@@ -25,7 +25,7 @@ code documentation into Org-Mode document.
 You need [[https://orgmode.org/][Org-Mode]] plus [[https://github.com/gjkerns/ob-julia/blob/master/ob-julia-doc.org][ob-julia.el]], which has [[http://stat.ethz.ch/ESS/index.php?Section=download][ESS]] as dependence, to be
 installed. A minimal =.emacs= file can be defined as follows:
 
-#+BEGIN_SRC emacs-lisp :tangle yes :tangle ./JuliaDoc.el
+#+BEGIN_SRC emacs-lisp :tangle yes :tangle minimal_example/JuliaDoc.el
 (package-initialize)
 
 (require 'ess-site)
