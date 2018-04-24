@@ -21,8 +21,6 @@ documented_items=create_documented_item_array("Foo.jl")
 * Example
 
 Prints all documented items, except those tagged with "Internal" 
-#+BEGIN_SRC julia :results output drawer :eval no-export :exports both
+#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 print_org_doc(documented_items,tag_to_ignore=["Internal"],header_level=0)
 #+END_SRC
-
-

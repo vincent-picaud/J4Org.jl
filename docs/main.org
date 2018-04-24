@@ -23,7 +23,13 @@ code documentation into Org-Mode document.
 ** Minimal requirements 
 
 You need [[https://orgmode.org/][Org-Mode]] plus [[https://github.com/gjkerns/ob-julia/blob/master/ob-julia-doc.org][ob-julia.el]], which has [[http://stat.ethz.ch/ESS/index.php?Section=download][ESS]] as dependence, to be
-installed. A minimal =.emacs= file can be defined as follows:
+installed.
+
+** Minimal example
+
+*** Emacs configuration
+
+ A minimal =.emacs= file can be defined as follows:
 
 #+BEGIN_SRC emacs-lisp :tangle yes :tangle minimal_example/init.el
 (package-initialize)
@@ -42,17 +48,101 @@ installed. A minimal =.emacs= file can be defined as follows:
  '((julia . t)))
 #+END_SRC
 
-#+RESULTS:
+*** A documented Julia =Foo= module
 
-** Minimal example
+The documented module is as follows:
 
-We need some documented code:
+#+BEGIN_SRC julia :eval never :tangle yes :tangle minimal_example/Foo.jl
+module Foo
 
-#+INCLUDE: "minimal_example/documented_code.jl" src julia
+export Point, foo
+    
+import Base: norm
 
-** Minimal org mode document
+#+Point L:Point_struct
+# This is my Point structure
+#
+# *Example:*
+#
+# Creates a point $p$ of coordinates $(x=1,y=2)$.
+#
+# #+BEGIN_SRC julia :eval never :exports code
+# p=Point(1,2)
+# #+END_SRC
+#
+# You can add any valid Org mode directive. If you want to use
+# in-documentation link, use [[norm_link_example][]]
+#
+struct Point
+    x::Float64
+    y::Float64
+end
 
-   #+INCLUDE: "./minimal_example/documentation.org" src org
+#+Point
+# Creates Point at origin $(0,0)$ 
+Point() = Point(0,0)
+
+#+Point,Method L:norm_link_example
+# A simple function that computes
+# $$
+# \sqrt{x^2+y^2}
+# $$
+#
+# *Example:*
+#!p=Point(1.0,2.0);
+#!norm(p) 
+#
+# See: [[Point_struct][]]
+#
+norm(p::Point)::Float64 = sqrt(p.x*p.x+p.y*p.y)
+
+#+Method,Internal
+# An internal function
+#
+# For symbol that are not exported, do not forget the "Foo." prefix:
+#!p=Point(1.0,2.0)
+#!Foo.foo(2.0,p)
+foo(r::Float64,p::Point) = Point(r*p.x,r*p.y)
+
+end 
+#+END_SRC
+
+
+*** Minimal org mode document
+
+This is the =foo.org= file.
+
+#+BEGIN_SRC org :tangle :tangle minimal_example/foo.org 
+,#+PROPERTY: header-args:julia :session *my_session* :exports code :eval no-export
+,#+OPTIONS: ^:{}
+,#+TITLE: Minimal example
+
+# usually this part is required, however for this miminal_example
+# we need to specify where to find the "Foo" module.
+#
+,#+BEGIN_SRC julia :results output none :eval no-export :exports none
+push!(LOAD_PATH,pwd())
+,#+END_SRC
+
+,#+BEGIN_SRC julia :results output none :eval no-export :exports none
+using J4Org
+# notifies J4Org that it needs "using Foo" to run Julia code snippets
+# in the documented code (those tagged as "#!")
+initialize_boxing_module(usedModules=["Foo"])
+# loads and tokenizes source code files, here only one file.
+documented_items=create_documented_item_array("Foo.jl")
+,#+END_SRC
+
+,* Example
+
+Prints all documented items, except those tagged with "Internal" 
+,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
+print_org_doc(documented_items,tag_to_ignore=["Internal"],header_level=0)
+,#+END_SRC
+#+END_SRC
+
+*** Generating the doc
+
 
 * Usage examples
 

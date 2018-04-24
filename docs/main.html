@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-04-24 Tue 15:56 -->
+<!-- 2018-04-24 Tue 22:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>J4Org Package</title>
@@ -311,53 +311,64 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf46d806">1. Introduction</a>
+<li><a href="#orgcf46690">1. Introduction</a>
 <ul>
-<li><a href="#org482c791">1.1. Minimal requirements</a></li>
+<li><a href="#org750f0ee">1.1. Minimal requirements</a>
+<ul>
+<li><a href="#org30c0228">1.1.1. Emacs configuration</a></li>
 </ul>
 </li>
-<li><a href="#org24793c7">2. Usage examples</a>
+<li><a href="#orga34ab05">1.2. Minimal example</a>
 <ul>
-<li><a href="#orga365da8">2.1. Tips</a>
-<ul>
-<li><a href="#org3f4c673">2.1.1. Org-mode block in comment</a></li>
-<li><a href="#orgb330ae6">2.1.2. Julia code block in comment</a></li>
-<li><a href="#orga2d9e55">2.1.3. Obsolete stuff</a></li>
+<li><a href="#org21d47ea">1.2.1. A documented Julia <code>Foo</code> module</a></li>
+<li><a href="#orgd77756e">1.2.2. Minimal org mode document</a></li>
+<li><a href="#org90cddff">1.2.3. Generating the doc</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgf983835">3. Documentation</a>
+<li><a href="#org79aa9d9">2. Usage examples</a>
 <ul>
-<li><a href="#org36ab241">3.1. API</a></li>
+<li><a href="#org58a0141">2.1. Tips</a>
+<ul>
+<li><a href="#orge716118">2.1.1. Org-mode block in comment</a></li>
+<li><a href="#orge02e9ff">2.1.2. Julia code block in comment</a></li>
+<li><a href="#orgcd67490">2.1.3. Obsolete stuff</a></li>
 </ul>
 </li>
-<li><a href="#org38047ea">4. Internal documention</a>
-<ul>
-<li><a href="#org8b7f371">4.1. Error management</a></li>
-<li><a href="#orgad3b8ae">4.2. Find Tag</a></li>
 </ul>
 </li>
-<li><a href="#org2826d98">5. <span class="todo TODO">TODO</span> list <code>[0/2]</code></a>
+<li><a href="#org27cd6cd">3. Documentation</a>
 <ul>
-<li><a href="#orge17f978">5.1. <span class="todo TODO">TODO</span> development <code>[5/10]</code></a></li>
-<li><a href="#org79331eb">5.2. <span class="todo TODO">TODO</span> code <code>[0/0]</code></a></li>
+<li><a href="#orgf7aeb55">3.1. API</a></li>
 </ul>
 </li>
-<li><a href="#orgbe8c170">6. Unit tests</a></li>
-<li><a href="#orgfe35c27">7. Designs tips</a>
+<li><a href="#org879334e">4. Internal documention</a>
 <ul>
-<li><a href="#org72f7c07">7.1. PDF export &amp; phantomsection</a></li>
-<li><a href="#orgf2b811a">7.2. HTML export with background</a></li>
-<li><a href="#org6c12237">7.3. Warning/Error messages</a></li>
+<li><a href="#orgdce89a4">4.1. Error management</a></li>
+<li><a href="#org11cde05">4.2. Find Tag</a></li>
+</ul>
+</li>
+<li><a href="#orgd47f677">5. <span class="todo TODO">TODO</span> list <code>[0/2]</code></a>
+<ul>
+<li><a href="#org7dd4908">5.1. <span class="todo TODO">TODO</span> development <code>[5/10]</code></a></li>
+<li><a href="#orgee2e90c">5.2. <span class="todo TODO">TODO</span> code <code>[0/0]</code></a></li>
+</ul>
+</li>
+<li><a href="#orgfecca01">6. Unit tests</a></li>
+<li><a href="#orgfe08f69">7. Designs tips</a>
+<ul>
+<li><a href="#orgebe2c16">7.1. PDF export &amp; phantomsection</a></li>
+<li><a href="#org598c9cd">7.2. HTML export with background</a></li>
+<li><a href="#org1bc0f04">7.3. Warning/Error messages</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgf46d806" class="outline-2">
-<h2 id="orgf46d806"><span class="section-number-2">1</span> Introduction</h2>
+<div id="outline-container-orgcf46690" class="outline-2">
+<h2 id="orgcf46690"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Defines a the <b>J4Org.jl</b> package, using <a href="https://github.com/KristofferC/Tokenize.jl/">Tokenize.jl</a>, to generate Julia
@@ -365,12 +376,20 @@ code documentation into Org-Mode document.
 </p>
 </div>
 
-<div id="outline-container-org482c791" class="outline-3">
-<h3 id="org482c791"><span class="section-number-3">1.1</span> Minimal requirements</h3>
+<div id="outline-container-org750f0ee" class="outline-3">
+<h3 id="org750f0ee"><span class="section-number-3">1.1</span> Minimal requirements</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 You need <a href="https://orgmode.org/">Org-Mode</a> plus <a href="https://github.com/gjkerns/ob-julia/blob/master/ob-julia-doc.org">ob-julia.el</a>, which has <a href="http://stat.ethz.ch/ESS/index.php?Section=download">ESS</a> as dependence, to be
-installed. A minimal <code>.emacs</code> file can be defined as follows:
+installed.
+</p>
+</div>
+
+<div id="outline-container-org30c0228" class="outline-4">
+<h4 id="org30c0228"><span class="section-number-4">1.1.1</span> Emacs configuration</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+A minimal <code>.emacs</code> file can be defined as follows:
 </p>
 
 <div class="org-src-container">
@@ -394,8 +413,124 @@ installed. A minimal <code>.emacs</code> file can be defined as follows:
 </div>
 </div>
 
-<div id="outline-container-org24793c7" class="outline-2">
-<h2 id="org24793c7"><span class="section-number-2">2</span> Usage examples</h2>
+<div id="outline-container-orga34ab05" class="outline-3">
+<h3 id="orga34ab05"><span class="section-number-3">1.2</span> Minimal example</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org21d47ea" class="outline-4">
+<h4 id="org21d47ea"><span class="section-number-4">1.2.1</span> A documented Julia <code>Foo</code> module</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+The documented module is as follows:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-julia"><span style="color: #a020f0;">module</span> Foo
+
+<span style="color: #a020f0;">export</span> Point, foo
+    
+<span style="color: #a020f0;">import</span> Base: norm
+
+<span style="color: #b22222;">#</span><span style="color: #b22222;">+Point L:Point_struct</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">This is my Point structure</span>
+<span style="color: #b22222;">#</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">*Example:*</span>
+<span style="color: #b22222;">#</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Creates a point $p$ of coordinates $(x=1,y=2)$.</span>
+<span style="color: #b22222;">#</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">#+BEGIN_SRC julia :eval never :exports code</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">p=Point(1,2)</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">#+END_SRC</span>
+<span style="color: #b22222;">#</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">You can add any valid Org mode directive. If you want to use</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">in-documentation link, use [[norm_link_example][]]</span>
+<span style="color: #b22222;">#</span>
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">Point</span>
+    x::<span style="color: #228b22;">Float64</span>
+    y::<span style="color: #228b22;">Float64</span>
+<span style="color: #a020f0;">end</span>
+
+<span style="color: #b22222;">#</span><span style="color: #b22222;">+Point</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Creates Point at origin $(0,0)$ </span>
+<span style="color: #0000ff;">Point</span>() = Point(0,0)
+
+<span style="color: #b22222;">#</span><span style="color: #b22222;">+Point,Method L:norm_link_example</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">A simple function that computes</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">$$</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">\sqrt{x^2+y^2}</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">$$</span>
+<span style="color: #b22222;">#</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">*Example:*</span>
+<span style="color: #b22222;">#</span><span style="color: #b22222;">!p=Point(1.0,2.0);</span>
+<span style="color: #b22222;">#</span><span style="color: #b22222;">!norm(p) </span>
+<span style="color: #b22222;">#</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">See: [[Point_struct][]]</span>
+<span style="color: #b22222;">#</span>
+<span style="color: #0000ff;">norm</span>(p::<span style="color: #228b22;">Point</span>)::<span style="color: #228b22;">Float64</span> = sqrt(p.x*p.x+p.y*p.y)
+
+<span style="color: #b22222;">#</span><span style="color: #b22222;">+Method,Internal</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">An internal function</span>
+<span style="color: #b22222;">#</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">For symbol that are not exported, do not forget the "Foo." prefix:</span>
+<span style="color: #b22222;">#</span><span style="color: #b22222;">!p=Point(1.0,2.0)</span>
+<span style="color: #b22222;">#</span><span style="color: #b22222;">!Foo.foo(2.0,p)</span>
+<span style="color: #0000ff;">foo</span>(r::<span style="color: #228b22;">Float64</span>,p::<span style="color: #228b22;">Point</span>) = Point(r*p.x,r*p.y)
+
+<span style="color: #a020f0;">end</span> 
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd77756e" class="outline-4">
+<h4 id="orgd77756e"><span class="section-number-4">1.2.2</span> Minimal org mode document</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+This is the <code>foo.org</code> file.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #b22222;">#+PROPERTY: header-args:julia :session *my_session* :exports code :eval no-export</span>
+<span style="color: #b22222;">#+OPTIONS: ^:{}</span>
+<span style="color: #7f7f7f;">#+TITLE:</span> <span style="color: #191970; font-weight: bold;">Minimal example</span>
+
+<span style="color: #b22222;"># usually this part is required, however for this miminal_example</span>
+<span style="color: #b22222;"># we need to specify where to find the "Foo" module.</span>
+<span style="color: #b22222;">#</span>
+<span style="color: #b22222;">#+BEGIN_SRC julia :results output none :eval no-export :exports none</span>
+<span style="color: #7f7f7f;">push!(LOAD_PATH,pwd())</span>
+<span style="color: #b22222;">#+END_SRC</span>
+
+<span style="color: #b22222;">#+BEGIN_SRC julia :results output none :eval no-export :exports none</span>
+<span style="color: #a020f0;">using</span><span style="color: #7f7f7f;"> J4Org</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">notifies J4Org that it needs "using Foo" to run Julia code snippets</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">in the documented code (those tagged as "#!")</span>
+<span style="color: #7f7f7f;">initialize_boxing_module(usedModules=[</span><span style="color: #8b2252;">"Foo"</span><span style="color: #7f7f7f;">])</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">loads and tokenizes source code files, here only one file.</span>
+<span style="color: #7f7f7f;">documented_items=create_documented_item_array(</span><span style="color: #8b2252;">"Foo.jl"</span><span style="color: #7f7f7f;">)</span>
+<span style="color: #b22222;">#+END_SRC</span>
+
+<span style="color: #0000ff;">* Example</span>
+
+Prints all documented items, except those tagged with "Internal" 
+<span style="color: #b22222;">#+BEGIN_SRC julia :results output drawer :eval no-export :exports results</span>
+<span style="color: #7f7f7f;">print_org_doc(documented_items,tag_to_ignore=[</span><span style="color: #8b2252;">"Internal"</span><span style="color: #7f7f7f;">],header_level=0)</span>
+<span style="color: #b22222;">#+END_SRC</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org90cddff" class="outline-4">
+<h4 id="org90cddff"><span class="section-number-4">1.2.3</span> Generating the doc</h4>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org79aa9d9" class="outline-2">
+<h2 id="org79aa9d9"><span class="section-number-2">2</span> Usage examples</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Let's use <b>J4Org.jl</b> for self-documentation, <code>API</code> functions
@@ -420,10 +555,10 @@ print_org_doc(documented_items,tag=<span style="color: #8b2252;">"API"</span>,he
 </p>
 
 <p>
-<a id="org4a7338c"></a> <b>Index:</b> <b>[c]</b> <a href="#orgd227177">create_documented_item_array</a>, <a href="#org568a403">create_documented_item_array_dir</a> <b>[e]</b> <a href="#orgf2e5880">export</a> <b>[i]</b> <a href="#org2047aaf">initialize_boxing_module</a> <b>[p]</b> <a href="#org2014776">print_org_doc</a> 
+<a id="org13d0845"></a> <b>Index:</b> <b>[c]</b> <a href="#org7a553e6">create_documented_item_array</a>, <a href="#org95ed68c">create_documented_item_array_dir</a> <b>[e]</b> <a href="#org5e13173">export</a> <b>[i]</b> <a href="#orgecbd519">initialize_boxing_module</a> <b>[p]</b> <a href="#org546f6b0">print_org_doc</a> 
 </p>
 <ul class="org-ul">
-<li><b><code>create_documented_item_array</code></b>  <a id="orgd227177"></a></li>
+<li><b><code>create_documented_item_array</code></b>  <a id="org7a553e6"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">create_documented_item_array</span>(filename::<span style="color: #228b22;">String</span>)::<span style="color: #228b22;">Array</span>{Documented_Item,1}
@@ -435,7 +570,7 @@ Reads a file from its <b>filename</b> and returns an array of documented items.
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#org37ca8d7">documented_item.jl:89</a>, <a href="#org4a7338c">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#org1b9d7c0">documented_item.jl:89</a>, <a href="#org13d0845">back to index</a>
 </p>
 
 <div class="org-src-container">
@@ -456,10 +591,10 @@ Reads a files and returns an array of documented items.
 </div>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#orgc19b3be">documented_item.jl:128</a>, <a href="#org4a7338c">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#orgd0c163a">documented_item.jl:128</a>, <a href="#org13d0845">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>create_documented_item_array_dir</code></b>  <a id="org568a403"></a></li>
+<li><b><code>create_documented_item_array_dir</code></b>  <a id="org95ed68c"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">create_documented_item_array_dir</span>(dirname::<span style="color: #228b22;">String</span>)
@@ -471,10 +606,10 @@ Reads all jl files in a directory
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#org50ec72f">documented_item.jl:147</a>, <a href="#org4a7338c">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#org0b99b89">documented_item.jl:147</a>, <a href="#org13d0845">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>export</code></b>  <a id="orgf2e5880"></a></li>
+<li><b><code>export</code></b>  <a id="org5e13173"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">export</span> create_documented_item_array_dir, print_org_doc
@@ -486,10 +621,10 @@ Exported symbols
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl#orgc870ab6">J4Org.jl:3</a>, <a href="#org4a7338c">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl#orgae068bd">J4Org.jl:3</a>, <a href="#org13d0845">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>initialize_boxing_module</code></b>  <a id="org2047aaf"></a></li>
+<li><b><code>initialize_boxing_module</code></b>  <a id="orgecbd519"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">initialize_boxing_module</span>(;boxingModule::<span style="color: #228b22;">String</span>=<span style="color: #8b2252;">"BoxingModule"</span>,usedModules::<span style="color: #228b22;">Vector</span>{<span style="color: #228b22;">String</span>}=<span style="color: #228b22;">String</span>[],force::<span style="color: #228b22;">Bool</span>=<span style="color: #008b8b;">false</span>)::<span style="color: #228b22;">Void</span>
@@ -502,10 +637,10 @@ code snippet (tagged by #!)
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl#org6a913d2">evaluate.jl:17</a>, <a href="#org4a7338c">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl#org1a4409f">evaluate.jl:17</a>, <a href="#org13d0845">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>print_org_doc</code></b>  <a id="org2014776"></a> <a id="orgb3fbe01"></a></li>
+<li><b><code>print_org_doc</code></b>  <a id="org546f6b0"></a> <a id="org452ee77"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">print_org_doc</span>(di_array::<span style="color: #228b22;">Array</span>{Documented_Item,1};
@@ -544,17 +679,17 @@ this is can be useful to avoid link name conflict when performing local doc extr
 </ul>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl#org08903d1">main.jl:346</a>, <a href="#org4a7338c">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl#org0fbb679">main.jl:346</a>, <a href="#org13d0845">back to index</a>
 </p>
 </div>
 
 
-<div id="outline-container-orga365da8" class="outline-3">
-<h3 id="orga365da8"><span class="section-number-3">2.1</span> Tips</h3>
+<div id="outline-container-org58a0141" class="outline-3">
+<h3 id="org58a0141"><span class="section-number-3">2.1</span> Tips</h3>
 <div class="outline-text-3" id="text-2-1">
 </div>
-<div id="outline-container-org3f4c673" class="outline-4">
-<h4 id="org3f4c673"><span class="section-number-4">2.1.1</span> Org-mode block in comment</h4>
+<div id="outline-container-orge716118" class="outline-4">
+<h4 id="orge716118"><span class="section-number-4">2.1.1</span> Org-mode block in comment</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 For the moment these blocks are left unchanged. For the moment only EXAMPLE blocks work. For instance:
@@ -588,7 +723,7 @@ This will generate this doc:
 </p>
 
 <p>
-  <a id="org415689a"></a>
+  <a id="org621ac93"></a>
 </p>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">print_org_doc</span>(di_array::<span style="color: #228b22;">Array</span>{Documented_Item,1};
@@ -627,13 +762,13 @@ this is can be useful to avoid link name conflict when performing local doc extr
 </ul>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl#org08903d1">main.jl:346</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl#org0fbb679">main.jl:346</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgb330ae6" class="outline-4">
-<h4 id="orgb330ae6"><a id="ID-f896399f-bd8f-4d68-b4ae-f67ed6a313ef"></a><span class="section-number-4">2.1.2</span> Julia code block in comment</h4>
+<div id="outline-container-orge02e9ff" class="outline-4">
+<h4 id="orge02e9ff"><a id="ID-f896399f-bd8f-4d68-b4ae-f67ed6a313ef"></a><span class="section-number-4">2.1.2</span> Julia code block in comment</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 You can define Julia code in comment:
@@ -678,7 +813,7 @@ You can redefine the foo function:
 </div>
 </blockquote>
 <p>
-<a href="./code_examples/meaninglesscode.jl#orgebacceb">meaninglesscode.jl:1</a>
+<a href="./code_examples/meaninglesscode.jl#org926707c">meaninglesscode.jl:1</a>
 </p>
 
 <p>
@@ -688,8 +823,8 @@ You can redefine the foo function:
 </div>
 </div>
 
-<div id="outline-container-orga2d9e55" class="outline-4">
-<h4 id="orga2d9e55"><span class="section-number-4">2.1.3</span> Obsolete stuff</h4>
+<div id="outline-container-orgcd67490" class="outline-4">
+<h4 id="orgcd67490"><span class="section-number-4">2.1.3</span> Obsolete stuff</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <p>
 You can use 
@@ -718,22 +853,22 @@ function is_tag(tok::Tokenized,idx::Int)::Bool
 
 
 
-<div id="outline-container-orgf983835" class="outline-2">
-<h2 id="orgf983835"><span class="section-number-2">3</span> Documentation</h2>
+<div id="outline-container-org27cd6cd" class="outline-2">
+<h2 id="org27cd6cd"><span class="section-number-2">3</span> Documentation</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org36ab241" class="outline-3">
-<h3 id="org36ab241"><span class="section-number-3">3.1</span> API</h3>
+<div id="outline-container-orgf7aeb55" class="outline-3">
+<h3 id="orgf7aeb55"><span class="section-number-3">3.1</span> API</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 
 </p>
 
 <p>
-<a id="org22cb039"></a> <b>Index:</b> <b>[c]</b> <a href="#org52b83ec">create_documented_item_array</a>, <a href="#orgea5ecff">create_documented_item_array_dir</a> <b>[e]</b> <a href="#org0d60725">export</a> <b>[i]</b> <a href="#orgaa7c4dd">initialize_boxing_module</a> <b>[p]</b> <a href="#orgf40dccb">print_org_doc</a> 
+<a id="orgdcabd23"></a> <b>Index:</b> <b>[c]</b> <a href="#org4fe8d66">create_documented_item_array</a>, <a href="#orgff47daf">create_documented_item_array_dir</a> <b>[e]</b> <a href="#org8dca704">export</a> <b>[i]</b> <a href="#org6cc84f8">initialize_boxing_module</a> <b>[p]</b> <a href="#org38861b3">print_org_doc</a> 
 </p>
 <ul class="org-ul">
-<li><b><code>create_documented_item_array</code></b>  <a id="org52b83ec"></a></li>
+<li><b><code>create_documented_item_array</code></b>  <a id="org4fe8d66"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">create_documented_item_array</span>(filename::<span style="color: #228b22;">String</span>)::<span style="color: #228b22;">Array</span>{Documented_Item,1}
@@ -745,7 +880,7 @@ Reads a file from its <b>filename</b> and returns an array of documented items.
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#org37ca8d7">documented_item.jl:89</a>, <a href="#org22cb039">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#org1b9d7c0">documented_item.jl:89</a>, <a href="#orgdcabd23">back to index</a>
 </p>
 
 <div class="org-src-container">
@@ -766,10 +901,10 @@ Reads a files and returns an array of documented items.
 </div>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#orgc19b3be">documented_item.jl:128</a>, <a href="#org22cb039">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#orgd0c163a">documented_item.jl:128</a>, <a href="#orgdcabd23">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>create_documented_item_array_dir</code></b>  <a id="orgea5ecff"></a></li>
+<li><b><code>create_documented_item_array_dir</code></b>  <a id="orgff47daf"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">create_documented_item_array_dir</span>(dirname::<span style="color: #228b22;">String</span>)
@@ -781,10 +916,10 @@ Reads all jl files in a directory
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#org50ec72f">documented_item.jl:147</a>, <a href="#org22cb039">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#org0b99b89">documented_item.jl:147</a>, <a href="#orgdcabd23">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>export</code></b>  <a id="org0d60725"></a></li>
+<li><b><code>export</code></b>  <a id="org8dca704"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">export</span> create_documented_item_array_dir, print_org_doc
@@ -796,10 +931,10 @@ Exported symbols
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl#orgc870ab6">J4Org.jl:3</a>, <a href="#org22cb039">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl#orgae068bd">J4Org.jl:3</a>, <a href="#orgdcabd23">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>initialize_boxing_module</code></b>  <a id="orgaa7c4dd"></a></li>
+<li><b><code>initialize_boxing_module</code></b>  <a id="org6cc84f8"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">initialize_boxing_module</span>(;boxingModule::<span style="color: #228b22;">String</span>=<span style="color: #8b2252;">"BoxingModule"</span>,usedModules::<span style="color: #228b22;">Vector</span>{<span style="color: #228b22;">String</span>}=<span style="color: #228b22;">String</span>[],force::<span style="color: #228b22;">Bool</span>=<span style="color: #008b8b;">false</span>)::<span style="color: #228b22;">Void</span>
@@ -812,10 +947,10 @@ code snippet (tagged by #!)
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl#org6a913d2">evaluate.jl:17</a>, <a href="#org22cb039">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl#org1a4409f">evaluate.jl:17</a>, <a href="#orgdcabd23">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>print_org_doc</code></b>  <a id="orgf40dccb"></a> <a id="orgf75df8c"></a></li>
+<li><b><code>print_org_doc</code></b>  <a id="org38861b3"></a> <a id="org87c678e"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">print_org_doc</span>(di_array::<span style="color: #228b22;">Array</span>{Documented_Item,1};
@@ -854,29 +989,29 @@ this is can be useful to avoid link name conflict when performing local doc extr
 </ul>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl#org08903d1">main.jl:346</a>, <a href="#org22cb039">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl#org0fbb679">main.jl:346</a>, <a href="#orgdcabd23">back to index</a>
 </p>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org38047ea" class="outline-2">
-<h2 id="org38047ea"><span class="section-number-2">4</span> Internal documention</h2>
+<div id="outline-container-org879334e" class="outline-2">
+<h2 id="org879334e"><span class="section-number-2">4</span> Internal documention</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org8b7f371" class="outline-3">
-<h3 id="org8b7f371"><span class="section-number-3">4.1</span> Error management</h3>
+<div id="outline-container-orgdce89a4" class="outline-3">
+<h3 id="orgdce89a4"><span class="section-number-3">4.1</span> Error management</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 
 </p>
 
 <p>
-<a id="org4d88c50"></a> <b>Index:</b> <b>[c]</b> <a href="#org34235e9">create_file_org_link</a> <b>[w]</b> <a href="#orgeb8b9f8">warning_message</a> 
+<a id="org1a26848"></a> <b>Index:</b> <b>[c]</b> <a href="#org06630f9">create_file_org_link</a> <b>[w]</b> <a href="#org50f3442">warning_message</a> 
 </p>
 <ul class="org-ul">
-<li><b><code>create_file_org_link</code></b>  <a id="org34235e9"></a></li>
+<li><b><code>create_file_org_link</code></b>  <a id="org06630f9"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">create_file_org_link</span>(filename::<span style="color: #228b22;">String</span>,line::<span style="color: #228b22;">Int</span>=0)::<span style="color: #228b22;">String</span>
@@ -900,10 +1035,10 @@ J4Org.create_file_org_link(<span style="color: #8b2252;">"/path/file.txt"</span>
 </div>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl#org116d224">J4Org.jl:20</a>, <a href="#org4d88c50">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl#orgba74ab0">J4Org.jl:20</a>, <a href="#org1a26848">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>warning_message</code></b>  <a id="orgeb8b9f8"></a></li>
+<li><b><code>warning_message</code></b>  <a id="org50f3442"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">warning_message</span>(message::<span style="color: #228b22;">String</span>)::<span style="color: #228b22;">Void</span>
@@ -922,7 +1057,7 @@ which is an Org mode <b>comment</b>, hence it does not affect function output.
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl#org957e607">J4Org.jl:8</a>, <a href="#org4d88c50">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl#org2ca50f9">J4Org.jl:8</a>, <a href="#org1a26848">back to index</a>
 </p>
 
 
@@ -932,10 +1067,10 @@ which is an Org mode <b>comment</b>, hence it does not affect function output.
 </p>
 
 <p>
-<a id="orgc00c918"></a> <b>Index:</b> <b>[D]</b> <a href="#org31e056f">Documented_Item</a> <b>[c]</b> <a href="#org40e0364">clean_extracted_links</a>, <a href="#org0ffaf06">create_file_org_link</a> <b>[d]</b> <a href="#org89c3218">doc_link_substituion</a> <b>[e]</b> <a href="#org1c60ccf">extract_links</a> <b>[g]</b> <a href="#org706f3f6">get_items_with_link_target</a> 
+<a id="orgd911a9a"></a> <b>Index:</b> <b>[D]</b> <a href="#orgaeaa4c5">Documented_Item</a> <b>[c]</b> <a href="#orgae9bf9f">clean_extracted_links</a>, <a href="#orge817f68">create_file_org_link</a> <b>[d]</b> <a href="#org0fdf7b7">doc_link_substituion</a> <b>[e]</b> <a href="#org64a2948">extract_links</a> <b>[g]</b> <a href="#org6dbac61">get_items_with_link_target</a> 
 </p>
 <ul class="org-ul">
-<li><b><code>Documented_Item</code></b>  <a id="org31e056f"></a> <a id="org9b40c7f"></a></li>
+<li><b><code>Documented_Item</code></b>  <a id="orgaeaa4c5"></a> <a id="org1239f10"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">struct</span> <span style="color: #228b22;">Documented_Item</span>
@@ -947,10 +1082,10 @@ A <b>central</b> structure containing documented item
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#org04e72c7">documented_item.jl:1</a>, <a href="#orgc00c918">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#org9daa1e9">documented_item.jl:1</a>, <a href="#orgd911a9a">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>clean_extracted_links</code></b>  <a id="org40e0364"></a></li>
+<li><b><code>clean_extracted_links</code></b>  <a id="orgae9bf9f"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">clean_extracted_links</span>(toClean::<span style="color: #228b22;">Vector</span>{<span style="color: #228b22;">Tuple</span>{<span style="color: #228b22;">String</span>,<span style="color: #228b22;">String</span>}})::<span style="color: #228b22;">Vector</span>{<span style="color: #228b22;">Tuple</span>{<span style="color: #228b22;">String</span>,<span style="color: #228b22;">String</span>}}
@@ -962,21 +1097,21 @@ This function clean extracted links by removing duplicates
 </p>
 
 <p>
-See: <a href="#org28982d1">extract_links(&#x2026;)</a>
+See: <a href="#org026e9e4">extract_links(&#x2026;)</a>
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl#orgad9ff0b">links.jl:60</a>, <a href="#orgc00c918">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl#org5ecf01f">links.jl:60</a>, <a href="#orgd911a9a">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>create_file_org_link</code></b>  <a id="org0ffaf06"></a></li>
+<li><b><code>create_file_org_link</code></b>  <a id="orge817f68"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">create_file_org_link</span>(di::<span style="color: #228b22;">Documented_Item</span>)::<span style="color: #228b22;">String</span>
 </pre>
 </div>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#orge271b39">documented_item.jl:49</a>, <a href="#orgc00c918">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl#orge2a35c2">documented_item.jl:49</a>, <a href="#orgd911a9a">back to index</a>
 </p>
 
 <div class="org-src-container">
@@ -1001,10 +1136,10 @@ J4Org.create_file_org_link(<span style="color: #8b2252;">"/path/file.txt"</span>
 </div>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl#org116d224">J4Org.jl:20</a>, <a href="#orgc00c918">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl#orgba74ab0">J4Org.jl:20</a>, <a href="#orgd911a9a">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>doc_link_substituion</code></b>  <a id="org89c3218"></a> <a id="org410b1ed"></a></li>
+<li><b><code>doc_link_substituion</code></b>  <a id="org0fdf7b7"></a> <a id="orgf13bb86"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">doc_link_substituion</span>(doc::<span style="color: #228b22;">String</span>,di_array::<span style="color: #228b22;">Array</span>{Documented_Item,1},link_prefix::<span style="color: #228b22;">String</span>)::<span style="color: #228b22;">String</span>
@@ -1035,10 +1170,10 @@ From doc string performs links substitution
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl#org5be972a">links.jl:89</a>, <a href="#orgc00c918">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl#orgd68e051">links.jl:89</a>, <a href="#orgd911a9a">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>extract_links</code></b>  <a id="org1c60ccf"></a> <a id="org28982d1"></a></li>
+<li><b><code>extract_links</code></b>  <a id="org64a2948"></a> <a id="org026e9e4"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">extract_links</span>(input::<span style="color: #228b22;">String</span>)::<span style="color: #228b22;">Vector</span>{<span style="color: #228b22;">Tuple</span>{<span style="color: #228b22;">String</span>,<span style="color: #228b22;">String</span>}}
@@ -1063,15 +1198,15 @@ J4Org.extract_links(s)
 
 <p>
 <b>Caveat:</b> only use links of the forme ​"[​[something][]]", which are not
-          valid Org mode links, see <a href="#org410b1ed">doc_link_substituion(&#x2026;)</a>
+          valid Org mode links, see <a href="#orgf13bb86">doc_link_substituion(&#x2026;)</a>
 </p>
 
 <p>
-<b>Test link:</b> <a href="#org410b1ed">doc_link_substituion(&#x2026;)</a>
+<b>Test link:</b> <a href="#orgf13bb86">doc_link_substituion(&#x2026;)</a>
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl#org45bbbb1">links.jl:2</a>, <a href="#orgc00c918">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl#orgcb82704">links.jl:2</a>, <a href="#orgd911a9a">back to index</a>
 </p>
 
 <div class="org-src-container">
@@ -1080,15 +1215,15 @@ J4Org.extract_links(s)
 </div>
 <blockquote>
 <p>
-This function is like <a href="#org28982d1">extract_links(&#x2026;)</a>, except that is
-process an array of <a href="#org9b40c7f">struct Documented_Item</a>
+This function is like <a href="#org026e9e4">extract_links(&#x2026;)</a>, except that is
+process an array of <a href="#org1239f10">struct Documented_Item</a>
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl#orga5c8b60">links.jl:45</a>, <a href="#orgc00c918">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl#orgea3a559">links.jl:45</a>, <a href="#orgd911a9a">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>get_items_with_link_target</code></b>  <a id="org706f3f6"></a></li>
+<li><b><code>get_items_with_link_target</code></b>  <a id="org6dbac61"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">get_items_with_link_target</span>(link_target::<span style="color: #228b22;">String</span>,di_array::<span style="color: #228b22;">Array</span>{Documented_Item,1})::<span style="color: #228b22;">Vector</span>{<span style="color: #228b22;">Int</span>}
@@ -1096,7 +1231,7 @@ process an array of <a href="#org9b40c7f">struct Documented_Item</a>
 </div>
 <blockquote>
 <p>
-Returns the indices of <a href="#org9b40c7f">struct Documented_Item</a> containing the
+Returns the indices of <a href="#org1239f10">struct Documented_Item</a> containing the
 link_target (have a tag line with L:link_target)
 </p>
 
@@ -1106,13 +1241,13 @@ indices means that we do not have a unique target.
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl#org96e0409">links.jl:70</a>, <a href="#orgc00c918">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl#org0b862bd">links.jl:70</a>, <a href="#orgd911a9a">back to index</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgad3b8ae" class="outline-3">
-<h3 id="orgad3b8ae"><span class="section-number-3">4.2</span> Find Tag</h3>
+<div id="outline-container-org11cde05" class="outline-3">
+<h3 id="org11cde05"><span class="section-number-3">4.2</span> Find Tag</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 The role of this group is to scan tokenized code to find tags.
@@ -1131,30 +1266,30 @@ Then extracts information like <code>Tags</code> list and <code>extra_link</code
 </p>
 
 <p>
-<a id="orgb87efde"></a> <b>Index:</b> <b>[E]</b> <a href="#org225fa29">Extract_Tag_Result</a> <b>[e]</b> <a href="#orgebbe4ec">extract_tag</a> <b>[f]</b> <a href="#orga02db7a">find_tag</a> <b>[l]</b> <a href="#org0b38557">line</a>, <a href="#orgd556683">link</a> <b>[s]</b> <a href="#org457f50a">skip</a> <b>[t]</b> <a href="#orga726c8f">tag_idx</a>, <a href="#orgd699125">tags</a> 
+<a id="orge98ec78"></a> <b>Index:</b> <b>[E]</b> <a href="#org9d28957">Extract_Tag_Result</a> <b>[e]</b> <a href="#orga3082a9">extract_tag</a> <b>[f]</b> <a href="#orgd44aa41">find_tag</a> <b>[l]</b> <a href="#orgcbcf15c">line</a>, <a href="#org477b665">link</a> <b>[s]</b> <a href="#orgf659835">skip</a> <b>[t]</b> <a href="#orgae591af">tag_idx</a>, <a href="#orgd2483f1">tags</a> 
 </p>
 <ul class="org-ul">
-<li><b><code>Extract_Tag_Result</code></b>  <a id="org225fa29"></a></li>
+<li><b><code>Extract_Tag_Result</code></b>  <a id="org9d28957"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">Extract_Tag_Result</span> &lt;: Extracted_Item_Base
 </pre>
 </div>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#org94a8927">find_tag.jl:2</a>, <a href="#orgb87efde">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#orgc2b56eb">find_tag.jl:2</a>, <a href="#orge98ec78">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>extract_tag</code></b>  <a id="orgebbe4ec"></a> <a id="orgcc242d1"></a></li>
+<li><b><code>extract_tag</code></b>  <a id="orga3082a9"></a> <a id="org8c3aeed"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"> <span style="color: #a020f0;">function</span> <span style="color: #0000ff;">extract_tag</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>)::<span style="color: #228b22;">Union</span>{<span style="color: #228b22;">Void</span>,Extract_Tag_Result}
 </pre>
 </div>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#org116c425">find_tag.jl:27</a>, <a href="#orgb87efde">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#org78dad96">find_tag.jl:27</a>, <a href="#orge98ec78">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>find_tag</code></b>  <a id="orga02db7a"></a> <a id="org614a917"></a></li>
+<li><b><code>find_tag</code></b>  <a id="orgd44aa41"></a> <a id="org2ff0be9"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"> <span style="color: #a020f0;">function</span> <span style="color: #0000ff;">find_tag</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>,predicate::<span style="color: #228b22;">Function</span>)::<span style="color: #228b22;">Union</span>{<span style="color: #228b22;">Void</span>,Extract_Tag_Result}
@@ -1182,7 +1317,7 @@ to accept (or not) the tags
 </ul>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#org279d1d5">find_tag.jl:76</a>, <a href="#orgb87efde">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#org7996208">find_tag.jl:76</a>, <a href="#orge98ec78">back to index</a>
 </p>
 
 <div class="org-src-container">
@@ -1191,12 +1326,12 @@ to accept (or not) the tags
 </div>
 <blockquote>
 <p>
-Convenience function that uses <a href="#org614a917">find_tag(&#x2026;)</a> with <code>x-&gt;true</code>
+Convenience function that uses <a href="#org2ff0be9">find_tag(&#x2026;)</a> with <code>x-&gt;true</code>
 predicate. It accepts all tags
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#org4c25bda">find_tag.jl:104</a>, <a href="#orgb87efde">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#org7939258">find_tag.jl:104</a>, <a href="#orge98ec78">back to index</a>
 </p>
 
 <div class="org-src-container">
@@ -1210,68 +1345,68 @@ predicate that checks for <b>Tag</b> existence.
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#orgaa4f031">find_tag.jl:112</a>, <a href="#orgb87efde">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#orgbcc1a80">find_tag.jl:112</a>, <a href="#orge98ec78">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>line</code></b>  <a id="org0b38557"></a></li>
+<li><b><code>line</code></b>  <a id="orgcbcf15c"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"> line(o::<span style="color: #228b22;">Extract_Tag_Result</span>)::<span style="color: #228b22;">Int</span>
 </pre>
 </div>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#org232d096">find_tag.jl:22</a>, <a href="#orgb87efde">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#org0cdc451">find_tag.jl:22</a>, <a href="#orge98ec78">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>link</code></b>  <a id="orgd556683"></a></li>
+<li><b><code>link</code></b>  <a id="org477b665"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"> link(o::<span style="color: #228b22;">Extract_Tag_Result</span>)::<span style="color: #228b22;">String</span>
 </pre>
 </div>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#org281accf">find_tag.jl:19</a>, <a href="#orgb87efde">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#orgf700c35">find_tag.jl:19</a>, <a href="#orge98ec78">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>skip</code></b>  <a id="org457f50a"></a></li>
+<li><b><code>skip</code></b>  <a id="orgf659835"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"> skip(o::<span style="color: #228b22;">Extract_Tag_Result</span>)::<span style="color: #228b22;">Int</span>
 </pre>
 </div>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#org9b18b12">find_tag.jl:13</a>, <a href="#orgb87efde">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#orgfad9c5f">find_tag.jl:13</a>, <a href="#orge98ec78">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>tag_idx</code></b>  <a id="orga726c8f"></a></li>
+<li><b><code>tag_idx</code></b>  <a id="orgae591af"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"> tag_idx(o::<span style="color: #228b22;">Extract_Tag_Result</span>)::<span style="color: #228b22;">Int</span>
 </pre>
 </div>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#org9f4194c">find_tag.jl:10</a>, <a href="#orgb87efde">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#orge9d9e20">find_tag.jl:10</a>, <a href="#orge98ec78">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>tags</code></b>  <a id="orgd699125"></a></li>
+<li><b><code>tags</code></b>  <a id="orgd2483f1"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"> tags(o::<span style="color: #228b22;">Extract_Tag_Result</span>)::<span style="color: #228b22;">Array</span>{<span style="color: #228b22;">String</span>,1}
 </pre>
 </div>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#org6cba034">find_tag.jl:16</a>, <a href="#orgb87efde">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl#org65cd32e">find_tag.jl:16</a>, <a href="#orge98ec78">back to index</a>
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org2826d98" class="outline-2">
-<h2 id="org2826d98"><span class="section-number-2">5</span> <span class="todo TODO">TODO</span> list <code>[0/2]</code></h2>
+<div id="outline-container-orgd47f677" class="outline-2">
+<h2 id="orgd47f677"><span class="section-number-2">5</span> <span class="todo TODO">TODO</span> list <code>[0/2]</code></h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orge17f978" class="outline-3">
-<h3 id="orge17f978"><span class="section-number-3">5.1</span> <span class="todo TODO">TODO</span> development <code>[5/10]</code></h3>
+<div id="outline-container-org7dd4908" class="outline-3">
+<h3 id="org7dd4908"><span class="section-number-3">5.1</span> <span class="todo TODO">TODO</span> development <code>[5/10]</code></h3>
 <div class="outline-text-3" id="text-5-1">
 <ul class="org-ul">
 <li class="off"><code>[&#xa0;]</code> add a function to show link and targets &amp; detect useless link_target</li>
@@ -1279,7 +1414,7 @@ predicate that checks for <b>Tag</b> existence.
 <li class="off"><code>[&#xa0;]</code> even if complete_link = false, search for target in order to do pretty print (information like struct etc&#x2026;)</li>
 <li class="on"><code>[X]</code> use extracted tag in DocumentedItem</li>
 <li class="on"><code>[X]</code> allows tag list "#+tag1, tag2"</li>
-<li class="on"><code>[X]</code> add prefix to extra link: <a id="org7d932ec"></a> -&gt; <a id="orge440bec"></a></li>
+<li class="on"><code>[X]</code> add prefix to extra link: <a id="org32252bc"></a> -&gt; <a id="orgf8f81ca"></a></li>
 <li class="on"><code>[X]</code> finish parsing and code cleaning</li>
 <li class="off"><code>[&#xa0;]</code> add an option to extract code body</li>
 <li class="off"><code>[&#xa0;]</code> :RESULT: bug</li>
@@ -1302,28 +1437,28 @@ predicate that checks for <b>Tag</b> existence.
 </div>
 </div>
 
-<div id="outline-container-org79331eb" class="outline-3">
-<h3 id="org79331eb"><span class="section-number-3">5.2</span> <span class="todo TODO">TODO</span> code <code>[0/0]</code></h3>
+<div id="outline-container-orgee2e90c" class="outline-3">
+<h3 id="orgee2e90c"><span class="section-number-3">5.2</span> <span class="todo TODO">TODO</span> code <code>[0/0]</code></h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 
 </p>
 
 <p>
-<a id="org456e357"></a> <b>Index:</b> <b>[E]</b> <a href="#org665ce3f">Extracted_Item_Base</a> <b>[w]</b> <a href="#orga9b3d65">with_hash_evaluate</a> 
+<a id="orgba9eed8"></a> <b>Index:</b> <b>[E]</b> <a href="#org7160275">Extracted_Item_Base</a> <b>[w]</b> <a href="#orge0068a8">with_hash_evaluate</a> 
 </p>
 <ul class="org-ul">
-<li><b><code>Extracted_Item_Base</code></b>  <a id="org665ce3f"></a> <a id="orgbe85cdd"></a></li>
+<li><b><code>Extracted_Item_Base</code></b>  <a id="org7160275"></a> <a id="org207c757"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">abstract type</span> <span style="color: #228b22;">Extracted_Item_Base</span> 
 </pre>
 </div>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl#org4f82908">extract.jl:3</a>, <a href="#org456e357">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl#orge882345">extract.jl:3</a>, <a href="#orgba9eed8">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>with_hash_evaluate</code></b>  <a id="orga9b3d65"></a></li>
+<li><b><code>with_hash_evaluate</code></b>  <a id="orge0068a8"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">with_hash_evaluate</span>(comment::<span style="color: #228b22;">String</span>,
@@ -1370,14 +1505,14 @@ rand(5)
 </ul>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl#orga40c652">evaluate.jl:48</a>, <a href="#org456e357">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl#org47c13d7">evaluate.jl:48</a>, <a href="#orgba9eed8">back to index</a>
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgbe8c170" class="outline-2">
-<h2 id="orgbe8c170"><span class="section-number-2">6</span> Unit tests</h2>
+<div id="outline-container-orgfecca01" class="outline-2">
+<h2 id="orgfecca01"><span class="section-number-2">6</span> Unit tests</h2>
 <div class="outline-text-2" id="text-6">
 <pre class="example">
 # =WARNING:= Link target ("faa", "") not found
@@ -1390,12 +1525,12 @@ J4Org         |   96     96
 
 
 
-<div id="outline-container-orgfe35c27" class="outline-2">
-<h2 id="orgfe35c27"><span class="section-number-2">7</span> Designs tips</h2>
+<div id="outline-container-orgfe08f69" class="outline-2">
+<h2 id="orgfe08f69"><span class="section-number-2">7</span> Designs tips</h2>
 <div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-org72f7c07" class="outline-3">
-<h3 id="org72f7c07"><span class="section-number-3">7.1</span> PDF export &amp; phantomsection</h3>
+<div id="outline-container-orgebe2c16" class="outline-3">
+<h3 id="orgebe2c16"><span class="section-number-3">7.1</span> PDF export &amp; phantomsection</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 To be able to use links everywhere we use the
@@ -1405,8 +1540,8 @@ To be able to use links everywhere we use the
 </div>
 </div>
 
-<div id="outline-container-orgf2b811a" class="outline-3">
-<h3 id="orgf2b811a"><span class="section-number-3">7.2</span> HTML export with background</h3>
+<div id="outline-container-org598c9cd" class="outline-3">
+<h3 id="org598c9cd"><span class="section-number-3">7.2</span> HTML export with background</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 See <a href="https://github.com/JuliaEditorSupport/julia-emacs/issues/53">https://github.com/JuliaEditorSupport/julia-emacs/issues/53</a>
@@ -1414,8 +1549,8 @@ See <a href="https://github.com/JuliaEditorSupport/julia-emacs/issues/53">https:
 </div>
 </div>
 
-<div id="outline-container-org6c12237" class="outline-3">
-<h3 id="org6c12237"><span class="section-number-3">7.3</span> Warning/Error messages</h3>
+<div id="outline-container-org1bc0f04" class="outline-3">
+<h3 id="org1bc0f04"><span class="section-number-3">7.3</span> Warning/Error messages</h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 The trick is to generate Org mode comments.
@@ -1426,10 +1561,10 @@ The trick is to generate Org mode comments.
 </p>
 
 <p>
-<a id="org45e0f68"></a> <b>Index:</b> <b>[E]</b> <a href="#orgc4df758">Extracted_Function</a>, <a href="#org2725cf3">Extracted_Item_Base</a> <b>[e]</b> <a href="#orgdc2d1bd">extract_abstract</a>, <a href="#org3cd0ac9">extract_export</a>, <a href="#org81419c7">extract_function</a>, <a href="#org97f9207">extract_struct</a> <b>[s]</b> <a href="#orgda4d9b6">skip_abstract_block</a>, <a href="#orgde93611">skip_comma_separated_identifiers</a>, <a href="#orgb70d802">skip_comment</a>, <a href="#org3854943">skip_declaration_block</a>, <a href="#orgaa48dfb">skip_function_call_block</a>, <a href="#org2cb792b">skip_identifier</a>, <a href="#org6d32a18">skip_issubtype_block</a>, <a href="#org566bba1">skip_struct_block</a>, <a href="#orgdb7b08f">skip_uninformative</a>, <a href="#org083f905">skip_where_block</a>, <a href="#orga3355a9">skip_whitespace</a>, <a href="#orgfa81979">skip_whitespace_strict</a> <b>[t]</b> <a href="#orga239b9f">tokenized</a> 
+<a id="org1b2ee6b"></a> <b>Index:</b> <b>[E]</b> <a href="#org3f3deaa">Extracted_Function</a>, <a href="#orgc9ce91a">Extracted_Item_Base</a> <b>[e]</b> <a href="#orgfafe138">extract_abstract</a>, <a href="#orgc741e6c">extract_export</a>, <a href="#org50c8278">extract_function</a>, <a href="#orgcf40847">extract_struct</a> <b>[s]</b> <a href="#org4ec0f31">skip_abstract_block</a>, <a href="#orgc6fddf0">skip_comma_separated_identifiers</a>, <a href="#orgedca274">skip_comment</a>, <a href="#orgdc9bb45">skip_declaration_block</a>, <a href="#orgcc8359c">skip_function_call_block</a>, <a href="#org07f88d2">skip_identifier</a>, <a href="#orgdfb69db">skip_issubtype_block</a>, <a href="#orge955a17">skip_struct_block</a>, <a href="#orgfc2d5ef">skip_uninformative</a>, <a href="#orgd02d06d">skip_where_block</a>, <a href="#orgaec58c3">skip_whitespace</a>, <a href="#orgf6ad534">skip_whitespace_strict</a> <b>[t]</b> <a href="#org73e50e3">tokenized</a> 
 </p>
 <ul class="org-ul">
-<li><b><code>Extracted_Function</code></b>  <a id="orgc4df758"></a></li>
+<li><b><code>Extracted_Function</code></b>  <a id="org3f3deaa"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">struct</span> <span style="color: #228b22;">Extracted_Function</span> &lt;: Extracted_Item_Base
@@ -1441,24 +1576,24 @@ A structure to store extracted function.
 </p>
 
 <p>
-See: <a href="#org1051f72">abstract Extracted_Item_Base</a>, <a href="#orgac7830a">extract_function(&#x2026;)</a>
+See: <a href="#orga92948e">abstract Extracted_Item_Base</a>, <a href="#org135336c">extract_function(&#x2026;)</a>
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl#org115462a">extract.jl:75</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl#org9faa760">extract.jl:75</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>Extracted_Item_Base</code></b>  <a id="org2725cf3"></a> <a id="org1051f72"></a></li>
+<li><b><code>Extracted_Item_Base</code></b>  <a id="orgc9ce91a"></a> <a id="orga92948e"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">abstract type</span> <span style="color: #228b22;">Extracted_Item_Base</span> 
 </pre>
 </div>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl#org4f82908">extract.jl:3</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl#orge882345">extract.jl:3</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>extract_abstract</code></b>  <a id="orgdc2d1bd"></a></li>
+<li><b><code>extract_abstract</code></b>  <a id="orgfafe138"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">extract_abstract</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>)::<span style="color: #228b22;">Union</span>{<span style="color: #228b22;">Void</span>,Extracted_Abstract}
@@ -1470,10 +1605,10 @@ Extract abstract type
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl#orgb37f996">extract.jl:185</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl#org6ada641">extract.jl:185</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>extract_export</code></b>  <a id="org3cd0ac9"></a></li>
+<li><b><code>extract_export</code></b>  <a id="orgc741e6c"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">extract_export</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>)::<span style="color: #228b22;">Union</span>{<span style="color: #228b22;">Void</span>,Extracted_Export}
@@ -1485,10 +1620,10 @@ Extract export
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl#org64a404c">extract.jl:157</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl#orgcadb82a">extract.jl:157</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>extract_function</code></b>  <a id="org81419c7"></a> <a id="orgac7830a"></a></li>
+<li><b><code>extract_function</code></b>  <a id="org50c8278"></a> <a id="org135336c"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">extract_function</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>)::<span style="color: #228b22;">Union</span>{<span style="color: #228b22;">Void</span>,Extracted_Function}
@@ -1500,10 +1635,10 @@ Extract function
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl#org19b4f5a">extract.jl:87</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl#org35241d6">extract.jl:87</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>extract_struct</code></b>  <a id="org97f9207"></a></li>
+<li><b><code>extract_struct</code></b>  <a id="orgcf40847"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">extract_struct</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>)::<span style="color: #228b22;">Union</span>{<span style="color: #228b22;">Void</span>,Extracted_Struct}
@@ -1515,10 +1650,10 @@ Extract struct
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl#orgf506141">extract.jl:131</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl#orgfa48d42">extract.jl:131</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>skip_abstract_block</code></b>  <a id="orgda4d9b6"></a></li>
+<li><b><code>skip_abstract_block</code></b>  <a id="org4ec0f31"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">skip_abstract_block</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>;
@@ -1532,10 +1667,10 @@ Does not move is identifier not found
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#org35f7cc9">tokenizer.jl:385</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#org43c43f8">tokenizer.jl:385</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>skip_comma_separated_identifiers</code></b>  <a id="orgde93611"></a></li>
+<li><b><code>skip_comma_separated_identifiers</code></b>  <a id="orgc6fddf0"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">skip_comma_separated_identifiers</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>)::<span style="color: #228b22;">Int</span>
@@ -1548,10 +1683,10 @@ Does not move is comma separeted identifier not found
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#org3259bcb">tokenizer.jl:231</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#orgdd554cc">tokenizer.jl:231</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>skip_comment</code></b>  <a id="orgb70d802"></a></li>
+<li><b><code>skip_comment</code></b>  <a id="orgedca274"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">skip_comment</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>)
@@ -1564,10 +1699,10 @@ Skip comment
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#orgf36f611">tokenizer.jl:41</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#org38629ea">tokenizer.jl:41</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>skip_declaration_block</code></b>  <a id="org3854943"></a></li>
+<li><b><code>skip_declaration_block</code></b>  <a id="orgdc9bb45"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">skip_declaration_block</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>)::<span style="color: #228b22;">Int</span>
@@ -1580,10 +1715,10 @@ Does not move in case of identification failure
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#orgd9fe857">tokenizer.jl:282</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#orge7b7da4">tokenizer.jl:282</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>skip_function_call_block</code></b>  <a id="orgaa48dfb"></a></li>
+<li><b><code>skip_function_call_block</code></b>  <a id="orgcc8359c"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">skip_function_call_block</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>;
@@ -1597,10 +1732,10 @@ Does not move in case of identification failure
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#orgf3103dd">tokenizer.jl:301</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#orgeba6eb8">tokenizer.jl:301</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>skip_identifier</code></b>  <a id="org2cb792b"></a></li>
+<li><b><code>skip_identifier</code></b>  <a id="org07f88d2"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">skip_identifier</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>;
@@ -1615,10 +1750,10 @@ Does not move is identifier not found
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#orga70f4d6">tokenizer.jl:183</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#org9af38a8">tokenizer.jl:183</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>skip_issubtype_block</code></b>  <a id="org6d32a18"></a></li>
+<li><b><code>skip_issubtype_block</code></b>  <a id="orgdfb69db"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">skip_issubtype_block</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>)::<span style="color: #228b22;">Int</span>
@@ -1631,10 +1766,10 @@ Does not move is identifier not found
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#org60d101a">tokenizer.jl:327</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#org44bc742">tokenizer.jl:327</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>skip_struct_block</code></b>  <a id="org566bba1"></a></li>
+<li><b><code>skip_struct_block</code></b>  <a id="orge955a17"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">skip_struct_block</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>;
@@ -1648,10 +1783,10 @@ Does not move is identifier not found
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#orgea007b6">tokenizer.jl:349</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#org3b0535e">tokenizer.jl:349</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>skip_uninformative</code></b>  <a id="orgdb7b08f"></a></li>
+<li><b><code>skip_uninformative</code></b>  <a id="orgfc2d5ef"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">skip_uninformative</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>)
@@ -1663,10 +1798,10 @@ Skip whitespace
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#orga253e1d">tokenizer.jl:51</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#orga0d79dd">tokenizer.jl:51</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>skip_where_block</code></b>  <a id="org083f905"></a></li>
+<li><b><code>skip_where_block</code></b>  <a id="orgd02d06d"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">skip_where_block</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>)::<span style="color: #228b22;">Int</span>
@@ -1679,10 +1814,10 @@ Does not move is comma separeted identifier not found
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#org3855ad7">tokenizer.jl:258</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#org2aae0f8">tokenizer.jl:258</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>skip_whitespace</code></b>  <a id="orga3355a9"></a></li>
+<li><b><code>skip_whitespace</code></b>  <a id="orgaec58c3"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">skip_whitespace</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>)
@@ -1694,10 +1829,10 @@ Skip comment + whitespace
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#orgb44fe05">tokenizer.jl:60</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#org95b5d01">tokenizer.jl:60</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>skip_whitespace_strict</code></b>  <a id="orgfa81979"></a></li>
+<li><b><code>skip_whitespace_strict</code></b>  <a id="orgf6ad534"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">skip_whitespace_strict</span>(tok::<span style="color: #228b22;">Tokenized</span>,idx::<span style="color: #228b22;">Int</span>)
@@ -1709,10 +1844,10 @@ Skip whitespace
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#org3b97255">tokenizer.jl:121</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#org31fb5b1">tokenizer.jl:121</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>tokenized</code></b>  <a id="orga239b9f"></a></li>
+<li><b><code>tokenized</code></b>  <a id="org73e50e3"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia">tokenized(s::<span style="color: #228b22;">String</span>)
@@ -1724,7 +1859,7 @@ Defines a convenient method to tokenize a <code>String</code>
 </p>
 </blockquote>
 <p>
-<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#orgf428554">tokenizer.jl:7</a>, <a href="#org45e0f68">back to index</a>
+<a href="file:///home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl#org490f0cf">tokenizer.jl:7</a>, <a href="#org1b2ee6b">back to index</a>
 </p>
 </div>
 </div>
@@ -1732,7 +1867,7 @@ Defines a convenient method to tokenize a <code>String</code>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: picaud</p>
-<p class="date">Created: 2018-04-24 Tue 15:56</p>
+<p class="date">Created: 2018-04-24 Tue 22:07</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

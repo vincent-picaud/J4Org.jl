@@ -33,7 +33,7 @@ Point() = Point(0,0)
 # \sqrt{x^2+y^2}
 # $$
 #
-# *Usage example:*
+# *Example:*
 #!p=Point(1.0,2.0);
 #!norm(p) 
 #
@@ -44,9 +44,9 @@ norm(p::Point)::Float64 = sqrt(p.x*p.x+p.y*p.y)
 #+Method,Internal
 # An internal function
 #
-# For non exported symbol, do not forget the "Foo." prefix
-#!p=Point(1.0,2.0);
+# For symbol that are not exported, do not forget the "Foo." prefix:
+#!p=Point(1.0,2.0)
 #!Foo.foo(2.0,p)
-foo(α::Float64,p::Point) = Point(α*p.x,α*p.y)
+foo(r::Float64,p::Point) = Point(r*p.x,r*p.y)
 
-end 
+end
