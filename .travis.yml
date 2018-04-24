@@ -5,16 +5,16 @@ os:
 #  - osx
 julia:
   - 0.6
-  - nightly
+#  - nightly
 notifications:
   email: false
 git:
   depth: 99999999
 
 ## allows failures on nightly julia
-matrix:
+#matrix:
 #  allow_failures:
-  - julia: nightly
+#  - julia: nightly
 
 ## test script
 script:
