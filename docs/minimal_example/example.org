@@ -1,0 +1,28 @@
+#+PROPERTY: header-args:julia :session *my_session* :exports code :eval no-export
+#+OPTIONS: ^:{}
+#+TITLE: Minimal example
+
+# usually this part is required, however for this miminal_example
+# we need to specify where to find the "Foo" module.
+#
+#+BEGIN_SRC julia :results output none :eval no-export :exports none
+push!(LOAD_PATH,pwd())
+#+END_SRC
+
+#+BEGIN_SRC julia :results output none :eval no-export :exports none
+using J4Org
+# notifies J4Org that it needs "using Foo" to run Julia code snippets
+# in the documented code (those tagged as "#!")
+initialize_boxing_module(usedModules=["Foo"])
+# loads and tokenizes source code files, here only one file.
+documented_items=create_documented_item_array("Foo.jl")
+#+END_SRC
+
+* Example
+
+Prints all documented items, except those tagged with "Internal" 
+#+BEGIN_SRC julia :results output drawer :eval no-export :exports both
+print_org_doc(documented_items,tag_to_ignore=["Internal"],header_level=0)
+#+END_SRC
+
+
