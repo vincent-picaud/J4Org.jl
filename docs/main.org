@@ -1,5 +1,4 @@
 #+SETUPFILE: ./Setup/setupFile.org
-#+TOC: headlines 2
 #+TITLE: J4Org Package
 #+FILETAGS: Julia
 #+PROPERTY: header-args:julia :session *JuliaDoc_session* :exports code :eval no-export
