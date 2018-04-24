@@ -54,15 +54,6 @@ using J4Org
 initialize_boxing_module(usedModules=["J4Org"])
 #+END_SRC
 
-#+RESULTS:
-:RESULTS:
-
-
-ERROR: AssertionError: Tried to define an already existing module, maybe use the force=true kwarg
-Stacktrace:
- [1] #initialize_boxing_module#24(::String, ::Array{String,1}, ::Bool, ::Function) at /home/picaud/.julia/v0.6/J4Org/src/evaluate.jl:42
- [2] (::J4Org.#kw##initialize_boxing_module)(::Array{Any,1}, ::J4Org.#initialize_boxing_module) at ./<missing>:0
-:END:
 
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports both
 documented_items=create_documented_item_array_dir("~/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/");
@@ -72,15 +63,15 @@ print_org_doc(documented_items,tag="API",header_level=0)
 #+RESULTS:
 :RESULTS:
 
-<<5VZ66qB5>> *Index:* *[c]* [[c8qLmOgx][create_documented_item_array]], [[KJygJnEo][create_documented_item_array_dir]] *[e]* [[50M6oZR9][export]] *[i]* [[OyWzMyTQ][initialize_boxing_module]] *[p]* [[sudYS3gK][print_org_doc]] 
-- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<c8qLmOgx>>
+<<RYTYsq3U>> *Index:* *[c]* [[ooSrQLog][create_documented_item_array]], [[JaWM5HYc][create_documented_item_array_dir]] *[e]* [[3XpvUT09][export]] *[i]* [[10ZtPcbh][initialize_boxing_module]] *[p]* [[1eTxJVN8][print_org_doc]] 
+- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<ooSrQLog>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename::String)::Array{Documented_Item,1}
 #+END_SRC
 #+BEGIN_QUOTE
 Reads a file from its *filename* and returns an array of documented items.
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::89][documented_item.jl:89]], [[5VZ66qB5][back to index]]
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::89][documented_item.jl:89]], [[RYTYsq3U][back to index]]
 
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename_list::Array{String,1})::Array{Documented_Item,1}
@@ -96,24 +87,24 @@ create_documented_item_array([file1;file2;...])
 #+RESULTS:
 
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::128][documented_item.jl:128]], [[5VZ66qB5][back to index]]
-- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<KJygJnEo>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::128][documented_item.jl:128]], [[RYTYsq3U][back to index]]
+- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<JaWM5HYc>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array_dir(dirname::String)
 #+END_SRC
 #+BEGIN_QUOTE
 Reads all jl files in a directory
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::147][documented_item.jl:147]], [[5VZ66qB5][back to index]]
-- @@latex:\phantomsection@@ *=export=*  <<50M6oZR9>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::147][documented_item.jl:147]], [[RYTYsq3U][back to index]]
+- @@latex:\phantomsection@@ *=export=*  <<3XpvUT09>>
 #+BEGIN_SRC julia :eval never :exports code
 export create_documented_item_array_dir, print_org_doc
 #+END_SRC
 #+BEGIN_QUOTE
 Exported symbols
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl::3][J4Org.jl:3]], [[5VZ66qB5][back to index]]
-- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<OyWzMyTQ>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl::3][J4Org.jl:3]], [[RYTYsq3U][back to index]]
+- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<10ZtPcbh>>
 #+BEGIN_SRC julia :eval never :exports code
 function initialize_boxing_module(;boxingModule::String="BoxingModule",usedModules::Vector{String}=String[],force::Bool=false)::Void
 #+END_SRC
@@ -121,8 +112,8 @@ function initialize_boxing_module(;boxingModule::String="BoxingModule",usedModul
 Initialize a boxing module. This module is used to run Julia comment
 code snippet (tagged by #!)
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl::17][evaluate.jl:17]], [[5VZ66qB5][back to index]]
-- @@latex:\phantomsection@@ *=print_org_doc=*  <<sudYS3gK>> <<Hz9fxO54print_org_doc_API>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl::17][evaluate.jl:17]], [[RYTYsq3U][back to index]]
+- @@latex:\phantomsection@@ *=print_org_doc=*  <<1eTxJVN8>> <<30XhCfBdprint_org_doc_API>>
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -150,7 +141,7 @@ print_org_doc(tag="API",header_level=0)
                  this is can be useful to avoid link name conflict when performing local doc extraction.
 - *complete_link:* if true, try to fix link without target by adding extra items
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl::346][main.jl:346]], [[5VZ66qB5][back to index]]
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl::346][main.jl:346]], [[RYTYsq3U][back to index]]
 :END:
 
 
@@ -188,20 +179,8 @@ print_org_doc(documented_items,identifier="print_org_doc",header_level=-1)
 
 #+RESULTS:
 :RESULTS:
-ERROR: MethodError: no method matching start(::Void)
-Closest candidates are:
-  start(!Matched::SimpleVector) at essentials.jl:258
-  start(!Matched::Base.MethodList) at reflection.jl:560
-  start(!Matched::ExponentialBackOff) at error.jl:107
-  ...
-Stacktrace:
- [1] #writedlm#18(::Array{Any,1}, ::Function, ::IOStream, ::Void, ::Char) at ./datafmt.jl:673
- [2] #20 at ./datafmt.jl:683 [inlined]
- [3] open(::Base.DataFmt.##20#21{Array{Any,1},Void,Char}, ::String, ::String) at ./iostream.jl:152
- [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Void) at ./datafmt.jl:705
- [5] writecsv(::String, ::Void) at ./datafmt.jl:705
 
- @@latex:\phantomsection@@  <<speLT1Smprint_org_doc_API>>
+ @@latex:\phantomsection@@  <<fuGcZYAkprint_org_doc_API>>
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -303,15 +282,15 @@ print_org_doc(documented_items,tag="API",header_level=0)
 #+RESULTS:
 :RESULTS:
 
-<<X2gYw2dG>> *Index:* *[c]* [[5C7R0luP][create_documented_item_array]], [[ThWZdowv][create_documented_item_array_dir]] *[e]* [[tsmBt19N][export]] *[i]* [[fNR8GGaj][initialize_boxing_module]] *[p]* [[xTS3CMHd][print_org_doc]] 
-- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<5C7R0luP>>
+<<zj5fdUXG>> *Index:* *[c]* [[UHugJ9p3][create_documented_item_array]], [[j0lCHG1g][create_documented_item_array_dir]] *[e]* [[YKcg5vMp][export]] *[i]* [[WLA9eepy][initialize_boxing_module]] *[p]* [[pR2RkWba][print_org_doc]] 
+- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<UHugJ9p3>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename::String)::Array{Documented_Item,1}
 #+END_SRC
 #+BEGIN_QUOTE
 Reads a file from its *filename* and returns an array of documented items.
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::89][documented_item.jl:89]], [[X2gYw2dG][back to index]]
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::89][documented_item.jl:89]], [[zj5fdUXG][back to index]]
 
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename_list::Array{String,1})::Array{Documented_Item,1}
@@ -327,24 +306,24 @@ create_documented_item_array([file1;file2;...])
 #+RESULTS:
 
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::128][documented_item.jl:128]], [[X2gYw2dG][back to index]]
-- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<ThWZdowv>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::128][documented_item.jl:128]], [[zj5fdUXG][back to index]]
+- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<j0lCHG1g>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array_dir(dirname::String)
 #+END_SRC
 #+BEGIN_QUOTE
 Reads all jl files in a directory
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::147][documented_item.jl:147]], [[X2gYw2dG][back to index]]
-- @@latex:\phantomsection@@ *=export=*  <<tsmBt19N>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::147][documented_item.jl:147]], [[zj5fdUXG][back to index]]
+- @@latex:\phantomsection@@ *=export=*  <<YKcg5vMp>>
 #+BEGIN_SRC julia :eval never :exports code
 export create_documented_item_array_dir, print_org_doc
 #+END_SRC
 #+BEGIN_QUOTE
 Exported symbols
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl::3][J4Org.jl:3]], [[X2gYw2dG][back to index]]
-- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<fNR8GGaj>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl::3][J4Org.jl:3]], [[zj5fdUXG][back to index]]
+- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<WLA9eepy>>
 #+BEGIN_SRC julia :eval never :exports code
 function initialize_boxing_module(;boxingModule::String="BoxingModule",usedModules::Vector{String}=String[],force::Bool=false)::Void
 #+END_SRC
@@ -352,8 +331,8 @@ function initialize_boxing_module(;boxingModule::String="BoxingModule",usedModul
 Initialize a boxing module. This module is used to run Julia comment
 code snippet (tagged by #!)
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl::17][evaluate.jl:17]], [[X2gYw2dG][back to index]]
-- @@latex:\phantomsection@@ *=print_org_doc=*  <<xTS3CMHd>> <<ZyzDNStjprint_org_doc_API>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl::17][evaluate.jl:17]], [[zj5fdUXG][back to index]]
+- @@latex:\phantomsection@@ *=print_org_doc=*  <<pR2RkWba>> <<WlkWcamvprint_org_doc_API>>
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -381,7 +360,7 @@ print_org_doc(tag="API",header_level=0)
                  this is can be useful to avoid link name conflict when performing local doc extraction.
 - *complete_link:* if true, try to fix link without target by adding extra items
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl::346][main.jl:346]], [[X2gYw2dG][back to index]]
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl::346][main.jl:346]], [[zj5fdUXG][back to index]]
 :END:
 
 
@@ -396,8 +375,8 @@ print_org_doc(documented_items,tag="Error",tag_to_ignore=["Documented_Item"],hea
 #+RESULTS:
 :RESULTS:
 
-<<ZvvmTOs7>> *Index:* *[c]* [[vNk4O9li][create_file_org_link]] *[w]* [[0D4E04o4][warning_message]] 
-- @@latex:\phantomsection@@ *=create_file_org_link=*  <<vNk4O9li>>
+<<7GbdEZda>> *Index:* *[c]* [[qr4XOP7V][create_file_org_link]] *[w]* [[ZQcZhdzw][warning_message]] 
+- @@latex:\phantomsection@@ *=create_file_org_link=*  <<qr4XOP7V>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_file_org_link(filename::String,line::Int=0)::String
 #+END_SRC
@@ -495,8 +474,8 @@ J4Org.create_file_org_link("/path/file.txt",10)
 | ] |
 
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl::20][J4Org.jl:20]], [[ZvvmTOs7][back to index]]
-- @@latex:\phantomsection@@ *=warning_message=*  <<0D4E04o4>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl::20][J4Org.jl:20]], [[7GbdEZda][back to index]]
+- @@latex:\phantomsection@@ *=warning_message=*  <<ZQcZhdzw>>
 #+BEGIN_SRC julia :eval never :exports code
 function warning_message(message::String)::Void
 #+END_SRC
@@ -508,7 +487,7 @@ It generates a message of the form
 #+END_EXAMPLE
 which is an Org mode *comment*, hence it does not affect function output.
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl::8][J4Org.jl:8]], [[ZvvmTOs7][back to index]]
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl::8][J4Org.jl:8]], [[7GbdEZda][back to index]]
 :END:
 
 
@@ -521,30 +500,30 @@ print_org_doc(documented_items,tag="Links",header_level=0,complete_link=true)
 #+RESULTS:
 :RESULTS:
 
-<<4SezrCcK>> *Index:* *[D]* [[59GAqnrE][Documented_Item]] *[c]* [[dWvlMIK7][clean_extracted_links]], [[ysdyHaVr][create_file_org_link]] *[d]* [[v93JABon][doc_link_substituion]] *[e]* [[2eKgXs8g][extract_links]] *[g]* [[yT6juWud][get_items_with_link_target]] 
-- @@latex:\phantomsection@@ *=Documented_Item=*  <<59GAqnrE>> <<2eOkHVZeDocumented_Item>>
+<<kEbAUZsr>> *Index:* *[D]* [[zOYEE9ys][Documented_Item]] *[c]* [[hIpBl7YK][clean_extracted_links]], [[YVhEbhZA][create_file_org_link]] *[d]* [[s0UbgNlj][doc_link_substituion]] *[e]* [[oujzG9jy][extract_links]] *[g]* [[XOTqfgHw][get_items_with_link_target]] 
+- @@latex:\phantomsection@@ *=Documented_Item=*  <<zOYEE9ys>> <<XXXfNYpUDocumented_Item>>
 #+BEGIN_SRC julia :eval never :exports code
 struct Documented_Item
 #+END_SRC
 #+BEGIN_QUOTE
 A *central* structure containing documented item
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::1][documented_item.jl:1]], [[4SezrCcK][back to index]]
-- @@latex:\phantomsection@@ *=clean_extracted_links=*  <<dWvlMIK7>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::1][documented_item.jl:1]], [[kEbAUZsr][back to index]]
+- @@latex:\phantomsection@@ *=clean_extracted_links=*  <<hIpBl7YK>>
 #+BEGIN_SRC julia :eval never :exports code
 function clean_extracted_links(toClean::Vector{Tuple{String,String}})::Vector{Tuple{String,String}}
 #+END_SRC
 #+BEGIN_QUOTE
 This function clean extracted links by removing duplicates
 
-See: [[2eOkHVZeextract_links_string][extract_links(...)]]
+See: [[XXXfNYpUextract_links_string][extract_links(...)]]
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl::60][links.jl:60]], [[4SezrCcK][back to index]]
-- @@latex:\phantomsection@@ *=create_file_org_link=*  <<ysdyHaVr>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl::60][links.jl:60]], [[kEbAUZsr][back to index]]
+- @@latex:\phantomsection@@ *=create_file_org_link=*  <<YVhEbhZA>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_file_org_link(di::Documented_Item)::String
 #+END_SRC
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::49][documented_item.jl:49]], [[4SezrCcK][back to index]]
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::49][documented_item.jl:49]], [[kEbAUZsr][back to index]]
 
 #+BEGIN_SRC julia :eval never :exports code
 function create_file_org_link(filename::String,line::Int=0)::String
@@ -556,13 +535,95 @@ Generate a org compatible link to file
 J4Org.create_file_org_link("/path/file.txt")
 J4Org.create_file_org_link("/path/file.txt",10)
 #+END_SRC
+
+#+RESULTS:
+| [ |
+| [ |
+| f |
+| i |
+| l |
+| e |
+| : |
+| p |
+| a |
+| t |
+| h |
+| f |
+| i |
+| l |
+| e |
+| 0 |
+| t |
+| x |
+| t |
+| : |
+| : |
+| 1 |
+| 0 |
+| ] |
+| [ |
+| f |
+| i |
+| l |
+| e |
+| 0 |
+| t |
+| x |
+| t |
+| : |
+| 1 |
+| 0 |
+| ] |
+| ] |
+
 #+BEGIN_SRC julia
 "[[file:/path/file.txt][file.txt]]"
 "[[file:/path/file.txt::10][file.txt:10]]"
 #+END_SRC
+
+#+RESULTS:
+| [ |
+| [ |
+| f |
+| i |
+| l |
+| e |
+| : |
+| p |
+| a |
+| t |
+| h |
+| f |
+| i |
+| l |
+| e |
+| 0 |
+| t |
+| x |
+| t |
+| : |
+| : |
+| 1 |
+| 0 |
+| ] |
+| [ |
+| f |
+| i |
+| l |
+| e |
+| 0 |
+| t |
+| x |
+| t |
+| : |
+| 1 |
+| 0 |
+| ] |
+| ] |
+
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl::20][J4Org.jl:20]], [[4SezrCcK][back to index]]
-- @@latex:\phantomsection@@ *=doc_link_substituion=*  <<v93JABon>> <<2eOkHVZedoc_link_substituion>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl::20][J4Org.jl:20]], [[kEbAUZsr][back to index]]
+- @@latex:\phantomsection@@ *=doc_link_substituion=*  <<s0UbgNlj>> <<XXXfNYpUdoc_link_substituion>>
 #+BEGIN_SRC julia :eval never :exports code
 function doc_link_substituion(doc::String,di_array::Array{Documented_Item,1},link_prefix::String)::String
 #+END_SRC
@@ -580,8 +641,8 @@ From doc string performs links substitution
 *Note:* to be able to write a "unactive" link, use C-x 8 RET 200b
         (see: https://emacs.stackexchange.com/a/16702)
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl::89][links.jl:89]], [[4SezrCcK][back to index]]
-- @@latex:\phantomsection@@ *=extract_links=*  <<2eKgXs8g>> <<2eOkHVZeextract_links_string>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl::89][links.jl:89]], [[kEbAUZsr][back to index]]
+- @@latex:\phantomsection@@ *=extract_links=*  <<oujzG9jy>> <<XXXfNYpUextract_links_string>>
 #+BEGIN_SRC julia :eval never :exports code
 function extract_links(input::String)::Vector{Tuple{String,String}}
 #+END_SRC
@@ -594,38 +655,41 @@ s="# some text [[some_target][]] another one [[link_target][link_name]]\n and a 
 J4Org.extract_links(s)
 #+END_SRC
 
+#+RESULTS:
+: some_target
+
 #+BEGIN_EXAMPLE
 1-element Array{Tuple{String,String},1}:
  ("some_target", "")         
 #+END_EXAMPLE
 
 *Caveat:* only use links of the forme ​"[​[something][]]", which are not
-          valid Org mode links, see [[2eOkHVZedoc_link_substituion][doc_link_substituion(...)]]
+          valid Org mode links, see [[XXXfNYpUdoc_link_substituion][doc_link_substituion(...)]]
 
-*Test link:* [[2eOkHVZedoc_link_substituion][doc_link_substituion(...)]]
+*Test link:* [[XXXfNYpUdoc_link_substituion][doc_link_substituion(...)]]
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl::2][links.jl:2]], [[4SezrCcK][back to index]]
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl::2][links.jl:2]], [[kEbAUZsr][back to index]]
 
 #+BEGIN_SRC julia :eval never :exports code
 function extract_links(di_array::Array{Documented_Item,1})::Vector{Tuple{String,String}}
 #+END_SRC
 #+BEGIN_QUOTE
-This function is like [[2eOkHVZeextract_links_string][extract_links(...)]], except that is
-process an array of [[2eOkHVZeDocumented_Item][struct Documented_Item]]
+This function is like [[XXXfNYpUextract_links_string][extract_links(...)]], except that is
+process an array of [[XXXfNYpUDocumented_Item][struct Documented_Item]]
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl::45][links.jl:45]], [[4SezrCcK][back to index]]
-- @@latex:\phantomsection@@ *=get_items_with_link_target=*  <<yT6juWud>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl::45][links.jl:45]], [[kEbAUZsr][back to index]]
+- @@latex:\phantomsection@@ *=get_items_with_link_target=*  <<XOTqfgHw>>
 #+BEGIN_SRC julia :eval never :exports code
 function get_items_with_link_target(link_target::String,di_array::Array{Documented_Item,1})::Vector{Int}
 #+END_SRC
 #+BEGIN_QUOTE
-Returns the indices of [[2eOkHVZeDocumented_Item][struct Documented_Item]] containing the
+Returns the indices of [[XXXfNYpUDocumented_Item][struct Documented_Item]] containing the
 link_target (have a tag line with L:link_target)
 
 *Note:* a normal situation is to have zero or one indices. Several
 indices means that we do not have a unique target.
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl::70][links.jl:70]], [[4SezrCcK][back to index]]
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/links.jl::70][links.jl:70]], [[kEbAUZsr][back to index]]
 :END:
 
 ** Find Tag
@@ -646,18 +710,18 @@ print_org_doc(documented_items,tag="FindTag",header_level=0,complete_link=false)
  #+RESULTS:
  :RESULTS:
 
- <<A1hL6n5O>> *Index:* *[E]* [[gzg58DfU][Extract_Tag_Result]] *[e]* [[AkJQ3KqK][extract_tag]] *[f]* [[rY3KxUjL][find_tag]] *[l]* [[UDsamTJ9][line]], [[WPr4JLvM][link]] *[s]* [[QkbpbMBc][skip]] *[t]* [[aNlQRkrj][tag_idx]], [[j0FWrxuT][tags]] 
- - @@latex:\phantomsection@@ *=Extract_Tag_Result=*  <<gzg58DfU>>
+ <<ZGCtoXS4>> *Index:* *[E]* [[1udfKYxi][Extract_Tag_Result]] *[e]* [[p8K0b8LG][extract_tag]] *[f]* [[sNA1a7d3][find_tag]] *[l]* [[EbhAVBW0][line]], [[8aNJT27A][link]] *[s]* [[pk7NE82N][skip]] *[t]* [[PBrDgS9n][tag_idx]], [[xAFyfZPg][tags]] 
+ - @@latex:\phantomsection@@ *=Extract_Tag_Result=*  <<1udfKYxi>>
  #+BEGIN_SRC julia :eval never :exports code
  struct Extract_Tag_Result <: Extracted_Item_Base
  #+END_SRC
- [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::2][find_tag.jl:2]], [[A1hL6n5O][back to index]]
- - @@latex:\phantomsection@@ *=extract_tag=*  <<AkJQ3KqK>> <<wiZD7pWxextract_tag_link>>
+ [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::2][find_tag.jl:2]], [[ZGCtoXS4][back to index]]
+ - @@latex:\phantomsection@@ *=extract_tag=*  <<p8K0b8LG>> <<CvN1Z4itextract_tag_link>>
  #+BEGIN_SRC julia :eval never :exports code
  function extract_tag(tok::Tokenized,idx::Int)::Union{Void,Extract_Tag_Result}
  #+END_SRC
- [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::27][find_tag.jl:27]], [[A1hL6n5O][back to index]]
- - @@latex:\phantomsection@@ *=find_tag=*  <<rY3KxUjL>> <<wiZD7pWxfind_tag_master>>
+ [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::27][find_tag.jl:27]], [[ZGCtoXS4][back to index]]
+ - @@latex:\phantomsection@@ *=find_tag=*  <<sNA1a7d3>> <<CvN1Z4itfind_tag_master>>
  #+BEGIN_SRC julia :eval never :exports code
  function find_tag(tok::Tokenized,idx::Int,predicate::Function)::Union{Void,Extract_Tag_Result}
  #+END_SRC
@@ -675,16 +739,16 @@ print_org_doc(documented_items,tag="FindTag",header_level=0,complete_link=false)
  - =(idx,Extract_Tag_Result)=: where =idx= is the position of the discovered tag
  - =(length(tok)+1,nothing)=: if no tag found
  #+END_QUOTE
- [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::76][find_tag.jl:76]], [[A1hL6n5O][back to index]]
+ [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::76][find_tag.jl:76]], [[ZGCtoXS4][back to index]]
 
  #+BEGIN_SRC julia :eval never :exports code
  function find_tag(tok::Tokenized,idx::Int)::Union{Void,Extract_Tag_Result}
  #+END_SRC
  #+BEGIN_QUOTE
- Convenience function that uses [[wiZD7pWxfind_tag_master][find_tag(...)]] with =x->true=
+ Convenience function that uses [[CvN1Z4itfind_tag_master][find_tag(...)]] with =x->true=
  predicate. It accepts all tags
  #+END_QUOTE
- [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::104][find_tag.jl:104]], [[A1hL6n5O][back to index]]
+ [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::104][find_tag.jl:104]], [[ZGCtoXS4][back to index]]
 
  #+BEGIN_SRC julia :eval never :exports code
  function find_tag(tok::Tokenized,idx::Int,tag::String)::Union{Void,Extract_Tag_Result}
@@ -693,32 +757,32 @@ print_org_doc(documented_items,tag="FindTag",header_level=0,complete_link=false)
  Convenience function that uses  find_tag_master find_tag  with a
  predicate that checks for *Tag* existence.
  #+END_QUOTE
- [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::112][find_tag.jl:112]], [[A1hL6n5O][back to index]]
- - @@latex:\phantomsection@@ *=line=*  <<UDsamTJ9>>
+ [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::112][find_tag.jl:112]], [[ZGCtoXS4][back to index]]
+ - @@latex:\phantomsection@@ *=line=*  <<EbhAVBW0>>
  #+BEGIN_SRC julia :eval never :exports code
  line(o::Extract_Tag_Result)::Int
  #+END_SRC
- [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::22][find_tag.jl:22]], [[A1hL6n5O][back to index]]
- - @@latex:\phantomsection@@ *=link=*  <<WPr4JLvM>>
+ [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::22][find_tag.jl:22]], [[ZGCtoXS4][back to index]]
+ - @@latex:\phantomsection@@ *=link=*  <<8aNJT27A>>
  #+BEGIN_SRC julia :eval never :exports code
  link(o::Extract_Tag_Result)::String
  #+END_SRC
- [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::19][find_tag.jl:19]], [[A1hL6n5O][back to index]]
- - @@latex:\phantomsection@@ *=skip=*  <<QkbpbMBc>>
+ [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::19][find_tag.jl:19]], [[ZGCtoXS4][back to index]]
+ - @@latex:\phantomsection@@ *=skip=*  <<pk7NE82N>>
  #+BEGIN_SRC julia :eval never :exports code
  skip(o::Extract_Tag_Result)::Int
  #+END_SRC
- [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::13][find_tag.jl:13]], [[A1hL6n5O][back to index]]
- - @@latex:\phantomsection@@ *=tag_idx=*  <<aNlQRkrj>>
+ [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::13][find_tag.jl:13]], [[ZGCtoXS4][back to index]]
+ - @@latex:\phantomsection@@ *=tag_idx=*  <<PBrDgS9n>>
  #+BEGIN_SRC julia :eval never :exports code
  tag_idx(o::Extract_Tag_Result)::Int
  #+END_SRC
- [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::10][find_tag.jl:10]], [[A1hL6n5O][back to index]]
- - @@latex:\phantomsection@@ *=tags=*  <<j0FWrxuT>>
+ [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::10][find_tag.jl:10]], [[ZGCtoXS4][back to index]]
+ - @@latex:\phantomsection@@ *=tags=*  <<xAFyfZPg>>
  #+BEGIN_SRC julia :eval never :exports code
  tags(o::Extract_Tag_Result)::Array{String,1}
  #+END_SRC
- [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::16][find_tag.jl:16]], [[A1hL6n5O][back to index]]
+ [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/find_tag.jl::16][find_tag.jl:16]], [[ZGCtoXS4][back to index]]
  :END:
 
 * TODO list [0/2]
@@ -757,13 +821,13 @@ print_org_doc(documented_items,tag="TODO",header_level=0)
 #+RESULTS:
 :RESULTS:
 
-<<EA26Z5qF>> *Index:* *[E]* [[YDX4jbbJ][Extracted_Item_Base]] *[w]* [[ncrkVkzn][with_hash_evaluate]] 
-- @@latex:\phantomsection@@ *=Extracted_Item_Base=*  <<YDX4jbbJ>> <<HlSICzrGExtracted_Item_Base>>
+<<xxEwCRi3>> *Index:* *[E]* [[upllexho][Extracted_Item_Base]] *[w]* [[G5g0gxVC][with_hash_evaluate]] 
+- @@latex:\phantomsection@@ *=Extracted_Item_Base=*  <<upllexho>> <<sPb5NRq5Extracted_Item_Base>>
 #+BEGIN_SRC julia :eval never :exports code
 abstract type Extracted_Item_Base 
 #+END_SRC
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::3][extract.jl:3]], [[EA26Z5qF][back to index]]
-- @@latex:\phantomsection@@ *=with_hash_evaluate=*  <<ncrkVkzn>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::3][extract.jl:3]], [[xxEwCRi3][back to index]]
+- @@latex:\phantomsection@@ *=with_hash_evaluate=*  <<G5g0gxVC>>
 #+BEGIN_SRC julia :eval never :exports code
 function with_hash_evaluate(comment::String,
                             boxingModule::String)::String
@@ -786,27 +850,28 @@ rand(5)
 #+END_SRC
 
 #+RESULTS:
-| 0.10290552873465542 |
-| 0.11016172971204474 |
-|  0.9621431017015925 |
-|  0.8414420209884048 |
-|  0.3714649327950268 |
+| 0.37336130056919803 |
+|  0.5336651179202612 |
+|  0.8183375565134803 |
+|  0.4596756705183185 |
+|  0.6012430089831795 |
 
 #+BEGIN_SRC julia
 11
 5-element Array{Float64,1}:
- 0.536283
- 0.668383
- 0.559368
- 0.213578
- 0.991541
+ 0.618715
+ 0.303327
+ 0.29002 
+ 0.140657
+ 0.107546
 #+END_SRC
 
 #+RESULTS:
+: 0.107546
 
 - [ ] TODO skip output for code ending with ";"
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl::48][evaluate.jl:48]], [[EA26Z5qF][back to index]]
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl::48][evaluate.jl:48]], [[xxEwCRi3][back to index]]
 :END:
 
 * Unit tests
@@ -816,7 +881,6 @@ include("../test/runtests.jl")
 #+END_SRC
 
 #+RESULTS:
-: 
 : # =WARNING:= Link target ("faa", "") not found
 : Test Summary: | Pass  Total
 : J4Org         |   96     96
@@ -847,55 +911,55 @@ print_org_doc(documented_items,tag="Tokenizer",header_level=0,complete_link=true
 #+RESULTS:
 :RESULTS:
 
-<<bxPwdP5r>> *Index:* *[E]* [[aLqyu4hD][Extracted_Function]], [[5Ed0cWEO][Extracted_Item_Base]] *[e]* [[FW1di4Hv][extract_abstract]], [[3VlKrfXP][extract_export]], [[bXcqdaeH][extract_function]], [[B29KeMYi][extract_struct]] *[s]* [[Yz9eHlZp][skip_abstract_block]], [[fnuivvYP][skip_comma_separated_identifiers]], [[YEwq9cKJ][skip_comment]], [[Fflr0WYL][skip_declaration_block]], [[QXMGFlPs][skip_function_call_block]], [[nUR8PgGj][skip_identifier]], [[TOHgw3NA][skip_issubtype_block]], [[ecyvr1SI][skip_struct_block]], [[TKZLIIjK][skip_uninformative]], [[ooxYfsos][skip_where_block]], [[bHB76fLD][skip_whitespace]], [[pnCV5TLl][skip_whitespace_strict]] *[t]* [[IbCVimIM][tokenized]] 
-- @@latex:\phantomsection@@ *=Extracted_Function=*  <<aLqyu4hD>>
+<<qttA4xGs>> *Index:* *[E]* [[upqudCMd][Extracted_Function]], [[ohlzDlSN][Extracted_Item_Base]] *[e]* [[GnYv9dv4][extract_abstract]], [[HtfpKWii][extract_export]], [[Vu7W6eF0][extract_function]], [[qjG2Tni1][extract_struct]] *[s]* [[OF9S6qZP][skip_abstract_block]], [[TMik1awd][skip_comma_separated_identifiers]], [[ENs3PquH][skip_comment]], [[kPaVDqHV][skip_declaration_block]], [[PCQNXVQi][skip_function_call_block]], [[LnT8u8If][skip_identifier]], [[hrOQf2Zi][skip_issubtype_block]], [[nbJpmv0R][skip_struct_block]], [[U4f8kI7P][skip_uninformative]], [[wCMx63vo][skip_where_block]], [[wDBZFRyN][skip_whitespace]], [[GSioLgBZ][skip_whitespace_strict]] *[t]* [[gBpI3pMO][tokenized]] 
+- @@latex:\phantomsection@@ *=Extracted_Function=*  <<upqudCMd>>
 #+BEGIN_SRC julia :eval never :exports code
 struct Extracted_Function <: Extracted_Item_Base
 #+END_SRC
 #+BEGIN_QUOTE
 A structure to store extracted function.
 
-See: [[46OWl1mmExtracted_Item_Base][abstract Extracted_Item_Base]], [[46OWl1mmextract_function][extract_function(...)]]
+See: [[Zjq8SftWExtracted_Item_Base][abstract Extracted_Item_Base]], [[Zjq8SftWextract_function][extract_function(...)]]
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::75][extract.jl:75]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=Extracted_Item_Base=*  <<5Ed0cWEO>> <<46OWl1mmExtracted_Item_Base>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::75][extract.jl:75]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=Extracted_Item_Base=*  <<ohlzDlSN>> <<Zjq8SftWExtracted_Item_Base>>
 #+BEGIN_SRC julia :eval never :exports code
 abstract type Extracted_Item_Base 
 #+END_SRC
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::3][extract.jl:3]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=extract_abstract=*  <<FW1di4Hv>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::3][extract.jl:3]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=extract_abstract=*  <<GnYv9dv4>>
 #+BEGIN_SRC julia :eval never :exports code
 function extract_abstract(tok::Tokenized,idx::Int)::Union{Void,Extracted_Abstract}
 #+END_SRC
 #+BEGIN_QUOTE
 Extract abstract type
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::185][extract.jl:185]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=extract_export=*  <<3VlKrfXP>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::185][extract.jl:185]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=extract_export=*  <<HtfpKWii>>
 #+BEGIN_SRC julia :eval never :exports code
 function extract_export(tok::Tokenized,idx::Int)::Union{Void,Extracted_Export}
 #+END_SRC
 #+BEGIN_QUOTE
 Extract export
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::157][extract.jl:157]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=extract_function=*  <<bXcqdaeH>> <<46OWl1mmextract_function>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::157][extract.jl:157]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=extract_function=*  <<Vu7W6eF0>> <<Zjq8SftWextract_function>>
 #+BEGIN_SRC julia :eval never :exports code
 function extract_function(tok::Tokenized,idx::Int)::Union{Void,Extracted_Function}
 #+END_SRC
 #+BEGIN_QUOTE
 Extract function
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::87][extract.jl:87]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=extract_struct=*  <<B29KeMYi>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::87][extract.jl:87]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=extract_struct=*  <<qjG2Tni1>>
 #+BEGIN_SRC julia :eval never :exports code
 function extract_struct(tok::Tokenized,idx::Int)::Union{Void,Extracted_Struct}
 #+END_SRC
 #+BEGIN_QUOTE
 Extract struct
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::131][extract.jl:131]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=skip_abstract_block=*  <<Yz9eHlZp>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::131][extract.jl:131]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=skip_abstract_block=*  <<OF9S6qZP>>
 #+BEGIN_SRC julia :eval never :exports code
 function skip_abstract_block(tok::Tokenized,idx::Int;
                              identifier::Ref{String}=Ref{String}(""))::Int
@@ -905,8 +969,8 @@ Skips uniformative & abstract type block
 Does not move is identifier not found
 
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::385][tokenizer.jl:385]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=skip_comma_separated_identifiers=*  <<fnuivvYP>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::385][tokenizer.jl:385]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=skip_comma_separated_identifiers=*  <<TMik1awd>>
 #+BEGIN_SRC julia :eval never :exports code
 function skip_comma_separated_identifiers(tok::Tokenized,idx::Int)::Int
 #+END_SRC
@@ -914,8 +978,8 @@ function skip_comma_separated_identifiers(tok::Tokenized,idx::Int)::Int
 Skips uninformative & a comma separated sequence of identifiers A,A.B.C,A.B{...}
 Does not move is comma separeted identifier not found
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::231][tokenizer.jl:231]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=skip_comment=*  <<YEwq9cKJ>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::231][tokenizer.jl:231]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=skip_comment=*  <<ENs3PquH>>
 #+BEGIN_SRC julia :eval never :exports code
 function skip_comment(tok::Tokenized,idx::Int)
 #+END_SRC
@@ -923,8 +987,8 @@ function skip_comment(tok::Tokenized,idx::Int)
 Skip comment
 -> replaced by skip uninformative
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::41][tokenizer.jl:41]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=skip_declaration_block=*  <<Fflr0WYL>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::41][tokenizer.jl:41]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=skip_declaration_block=*  <<kPaVDqHV>>
 #+BEGIN_SRC julia :eval never :exports code
 function skip_declaration_block(tok::Tokenized,idx::Int)::Int
 #+END_SRC
@@ -932,8 +996,8 @@ function skip_declaration_block(tok::Tokenized,idx::Int)::Int
 Skips uninformative & a declaration block ::identifier{...}
 Does not move in case of identification failure
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::282][tokenizer.jl:282]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=skip_function_call_block=*  <<QXMGFlPs>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::282][tokenizer.jl:282]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=skip_function_call_block=*  <<PCQNXVQi>>
 #+BEGIN_SRC julia :eval never :exports code
 function skip_function_call_block(tok::Tokenized,idx::Int;
                          identifier::Ref{String}=Ref{String}(""))::Int
@@ -942,8 +1006,8 @@ function skip_function_call_block(tok::Tokenized,idx::Int;
 Skips uninformative & a function call block identifier{...}(....)
 Does not move in case of identification failure
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::301][tokenizer.jl:301]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=skip_identifier=*  <<nUR8PgGj>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::301][tokenizer.jl:301]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=skip_identifier=*  <<LnT8u8If>>
 #+BEGIN_SRC julia :eval never :exports code
 function skip_identifier(tok::Tokenized,idx::Int;
                          identifier::Ref{String}=Ref{String}(""))::Int
@@ -954,8 +1018,8 @@ Returns (name,idx) if prod
 Does not move is identifier not found
 
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::183][tokenizer.jl:183]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=skip_issubtype_block=*  <<TOHgw3NA>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::183][tokenizer.jl:183]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=skip_issubtype_block=*  <<hrOQf2Zi>>
 #+BEGIN_SRC julia :eval never :exports code
 function skip_issubtype_block(tok::Tokenized,idx::Int)::Int
 #+END_SRC
@@ -964,8 +1028,8 @@ Skips uniformative & issubtype indentifier
 Does not move is identifier not found
 
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::327][tokenizer.jl:327]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=skip_struct_block=*  <<ecyvr1SI>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::327][tokenizer.jl:327]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=skip_struct_block=*  <<nbJpmv0R>>
 #+BEGIN_SRC julia :eval never :exports code
 function skip_struct_block(tok::Tokenized,idx::Int;
                           identifier::Ref{String}=Ref{String}(""))::Int
@@ -975,16 +1039,16 @@ Skips uniformative & structure block
 Does not move is identifier not found
 
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::349][tokenizer.jl:349]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=skip_uninformative=*  <<TKZLIIjK>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::349][tokenizer.jl:349]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=skip_uninformative=*  <<U4f8kI7P>>
 #+BEGIN_SRC julia :eval never :exports code
 function skip_uninformative(tok::Tokenized,idx::Int)
 #+END_SRC
 #+BEGIN_QUOTE
 Skip whitespace 
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::51][tokenizer.jl:51]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=skip_where_block=*  <<ooxYfsos>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::51][tokenizer.jl:51]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=skip_where_block=*  <<wCMx63vo>>
 #+BEGIN_SRC julia :eval never :exports code
 function skip_where_block(tok::Tokenized,idx::Int)::Int
 #+END_SRC
@@ -992,31 +1056,31 @@ function skip_where_block(tok::Tokenized,idx::Int)::Int
 Skips uninformative & a where block (where {...} or where A,B
 Does not move is comma separeted identifier not found
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::258][tokenizer.jl:258]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=skip_whitespace=*  <<bHB76fLD>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::258][tokenizer.jl:258]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=skip_whitespace=*  <<wDBZFRyN>>
 #+BEGIN_SRC julia :eval never :exports code
 function skip_whitespace(tok::Tokenized,idx::Int)
 #+END_SRC
 #+BEGIN_QUOTE
 Skip comment + whitespace 
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::60][tokenizer.jl:60]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=skip_whitespace_strict=*  <<pnCV5TLl>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::60][tokenizer.jl:60]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=skip_whitespace_strict=*  <<GSioLgBZ>>
 #+BEGIN_SRC julia :eval never :exports code
 function skip_whitespace_strict(tok::Tokenized,idx::Int)
 #+END_SRC
 #+BEGIN_QUOTE
 Skip whitespace
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::121][tokenizer.jl:121]], [[bxPwdP5r][back to index]]
-- @@latex:\phantomsection@@ *=tokenized=*  <<IbCVimIM>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::121][tokenizer.jl:121]], [[qttA4xGs][back to index]]
+- @@latex:\phantomsection@@ *=tokenized=*  <<gBpI3pMO>>
 #+BEGIN_SRC julia :eval never :exports code
 tokenized(s::String)
 #+END_SRC
 #+BEGIN_QUOTE
 Defines a convenient method to tokenize a =String=
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::7][tokenizer.jl:7]], [[bxPwdP5r][back to index]]
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::7][tokenizer.jl:7]], [[qttA4xGs][back to index]]
 :END:
 
 
