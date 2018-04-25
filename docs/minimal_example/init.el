@@ -1,3 +1,4 @@
+;; [[file:~/GitHub/J4Org.jl/docs/main.org::*Emacs%20configuration][Emacs configuration:1]]
 (package-initialize)
 
 (require 'ess-site)
@@ -12,3 +13,4 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((julia . t)))
+;; Emacs configuration:1 ends here

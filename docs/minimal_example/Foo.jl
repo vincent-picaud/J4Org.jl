@@ -1,3 +1,4 @@
+# [[file:~/GitHub/J4Org.jl/docs/main.org::*A%20documented%20Julia%20=Foo=%20module][A documented Julia =Foo= module:1]]
 module Foo
 
 export Point, foo
@@ -50,3 +51,4 @@ norm(p::Point)::Float64 = sqrt(p.x*p.x+p.y*p.y)
 foo(r::Float64,p::Point) = Point(r*p.x,r*p.y)
 
 end
+# A documented Julia =Foo= module:1 ends here
