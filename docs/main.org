@@ -98,10 +98,7 @@ end
 Point() = Point(0,0)
 
 #+Point,Method L:norm_link_example
-# A simple function that computes
-# $$
-# \sqrt{x^2+y^2}
-# $$
+# A simple function that computes $\sqrt{x^2+y^2}$
 #
 # *Example:*
 #!p=Point(1.0,2.0);
@@ -229,9 +226,184 @@ we used to generate *this* document (also see the pdf file).
 
 * More examples 
 
-We still use our =Foo= module to provide more example. The complete [[id:c9053a86-dea5-4bc2-a883-92a1bfde20ba][API]] is detailed after.
+We still use our =Foo= module to provide more examples. The complete [[id:c9053a86-dea5-4bc2-a883-92a1bfde20ba][API]] is detailed after.
 
-** 
+** =print_org_doc= options
+
+The [[API_print_org_doc_API][print_org_doc(...)]] function has several options, let's see some usage examples
+
+*** =header_level=
+
+This integer can have these values:
+- *-1*: do not print header nor index, see [[id:bda53362-32fb-4096-9c0a-32c0afb96b5f][header_level=-1]]
+- *0*: print header beginning with "-", see [[id:842e5c47-62d1-44fc-8489-e105a45f5dd4][header_level=0]].
+- *l>0* create subsection of level *l*, for instance *header_level=3*
+  creates subsections beginning with *3* stars. See [[id:0f6a49dc-ee9f-4964-8801-8badfb67f735][header_level=5]].
+
+*Caveat:* for *l>0* AFAIK there is a bug in OrgMode, because a residual *:RESULT:* is printed.
+
+**** header_level=-1
+     :PROPERTIES:
+     :ID:       bda53362-32fb-4096-9c0a-32c0afb96b5f
+     :END:
+
+#+BEGIN_SRC julia :results output drawer :eval no-export :exports both
+documented_items=create_documented_item_array("minimal_example/Foo.jl");
+print_org_doc(documented_items,tag="Method",header_level=-1)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+
+# =WARNING:= Link target ("Point_struct", "") not found
+
+#+BEGIN_SRC julia :eval never :exports code
+foo(r::Float64,p::Point)
+#+END_SRC
+#+BEGIN_QUOTE
+An internal function
+
+For symbol that are not exported, do not forget the "Foo." prefix:
+#+BEGIN_SRC julia
+p=Point(1.0,2.0)
+Foo.foo(2.0,p)
+#+END_SRC
+#+BEGIN_SRC julia
+Foo.Point(1.0, 2.0)
+Foo.Point(2.0, 4.0)
+#+END_SRC
+#+END_QUOTE
+[[file:minimal_example/Foo.jl::42][Foo.jl:42]]
+ @@latex:\phantomsection@@  <<6NMUOTNGnorm_link_example>>
+#+BEGIN_SRC julia :eval never :exports code
+norm(p::Point)::Float64
+#+END_SRC
+#+BEGIN_QUOTE
+A simple function that computes $\sqrt{x^2+y^2}$
+
+*Example:*
+#+BEGIN_SRC julia
+p=Point(1.0,2.0);
+norm(p) 
+#+END_SRC
+#+BEGIN_SRC julia
+2.23606797749979
+#+END_SRC
+
+See: _Point_struct_
+#+END_QUOTE
+[[file:minimal_example/Foo.jl::31][Foo.jl:31]]
+:END:
+
+**** header_level=0
+     :PROPERTIES:
+     :ID:       842e5c47-62d1-44fc-8489-e105a45f5dd4
+     :END:
+
+#+BEGIN_SRC julia :results output drawer :eval no-export :exports both
+documented_items=create_documented_item_array("minimal_example/Foo.jl");
+print_org_doc(documented_items,tag="Method",header_level=0)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+
+# =WARNING:= Link target ("Point_struct", "") not found
+<<MOdp26jo>> *Index:* *[f]* [[6T7mWmH8][foo]] *[n]* [[2eMRib40][norm]] 
+- @@latex:\phantomsection@@ *=foo=*  <<6T7mWmH8>>
+#+BEGIN_SRC julia :eval never :exports code
+foo(r::Float64,p::Point)
+#+END_SRC
+#+BEGIN_QUOTE
+An internal function
+
+For symbol that are not exported, do not forget the "Foo." prefix:
+#+BEGIN_SRC julia
+p=Point(1.0,2.0)
+Foo.foo(2.0,p)
+#+END_SRC
+#+BEGIN_SRC julia
+Foo.Point(1.0, 2.0)
+Foo.Point(2.0, 4.0)
+#+END_SRC
+#+END_QUOTE
+[[file:minimal_example/Foo.jl::42][Foo.jl:42]], [[MOdp26jo][back to index]]
+- @@latex:\phantomsection@@ *=norm=*  <<2eMRib40>> <<KGerKtxUnorm_link_example>>
+#+BEGIN_SRC julia :eval never :exports code
+norm(p::Point)::Float64
+#+END_SRC
+#+BEGIN_QUOTE
+A simple function that computes $\sqrt{x^2+y^2}$
+
+*Example:*
+#+BEGIN_SRC julia
+p=Point(1.0,2.0);
+norm(p) 
+#+END_SRC
+#+BEGIN_SRC julia
+2.23606797749979
+#+END_SRC
+
+See: _Point_struct_
+#+END_QUOTE
+[[file:minimal_example/Foo.jl::31][Foo.jl:31]], [[MOdp26jo][back to index]]
+:END:
+
+
+
+**** header_level=5
+     :PROPERTIES:
+     :ID:       0f6a49dc-ee9f-4964-8801-8badfb67f735
+     :END:
+
+#+BEGIN_SRC julia :results output drawer :eval no-export :exports both
+documented_items=create_documented_item_array("minimal_example/Foo.jl");
+print_org_doc(documented_items,tag="Method",header_level=5)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+
+# =WARNING:= Link target ("Point_struct", "") not found
+<<Fnuec4dG>> *Index:* *[f]* [[Ygi2UuWU][foo]] *[n]* [[wmjf1rQB][norm]] 
+***** *=foo=*  <<Ygi2UuWU>>
+#+BEGIN_SRC julia :eval never :exports code
+foo(r::Float64,p::Point)
+#+END_SRC
+#+BEGIN_QUOTE
+An internal function
+
+For symbol that are not exported, do not forget the "Foo." prefix:
+#+BEGIN_SRC julia
+p=Point(1.0,2.0)
+Foo.foo(2.0,p)
+#+END_SRC
+#+BEGIN_SRC julia
+Foo.Point(1.0, 2.0)
+Foo.Point(2.0, 4.0)
+#+END_SRC
+#+END_QUOTE
+[[file:minimal_example/Foo.jl::42][Foo.jl:42]], [[Fnuec4dG][back to index]]
+***** *=norm=*  <<wmjf1rQB>> <<gYEa51ginorm_link_example>>
+#+BEGIN_SRC julia :eval never :exports code
+norm(p::Point)::Float64
+#+END_SRC
+#+BEGIN_QUOTE
+A simple function that computes $\sqrt{x^2+y^2}$
+
+*Example:*
+#+BEGIN_SRC julia
+p=Point(1.0,2.0);
+norm(p) 
+#+END_SRC
+#+BEGIN_SRC julia
+2.23606797749979
+#+END_SRC
+
+See: _Point_struct_
+#+END_QUOTE
+[[file:minimal_example/Foo.jl::31][Foo.jl:31]], [[Fnuec4dG][back to index]]
+:END:
 
 * API
   :PROPERTIES:

@@ -29,10 +29,7 @@ end
 Point() = Point(0,0)
 
 #+Point,Method L:norm_link_example
-# A simple function that computes
-# $$
-# \sqrt{x^2+y^2}
-# $$
+# A simple function that computes $\sqrt{x^2+y^2}$
 #
 # *Example:*
 #!p=Point(1.0,2.0);
