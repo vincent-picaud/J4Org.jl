@@ -405,10 +405,122 @@ See: _Point_struct_
 [[file:minimal_example/Foo.jl::31][Foo.jl:31]], [[Fnuec4dG][back to index]]
 :END:
 
+*** =tag=, =tag_to_ignore=, =identifier=
+    :PROPERTIES:
+    :ID:       0e085bd4-7c99-44d6-8220-3e397fff8458
+    :END:
+
+These options allow to select items to include:
+
+- =tag= a string or an array of strings, collects all items with at least one tag in this =tag= option.
+- =tag_to_ignore= a string or an array of strings, ignore all items with at least one tag in this =tag_to_ignore= option.
+- =identifier= a string that stands for the structure, abstract type or function name. Collects all items with this =identifier= name.
+
+For instance we can print =Point= identifier, restricted to =Method= tag, as follows:
+
+#+BEGIN_SRC julia :results output drawer :eval no-export :exports both
+documented_items=create_documented_item_array("minimal_example/Foo.jl");
+print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+
+# =WARNING:= Link target ("Point_struct", "") not found
+ @@latex:\phantomsection@@  <<MUvmN4JXnorm_link_example>>
+#+BEGIN_SRC julia :eval never :exports code
+norm(p::Point)::Float64
+#+END_SRC
+#+BEGIN_QUOTE
+A simple function that computes $\sqrt{x^2+y^2}$
+
+*Example:*
+#+BEGIN_SRC julia
+p=Point(1.0,2.0);
+norm(p) 
+#+END_SRC
+#+BEGIN_SRC julia
+2.23606797749979
+#+END_SRC
+
+See: _Point_struct_
+#+END_QUOTE
+[[file:minimal_example/Foo.jl::31][Foo.jl:31]]
+:END:
+
+*** =complete_link=
+
+If you look back at [[id:0e085bd4-7c99-44d6-8220-3e397fff8458][=tag=, =tag_to_ignore=, =identifier=]] you can see,
+at the end of the =norm= function documentation, that the
+_Point_struct_ link is not active. The reason is that the =Point=
+structure is not present. The =complete_link= option, if set to =true=
+will try to fix all dangling links by including all the required
+documented items. For instance, with:
+
+#+BEGIN_SRC julia :results output drawer :eval no-export :exports both
+documented_items=create_documented_item_array("minimal_example/Foo.jl");
+print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1,
+              complete_link=true)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+
+ @@latex:\phantomsection@@  <<Miryi32RPoint_struct>>
+#+BEGIN_SRC julia :eval never :exports code
+struct Point
+#+END_SRC
+#+BEGIN_QUOTE
+This is my Point structure
+
+*Example:*
+
+Creates a point $p$ of coordinates $(x=1,y=2)$.
+
+#+BEGIN_SRC julia :eval never :exports code
+p=Point(1,2)
+#+END_SRC
+
+You can add any valid Org mode directive. If you want to use
+in-documentation link, use [[Miryi32Rnorm_link_example][norm(...)]]
+#+END_QUOTE
+[[file:minimal_example/Foo.jl::8][Foo.jl:8]]
+ @@latex:\phantomsection@@  <<Miryi32Rnorm_link_example>>
+#+BEGIN_SRC julia :eval never :exports code
+norm(p::Point)::Float64
+#+END_SRC
+#+BEGIN_QUOTE
+A simple function that computes $\sqrt{x^2+y^2}$
+
+*Example:*
+#+BEGIN_SRC julia
+p=Point(1.0,2.0);
+norm(p) 
+#+END_SRC
+#+BEGIN_SRC julia
+2.23606797749979
+#+END_SRC
+
+See: [[Miryi32RPoint_struct][struct Point]]
+#+END_QUOTE
+[[file:minimal_example/Foo.jl::31][Foo.jl:31]]
+:END:
+
+you see that the =Point= structure is included to make the
+_struct_Point_ link active.
+
+*** TODO =link_prefix=
+
+*** TODO =case_sensitive=
+
+*** TODO =boxingModule=
+
 * API
   :PROPERTIES:
   :ID:       c9053a86-dea5-4bc2-a883-92a1bfde20ba
   :END:
+
+The API is simple, with very few functions:
 
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array_dir("~/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/");
@@ -498,11 +610,7 @@ print_org_doc(tag="API",header_level=0)
 [[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl::346][main.jl:346]], [[d3217XDy][back to index]]
 :END:
 
-
-
-
-
-* More examples and Tips
+* More examples and Tips                                           :noexport:
 
 *** Org-mode block in comment
 
@@ -628,9 +736,32 @@ function is_tag(tok::Tokenized,idx::Int)::Bool
 
 
 
+* Unit tests
 
-* TODO list [0/2]
-** TODO development [5/10]
+#+BEGIN_SRC julia :results output table :exports results
+include("../test/runtests.jl")
+#+END_SRC
+
+#+RESULTS:
+: # =WARNING:= Link target ("faa", "") not found
+: Test Summary: | Pass  Total
+: J4Org         |   96     96
+
+* Design tips
+** PDF export & phantomsection 
+
+To be able to use links everywhere we use the
+="@@latex:\\phantomsection@@"= tricks. See
+[[https://tex.stackexchange.com/questions/44088/when-do-i-need-to-invoke-phantomsection][when-do-i-need-to-invoke-phantomsection]] for instance.
+
+** HTML export with background
+
+See https://github.com/JuliaEditorSupport/julia-emacs/issues/53
+
+** Warning/Error messages
+The trick is to generate Org mode comments.
+
+* TODO [6/12]
 - [ ] add a function to show link and targets & detect useless link_target
 - [ ] search for "export" keyword to annotate documented item 
 - [ ] even if complete_link = false, search for target in order to do pretty print (information like struct etc...)
@@ -643,289 +774,3 @@ function is_tag(tok::Tokenized,idx::Int)::Bool
 - [X] fix ugly PDF link 
 - [ ] detect constructor
 - [X] for the index, lexico sort: l = L (sort not sensitive to capital)
-- [ ] allows an alternative syntax (maybe not a good idea?)
-#+BEGIN_SRC julia :eval never :exports code 
-#<Tokenizer,Internal
-# common doc
-is_structure(tok::Tokenized,idx::Int)::Bool = (exactkind(tok[idx])==Tokenize.Tokens.STRUCT)
-is_function(tok::Tokenized,idx::Int)::Bool = (exactkind(tok[idx])==Tokenize.Tokens.FUNCTION)
-is_comment(tok::Tokenized,idx::Int)::Bool = (kind(tok[idx])==Tokenize.Tokens.COMMENT)
-is_whitespace(tok::Tokenized,idx::Int)::Bool = (kind(tok[idx])==Tokenize.Tokens.WHITESPACE)
-is_identifier(tok::Tokenized,idx::Int)::Bool = (exactkind(tok[idx])==Tokenize.Tokens.IDENTIFIER)
-#>
-#+END_SRC
-
-** TODO code [0/0]
-
-#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
-documented_items=create_documented_item_array_dir("~/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/");
-print_org_doc(documented_items,tag="TODO",header_level=0)
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-
-<<xxEwCRi3>> *Index:* *[E]* [[upllexho][Extracted_Item_Base]] *[w]* [[G5g0gxVC][with_hash_evaluate]] 
-- @@latex:\phantomsection@@ *=Extracted_Item_Base=*  <<upllexho>> <<sPb5NRq5Extracted_Item_Base>>
-#+BEGIN_SRC julia :eval never :exports code
-abstract type Extracted_Item_Base 
-#+END_SRC
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::3][extract.jl:3]], [[xxEwCRi3][back to index]]
-- @@latex:\phantomsection@@ *=with_hash_evaluate=*  <<G5g0gxVC>>
-#+BEGIN_SRC julia :eval never :exports code
-function with_hash_evaluate(comment::String,
-                            boxingModule::String)::String
-#+END_SRC
-#+BEGIN_QUOTE
-Parse and execute a Julia code snippet
-
-The format is raw comment
-#+BEGIN_EXAMPLE
-# some text
-#!5+6
-#!rand(5)
-# some text 
-#+END_EXAMPLE
-
-Example:
-#+BEGIN_SRC julia
-5+6
-rand(5)
-#+END_SRC
-
-#+RESULTS:
-| 0.37336130056919803 |
-|  0.5336651179202612 |
-|  0.8183375565134803 |
-|  0.4596756705183185 |
-|  0.6012430089831795 |
-
-#+BEGIN_SRC julia
-11
-5-element Array{Float64,1}:
- 0.618715
- 0.303327
- 0.29002 
- 0.140657
- 0.107546
-#+END_SRC
-
-#+RESULTS:
-: 0.107546
-
-- [ ] TODO skip output for code ending with ";"
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl::48][evaluate.jl:48]], [[xxEwCRi3][back to index]]
-:END:
-
-* Unit tests
-
-#+BEGIN_SRC julia :results output table :exports results
-include("../test/runtests.jl")
-#+END_SRC
-
-#+RESULTS:
-: # =WARNING:= Link target ("faa", "") not found
-: Test Summary: | Pass  Total
-: J4Org         |   96     96
-
-
-* Design tips
-
-** PDF export & phantomsection 
-
-To be able to use links everywhere we use the
-="@@latex:\\phantomsection@@"= tricks. See
-[[https://tex.stackexchange.com/questions/44088/when-do-i-need-to-invoke-phantomsection][when-do-i-need-to-invoke-phantomsection]] for instance.
-
-** HTML export with background
-
-See https://github.com/JuliaEditorSupport/julia-emacs/issues/53
-
-** Warning/Error messages
-
-The trick is to generate Org mode comments.
-
-#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
-documented_items=create_documented_item_array_dir("~/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/");
-print_org_doc(documented_items,tag="Tokenizer",header_level=0,complete_link=true)
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-
-<<qttA4xGs>> *Index:* *[E]* [[upqudCMd][Extracted_Function]], [[ohlzDlSN][Extracted_Item_Base]] *[e]* [[GnYv9dv4][extract_abstract]], [[HtfpKWii][extract_export]], [[Vu7W6eF0][extract_function]], [[qjG2Tni1][extract_struct]] *[s]* [[OF9S6qZP][skip_abstract_block]], [[TMik1awd][skip_comma_separated_identifiers]], [[ENs3PquH][skip_comment]], [[kPaVDqHV][skip_declaration_block]], [[PCQNXVQi][skip_function_call_block]], [[LnT8u8If][skip_identifier]], [[hrOQf2Zi][skip_issubtype_block]], [[nbJpmv0R][skip_struct_block]], [[U4f8kI7P][skip_uninformative]], [[wCMx63vo][skip_where_block]], [[wDBZFRyN][skip_whitespace]], [[GSioLgBZ][skip_whitespace_strict]] *[t]* [[gBpI3pMO][tokenized]] 
-- @@latex:\phantomsection@@ *=Extracted_Function=*  <<upqudCMd>>
-#+BEGIN_SRC julia :eval never :exports code
-struct Extracted_Function <: Extracted_Item_Base
-#+END_SRC
-#+BEGIN_QUOTE
-A structure to store extracted function.
-
-See: [[Zjq8SftWExtracted_Item_Base][abstract Extracted_Item_Base]], [[Zjq8SftWextract_function][extract_function(...)]]
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::75][extract.jl:75]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=Extracted_Item_Base=*  <<ohlzDlSN>> <<Zjq8SftWExtracted_Item_Base>>
-#+BEGIN_SRC julia :eval never :exports code
-abstract type Extracted_Item_Base 
-#+END_SRC
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::3][extract.jl:3]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=extract_abstract=*  <<GnYv9dv4>>
-#+BEGIN_SRC julia :eval never :exports code
-function extract_abstract(tok::Tokenized,idx::Int)::Union{Void,Extracted_Abstract}
-#+END_SRC
-#+BEGIN_QUOTE
-Extract abstract type
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::185][extract.jl:185]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=extract_export=*  <<HtfpKWii>>
-#+BEGIN_SRC julia :eval never :exports code
-function extract_export(tok::Tokenized,idx::Int)::Union{Void,Extracted_Export}
-#+END_SRC
-#+BEGIN_QUOTE
-Extract export
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::157][extract.jl:157]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=extract_function=*  <<Vu7W6eF0>> <<Zjq8SftWextract_function>>
-#+BEGIN_SRC julia :eval never :exports code
-function extract_function(tok::Tokenized,idx::Int)::Union{Void,Extracted_Function}
-#+END_SRC
-#+BEGIN_QUOTE
-Extract function
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::87][extract.jl:87]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=extract_struct=*  <<qjG2Tni1>>
-#+BEGIN_SRC julia :eval never :exports code
-function extract_struct(tok::Tokenized,idx::Int)::Union{Void,Extracted_Struct}
-#+END_SRC
-#+BEGIN_QUOTE
-Extract struct
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/extract.jl::131][extract.jl:131]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=skip_abstract_block=*  <<OF9S6qZP>>
-#+BEGIN_SRC julia :eval never :exports code
-function skip_abstract_block(tok::Tokenized,idx::Int;
-                             identifier::Ref{String}=Ref{String}(""))::Int
-#+END_SRC
-#+BEGIN_QUOTE
-Skips uniformative & abstract type block
-Does not move is identifier not found
-
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::385][tokenizer.jl:385]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=skip_comma_separated_identifiers=*  <<TMik1awd>>
-#+BEGIN_SRC julia :eval never :exports code
-function skip_comma_separated_identifiers(tok::Tokenized,idx::Int)::Int
-#+END_SRC
-#+BEGIN_QUOTE
-Skips uninformative & a comma separated sequence of identifiers A,A.B.C,A.B{...}
-Does not move is comma separeted identifier not found
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::231][tokenizer.jl:231]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=skip_comment=*  <<ENs3PquH>>
-#+BEGIN_SRC julia :eval never :exports code
-function skip_comment(tok::Tokenized,idx::Int)
-#+END_SRC
-#+BEGIN_QUOTE
-Skip comment
--> replaced by skip uninformative
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::41][tokenizer.jl:41]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=skip_declaration_block=*  <<kPaVDqHV>>
-#+BEGIN_SRC julia :eval never :exports code
-function skip_declaration_block(tok::Tokenized,idx::Int)::Int
-#+END_SRC
-#+BEGIN_QUOTE
-Skips uninformative & a declaration block ::identifier{...}
-Does not move in case of identification failure
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::282][tokenizer.jl:282]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=skip_function_call_block=*  <<PCQNXVQi>>
-#+BEGIN_SRC julia :eval never :exports code
-function skip_function_call_block(tok::Tokenized,idx::Int;
-                         identifier::Ref{String}=Ref{String}(""))::Int
-#+END_SRC
-#+BEGIN_QUOTE
-Skips uninformative & a function call block identifier{...}(....)
-Does not move in case of identification failure
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::301][tokenizer.jl:301]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=skip_identifier=*  <<LnT8u8If>>
-#+BEGIN_SRC julia :eval never :exports code
-function skip_identifier(tok::Tokenized,idx::Int;
-                         identifier::Ref{String}=Ref{String}(""))::Int
-#+END_SRC
-#+BEGIN_QUOTE
-Skips uniformative & identifier A or A.B.C or A.B{...}
-Returns (name,idx) if prod
-Does not move is identifier not found
-
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::183][tokenizer.jl:183]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=skip_issubtype_block=*  <<hrOQf2Zi>>
-#+BEGIN_SRC julia :eval never :exports code
-function skip_issubtype_block(tok::Tokenized,idx::Int)::Int
-#+END_SRC
-#+BEGIN_QUOTE
-Skips uniformative & issubtype indentifier
-Does not move is identifier not found
-
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::327][tokenizer.jl:327]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=skip_struct_block=*  <<nbJpmv0R>>
-#+BEGIN_SRC julia :eval never :exports code
-function skip_struct_block(tok::Tokenized,idx::Int;
-                          identifier::Ref{String}=Ref{String}(""))::Int
-#+END_SRC
-#+BEGIN_QUOTE
-Skips uniformative & structure block
-Does not move is identifier not found
-
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::349][tokenizer.jl:349]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=skip_uninformative=*  <<U4f8kI7P>>
-#+BEGIN_SRC julia :eval never :exports code
-function skip_uninformative(tok::Tokenized,idx::Int)
-#+END_SRC
-#+BEGIN_QUOTE
-Skip whitespace 
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::51][tokenizer.jl:51]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=skip_where_block=*  <<wCMx63vo>>
-#+BEGIN_SRC julia :eval never :exports code
-function skip_where_block(tok::Tokenized,idx::Int)::Int
-#+END_SRC
-#+BEGIN_QUOTE
-Skips uninformative & a where block (where {...} or where A,B
-Does not move is comma separeted identifier not found
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::258][tokenizer.jl:258]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=skip_whitespace=*  <<wDBZFRyN>>
-#+BEGIN_SRC julia :eval never :exports code
-function skip_whitespace(tok::Tokenized,idx::Int)
-#+END_SRC
-#+BEGIN_QUOTE
-Skip comment + whitespace 
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::60][tokenizer.jl:60]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=skip_whitespace_strict=*  <<GSioLgBZ>>
-#+BEGIN_SRC julia :eval never :exports code
-function skip_whitespace_strict(tok::Tokenized,idx::Int)
-#+END_SRC
-#+BEGIN_QUOTE
-Skip whitespace
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::121][tokenizer.jl:121]], [[qttA4xGs][back to index]]
-- @@latex:\phantomsection@@ *=tokenized=*  <<gBpI3pMO>>
-#+BEGIN_SRC julia :eval never :exports code
-tokenized(s::String)
-#+END_SRC
-#+BEGIN_QUOTE
-Defines a convenient method to tokenize a =String=
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/tokenizer.jl::7][tokenizer.jl:7]], [[qttA4xGs][back to index]]
-:END:
-
-
-
-
