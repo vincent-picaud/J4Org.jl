@@ -15,6 +15,18 @@
   fontsize=\footnotesize}
 #+END_EXPORT
 
+#+BEGIN_SRC julia :results output none :eval no-export :exports none
+using Revise
+using J4Org
+initialize_boxing_module(usedModules=["J4Org"],force=true)
+#+END_SRC
+
+# Also use Foo as example 
+#+BEGIN_SRC julia :results output none :eval no-export :exports none
+push!(LOAD_PATH,pwd()*"/minimal_example/")
+initialize_boxing_module(boxingModule="FooBoxing",usedModules=["Foo"],force=true)
+#+END_SRC
+
 * Introduction
 
 Defines a the *J4Org.jl* package, using [[https://github.com/KristofferC/Tokenize.jl/][Tokenize.jl]], to generate Julia
@@ -25,11 +37,14 @@ code documentation into Org-Mode document.
 You need [[https://orgmode.org/][Org-Mode]] plus [[https://github.com/gjkerns/ob-julia/blob/master/ob-julia-doc.org][ob-julia.el]], which has [[http://stat.ethz.ch/ESS/index.php?Section=download][ESS]] as dependence, to be
 installed.
 
-** Minimal example
+** Getting started with a minimal example
+
+The following is a minimal example you can reproduce to have a taste
+of what this package do.
 
 *** Emacs configuration
 
- A minimal =.emacs= file can be defined as follows:
+You first need a minimal =init.el= file to configure Emacs.
 
 #+BEGIN_SRC emacs-lisp :tangle yes :tangle minimal_example/init.el
 (package-initialize)
@@ -50,7 +65,7 @@ installed.
 
 *** A documented Julia =Foo= module
 
-The documented module is as follows:
+Then you need a documented module:
 
 #+BEGIN_SRC julia :eval never :tangle yes :tangle minimal_example/Foo.jl
 module Foo
@@ -107,28 +122,59 @@ foo(r::Float64,p::Point) = Point(r*p.x,r*p.y)
 end 
 #+END_SRC
 
+I wanted to reduce the documentation process as much as possible. The
+template is very simple. Before each item you want to document add
+these comment lines:
 
-*** Minimal org mode document
+#+BEGIN_SRC julia :eval never :exports code 
+#+Tag1,Tag2,... L:an_extra_link_if_required 
+#
+# Here you can put any Org mode text, for instance $sin(x)$
+#
+#!sin(5) # julia code to be executed
+#
+# [[internal_link][]]
+struct A_Documented_Struct 
+...
+end 
+#+END_SRC
+
+- *#+Tag1,Tag2,...* is mandatory, "#+" is followed by a list of
+  tags. Later when you want to extract doc you can do filtering
+  according these tags.
+
+- *L:an_extra_link_if_required* is *not* mandatory. It defines a
+  reference if you want to create doc links. The previous statement
+  defines a link *target* named =an_extra_link_if_required=.
+
+- *[[internal_link][]]* creates a link to a previously defined
+  *L:internal_link*.
+
+- *!sin(5)* will execute Julia code and include the output in the
+  doc. If you only want to include Julia code without executing it,
+  simply use Org mode source block:
+#+BEGIN_SRC julia :eval never :exports code 
+# #+BEGIN_SRC julia :eval never :exports code
+# sin(5)
+# #+END_SRC
+#+END_SRC
+
+*** Minimal OrgMode document
 
 This is the =foo.org= file.
 
-#+BEGIN_SRC org :tangle :tangle minimal_example/foo.org 
+#+BEGIN_SRC org -j -n :tangle :tangle minimal_example/foo.org 
 ,#+PROPERTY: header-args:julia :session *my_session* :exports code :eval no-export
 ,#+OPTIONS: ^:{}
-,#+TITLE: Minimal example
+,#+TITLE: Getting Started with a minimal example
 
-# usually this part is required, however for this miminal_example
-# we need to specify where to find the "Foo" module.
-#
 ,#+BEGIN_SRC julia :results output none :eval no-export :exports none
-push!(LOAD_PATH,pwd())
+push!(LOAD_PATH,pwd()) # (ref:module_location)
 ,#+END_SRC
 
 ,#+BEGIN_SRC julia :results output none :eval no-export :exports none
-using J4Org
-# notifies J4Org that it needs "using Foo" to run Julia code snippets
-# in the documented code (those tagged as "#!")
-initialize_boxing_module(usedModules=["Foo"])
+using J4Org # (ref:using_J4Org)
+initialize_boxing_module(usedModules=["Foo"]) # (ref:boxing)
 # loads and tokenizes source code files, here only one file.
 documented_items=create_documented_item_array("Foo.jl")
 ,#+END_SRC
@@ -140,6 +186,107 @@ Prints all documented items, except those tagged with "Internal"
 print_org_doc(documented_items,tag_to_ignore=["Internal"],header_level=0)
 ,#+END_SRC
 #+END_SRC
+
+- [[(module_location)]] tells Julia where it can find our local =Foo=
+  module. This statement is only required if the documented module is
+  in an unusual place.
+
+- [[(using_J4Org)]] uses this package
+
+- [[(boxing)]] defines what are the module to use when executing Julia
+  code extracted from the doc (the "#!" statements). Here we are
+  documenting the =Foo= module, hence we must use it. Note that you
+  can also use extra module for instance with =["Foo", "ExtraModule",
+  ...]=. See [[API_initialize_boxing_module][initialize_boxing_module]] for further details
+
+* API
+
+#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
+documented_items=create_documented_item_array_dir("~/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/");
+print_org_doc(documented_items,tag="API",header_level=0,link_prefix="API_")
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+
+<<JTjbLb9P>> *Index:* *[c]* [[4gN2iSbb][create_documented_item_array]], [[ccQ8yE3U][create_documented_item_array_dir]] *[e]* [[80BigUqU][export]] *[i]* [[8znoAhf3][initialize_boxing_module]] *[p]* [[jxMC3IVR][print_org_doc]] 
+- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<4gN2iSbb>>
+#+BEGIN_SRC julia :eval never :exports code
+function create_documented_item_array(filename::String)::Array{Documented_Item,1}
+#+END_SRC
+#+BEGIN_QUOTE
+Reads a file from its *filename* and returns an array of documented items.
+#+END_QUOTE
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::89][documented_item.jl:89]], [[JTjbLb9P][back to index]]
+
+#+BEGIN_SRC julia :eval never :exports code
+function create_documented_item_array(filename_list::Array{String,1})::Array{Documented_Item,1}
+#+END_SRC
+#+BEGIN_QUOTE
+Reads a files and returns an array of documented items.
+
+*Usage example:* (attention to ; separator)
+#+BEGIN_SRC julia
+create_documented_item_array([file1;file2;...])
+#+END_SRC
+#+END_QUOTE
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::128][documented_item.jl:128]], [[JTjbLb9P][back to index]]
+- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<ccQ8yE3U>>
+#+BEGIN_SRC julia :eval never :exports code
+function create_documented_item_array_dir(dirname::String)
+#+END_SRC
+#+BEGIN_QUOTE
+Reads all jl files in a directory
+#+END_QUOTE
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::147][documented_item.jl:147]], [[JTjbLb9P][back to index]]
+- @@latex:\phantomsection@@ *=export=*  <<80BigUqU>>
+#+BEGIN_SRC julia :eval never :exports code
+export create_documented_item_array_dir, print_org_doc
+#+END_SRC
+#+BEGIN_QUOTE
+Exported symbols
+#+END_QUOTE
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl::3][J4Org.jl:3]], [[JTjbLb9P][back to index]]
+- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<8znoAhf3>> <<API_initialize_boxing_module>>
+#+BEGIN_SRC julia :eval never :exports code
+function initialize_boxing_module(;boxingModule::String="BoxingModule",usedModules::Vector{String}=String[],force::Bool=false)::Void
+#+END_SRC
+#+BEGIN_QUOTE
+Initialize a boxing module. This module is used to run Julia comment
+code snippet (tagged by #!)
+#+END_QUOTE
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl::17][evaluate.jl:17]], [[JTjbLb9P][back to index]]
+- @@latex:\phantomsection@@ *=print_org_doc=*  <<jxMC3IVR>> <<API_print_org_doc_API>>
+#+BEGIN_SRC julia :eval never :exports code
+function print_org_doc(di_array::Array{Documented_Item,1};
+                       tag::Union{String,Array{String,1}}="",
+                       tag_to_ignore::Union{String,Array{String,1}}="",
+                       identifier::String="",
+                       header_level::Int=0,
+                       link_prefix::String=randstring(),
+                       complete_link::Bool=false,
+                       case_sensitive::Bool=true,
+                       boxingModule::String="BoxingModule")
+#+END_SRC
+#+BEGIN_QUOTE
+Prints generated documentation to be exported by OrgMode, this is the main function of the =J4Org= package.
+
+*Org-Mode Usage example:*
+#+BEGIN_EXAMPLE
+,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
+documented_items = create_documented_item_array_dir("~/GitLab/MyPackage.jl/src/");
+print_org_doc(tag="API",header_level=0)
+,#+END_SRC
+#+END_EXAMPLE
+
+*Arguments:*
+- *link_prefix:* allows to add a prefix to extra link (#+tags    L:extra_link).
+                 this is can be useful to avoid link name conflict when performing local doc extraction.
+- *complete_link:* if true, try to fix link without target by adding extra items
+#+END_QUOTE
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl::346][main.jl:346]], [[JTjbLb9P][back to index]]
+:END:
+
 
 *** Generating the doc
 
@@ -371,98 +518,6 @@ function is_tag(tok::Tokenized,idx::Int)::Bool
 
 
 * Documentation
-
-** API
-
-#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
-documented_items=create_documented_item_array_dir("~/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/");
-print_org_doc(documented_items,tag="API",header_level=0)
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-
-<<zj5fdUXG>> *Index:* *[c]* [[UHugJ9p3][create_documented_item_array]], [[j0lCHG1g][create_documented_item_array_dir]] *[e]* [[YKcg5vMp][export]] *[i]* [[WLA9eepy][initialize_boxing_module]] *[p]* [[pR2RkWba][print_org_doc]] 
-- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<UHugJ9p3>>
-#+BEGIN_SRC julia :eval never :exports code
-function create_documented_item_array(filename::String)::Array{Documented_Item,1}
-#+END_SRC
-#+BEGIN_QUOTE
-Reads a file from its *filename* and returns an array of documented items.
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::89][documented_item.jl:89]], [[zj5fdUXG][back to index]]
-
-#+BEGIN_SRC julia :eval never :exports code
-function create_documented_item_array(filename_list::Array{String,1})::Array{Documented_Item,1}
-#+END_SRC
-#+BEGIN_QUOTE
-Reads a files and returns an array of documented items.
-
-*Usage example:* (attention to ; separator)
-#+BEGIN_SRC julia
-create_documented_item_array([file1;file2;...])
-#+END_SRC
-
-#+RESULTS:
-
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::128][documented_item.jl:128]], [[zj5fdUXG][back to index]]
-- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<j0lCHG1g>>
-#+BEGIN_SRC julia :eval never :exports code
-function create_documented_item_array_dir(dirname::String)
-#+END_SRC
-#+BEGIN_QUOTE
-Reads all jl files in a directory
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::147][documented_item.jl:147]], [[zj5fdUXG][back to index]]
-- @@latex:\phantomsection@@ *=export=*  <<YKcg5vMp>>
-#+BEGIN_SRC julia :eval never :exports code
-export create_documented_item_array_dir, print_org_doc
-#+END_SRC
-#+BEGIN_QUOTE
-Exported symbols
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/J4Org.jl::3][J4Org.jl:3]], [[zj5fdUXG][back to index]]
-- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<WLA9eepy>>
-#+BEGIN_SRC julia :eval never :exports code
-function initialize_boxing_module(;boxingModule::String="BoxingModule",usedModules::Vector{String}=String[],force::Bool=false)::Void
-#+END_SRC
-#+BEGIN_QUOTE
-Initialize a boxing module. This module is used to run Julia comment
-code snippet (tagged by #!)
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl::17][evaluate.jl:17]], [[zj5fdUXG][back to index]]
-- @@latex:\phantomsection@@ *=print_org_doc=*  <<pR2RkWba>> <<WlkWcamvprint_org_doc_API>>
-#+BEGIN_SRC julia :eval never :exports code
-function print_org_doc(di_array::Array{Documented_Item,1};
-                       tag::Union{String,Array{String,1}}="",
-                       tag_to_ignore::Union{String,Array{String,1}}="",
-                       identifier::String="",
-                       header_level::Int=0,
-                       link_prefix::String=randstring(),
-                       complete_link::Bool=false,
-                       case_sensitive::Bool=true,
-                       boxingModule::String="BoxingModule")
-#+END_SRC
-#+BEGIN_QUOTE
-Prints generated documentation to be exported by OrgMode, this is the main function of the =J4Org= package.
-
-*Org-Mode Usage example:*
-#+BEGIN_EXAMPLE
-,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
-documented_items = create_documented_item_array_dir("~/GitLab/MyPackage.jl/src/");
-print_org_doc(tag="API",header_level=0)
-,#+END_SRC
-#+END_EXAMPLE
-
-*Arguments:*
-- *link_prefix:* allows to add a prefix to extra link (#+tags    L:extra_link).
-                 this is can be useful to avoid link name conflict when performing local doc extraction.
-- *complete_link:* if true, try to fix link without target by adding extra items
-#+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl::346][main.jl:346]], [[zj5fdUXG][back to index]]
-:END:
-
 
 * Internal documention
 ** Error management
