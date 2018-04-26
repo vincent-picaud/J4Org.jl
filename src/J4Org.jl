@@ -1,8 +1,5 @@
 module J4Org
 
-#+API
-#
-# Exported symbols
 export create_documented_item_array_dir, print_org_doc
 
 #+Error 

@@ -1,9 +1,8 @@
 #+SETUPFILE: ./Setup/setupFile.org
-#+TITLE: J4Org.jl Package 
+#+TITLE: J4Org.jl Sitemap
 
 * Introduction
 
 A package to generate Julia code documentation in Emacs OrgMode
-documents. This package is used to generate this doc. Another usage
-example is [[https://vincent-picaud.github.io/DirectConvolution.jl/index.html][DirectConvolution.jl]].
+documents. 
 

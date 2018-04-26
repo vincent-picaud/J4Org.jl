@@ -6,4 +6,6 @@
 - [[file:theindex.org][J4Org Index]]
 - [[file:main.org][J4Org Package]]
 - [[file:workInProgress.org][Work in Progress]]
+- minimal_example
+  - [[file:minimal_example/foo.org][Getting Started with a minimal example]]
 
