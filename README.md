@@ -7,10 +7,12 @@ A package to generate Julia code documentation in Emacs OrgMode documents.
 
 You can read documentation directly
 [here](https://vincent-picaud.github.io/J4Org.jl/index.html), however
-it is much better to clone this repo and to browse it locally:
+you will have a better experience (because GitHub does not allow CSS
+theme online) if you clone this repo and browse it locally:
 
 ```
-firefox docs/index.html
+git clone https://github.com/vincent-picaud/J4Org.jl.git
+firefox J4Org.jl/docs/index.html
 ```
 
 
