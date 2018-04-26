@@ -1,6 +1,6 @@
 #+SETUPFILE: ./Setup/setupFile.org
 #+TITLE: J4Org Package
-#+FILETAGS: Julia
+#+AUTHOR: Vincent Picaud
 #+PROPERTY: header-args:julia :session *JuliaDoc_session* :exports code :eval no-export
 #+HTML_HEAD_EXTRA: <style type="text/css"> blockquote {background:#EEEEEE; padding: 3px 13px}    </style>
 #+HTML_HEAD_EXTRA: <style type="text/css"> pre {background:#EEEEEE; padding: 3px 13px}    </style>
@@ -218,11 +218,14 @@ then type:
 - =C-c C-e h o= to html-export the file 
 - =C-c C-e l o= to pdf-export the file 
 
-*** Improving exported document style
+*** TODO Improving exported document style [0/1]
 
 This was a minimal example, you can have a better look for the
 exported documents by including css theme, etc. This is the approach
-we used to generate *this* document (also see the pdf file).
+we used to generate *this* document (also see the [[file:main.pdf][main.pdf]] PDF file).
+Another example is [[https://vincent-picaud.github.io/DirectConvolution.jl/docs.html][DirectConvolution.jl documentation]]. 
+- [ ] TODO provide more details about customization, for the moment
+  you can have a look at [[https://github.com/vincent-picaud/Julia_with_OrgMode_Example][github: Julia_with_OrgMode_Example]]
 
 * More examples 
 
@@ -509,11 +512,70 @@ See: [[Miryi32RPoint_struct][struct Point]]
 you see that the =Point= structure is included to make the
 _struct_Point_ link active.
 
-*** TODO =link_prefix=
+*** =link_prefix=
 
-*** TODO =case_sensitive=
+You can create link from your OrgMode document to Julia documented
+items that have defined a "L:link_target". However like these items
+can be extracted at several places in your OrgMode document you need
+to define a prefix to avoid multiple targets with the same name.
 
-*** TODO =boxingModule=
+For instance, chose a prefix, here "my_prefix" and use:
+#+BEGIN_SRC julia :results none :eval never :exports code
+print_org_doc(documented_items,...,link_prefix="my_prefix_")
+#+END_SRC
+then you can create a regular OrgMode link to this item using
+​ *[​[my_prefix_link_target][some_text]]*.
+
+
+*** =case_sensitive=
+
+When set to true, generates an index as follows:
+#+BEGIN_EXAMPLE
+[A] ..., [B] ...,[a] ..., [b] ...,
+#+END_EXAMPLE
+
+When set to false, do not split upper/lower cases and group all A,a;B,b together:
+#+BEGIN_EXAMPLE
+[A] ..., [B] ...
+#+END_EXAMPLE
+
+*** =boxingModule=
+
+Comments starting with "#!" are executed in a boxed environment
+#+BEGIN_SRC julia :eval never 
+module MyBoxing
+using RequiredPackage_1,RequiredPackage_2,...
+
+# execute "#!" statement here
+end 
+#+END_SRC
+
+This boxing is defined by the [[API_initialize_boxing_module][initialize_boxing_module(...)]] function:
+
+#+BEGIN_SRC julia :eval never
+initialize_boxing_module(boxingModule="MyBoxing",
+                         usedModules=["RequiredPackage_1","RequiredPackage_2",...])
+#+END_SRC
+
+This =boxingModule= option allows you to chose your boxing environment:
+#+BEGIN_SRC julia :eval never
+print_org_doc(documented_items,boxingModule="MyBoxing",...)
+#+END_SRC
+
+** Error reporting
+Error reporting is performed as OrgMode comment. For instance if you execute:
+#+BEGIN_SRC julia :eval never
+documented_items=create_documented_item_array("minimal_example/Foo.jl");
+print_org_doc(documented_items,tag="Method",header_level=-1)
+#+END_SRC
+you will get:
+#+BEGIN_EXAMPLE
+#+RESULTS:
+:RESULTS:
+
+# =WARNING:= Link target ("Point_struct", "") not found
+...
+#+END_EXAMPLE
 
 * API
   :PROPERTIES:
@@ -747,7 +809,7 @@ include("../test/runtests.jl")
 : Test Summary: | Pass  Total
 : J4Org         |   96     96
 
-* Design tips
+* Design tips                                                      :noexport:
 ** PDF export & phantomsection 
 
 To be able to use links everywhere we use the
@@ -758,19 +820,5 @@ To be able to use links everywhere we use the
 
 See https://github.com/JuliaEditorSupport/julia-emacs/issues/53
 
-** Warning/Error messages
-The trick is to generate Org mode comments.
 
-* TODO [6/12]
-- [ ] add a function to show link and targets & detect useless link_target
-- [ ] search for "export" keyword to annotate documented item 
-- [ ] even if complete_link = false, search for target in order to do pretty print (information like struct etc...)
-- [X] use extracted tag in DocumentedItem
-- [X] allows tag list "#+tag1, tag2"
-- [X] add prefix to extra link: <<link>> -> <<prefix_link>>
-- [X] finish parsing and code cleaning 
-- [ ] add an option to extract code body
-- [ ] :RESULT: bug
-- [X] fix ugly PDF link 
-- [ ] detect constructor
-- [X] for the index, lexico sort: l = L (sort not sensitive to capital)
+

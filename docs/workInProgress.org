@@ -3,5 +3,18 @@
 
 * Project Journal
 * Project TODO
+** TODO [6/12]
+- [ ] add a function to show link and targets & detect useless link_target
+- [ ] search for "export" keyword to annotate documented item 
+- [ ] even if complete_link = false, search for target in order to do pretty print (information like struct etc...)
+- [X] use extracted tag in DocumentedItem
+- [X] allows tag list "#+tag1, tag2"
+- [X] add prefix to extra link: <<link>> -> <<prefix_link>>
+- [X] finish parsing and code cleaning 
+- [ ] add an option to extract code body
+- [ ] :RESULT: bug
+- [X] fix ugly PDF link 
+- [ ] detect constructor
+- [X] for the index, lexico sort: l = L (sort not sensitive to capital)
 * W3 Links
 #+INDEX: W3 link!An index example
