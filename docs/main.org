@@ -170,7 +170,7 @@ push!(LOAD_PATH,pwd())
 ,#+END_SRC
 
 ,#+BEGIN_SRC julia :results output none :eval no-export :exports none
-using J4Org # (ref:using_J4Org)
+using J4Org 
 initialize_boxing_module(usedModules=["Foo"]) 
 documented_items=create_documented_item_array("Foo.jl")
 ,#+END_SRC
@@ -590,14 +590,14 @@ The API is simple, with very few functions:
 
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array_dir("~/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/");
-print_org_doc(documented_items,boxingModule="J4OrgBoxing",tag="API",header_level=0,link_prefix="API_")
+print_org_doc(documented_items,boxingModule="J4OrgBoxing",tag="API",header_level=2,link_prefix="API_")
 #+END_SRC
 
 #+RESULTS:
 :RESULTS:
 
-<<Kx83NybY>> *Index:* *[c]* [[NGozFPgj][create_documented_item_array]], [[ZPlRVePV][create_documented_item_array_dir]] *[i]* [[r2AJP3jU][initialize_boxing_module]] *[p]* [[DT7NZ2uz][print_org_doc]] 
-- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<NGozFPgj>> <<API_create_documented_item_array_filename>>
+<<1hsaCwUX>> *Index:* *[c]* [[KoYAb5Ql][create_documented_item_array]], [[wtaVuaiF][create_documented_item_array_dir]] *[i]* [[gmTuFeZA][initialize_boxing_module]] *[p]* [[nC1kfeoL][print_org_doc]] 
+** *=create_documented_item_array=*  <<KoYAb5Ql>> <<API_create_documented_item_array_filename>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename::String)::Array{Documented_Item,1}
 #+END_SRC
@@ -606,7 +606,7 @@ Reads the *filename* Julia code file and returns an array of documented items.
 
 See: [[API_create_documented_item_array_directory][create_documented_item_array_dir(...)]]
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::89][documented_item.jl:89]], [[Kx83NybY][back to index]]
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::89][documented_item.jl:89]], [[1hsaCwUX][back to index]]
 
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename_list::Array{String,1})::Array{Documented_Item,1}
@@ -621,8 +621,8 @@ create_documented_item_array(["file1.jl";"file2.jl";...])
 
 See: [[API_create_documented_item_array_directory][create_documented_item_array_dir(...)]]
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::130][documented_item.jl:130]], [[Kx83NybY][back to index]]
-- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<ZPlRVePV>> <<API_create_documented_item_array_directory>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::130][documented_item.jl:130]], [[1hsaCwUX][back to index]]
+** *=create_documented_item_array_dir=*  <<wtaVuaiF>> <<API_create_documented_item_array_directory>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array_dir(dirname::String)
 #+END_SRC
@@ -630,8 +630,8 @@ function create_documented_item_array_dir(dirname::String)
 Reads all *.jl files in a directory and returns an array of
 documented items.
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::150][documented_item.jl:150]], [[Kx83NybY][back to index]]
-- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<r2AJP3jU>> <<API_initialize_boxing_module>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::150][documented_item.jl:150]], [[1hsaCwUX][back to index]]
+** *=initialize_boxing_module=*  <<gmTuFeZA>> <<API_initialize_boxing_module>>
 #+BEGIN_SRC julia :eval never :exports code
 function initialize_boxing_module(;boxingModule::String="BoxingModule",
                                   usedModules::Vector{String}=String[],
@@ -660,8 +660,8 @@ using MyBoxing
 
 See: [[API_print_org_doc_API][print_org_doc(...)]]
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl::17][evaluate.jl:17]], [[Kx83NybY][back to index]]
-- @@latex:\phantomsection@@ *=print_org_doc=*  <<DT7NZ2uz>> <<API_print_org_doc_API>>
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl::17][evaluate.jl:17]], [[1hsaCwUX][back to index]]
+** *=print_org_doc=*  <<nC1kfeoL>> <<API_print_org_doc_API>>
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -695,7 +695,7 @@ print_org_doc(documented_items,tag="API",header_level=0)
 - *case_sensitive*: case sensitive index.
 - *boxingModule*: specifies the context in which "#!" code will be executed. See [[API_initialize_boxing_module][initialize_boxing_module(...)]] for details.
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl::346][main.jl:346]], [[Kx83NybY][back to index]]
+[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl::346][main.jl:346]], [[1hsaCwUX][back to index]]
 :END:
 
 * More examples and Tips                                           :noexport:

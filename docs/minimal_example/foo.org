@@ -8,7 +8,7 @@ push!(LOAD_PATH,pwd())
 #+END_SRC
 
 #+BEGIN_SRC julia :results output none :eval no-export :exports none
-using J4Org # (ref:using_J4Org)
+using J4Org 
 initialize_boxing_module(usedModules=["Foo"]) 
 documented_items=create_documented_item_array("Foo.jl")
 #+END_SRC
@@ -19,4 +19,56 @@ Prints all documented items, except those tagged with "Internal"
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 print_org_doc(documented_items,tag_to_ignore=["Internal"],header_level=0)
 #+END_SRC
+
+#+RESULTS:
+:RESULTS:
+<<NQLGNLg1>> *Index:* *[P]* [[GvLtllpK][Point]] *[n]* [[vYEkM9tE][norm]] 
+- @@latex:\phantomsection@@ *=Point=*  <<GvLtllpK>> <<fFt3etiGPoint_struct>>
+#+BEGIN_SRC julia :eval never :exports code
+struct Point
+#+END_SRC
+#+BEGIN_QUOTE
+This is my Point structure
+
+*Example:*
+
+Creates a point $p$ of coordinates $(x=1,y=2)$.
+
+#+BEGIN_SRC julia :eval never :exports code
+p=Point(1,2)
+#+END_SRC
+
+You can add any valid Org mode directive. If you want to use
+in-documentation link, use [[fFt3etiGnorm_link_example][norm(...)]]
+#+END_QUOTE
+[[file:Foo.jl::8][Foo.jl:8]], [[NQLGNLg1][back to index]]
+
+#+BEGIN_SRC julia :eval never :exports code
+Point()
+#+END_SRC
+#+BEGIN_QUOTE
+Creates Point at origin $(0,0)$ 
+#+END_QUOTE
+[[file:Foo.jl::27][Foo.jl:27]], [[NQLGNLg1][back to index]]
+- @@latex:\phantomsection@@ *=norm=*  <<vYEkM9tE>> <<fFt3etiGnorm_link_example>>
+#+BEGIN_SRC julia :eval never :exports code
+norm(p::Point)::Float64
+#+END_SRC
+#+BEGIN_QUOTE
+A simple function that computes $\sqrt{x^2+y^2}$
+
+*Example:*
+#+BEGIN_SRC julia
+p=Point(1.0,2.0);
+norm(p) 
+#+END_SRC
+#+BEGIN_SRC julia
+2.23606797749979
+#+END_SRC
+
+See: [[fFt3etiGPoint_struct][struct Point]]
+#+END_QUOTE
+[[file:Foo.jl::31][Foo.jl:31]], [[NQLGNLg1][back to index]]
+:END:
+
 # Minimal OrgMode document:1 ends here
