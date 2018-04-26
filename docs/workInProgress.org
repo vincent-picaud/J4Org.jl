@@ -17,4 +17,4 @@
 - [ ] detect constructor
 - [X] for the index, lexico sort: l = L (sort not sensitive to capital)
 * W3 Links
-#+INDEX: W3 link!An index example
+

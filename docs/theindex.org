@@ -1,5 +1,5 @@
 #+SETUPFILE: ./Setup/setupFile.org
-#+TITLE: J4Org Index
+#+TITLE: Index
 
 * Index 
 #+INCLUDE: "theindex.inc"
