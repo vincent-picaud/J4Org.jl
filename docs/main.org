@@ -63,6 +63,8 @@ You first need a minimal =init.el= file to configure Emacs.
  '((julia . t)))
 #+END_SRC
 
+#+RESULTS:
+
 *** A documented Julia =Foo= module
 
 Then you need a documented module:
@@ -183,6 +185,8 @@ print_org_doc(documented_items,tag_to_ignore=["Internal"],header_level=0)
 ,#+END_SRC
 #+END_SRC
 
+#+RESULTS:
+
 
 - *push!(LOAD_PATH,pwd())* tells Julia where it can find our local =Foo=
   module. This statement is only required if the documented module is
@@ -213,19 +217,19 @@ To check that it works you can start a fresh emacs with
 emacs -q --load init.el foo.org &
 #+END_SRC
 
+#+RESULTS:
+
 then type:
 - =C-c C-v b= + =RET= to execute all source code blocks
 - =C-c C-e h o= to html-export the file 
 - =C-c C-e l o= to pdf-export the file 
 
-*** TODO Improving exported document style [0/1]
+*** Improving exported document style
 
 This was a minimal example, you can have a better look for the
 exported documents by including css theme, etc. This is the approach
 we used to generate *this* document (also see the [[file:main.pdf][main.pdf]] PDF file).
 Another example is [[https://vincent-picaud.github.io/DirectConvolution.jl/docs.html][DirectConvolution.jl documentation]]. 
-- [ ] TODO provide more details about customization, for the moment
-  you can have a look at [[https://github.com/vincent-picaud/Julia_with_OrgMode_Example][github: Julia_with_OrgMode_Example]]
 
 * More examples 
 
@@ -241,16 +245,25 @@ This integer can have these values:
 - *-1*: do not print header nor index, see [[id:bda53362-32fb-4096-9c0a-32c0afb96b5f][header_level=-1]]
 - *0*: print header beginning with "-", see [[id:842e5c47-62d1-44fc-8489-e105a45f5dd4][header_level=0]].
 - *l>0* create subsection of level *l*, for instance *header_level=3*
-  creates subsections beginning with *3* stars. See [[id:0f6a49dc-ee9f-4964-8801-8badfb67f735][header_level=5]].
-
-*Caveat:* for *l>0* AFAIK there is a bug in OrgMode, because a residual *:RESULT:* is printed.
+  creates subsections beginning with *3* stars. See
+  [[id:0f6a49dc-ee9f-4964-8801-8badfb67f735][header_level=5]]. *Caveat:* for *l>0* AFAIK there is a bug in OrgMode,
+  because a residual *:RESULT:* is printed.
 
 **** header_level=-1
      :PROPERTIES:
      :ID:       bda53362-32fb-4096-9c0a-32c0afb96b5f
      :END:
 
-#+BEGIN_SRC julia :results output drawer :eval no-export :exports both
+#+BEGIN_SRC bash :eval never :exports code
+,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results 
+documented_items=create_documented_item_array("minimal_example/Foo.jl");
+print_org_doc(documented_items,tag="Method",header_level=-1)
+,#+END_SRC
+#+END_SRC
+
+will generate:
+
+#+BEGIN_SRC julia :results output drawer :eval no-export :exports results 
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
 print_org_doc(documented_items,tag="Method",header_level=-1)
 #+END_SRC
@@ -271,13 +284,19 @@ For symbol that are not exported, do not forget the "Foo." prefix:
 p=Point(1.0,2.0)
 Foo.foo(2.0,p)
 #+END_SRC
+
+#+RESULTS:
+
 #+BEGIN_SRC julia
 Foo.Point(1.0, 2.0)
 Foo.Point(2.0, 4.0)
 #+END_SRC
+
+#+RESULTS:
+
 #+END_QUOTE
 [[file:minimal_example/Foo.jl::42][Foo.jl:42]]
- @@latex:\phantomsection@@  <<6NMUOTNGnorm_link_example>>
+ @@latex:\phantomsection@@  <<GMKhRdiFnorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -289,9 +308,14 @@ A simple function that computes $\sqrt{x^2+y^2}$
 p=Point(1.0,2.0);
 norm(p) 
 #+END_SRC
+
+#+RESULTS:
+
 #+BEGIN_SRC julia
 2.23606797749979
 #+END_SRC
+
+#+RESULTS:
 
 See: _Point_struct_
 #+END_QUOTE
@@ -303,7 +327,16 @@ See: _Point_struct_
      :ID:       842e5c47-62d1-44fc-8489-e105a45f5dd4
      :END:
 
-#+BEGIN_SRC julia :results output drawer :eval no-export :exports both
+#+BEGIN_SRC bash :eval never :exports code
+,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
+documented_items=create_documented_item_array("minimal_example/Foo.jl");
+print_org_doc(documented_items,tag="Method",header_level=0)
+,#+END_SRC
+#+END_SRC
+
+will generate:
+
+#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
 print_org_doc(documented_items,tag="Method",header_level=0)
 #+END_SRC
@@ -312,8 +345,8 @@ print_org_doc(documented_items,tag="Method",header_level=0)
 :RESULTS:
 
 # =WARNING:= Link target ("Point_struct", "") not found
-<<MOdp26jo>> *Index:* *[f]* [[6T7mWmH8][foo]] *[n]* [[2eMRib40][norm]] 
-- @@latex:\phantomsection@@ *=foo=*  <<6T7mWmH8>>
+<<9DmFzSP8>> *Index:* *[f]* [[5X3b2pMe][foo]] *[n]* [[lC2oGf3j][norm]] 
+- @@latex:\phantomsection@@ *=foo=*  <<5X3b2pMe>>
 #+BEGIN_SRC julia :eval never :exports code
 foo(r::Float64,p::Point)
 #+END_SRC
@@ -330,8 +363,8 @@ Foo.Point(1.0, 2.0)
 Foo.Point(2.0, 4.0)
 #+END_SRC
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::42][Foo.jl:42]], [[MOdp26jo][back to index]]
-- @@latex:\phantomsection@@ *=norm=*  <<2eMRib40>> <<KGerKtxUnorm_link_example>>
+[[file:minimal_example/Foo.jl::42][Foo.jl:42]], [[9DmFzSP8][back to index]]
+- @@latex:\phantomsection@@ *=norm=*  <<lC2oGf3j>> <<Mvnscf3dnorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -349,7 +382,7 @@ norm(p)
 
 See: _Point_struct_
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::31][Foo.jl:31]], [[MOdp26jo][back to index]]
+[[file:minimal_example/Foo.jl::31][Foo.jl:31]], [[9DmFzSP8][back to index]]
 :END:
 
 
@@ -359,7 +392,16 @@ See: _Point_struct_
      :ID:       0f6a49dc-ee9f-4964-8801-8badfb67f735
      :END:
 
-#+BEGIN_SRC julia :results output drawer :eval no-export :exports both
+#+BEGIN_SRC bash :eval never :exports code 
+,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
+documented_items=create_documented_item_array("minimal_example/Foo.jl");
+print_org_doc(documented_items,tag="Method",header_level=5)
+,#+END_SRC
+#+END_SRC
+
+will generate:
+
+#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
 print_org_doc(documented_items,tag="Method",header_level=5)
 #+END_SRC
@@ -368,8 +410,8 @@ print_org_doc(documented_items,tag="Method",header_level=5)
 :RESULTS:
 
 # =WARNING:= Link target ("Point_struct", "") not found
-<<Fnuec4dG>> *Index:* *[f]* [[Ygi2UuWU][foo]] *[n]* [[wmjf1rQB][norm]] 
-***** *=foo=*  <<Ygi2UuWU>>
+<<kxVWBf1C>> *Index:* *[f]* [[mO1O71AO][foo]] *[n]* [[AgGeysXM][norm]] 
+***** *=foo=*  <<mO1O71AO>>
 #+BEGIN_SRC julia :eval never :exports code
 foo(r::Float64,p::Point)
 #+END_SRC
@@ -386,8 +428,8 @@ Foo.Point(1.0, 2.0)
 Foo.Point(2.0, 4.0)
 #+END_SRC
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::42][Foo.jl:42]], [[Fnuec4dG][back to index]]
-***** *=norm=*  <<wmjf1rQB>> <<gYEa51ginorm_link_example>>
+[[file:minimal_example/Foo.jl::42][Foo.jl:42]], [[kxVWBf1C][back to index]]
+***** *=norm=*  <<AgGeysXM>> <<B4VCq5ainorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -405,7 +447,7 @@ norm(p)
 
 See: _Point_struct_
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::31][Foo.jl:31]], [[Fnuec4dG][back to index]]
+[[file:minimal_example/Foo.jl::31][Foo.jl:31]], [[kxVWBf1C][back to index]]
 :END:
 
 *** =tag=, =tag_to_ignore=, =identifier=
@@ -419,9 +461,18 @@ These options allow to select items to include:
 - =tag_to_ignore= a string or an array of strings, ignore all items with at least one tag in this =tag_to_ignore= option.
 - =identifier= a string that stands for the structure, abstract type or function name. Collects all items with this =identifier= name.
 
-For instance we can print =Point= identifier, restricted to =Method= tag, as follows:
+For instance we can print =norm= identifier, restricted to =Point= tag, as follows:
 
-#+BEGIN_SRC julia :results output drawer :eval no-export :exports both
+#+BEGIN_SRC bash :eval never :exports code
+,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
+documented_items=create_documented_item_array("minimal_example/Foo.jl");
+print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1)
+,#+END_SRC
+#+END_SRC
+
+will generate:
+
+#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
 print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1)
 #+END_SRC
@@ -430,7 +481,7 @@ print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1)
 :RESULTS:
 
 # =WARNING:= Link target ("Point_struct", "") not found
- @@latex:\phantomsection@@  <<MUvmN4JXnorm_link_example>>
+ @@latex:\phantomsection@@  <<Q1Sqm9nGnorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -460,7 +511,17 @@ structure is not present. The =complete_link= option, if set to =true=
 will try to fix all dangling links by including all the required
 documented items. For instance, with:
 
-#+BEGIN_SRC julia :results output drawer :eval no-export :exports both
+#+BEGIN_SRC bash :eval never :exports code
+,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
+documented_items=create_documented_item_array("minimal_example/Foo.jl");
+print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1,
+              complete_link=true)
+,#+END_SRC
+#+END_SRC
+
+will generate:
+
+#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
 print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1,
               complete_link=true)
@@ -469,7 +530,7 @@ print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1,
 #+RESULTS:
 :RESULTS:
 
- @@latex:\phantomsection@@  <<Miryi32RPoint_struct>>
+ @@latex:\phantomsection@@  <<IymsBnvIPoint_struct>>
 #+BEGIN_SRC julia :eval never :exports code
 struct Point
 #+END_SRC
@@ -485,10 +546,10 @@ p=Point(1,2)
 #+END_SRC
 
 You can add any valid Org mode directive. If you want to use
-in-documentation link, use [[Miryi32Rnorm_link_example][norm(...)]]
+in-documentation link, use [[IymsBnvInorm_link_example][norm(...)]]
 #+END_QUOTE
 [[file:minimal_example/Foo.jl::8][Foo.jl:8]]
- @@latex:\phantomsection@@  <<Miryi32Rnorm_link_example>>
+ @@latex:\phantomsection@@  <<IymsBnvInorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -504,7 +565,7 @@ norm(p)
 2.23606797749979
 #+END_SRC
 
-See: [[Miryi32RPoint_struct][struct Point]]
+See: [[IymsBnvIPoint_struct][struct Point]]
 #+END_QUOTE
 [[file:minimal_example/Foo.jl::31][Foo.jl:31]]
 :END:
@@ -568,18 +629,34 @@ print_org_doc(documented_items,boxingModule="MyBoxing",...)
 
 ** Error reporting
 Error reporting is performed as OrgMode comment. For instance if you execute:
-#+BEGIN_SRC julia :eval never
+#+BEGIN_SRC bash :eval never :exports code
+,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results 
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
 print_org_doc(documented_items,tag="Method",header_level=-1)
+,#+END_SRC
 #+END_SRC
+
+
 you will get:
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC bash :eval never :exports code
 #+RESULTS:
 :RESULTS:
-
 # =WARNING:= Link target ("Point_struct", "") not found
 ...
-#+END_EXAMPLE
+:END:
+#+END_SRC 
+** Compatibility with docstring / documenter.jl
+You can still use something like:
+#+BEGIN_SRC julia :eval never :exports code
+"""
+    foo()
+
+foo function ...
+"""
+#+Tags...
+# foo function ...
+foo() = ...
+#+END_SRC
 
 * API
   :PROPERTIES:
@@ -589,40 +666,40 @@ you will get:
 The API is simple, with very few functions:
 
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports results
-documented_items=create_documented_item_array_dir("~/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/");
-print_org_doc(documented_items,boxingModule="J4OrgBoxing",tag="API",header_level=2,link_prefix="API_")
+documented_items=create_documented_item_array_dir("../src/");
+print_org_doc(documented_items,boxingModule="J4OrgBoxing",tag="API",header_level=0,link_prefix="API_")
 #+END_SRC
 
 #+RESULTS:
 :RESULTS:
 
-<<1hsaCwUX>> *Index:* *[c]* [[KoYAb5Ql][create_documented_item_array]], [[wtaVuaiF][create_documented_item_array_dir]] *[i]* [[gmTuFeZA][initialize_boxing_module]] *[p]* [[nC1kfeoL][print_org_doc]] 
-** *=create_documented_item_array=*  <<KoYAb5Ql>> <<API_create_documented_item_array_filename>>
+<<4Dl3iiI8>> *Index:* *[c]* [[4zqTWGfJ][create_documented_item_array]], [[emKJeMig][create_documented_item_array_dir]] *[i]* [[SyNpmZe3][initialize_boxing_module]] *[p]* [[IdUayqNe][print_org_doc]] 
+- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<4zqTWGfJ>> <<API_create_documented_item_array_filename>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename::String)::Array{Documented_Item,1}
 #+END_SRC
 #+BEGIN_QUOTE
-Reads the *filename* Julia code file and returns an array of documented items.
-
-See: [[API_create_documented_item_array_directory][create_documented_item_array_dir(...)]]
+Reads a Julia code file and returns an array of documented items.
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::89][documented_item.jl:89]], [[1hsaCwUX][back to index]]
+[[file:../src/documented_item.jl::89][documented_item.jl:89]], [[4Dl3iiI8][back to index]]
 
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename_list::Array{String,1})::Array{Documented_Item,1}
 #+END_SRC
 #+BEGIN_QUOTE
-Reads an array of Julia code files and returns an array of documented items.
+Reads an array of Julia code files and returns an array of
+documented items.
 
-*Usage example:*
+*Usage example:* 
 #+BEGIN_SRC julia
-create_documented_item_array(["file1.jl";"file2.jl";...])
+create_documented_item_array(["file1","file2",...])
 #+END_SRC
 
-See: [[API_create_documented_item_array_directory][create_documented_item_array_dir(...)]]
+*Note:* instead of a list of files you can also specify a directory,
+see [[API_create_documented_item_array_dir][create_documented_item_array_dir(...)]]
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::130][documented_item.jl:130]], [[1hsaCwUX][back to index]]
-** *=create_documented_item_array_dir=*  <<wtaVuaiF>> <<API_create_documented_item_array_directory>>
+[[file:../src/documented_item.jl::128][documented_item.jl:128]], [[4Dl3iiI8][back to index]]
+- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<emKJeMig>> <<API_create_documented_item_array_dir>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array_dir(dirname::String)
 #+END_SRC
@@ -630,38 +707,41 @@ function create_documented_item_array_dir(dirname::String)
 Reads all *.jl files in a directory and returns an array of
 documented items.
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/documented_item.jl::150][documented_item.jl:150]], [[1hsaCwUX][back to index]]
-** *=initialize_boxing_module=*  <<gmTuFeZA>> <<API_initialize_boxing_module>>
+[[file:../src/documented_item.jl::150][documented_item.jl:150]], [[4Dl3iiI8][back to index]]
+- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<SyNpmZe3>> <<API_initialize_boxing_module>>
 #+BEGIN_SRC julia :eval never :exports code
-function initialize_boxing_module(;boxingModule::String="BoxingModule",
+function initialize_boxing_module(;
+                                  boxingModule::String="BoxingModule",
                                   usedModules::Vector{String}=String[],
                                   force::Bool=false)::Void
 #+END_SRC
 #+BEGIN_QUOTE
-Initializes a boxing module. This module is used to run Julia comment
-code snippets (code comments starting by "#!")
+Initialize a boxing module. This module is used to run Julia comment
+code snippet (tagged by #!)
 
 *Example:*
 #+BEGIN_SRC julia :eval never :exports code
 initialize_boxing_module(boxingModule="MyBoxing",
-                         usedModules=["RequiredPackage_1","RequiredPackage_2",...])
+                         usedModules=["RequiredPackage_1",
+                                      "RequiredPackage_2",...])
 #+END_SRC
-creates:
-#+BEGIN_SRC julia :eval never 
+
+creates
+
+#+BEGIN_SRC julia :eval never :exports code
 module MyBoxing
 using RequiredPackage_1,RequiredPackage_2,...
 end 
 #+END_SRC
-Future "#!" statements are executed after using MyBoxing:
+
+and future "#!" statements are executed after using MyBoxing:
 #+BEGIN_SRC julia :eval never :exports code
 using MyBoxing
 #! statements
 #+END_SRC
-
-See: [[API_print_org_doc_API][print_org_doc(...)]]
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/evaluate.jl::17][evaluate.jl:17]], [[1hsaCwUX][back to index]]
-** *=print_org_doc=*  <<nC1kfeoL>> <<API_print_org_doc_API>>
+[[file:../src/evaluate.jl::18][evaluate.jl:18]], [[4Dl3iiI8][back to index]]
+- @@latex:\phantomsection@@ *=print_org_doc=*  <<IdUayqNe>> <<API_print_org_doc_API>>
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -685,17 +765,15 @@ print_org_doc(documented_items,tag="API",header_level=0)
 #+END_EXAMPLE
 
 *Arguments:*
-- *tag*: tags to collect when generating the documentation
-- *tag_to_ignore*: tags to ignore when generating the documentation
-- *identifier*: generate documentation for this "identifier".
-  Can be a function name, a structure name, etc... 
-- *link_prefix*: allows to add a prefix to extra link (#+tag    L:extra_link).
-                 this is can be useful to avoid link name conflict when performing local doc extraction.
-- *complete_link*: if true, try to fix link without target by adding extra items
-- *case_sensitive*: case sensitive index.
-- *boxingModule*: specifies the context in which "#!" code will be executed. See [[API_initialize_boxing_module][initialize_boxing_module(...)]] for details.
+- =tag=: tags to collect when generating the documentation
+- =tag_to_ignore=: tags to ignore when generating the documentation
+- =identifier=: generate documentation for this "identifier". Can be a function name, a structure name, etc…
+- =link_prefix=: allows to add a prefix to extra link (#+tag L=extra_link). this is can be useful to avoid link name conflict when performing local doc extraction.
+- =complete_link=: if true, try to fix link without target by adding extra items
+- =case_sensitive=: case sensitive index.
+- =boxingModule=: specifies the context in which "#!" code will be executed. See [[API_initialize_boxing_module][initialize_boxing_module(...)]] for details.
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl::346][main.jl:346]], [[1hsaCwUX][back to index]]
+[[file:../src/main.jl::346][main.jl:346]], [[4Dl3iiI8][back to index]]
 :END:
 
 * More examples and Tips                                           :noexport:
@@ -726,14 +804,14 @@ function print_org_doc(di_array::Array{Documented_Item,1};
 
 This will generate this doc: 
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports results
-documented_items=create_documented_item_array_dir("~/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/");
+documented_items=create_documented_item_array_dir("../src/");
 print_org_doc(documented_items,identifier="print_org_doc",header_level=-1)
 #+END_SRC
 
 #+RESULTS:
 :RESULTS:
 
- @@latex:\phantomsection@@  <<fuGcZYAkprint_org_doc_API>>
+ @@latex:\phantomsection@@  <<m7Bqca4bprint_org_doc_API>>
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -761,7 +839,7 @@ print_org_doc(tag="API",header_level=0)
                  this is can be useful to avoid link name conflict when performing local doc extraction.
 - *complete_link:* if true, try to fix link without target by adding extra items
 #+END_QUOTE
-[[file:/home/picaud/GitLab/PVBibliography/Julia/MyLocalPackages/J4Org/src/main.jl::346][main.jl:346]]
+[[file:../src/main.jl::346][main.jl:346]]
 :END:
 
 *** Julia code block in comment 

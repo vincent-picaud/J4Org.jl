@@ -7,19 +7,43 @@ export initialize_boxing_module
 # -> evaluate_new
 # Parse and execute a Julia code snippet
 #
-function evaluate(code::Union{SubString{String},String},m::Module)::String
+function evaluate(code::Union{SubString{String},String},
+                  m::Module)::String
         result=eval(m,parse(code,raise=true))
         io=IOBuffer()
         show(io,"text/plain",result)
         return String(take!(io))
 end
 
-#+Evaluate, API
+#+Evaluate, API   L:initialize_boxing_module
 #
 # Initialize a boxing module. This module is used to run Julia comment
 # code snippet (tagged by #!)
 #
-function initialize_boxing_module(;boxingModule::String="BoxingModule",usedModules::Vector{String}=String[],force::Bool=false)::Void
+# *Example:*
+# #+BEGIN_SRC julia :eval never :exports code
+# initialize_boxing_module(boxingModule="MyBoxing",
+#                          usedModules=["RequiredPackage_1",
+#                                       "RequiredPackage_2",...])
+# #+END_SRC
+#
+# creates
+#
+# #+BEGIN_SRC julia :eval never :exports code
+# module MyBoxing
+# using RequiredPackage_1,RequiredPackage_2,...
+# end 
+# #+END_SRC
+#
+# and future "#!" statements are executed after using MyBoxing:
+# #+BEGIN_SRC julia :eval never :exports code
+# using MyBoxing
+# #! statements
+# #+END_SRC
+function initialize_boxing_module(;
+                                  boxingModule::String="BoxingModule",
+                                  usedModules::Vector{String}=String[],
+                                  force::Bool=false)::Void
     # Common errors
     @assert boxingModule!=""
     @assert usedModules!=String[""]

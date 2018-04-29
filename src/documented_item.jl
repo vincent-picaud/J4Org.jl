@@ -86,9 +86,9 @@ function create_documented_item(tok::Tokenized,idx::Int;
 end
 
 
-#+API
+#+API L:create_documented_item_array_filename
 #
-# Reads a file from its *filename* and returns an array of documented items.
+# Reads a Julia code file and returns an array of documented items.
 #
 function create_documented_item_array(filename::String)::Array{Documented_Item,1}
 
@@ -127,13 +127,16 @@ end
 
 #+API
 #
-# Reads a files and returns an array of documented items.
+# Reads an array of Julia code files and returns an array of
+# documented items.
 #
-# *Usage example:* (attention to ; separator)
+# *Usage example:* 
 # #+BEGIN_SRC julia
-# create_documented_item_array([file1;file2;...])
+# create_documented_item_array(["file1","file2",...])
 # #+END_SRC
 #
+# *Note:* instead of a list of files you can also specify a directory,
+# see [[create_documented_item_array_dir][]]
 function create_documented_item_array(filename_list::Array{String,1})::Array{Documented_Item,1}
     docItem_array = Array{Documented_Item,1}()
     
@@ -144,9 +147,10 @@ function create_documented_item_array(filename_list::Array{String,1})::Array{Doc
     return docItem_array
 end 
 
-#+API
+#+API L:create_documented_item_array_dir
 #
-# Reads all jl files in a directory
+# Reads all *.jl files in a directory and returns an array of
+# documented items.
 #
 function create_documented_item_array_dir(dirname::String)
     expanded_dirname=expanduser(dirname)

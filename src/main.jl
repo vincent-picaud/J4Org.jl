@@ -351,16 +351,18 @@ end
 # #+BEGIN_EXAMPLE
 # ,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 # documented_items = create_documented_item_array_dir("~/GitLab/MyPackage.jl/src/");
-# print_org_doc(tag="API",header_level=0)
+# print_org_doc(documented_items,tag="API",header_level=0)
 # ,#+END_SRC
 # #+END_EXAMPLE
 #
 # *Arguments:*
-# - *link_prefix:* allows to add a prefix to extra link (#+tags    L:extra_link).
-#                  this is can be useful to avoid link name conflict when performing local doc extraction.
-# - *complete_link:* if true, try to fix link without target by adding extra items
-#
-#
+# - =tag=: tags to collect when generating the documentation
+# - =tag_to_ignore=: tags to ignore when generating the documentation
+# - =identifier=: generates documentation for this "identifier". Can be a function name, a structure name, etc…
+# - =link_prefix=: allows to add a prefix to extra link (#+tag L=extra_link). this is can be useful to avoid link name conflict when performing local doc extraction.
+# - =complete_link=: if true, try to fix link without target by adding extra items
+# - =case_sensitive=: case sensitive index.
+# - =boxingModule=: specifies the context in which "#!" code will be executed. See [[initialize_boxing_module][]] for details.
 #
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
