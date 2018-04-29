@@ -191,14 +191,14 @@ print_org_doc(documented_items,tag_to_ignore=["Internal"],header_level=0)
 - *using J4Org* uses this package
 
 - *initialize_boxing_module(usedModules=["Foo"])* defines what are
-  the module to use when executing Julia code extracted from the doc
+  the modules to use when executing Julia code extracted from the doc
   (the "#!" statements). Here we are documenting the =Foo= module,
   hence we must use it. Note that you can also use any number of extra
   modules for instance with =["Foo", "ExtraModule", ...]=. See
   [[API_initialize_boxing_module][initialize_boxing_module(...)]] for further details.
 
 - *create_documented_item_array("Foo.jl")* creates the list of
-  documented item from file "Foo.jl". You can use a list of files and
+  documented items from file "Foo.jl". You can use a list of files and
   a directory, see [[API_create_documented_item_array_filename][create_documented_item_array(...)]] for further details.
 
 - *print_org_doc(documented_items,tag_to_ignore=["Internal"],header_level=0)*
