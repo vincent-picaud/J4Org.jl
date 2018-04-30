@@ -348,12 +348,12 @@ end
 # Prints generated documentation to be exported by OrgMode, this is the main function of the =J4Org= package.
 #
 # *Org-Mode Usage example:*
-# #+BEGIN_EXAMPLE
+# #+BEGIN_SRC julia :eval never :exports code
 # ,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 # documented_items = create_documented_item_array_dir("~/GitLab/MyPackage.jl/src/");
 # print_org_doc(documented_items,tag="API",header_level=0)
 # ,#+END_SRC
-# #+END_EXAMPLE
+# #+END_SRC
 #
 # *Arguments:*
 # - =tag=: tags to collect when generating the documentation

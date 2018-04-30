@@ -29,8 +29,11 @@ initialize_boxing_module(usedModules=["Foo"],force=true)
 
 * Introduction
 
-Defines a the *J4Org.jl* package, using [[https://github.com/KristofferC/Tokenize.jl/][Tokenize.jl]], to generate Julia
-code documentation into Org-Mode document.
+J4Org.jl is a Julia package that allows Julia doc generation into an
+Org-Mode document. The goal is to be able to code and document Julia
+packages without leaving Emacs and to reduce as much as possible the
+burden of documentation. This package depends on [[https://github.com/KristofferC/Tokenize.jl/][Tokenize.jl]], to
+tokenize Julia code.
 
 ** Minimal requirements 
 
@@ -254,14 +257,14 @@ This integer can have these values:
      :ID:       bda53362-32fb-4096-9c0a-32c0afb96b5f
      :END:
 
-#+BEGIN_SRC bash :eval never :exports code
+#+BEGIN_src julia :eval never :exports code
 ,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results 
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
 print_org_doc(documented_items,tag="Method",header_level=-1)
 ,#+END_SRC
 #+END_SRC
 
-will generate:
+This will generate:
 
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports results 
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
@@ -327,14 +330,14 @@ See: _Point_struct_
      :ID:       842e5c47-62d1-44fc-8489-e105a45f5dd4
      :END:
 
-#+BEGIN_SRC bash :eval never :exports code
+#+BEGIN_src julia :eval never :exports code
 ,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
 print_org_doc(documented_items,tag="Method",header_level=0)
 ,#+END_SRC
 #+END_SRC
 
-will generate:
+This will generate:
 
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
@@ -392,14 +395,14 @@ See: _Point_struct_
      :ID:       0f6a49dc-ee9f-4964-8801-8badfb67f735
      :END:
 
-#+BEGIN_SRC bash :eval never :exports code 
+#+BEGIN_src julia :eval never :exports code 
 ,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
 print_org_doc(documented_items,tag="Method",header_level=5)
 ,#+END_SRC
 #+END_SRC
 
-will generate:
+This will generate:
 
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
@@ -463,14 +466,14 @@ These options allow to select items to include:
 
 For instance we can print =norm= identifier, restricted to =Point= tag, as follows:
 
-#+BEGIN_SRC bash :eval never :exports code
+#+BEGIN_src julia :eval never :exports code
 ,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
 print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1)
 ,#+END_SRC
 #+END_SRC
 
-will generate:
+This will generate:
 
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
@@ -511,7 +514,7 @@ structure is not present. The =complete_link= option, if set to =true=
 will try to fix all dangling links by including all the required
 documented items. For instance, with:
 
-#+BEGIN_SRC bash :eval never :exports code
+#+BEGIN_src julia :eval never :exports code
 ,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
 print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1,
@@ -519,7 +522,7 @@ print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1,
 ,#+END_SRC
 #+END_SRC
 
-will generate:
+This will generate:
 
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
@@ -629,7 +632,7 @@ print_org_doc(documented_items,boxingModule="MyBoxing",...)
 
 ** Error reporting
 Error reporting is performed as OrgMode comment. For instance if you execute:
-#+BEGIN_SRC bash :eval never :exports code
+#+BEGIN_src julia :eval never :exports code
 ,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results 
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
 print_org_doc(documented_items,tag="Method",header_level=-1)
@@ -638,7 +641,7 @@ print_org_doc(documented_items,tag="Method",header_level=-1)
 
 
 you will get:
-#+BEGIN_SRC bash :eval never :exports code
+#+BEGIN_src julia :eval never :exports code
 #+RESULTS:
 :RESULTS:
 # =WARNING:= Link target ("Point_struct", "") not found
@@ -673,15 +676,15 @@ print_org_doc(documented_items,boxingModule="J4OrgBoxing",tag="API",header_level
 #+RESULTS:
 :RESULTS:
 
-<<4Dl3iiI8>> *Index:* *[c]* [[4zqTWGfJ][create_documented_item_array]], [[emKJeMig][create_documented_item_array_dir]] *[i]* [[SyNpmZe3][initialize_boxing_module]] *[p]* [[IdUayqNe][print_org_doc]] 
-- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<4zqTWGfJ>> <<API_create_documented_item_array_filename>>
+<<sc1zv94h>> *Index:* *[c]* [[ZLmVoyWk][create_documented_item_array]], [[5Eg8CYXp][create_documented_item_array_dir]] *[i]* [[sCy0j0YO][initialize_boxing_module]] *[p]* [[4meIsN4c][print_org_doc]] 
+- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<ZLmVoyWk>> <<API_create_documented_item_array_filename>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename::String)::Array{Documented_Item,1}
 #+END_SRC
 #+BEGIN_QUOTE
 Reads a Julia code file and returns an array of documented items.
 #+END_QUOTE
-[[file:../src/documented_item.jl::89][documented_item.jl:89]], [[4Dl3iiI8][back to index]]
+[[file:../src/documented_item.jl::89][documented_item.jl:89]], [[sc1zv94h][back to index]]
 
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename_list::Array{String,1})::Array{Documented_Item,1}
@@ -698,8 +701,8 @@ create_documented_item_array(["file1","file2",...])
 *Note:* instead of a list of files you can also specify a directory,
 see [[API_create_documented_item_array_dir][create_documented_item_array_dir(...)]]
 #+END_QUOTE
-[[file:../src/documented_item.jl::128][documented_item.jl:128]], [[4Dl3iiI8][back to index]]
-- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<emKJeMig>> <<API_create_documented_item_array_dir>>
+[[file:../src/documented_item.jl::128][documented_item.jl:128]], [[sc1zv94h][back to index]]
+- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<5Eg8CYXp>> <<API_create_documented_item_array_dir>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array_dir(dirname::String)
 #+END_SRC
@@ -707,8 +710,8 @@ function create_documented_item_array_dir(dirname::String)
 Reads all *.jl files in a directory and returns an array of
 documented items.
 #+END_QUOTE
-[[file:../src/documented_item.jl::150][documented_item.jl:150]], [[4Dl3iiI8][back to index]]
-- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<SyNpmZe3>> <<API_initialize_boxing_module>>
+[[file:../src/documented_item.jl::150][documented_item.jl:150]], [[sc1zv94h][back to index]]
+- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<sCy0j0YO>> <<API_initialize_boxing_module>>
 #+BEGIN_SRC julia :eval never :exports code
 function initialize_boxing_module(;
                                   boxingModule::String="BoxingModule",
@@ -740,8 +743,8 @@ using MyBoxing
 #! statements
 #+END_SRC
 #+END_QUOTE
-[[file:../src/evaluate.jl::18][evaluate.jl:18]], [[4Dl3iiI8][back to index]]
-- @@latex:\phantomsection@@ *=print_org_doc=*  <<IdUayqNe>> <<API_print_org_doc_API>>
+[[file:../src/evaluate.jl::18][evaluate.jl:18]], [[sc1zv94h][back to index]]
+- @@latex:\phantomsection@@ *=print_org_doc=*  <<4meIsN4c>> <<API_print_org_doc_API>>
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -757,23 +760,23 @@ function print_org_doc(di_array::Array{Documented_Item,1};
 Prints generated documentation to be exported by OrgMode, this is the main function of the =J4Org= package.
 
 *Org-Mode Usage example:*
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC julia :eval never :exports code
 ,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items = create_documented_item_array_dir("~/GitLab/MyPackage.jl/src/");
 print_org_doc(documented_items,tag="API",header_level=0)
 ,#+END_SRC
-#+END_EXAMPLE
+#+END_SRC
 
 *Arguments:*
 - =tag=: tags to collect when generating the documentation
 - =tag_to_ignore=: tags to ignore when generating the documentation
-- =identifier=: generate documentation for this "identifier". Can be a function name, a structure name, etc…
+- =identifier=: generates documentation for this "identifier". Can be a function name, a structure name, etc…
 - =link_prefix=: allows to add a prefix to extra link (#+tag L=extra_link). this is can be useful to avoid link name conflict when performing local doc extraction.
 - =complete_link=: if true, try to fix link without target by adding extra items
 - =case_sensitive=: case sensitive index.
 - =boxingModule=: specifies the context in which "#!" code will be executed. See [[API_initialize_boxing_module][initialize_boxing_module(...)]] for details.
 #+END_QUOTE
-[[file:../src/main.jl::346][main.jl:346]], [[4Dl3iiI8][back to index]]
+[[file:../src/main.jl::346][main.jl:346]], [[sc1zv94h][back to index]]
 :END:
 
 * More examples and Tips                                           :noexport:
@@ -811,7 +814,8 @@ print_org_doc(documented_items,identifier="print_org_doc",header_level=-1)
 #+RESULTS:
 :RESULTS:
 
- @@latex:\phantomsection@@  <<m7Bqca4bprint_org_doc_API>>
+# =WARNING:= Link target ("initialize_boxing_module", "") not found
+ @@latex:\phantomsection@@  <<OaY7rdLXprint_org_doc_API>>
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -827,17 +831,21 @@ function print_org_doc(di_array::Array{Documented_Item,1};
 Prints generated documentation to be exported by OrgMode, this is the main function of the =J4Org= package.
 
 *Org-Mode Usage example:*
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC julia :eval never :exports code
 ,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items = create_documented_item_array_dir("~/GitLab/MyPackage.jl/src/");
-print_org_doc(tag="API",header_level=0)
+print_org_doc(documented_items,tag="API",header_level=0)
 ,#+END_SRC
 #+END_EXAMPLE
 
 *Arguments:*
-- *link_prefix:* allows to add a prefix to extra link (#+tags    L:extra_link).
-                 this is can be useful to avoid link name conflict when performing local doc extraction.
-- *complete_link:* if true, try to fix link without target by adding extra items
+- =tag=: tags to collect when generating the documentation
+- =tag_to_ignore=: tags to ignore when generating the documentation
+- =identifier=: generates documentation for this "identifier". Can be a function name, a structure name, etc…
+- =link_prefix=: allows to add a prefix to extra link (#+tag L=extra_link). this is can be useful to avoid link name conflict when performing local doc extraction.
+- =complete_link=: if true, try to fix link without target by adding extra items
+- =case_sensitive=: case sensitive index.
+- =boxingModule=: specifies the context in which "#!" code will be executed. See _initialize_boxing_module_ for details.
 #+END_QUOTE
 [[file:../src/main.jl::346][main.jl:346]]
 :END:
