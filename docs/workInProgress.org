@@ -23,10 +23,11 @@
   - "# !" is processed as "#!"
   one possible risk is than you must avoid line starting with "!"
 
-  You can instal poporg from MELPA, configuration is:
+  You can install poporg from MELPA. Configuration is:
   #+BEGIN_EXAMPLE
   (autoload 'poporg-dwim "poporg" nil t)
   (global-set-key (kbd "C-c \"") 'poporg-dwim)
   #+END_EXAMPLE
+- add support for =@enum=
 * W3 Links
 

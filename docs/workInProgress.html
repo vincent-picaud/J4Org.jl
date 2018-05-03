@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-05-03 Thu 12:27 -->
+<!-- 2018-05-03 Thu 19:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Work in Progress</title>
@@ -309,31 +309,31 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org7fbc588">1. Project Journal</a></li>
-<li><a href="#org0957ce7">2. Project TODO</a>
+<li><a href="#org7d0908c">1. Project Journal</a></li>
+<li><a href="#orged6d146">2. Project TODO</a>
 <ul>
-<li><a href="#org7e98781">2.1. <span class="todo TODO">TODO</span> <code>[6/12]</code></a></li>
+<li><a href="#org1272fa4">2.1. <span class="todo TODO">TODO</span> <code>[6/12]</code></a></li>
 </ul>
 </li>
-<li><a href="#orga20a903">3. Change logs</a>
+<li><a href="#orgb5001d7">3. Change logs</a>
 <ul>
-<li><a href="#org74c139b">3.1. v0.1.0 -&gt; v0.2.0</a></li>
+<li><a href="#orgd2e5cba">3.1. v0.1.0 -&gt; v0.2.0</a></li>
 </ul>
 </li>
-<li><a href="#org6b7d3c6">4. W3 Links</a></li>
+<li><a href="#orgb881e16">4. W3 Links</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org7fbc588" class="outline-2">
-<h2 id="org7fbc588"><span class="section-number-2">1</span> Project Journal</h2>
+<div id="outline-container-org7d0908c" class="outline-2">
+<h2 id="org7d0908c"><span class="section-number-2">1</span> Project Journal</h2>
 </div>
-<div id="outline-container-org0957ce7" class="outline-2">
-<h2 id="org0957ce7"><span class="section-number-2">2</span> Project TODO</h2>
+<div id="outline-container-orged6d146" class="outline-2">
+<h2 id="orged6d146"><span class="section-number-2">2</span> Project TODO</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org7e98781" class="outline-3">
-<h3 id="org7e98781"><span class="section-number-3">2.1</span> <span class="todo TODO">TODO</span> <code>[6/12]</code></h3>
+<div id="outline-container-org1272fa4" class="outline-3">
+<h3 id="org1272fa4"><span class="section-number-3">2.1</span> <span class="todo TODO">TODO</span> <code>[6/12]</code></h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li class="off"><code>[&#xa0;]</code> add a function to show link and targets &amp; detect useless link_target</li>
@@ -341,7 +341,7 @@ for the JavaScript code in this tag.
 <li class="off"><code>[&#xa0;]</code> even if complete_link = false, search for target in order to do pretty print (information like struct etc&#x2026;)</li>
 <li class="on"><code>[X]</code> use extracted tag in DocumentedItem</li>
 <li class="on"><code>[X]</code> allows tag list "#+tag1, tag2"</li>
-<li class="on"><code>[X]</code> add prefix to extra link: <a id="orgf49ad4a"></a> -&gt; <a id="org6cb3ad6"></a></li>
+<li class="on"><code>[X]</code> add prefix to extra link: <a id="orged3c753"></a> -&gt; <a id="org7a73329"></a></li>
 <li class="on"><code>[X]</code> finish parsing and code cleaning</li>
 <li class="off"><code>[&#xa0;]</code> add an option to extract code body</li>
 <li class="off"><code>[&#xa0;]</code> :RESULT: bug</li>
@@ -352,29 +352,44 @@ for the JavaScript code in this tag.
 </div>
 </div>
 </div>
-<div id="outline-container-orga20a903" class="outline-2">
-<h2 id="orga20a903"><span class="section-number-2">3</span> Change logs</h2>
+<div id="outline-container-orgb5001d7" class="outline-2">
+<h2 id="orgb5001d7"><span class="section-number-2">3</span> Change logs</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org74c139b" class="outline-3">
-<h3 id="org74c139b"><span class="section-number-3">3.1</span> v0.1.0 -&gt; v0.2.0</h3>
+<div id="outline-container-orgd2e5cba" class="outline-3">
+<h3 id="orgd2e5cba"><span class="section-number-3">3.1</span> v0.1.0 -&gt; v0.2.0</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
-<li>to support <a href="https://github.com/QBobWatson/poporg/blob/master/poporg.el">poporg</a> for comment editing, comment syntax is extended: 
+<li><p>
+to support <a href="https://github.com/QBobWatson/poporg/blob/master/poporg.el">poporg</a> (also see <a href="https://github.com/QBobWatson/poporg">QBobWatson/poporg</a>) for comment editing, comment syntax is extended: 
+</p>
 <ul class="org-ul">
 <li>"# +" is processed as "#+"</li>
-</ul></li>
+<li>"# !" is processed as "#!"</li>
+</ul>
+<p>
+one possible risk is than you must avoid line starting with "!"
+</p>
+
+<p>
+You can instal poporg from MELPA, configuration is:
+</p>
+<pre class="example">
+  (autoload 'poporg-dwim "poporg" nil t)
+  (global-set-key (kbd "C-c \"") 'poporg-dwim)
+</pre></li>
+<li>add support for <code>@enum</code></li>
 </ul>
 </div>
 </div>
 </div>
-<div id="outline-container-org6b7d3c6" class="outline-2">
-<h2 id="org6b7d3c6"><span class="section-number-2">4</span> W3 Links</h2>
+<div id="outline-container-orgb881e16" class="outline-2">
+<h2 id="orgb881e16"><span class="section-number-2">4</span> W3 Links</h2>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: picaud</p>
-<p class="date">Created: 2018-05-03 Thu 12:27</p>
+<p class="date">Created: 2018-05-03 Thu 19:29</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
