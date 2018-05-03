@@ -15,10 +15,10 @@ function evaluate(code::Union{SubString{String},String},
         return String(take!(io))
 end
 
-#+Evaluate, API   L:initialize_boxing_module
+# +Evaluate, API   L:initialize_boxing_module
 #
 # Initialize a boxing module. This module is used to run Julia comment
-# code snippet (tagged by #!)
+# code snippet (tagged by "#!" or by "# !")
 #
 # *Example:*
 # #+BEGIN_SRC julia :eval never :exports code
@@ -35,10 +35,10 @@ end
 # end 
 # #+END_SRC
 #
-# and future "#!" statements are executed after using MyBoxing:
+# and future "# !" statements are executed after using MyBoxing:
 # #+BEGIN_SRC julia :eval never :exports code
 # using MyBoxing
-# #! statements
+# # !statements
 # #+END_SRC
 function initialize_boxing_module(;
                                   boxingModule::String="BoxingModule",
@@ -69,7 +69,7 @@ function initialize_boxing_module(;
 end 
 
 
-#+Evaluate, TODO
+# +Evaluate, TODO
 #
 # Parse and execute a Julia code snippet
 #
@@ -82,8 +82,8 @@ end
 # #+END_EXAMPLE
 #
 # Example:
-#!5+6
-#!rand(5)
+# !5+6
+# !rand(5)
 #
 # - [ ] TODO skip output for code ending with ";"
 function with_hash_evaluate(comment::String,
@@ -98,19 +98,20 @@ function with_hash_evaluate(comment::String,
     output=Array{String,1}(0)
     comment_line_by_line=split(comment,"\n")
     const n_comment_line_by_line=length(comment_line_by_line)
+    const code_to_execute=r"^#[ ]?!(.*)$"
     i=1
     while i<=n_comment_line_by_line
         
-        # only process line beginning with "#!"
+        # only process line beginning with "#!" or by "# !"
         # (other lines are forwarded without modification)
-        if (length(comment_line_by_line[i])<2)||(comment_line_by_line[i][1:2]!="#!")
+        if !ismatch(code_to_execute,comment_line_by_line[i])
             push!(output,comment_line_by_line[i])
             i=i+1
             continue
         end 
 
         # Here process code
-        @assert comment_line_by_line[i][1:2]=="#!"
+        @assert ismatch(code_to_execute,comment_line_by_line[i])
 
         output_code=Array{String,1}(0)
         output_result=Array{String,1}(0)
@@ -118,9 +119,9 @@ function with_hash_evaluate(comment::String,
         push!(output_code,"# #+BEGIN_SRC julia")
         push!(output_result,"# #+BEGIN_SRC julia")
 
-        while (length(comment_line_by_line[i])>=2)&&(comment_line_by_line[i][1:2]=="#!")
-            push!(output_code,"# "*comment_line_by_line[i][3:end])
-            const code_local = comment_line_by_line[i][3:end]
+        while ismatch(code_to_execute,comment_line_by_line[i])
+            const code_local = match(code_to_execute,comment_line_by_line[i])[1]
+            push!(output_code,"# "*code_local)
             show_code_local_result = !ismatch(r";\s*$",code_local) # Caveat: do not take into account final comment
             
             try 
