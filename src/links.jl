@@ -146,6 +146,8 @@ function doc_link_substituion(doc::String,di_array::Array{Documented_Item,1},lin
                     identifier_for_link_k="struct "*identifier_for_link_k
                 elseif is_documented_abstract_type(di_array[first_occurence])
                     identifier_for_link_k="abstract "*identifier_for_link_k
+                elseif is_documented_enum_type(di_array[first_occurence])
+                    identifier_for_link_k="@enum "*identifier_for_link_k
                 end 
             end 
             links[k]=(links[k][1],identifier_for_link_k)
