@@ -86,6 +86,48 @@ function get_items_with_link_target(link_target::String,di_array::Array{Document
     return v
 end 
 
+# +Links
+#
+# Creates readable part of the link.
+#
+# By default use item identifier.
+#
+# Improve it if we can, for instance
+#
+# - for functions: identifier -> identifier(...)
+# - for enums: identifier -> @enum identifier
+# - ...
+#
+# *Parameters*:
+# - di: the item containing the link target (L:link_target)
+#
+# *Post-condition*:
+# - returns a non-empty string
+# 
+function create_link_readable_part(di::Documented_Item)::String
+
+    # start with the identifier
+    readable_link = identifier(di)
+
+    # try to magnify 
+    # - function add identifier()
+    # - strucure add struct identifier
+    # - ...
+    if is_documented_function(di)
+        readable_link=readable_link*"(...)"
+    elseif is_documented_structure(di)
+        readable_link="struct "*readable_link
+    elseif is_documented_abstract_type(di)
+        readable_link="abstract "*readable_link
+    elseif is_documented_enum_type(di)
+        readable_link="@enum "*readable_link
+    end 
+
+    @assert !isempty(readable_link)
+
+    return readable_link
+end
+
 #+Links                                       L:doc_link_substituion
 # From doc string performs links substitution
 #
@@ -103,7 +145,7 @@ end
 function doc_link_substituion(doc::String,di_array::Array{Documented_Item,1},link_prefix::String)::String
     # extract links 
     links = extract_links(doc)
-    links=clean_extracted_links(links)
+    links = clean_extracted_links(links)
     
     if isempty(links)
         return doc
@@ -128,29 +170,8 @@ function doc_link_substituion(doc::String,di_array::Array{Documented_Item,1},lin
             warning_message("Link target $(links[k]) not found")
             doc = replace(doc,link_in_doc,"_$(first(links[k]))_") # inactive link 
         else
-            # Generate "readable part of the link"
-            # start with the identifier
-            identifier_for_link_k = identifier(di_array[first_occurence])
-
-            if isempty(identifier_for_link_k)
-                # if no identifier reuse the link first part (the target string)
-                identifier_for_link_k=links[k][1]
-            else
-                # if the target has an identifier try to magnify it
-                # - function add identifier()
-                # - strucure add struct identifier
-                # - ...
-                if is_documented_function(di_array[first_occurence])
-                    identifier_for_link_k=identifier_for_link_k*"(...)"
-                elseif is_documented_structure(di_array[first_occurence])
-                    identifier_for_link_k="struct "*identifier_for_link_k
-                elseif is_documented_abstract_type(di_array[first_occurence])
-                    identifier_for_link_k="abstract "*identifier_for_link_k
-                elseif is_documented_enum_type(di_array[first_occurence])
-                    identifier_for_link_k="@enum "*identifier_for_link_k
-                end 
-            end 
-            links[k]=(links[k][1],identifier_for_link_k)
+            readable_link = create_link_readable_part(di_array[first_occurence])
+            links[k]=(links[k][1],readable_link)
             
             # check for multi-occurrence
             for i in first_occurence+1:n_di_array
