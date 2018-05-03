@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-04-30 Mon 11:59 -->
+<!-- 2018-05-03 Thu 13:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Package Documentation</title>
@@ -333,43 +333,43 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org5b50fcc">1. Introduction</a>
+<li><a href="#org330b184">1. Introduction</a>
 <ul>
-<li><a href="#orge204d6d">1.1. Minimal requirements</a></li>
-<li><a href="#org64b9f57">1.2. Getting started with a minimal example</a>
+<li><a href="#org74d893a">1.1. Minimal requirements</a></li>
+<li><a href="#org24d45fc">1.2. Getting started with a minimal example</a>
 <ul>
-<li><a href="#org4d068a7">1.2.1. Emacs configuration</a></li>
-<li><a href="#orgbb85bfb">1.2.2. A documented Julia <code>Foo</code> module</a></li>
-<li><a href="#org8b9ef9f">1.2.3. Minimal OrgMode document</a></li>
-<li><a href="#org50a253c">1.2.4. Generating the doc</a></li>
-<li><a href="#org11b1851">1.2.5. Improving exported document style</a></li>
+<li><a href="#org217f8d0">1.2.1. Emacs configuration</a></li>
+<li><a href="#orgcdbfe0a">1.2.2. A documented Julia <code>Foo</code> module</a></li>
+<li><a href="#org5bed9ca">1.2.3. Minimal OrgMode document</a></li>
+<li><a href="#orgff44c15">1.2.4. Generating the doc</a></li>
+<li><a href="#orgbf80f17">1.2.5. Improving exported document style</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org937574b">2. More examples</a>
+<li><a href="#org7ac4574">2. More examples</a>
 <ul>
-<li><a href="#org34e1ed2">2.1. <code>print_org_doc</code> options</a>
+<li><a href="#orga433e62">2.1. <code>print_org_doc</code> options</a>
 <ul>
-<li><a href="#org2d650c8">2.1.1. <code>header_level</code></a></li>
-<li><a href="#orgd3cca42">2.1.2. <code>tag</code>, <code>tag_to_ignore</code>, <code>identifier</code></a></li>
-<li><a href="#orgb39892c">2.1.3. <code>complete_link</code></a></li>
-<li><a href="#org3aad26d">2.1.4. <code>link_prefix</code></a></li>
-<li><a href="#orgd961e35">2.1.5. <code>case_sensitive</code></a></li>
-<li><a href="#orgf00017b">2.1.6. <code>boxingModule</code></a></li>
+<li><a href="#org681719e">2.1.1. <code>header_level</code></a></li>
+<li><a href="#org5572ba7">2.1.2. <code>tag</code>, <code>tag_to_ignore</code>, <code>identifier</code></a></li>
+<li><a href="#orgc0dac95">2.1.3. <code>complete_link</code></a></li>
+<li><a href="#org5170100">2.1.4. <code>link_prefix</code></a></li>
+<li><a href="#org39662f2">2.1.5. <code>case_sensitive</code></a></li>
+<li><a href="#orgfb7012f">2.1.6. <code>boxingModule</code></a></li>
 </ul>
 </li>
-<li><a href="#org5f87d89">2.2. Error reporting</a></li>
-<li><a href="#org233ca55">2.3. Compatibility with docstring / documenter.jl</a></li>
+<li><a href="#orgdd98cc8">2.2. Error reporting</a></li>
+<li><a href="#orge33065a">2.3. Compatibility with docstring / documenter.jl</a></li>
 </ul>
 </li>
-<li><a href="#org70a58aa">3. API</a></li>
-<li><a href="#org7dfa80c">4. Unit tests</a></li>
+<li><a href="#org2934804">3. API</a></li>
+<li><a href="#org428f8e0">4. Unit tests</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org5b50fcc" class="outline-2">
-<h2 id="org5b50fcc"><span class="section-number-2">1</span> Introduction</h2>
+<div id="outline-container-org330b184" class="outline-2">
+<h2 id="org330b184"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 J4Org.jl is a Julia package that allows Julia doc generation into an
@@ -380,8 +380,8 @@ tokenize Julia code.
 </p>
 </div>
 
-<div id="outline-container-orge204d6d" class="outline-3">
-<h3 id="orge204d6d"><span class="section-number-3">1.1</span> Minimal requirements</h3>
+<div id="outline-container-org74d893a" class="outline-3">
+<h3 id="org74d893a"><span class="section-number-3">1.1</span> Minimal requirements</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 You need <a href="https://orgmode.org/">Org-Mode</a> plus <a href="https://github.com/gjkerns/ob-julia/blob/master/ob-julia-doc.org">ob-julia.el</a>, which has <a href="http://stat.ethz.ch/ESS/index.php?Section=download">ESS</a> as dependence, to be
@@ -390,8 +390,8 @@ installed.
 </div>
 </div>
 
-<div id="outline-container-org64b9f57" class="outline-3">
-<h3 id="org64b9f57"><span class="section-number-3">1.2</span> Getting started with a minimal example</h3>
+<div id="outline-container-org24d45fc" class="outline-3">
+<h3 id="org24d45fc"><span class="section-number-3">1.2</span> Getting started with a minimal example</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 The following is a minimal example you can reproduce to have a taste
@@ -399,8 +399,8 @@ of what this package do.
 </p>
 </div>
 
-<div id="outline-container-org4d068a7" class="outline-4">
-<h4 id="org4d068a7"><span class="section-number-4">1.2.1</span> Emacs configuration</h4>
+<div id="outline-container-org217f8d0" class="outline-4">
+<h4 id="org217f8d0"><span class="section-number-4">1.2.1</span> Emacs configuration</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 You first need a minimal <code>init.el</code> file to configure Emacs.
@@ -426,8 +426,8 @@ You first need a minimal <code>init.el</code> file to configure Emacs.
 </div>
 </div>
 
-<div id="outline-container-orgbb85bfb" class="outline-4">
-<h4 id="orgbb85bfb"><span class="section-number-4">1.2.2</span> A documented Julia <code>Foo</code> module</h4>
+<div id="outline-container-orgcdbfe0a" class="outline-4">
+<h4 id="orgcdbfe0a"><span class="section-number-4">1.2.2</span> A documented Julia <code>Foo</code> module</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 Then you need a documented module:
@@ -474,12 +474,12 @@ Then you need a documented module:
 <span style="color: #b22222;">#</span>
 <span style="color: #0000ff;">norm</span>(p::<span style="color: #228b22;">Point</span>)::<span style="color: #228b22;">Float64</span> = sqrt(p.x*p.x+p.y*p.y)
 
-<span style="color: #b22222;">#</span><span style="color: #b22222;">+Method,Internal</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">+Method,Internal</span>
 <span style="color: #b22222;"># </span><span style="color: #b22222;">An internal function</span>
 <span style="color: #b22222;">#</span>
 <span style="color: #b22222;"># </span><span style="color: #b22222;">For symbol that are not exported, do not forget the "Foo." prefix:</span>
-<span style="color: #b22222;">#</span><span style="color: #b22222;">!p=Point(1.0,2.0)</span>
-<span style="color: #b22222;">#</span><span style="color: #b22222;">!Foo.foo(2.0,p)</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">!p=Point(1.0,2.0)</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">!Foo.foo(2.0,p)</span>
 <span style="color: #0000ff;">foo</span>(r::<span style="color: #228b22;">Float64</span>,p::<span style="color: #228b22;">Point</span>) = Point(r*p.x,r*p.y)
 
 <span style="color: #a020f0;">end</span> 
@@ -529,36 +529,49 @@ simply use Org mode source block:</li>
 </pre>
 </div>
 </div>
+
+<ol class="org-ol">
+<li><a id="org917f220"></a>Support for "# +" and "# !" (since v0.2.0)<br />
+<div class="outline-text-5" id="text-1-2-2-1">
+<p>
+As you can see (foo() function comments), "# +", "#+" and "#
+!", "#!" are synonyms.  The motivation is a better integration with
+<a href="https://github.com/QBobWatson/poporg">poporg</a> Emacs package.  With this Emacs package you can edit comment
+under OrgMode mode without being bothered by the "#" characters.
+</p>
+</div>
+</li>
+</ol>
 </div>
 
-<div id="outline-container-org8b9ef9f" class="outline-4">
-<h4 id="org8b9ef9f"><span class="section-number-4">1.2.3</span> Minimal OrgMode document</h4>
+<div id="outline-container-org5bed9ca" class="outline-4">
+<h4 id="org5bed9ca"><span class="section-number-4">1.2.3</span> Minimal OrgMode document</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <p>
 This is the <code>foo.org</code> file.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #b22222;">#</span><span style="color: #b22222;">+PROPERTY: header-args:julia :session *my_session* :exports code :eval no-export</span>
-<span style="color: #b22222;">#</span><span style="color: #b22222;">+OPTIONS: ^:{}</span>
-<span style="color: #b22222;">#</span><span style="color: #b22222;">+TITLE: Getting Started with a minimal example</span>
+<pre class="src src-org"><span style="color: #b22222;">#+PROPERTY: header-args:julia :session *my_session* :exports code :eval no-export</span>
+<span style="color: #b22222;">#+OPTIONS: ^:{}</span>
+<span style="color: #7f7f7f;">#+TITLE:</span> <span style="color: #191970; font-weight: bold;">Getting Started with a minimal example</span>
 
-<span style="color: #b22222;">#</span><span style="color: #b22222;">+BEGIN_SRC julia :results output none :eval no-export :exports none</span>
-push!(LOAD_PATH,pwd())
-<span style="color: #b22222;">#</span><span style="color: #b22222;">+END_SRC</span>
+<span style="color: #b22222;">#+BEGIN_SRC julia :results output none :eval no-export :exports none</span>
+<span style="color: #7f7f7f;">push!(LOAD_PATH,pwd())</span>
+<span style="color: #b22222;">#+END_SRC</span>
 
-<span style="color: #b22222;">#</span><span style="color: #b22222;">+BEGIN_SRC julia :results output none :eval no-export :exports none</span>
-using J4Org 
-<span style="color: #0000ff;">initialize_boxing_module</span>(<span style="color: #a0522d;">usedModules</span>=[<span style="color: #8b2252;">"Foo"</span>]) 
-<span style="color: #a0522d;">documented_items</span>=create_documented_item_array(<span style="color: #8b2252;">"Foo.jl"</span>)
-<span style="color: #b22222;">#</span><span style="color: #b22222;">+END_SRC</span>
+<span style="color: #b22222;">#+BEGIN_SRC julia :results output none :eval no-export :exports none</span>
+<span style="color: #a020f0;">using</span><span style="color: #7f7f7f;"> J4Org </span>
+<span style="color: #7f7f7f;">initialize_boxing_module(usedModules=[</span><span style="color: #8b2252;">"Foo"</span><span style="color: #7f7f7f;">]) </span>
+<span style="color: #7f7f7f;">documented_items=create_documented_item_array(</span><span style="color: #8b2252;">"Foo.jl"</span><span style="color: #7f7f7f;">)</span>
+<span style="color: #b22222;">#+END_SRC</span>
 
-* Example
+<span style="color: #0000ff;">* Example</span>
 
-Prints all documented items, except those tagged with <span style="color: #8b2252;">"Internal"</span> 
-<span style="color: #b22222;">#</span><span style="color: #b22222;">+BEGIN_SRC julia :results output drawer :eval no-export :exports results</span>
-<span style="color: #0000ff;">print_org_doc</span>(documented_items,<span style="color: #a0522d;">tag_to_ignore</span>=[<span style="color: #8b2252;">"Internal"</span>],<span style="color: #a0522d;">header_level</span>=0)
-<span style="color: #b22222;">#</span><span style="color: #b22222;">+END_SRC</span>
+Prints all documented items, except those tagged with "Internal" 
+<span style="color: #b22222;">#+BEGIN_SRC julia :results output drawer :eval no-export :exports results</span>
+<span style="color: #7f7f7f;">print_org_doc(documented_items,tag_to_ignore=[</span><span style="color: #8b2252;">"Internal"</span><span style="color: #7f7f7f;">],header_level=0)</span>
+<span style="color: #b22222;">#+END_SRC</span>
 </pre>
 </div>
 
@@ -575,21 +588,21 @@ the modules to use when executing Julia code extracted from the doc
 (the "#!" statements). Here we are documenting the <code>Foo</code> module,
 hence we must use it. Note that you can also use any number of extra
 modules for instance with <code>["Foo", "ExtraModule", ...]</code>. See
-<a href="#orgf4ac8ec">initialize_boxing_module(&#x2026;)</a> for further details.</li>
+<a href="#org9ae6dc0">initialize_boxing_module(&#x2026;)</a> for further details.</li>
 
 <li><b>create_documented_item_array("Foo.jl")</b> creates the list of
 documented items from file "Foo.jl". You can use a list of files and
-a directory, see <a href="#org93874d4">create_documented_item_array(&#x2026;)</a> for further details.</li>
+a directory, see <a href="#org067741a">create_documented_item_array(&#x2026;)</a> for further details.</li>
 
 <li><b>print_org_doc(documented_items,tag_to_ignore=["Internal"],header_level=0)</b>
 prints all documented items, except those tagged with "Internal",
-see <a href="#orgc7a8cf1">print_org_doc(&#x2026;)</a> for further details</li>
+see <a href="#org3050b31">print_org_doc(&#x2026;)</a> for further details</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org50a253c" class="outline-4">
-<h4 id="org50a253c"><span class="section-number-4">1.2.4</span> Generating the doc</h4>
+<div id="outline-container-orgff44c15" class="outline-4">
+<h4 id="orgff44c15"><span class="section-number-4">1.2.4</span> Generating the doc</h4>
 <div class="outline-text-4" id="text-1-2-4">
 <p>
 To check that it works you can start a fresh emacs with
@@ -611,8 +624,8 @@ then type:
 </div>
 </div>
 
-<div id="outline-container-org11b1851" class="outline-4">
-<h4 id="org11b1851"><span class="section-number-4">1.2.5</span> Improving exported document style</h4>
+<div id="outline-container-orgbf80f17" class="outline-4">
+<h4 id="orgbf80f17"><span class="section-number-4">1.2.5</span> Improving exported document style</h4>
 <div class="outline-text-4" id="text-1-2-5">
 <p>
 This was a minimal example, you can have a better look for the
@@ -625,40 +638,40 @@ Another example is <a href="https://vincent-picaud.github.io/DirectConvolution.j
 </div>
 </div>
 
-<div id="outline-container-org937574b" class="outline-2">
-<h2 id="org937574b"><span class="section-number-2">2</span> More examples</h2>
+<div id="outline-container-org7ac4574" class="outline-2">
+<h2 id="org7ac4574"><span class="section-number-2">2</span> More examples</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-We still use our <code>Foo</code> module to provide more examples. The complete <a href="#org70a58aa">API</a> is detailed after.
+We still use our <code>Foo</code> module to provide more examples. The complete <a href="#org2934804">API</a> is detailed after.
 </p>
 </div>
 
-<div id="outline-container-org34e1ed2" class="outline-3">
-<h3 id="org34e1ed2"><span class="section-number-3">2.1</span> <code>print_org_doc</code> options</h3>
+<div id="outline-container-orga433e62" class="outline-3">
+<h3 id="orga433e62"><span class="section-number-3">2.1</span> <code>print_org_doc</code> options</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
-The <a href="#orgc7a8cf1">print_org_doc(&#x2026;)</a> function has several options, let's see some usage examples
+The <a href="#org3050b31">print_org_doc(&#x2026;)</a> function has several options, let's see some usage examples
 </p>
 </div>
 
-<div id="outline-container-org2d650c8" class="outline-4">
-<h4 id="org2d650c8"><span class="section-number-4">2.1.1</span> <code>header_level</code></h4>
+<div id="outline-container-org681719e" class="outline-4">
+<h4 id="org681719e"><span class="section-number-4">2.1.1</span> <code>header_level</code></h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 This integer can have these values:
 </p>
 <ul class="org-ul">
-<li><b>-1</b>: do not print header nor index, see <a href="#org4cfad0d">header_level=-1</a></li>
-<li><b>0</b>: print header beginning with "-", see <a href="#org08633fd">header_level=0</a>.</li>
+<li><b>-1</b>: do not print header nor index, see <a href="#orga3fc2aa">header_level=-1</a></li>
+<li><b>0</b>: print header beginning with "-", see <a href="#org541ba77">header_level=0</a>.</li>
 <li><b>l&gt;0</b> create subsection of level <b>l</b>, for instance <b>header_level=3</b>
 creates subsections beginning with <b>3</b> stars. See
-<a href="#org47f5b60">header_level=5</a>. <b>Caveat:</b> for <b>l&gt;0</b> AFAIK there is a bug in OrgMode,
+<a href="#orgbe9fe55">header_level=5</a>. <b>Caveat:</b> for <b>l&gt;0</b> AFAIK there is a bug in OrgMode,
 because a residual <b>:RESULT:</b> is printed.</li>
 </ul>
 </div>
 
 <ol class="org-ol">
-<li><a id="org4cfad0d"></a><a id="ID-bda53362-32fb-4096-9c0a-32c0afb96b5f"></a>header_level=-1<br />
+<li><a id="orga3fc2aa"></a><a id="ID-bda53362-32fb-4096-9c0a-32c0afb96b5f"></a>header_level=-1<br />
 <div class="outline-text-5" id="text-2-1-1-1">
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #b22222;">#</span><span style="color: #b22222;">+BEGIN_SRC julia :results output drawer :eval no-export :exports results </span>
@@ -701,8 +714,8 @@ Foo.Point(2.0, 4.0)
 </div>
 </blockquote>
 <p>
-<a href="minimal_example/Foo.jl#orgb931410">Foo.jl:42</a>
-   <a id="org4a6a798"></a>
+<a href="minimal_example/Foo.jl#orgde6ed01">Foo.jl:42</a>
+   <a id="org187e589"></a>
 </p>
 <div class="org-src-container">
 <pre class="src src-julia">norm(p::<span style="color: #228b22;">Point</span>)::<span style="color: #228b22;">Float64</span>
@@ -732,12 +745,12 @@ See: <span class="underline">Point_struct</span>
 </p>
 </blockquote>
 <p>
-<a href="minimal_example/Foo.jl#org4c99d07">Foo.jl:31</a>
+<a href="minimal_example/Foo.jl#orgdc51c53">Foo.jl:31</a>
 </p>
 </div>
 </li>
 
-<li><a id="org08633fd"></a><a id="ID-842e5c47-62d1-44fc-8489-e105a45f5dd4"></a>header_level=0<br />
+<li><a id="org541ba77"></a><a id="ID-842e5c47-62d1-44fc-8489-e105a45f5dd4"></a>header_level=0<br />
 <div class="outline-text-5" id="text-2-1-1-2">
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #b22222;">#</span><span style="color: #b22222;">+BEGIN_SRC julia :results output drawer :eval no-export :exports results</span>
@@ -756,10 +769,10 @@ This will generate:
 </p>
 
 <p>
-<a id="orgaa12275"></a> <b>Index:</b> <b>[f]</b> <a href="#org001037a">foo</a> <b>[n]</b> <a href="#org97a29da">norm</a> 
+<a id="org23feeac"></a> <b>Index:</b> <b>[f]</b> <a href="#org519efa9">foo</a> <b>[n]</b> <a href="#org9ad6760">norm</a> 
 </p>
 <ul class="org-ul">
-<li><b><code>foo</code></b>  <a id="org001037a"></a></li>
+<li><b><code>foo</code></b>  <a id="org519efa9"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia">foo(r::<span style="color: #228b22;">Float64</span>,p::<span style="color: #228b22;">Point</span>)
@@ -778,6 +791,7 @@ For symbol that are not exported, do not forget the "Foo." prefix:
 Foo.foo(2.0,p)
 </pre>
 </div>
+
 <div class="org-src-container">
 <pre class="src src-julia">Foo.Point(1.0, 2.0)
 Foo.Point(2.0, 4.0)
@@ -785,10 +799,10 @@ Foo.Point(2.0, 4.0)
 </div>
 </blockquote>
 <p>
-<a href="minimal_example/Foo.jl#orgb931410">Foo.jl:42</a>, <a href="#orgaa12275">back to index</a>
+<a href="minimal_example/Foo.jl#orgde6ed01">Foo.jl:42</a>, <a href="#org23feeac">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>norm</code></b>  <a id="org97a29da"></a> <a id="org7c35911"></a></li>
+<li><b><code>norm</code></b>  <a id="org9ad6760"></a> <a id="org650b0e0"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia">norm(p::<span style="color: #228b22;">Point</span>)::<span style="color: #228b22;">Float64</span>
@@ -807,6 +821,7 @@ A simple function that computes \(\sqrt{x^2+y^2}\)
 norm(p) 
 </pre>
 </div>
+
 <div class="org-src-container">
 <pre class="src src-julia">2.23606797749979
 </pre>
@@ -817,14 +832,14 @@ See: <span class="underline">Point_struct</span>
 </p>
 </blockquote>
 <p>
-<a href="minimal_example/Foo.jl#org4c99d07">Foo.jl:31</a>, <a href="#orgaa12275">back to index</a>
+<a href="minimal_example/Foo.jl#orgdc51c53">Foo.jl:31</a>, <a href="#org23feeac">back to index</a>
 </p>
 </div>
 </li>
 
 
 
-<li><a id="org47f5b60"></a><a id="ID-0f6a49dc-ee9f-4964-8801-8badfb67f735"></a>header_level=5<br />
+<li><a id="orgbe9fe55"></a><a id="ID-0f6a49dc-ee9f-4964-8801-8badfb67f735"></a>header_level=5<br />
 <div class="outline-text-5" id="text-2-1-1-3">
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #b22222;">#</span><span style="color: #b22222;">+BEGIN_SRC julia :results output drawer :eval no-export :exports results</span>
@@ -843,11 +858,11 @@ This will generate:
 </p>
 
 <p>
-<a id="org1d70fd5"></a> <b>Index:</b> <b>[f]</b> <a href="#org1f80837">foo</a> <b>[n]</b> <a href="#org1068fba">norm</a> 
+<a id="org21b1130"></a> <b>Index:</b> <b>[f]</b> <a href="#orgf662255">foo</a> <b>[n]</b> <a href="#orga8cadda">norm</a> 
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org2706116"></a><b><code>foo</code></b>  <a id="org1f80837"></a><br />
+<li><a id="org755c972"></a><b><code>foo</code></b>  <a id="orgf662255"></a><br />
 <div class="outline-text-6" id="text-2-1-1-3-1">
 <div class="org-src-container">
 <pre class="src src-julia">foo(r::<span style="color: #228b22;">Float64</span>,p::<span style="color: #228b22;">Point</span>)
@@ -873,11 +888,11 @@ Foo.Point(2.0, 4.0)
 </div>
 </blockquote>
 <p>
-<a href="minimal_example/Foo.jl#orgb931410">Foo.jl:42</a>, <a href="#org1d70fd5">back to index</a>
+<a href="minimal_example/Foo.jl#orgde6ed01">Foo.jl:42</a>, <a href="#org21b1130">back to index</a>
 </p>
 </div>
 </li>
-<li><a id="org75f326f"></a><b><code>norm</code></b>  <a id="org1068fba"></a> <a id="orgbdb86cf"></a><br />
+<li><a id="orgcc95fcc"></a><b><code>norm</code></b>  <a id="orga8cadda"></a> <a id="orgb44a102"></a><br />
 <div class="outline-text-6" id="text-2-1-1-3-2">
 <div class="org-src-container">
 <pre class="src src-julia">norm(p::<span style="color: #228b22;">Point</span>)::<span style="color: #228b22;">Float64</span>
@@ -906,7 +921,7 @@ See: <span class="underline">Point_struct</span>
 </p>
 </blockquote>
 <p>
-<a href="minimal_example/Foo.jl#org4c99d07">Foo.jl:31</a>, <a href="#org1d70fd5">back to index</a>
+<a href="minimal_example/Foo.jl#orgdc51c53">Foo.jl:31</a>, <a href="#org21b1130">back to index</a>
 </p>
 </div>
 </li>
@@ -915,8 +930,8 @@ See: <span class="underline">Point_struct</span>
 </ol>
 </div>
 
-<div id="outline-container-orgd3cca42" class="outline-4">
-<h4 id="orgd3cca42"><a id="ID-0e085bd4-7c99-44d6-8220-3e397fff8458"></a><span class="section-number-4">2.1.2</span> <code>tag</code>, <code>tag_to_ignore</code>, <code>identifier</code></h4>
+<div id="outline-container-org5572ba7" class="outline-4">
+<h4 id="org5572ba7"><a id="ID-0e085bd4-7c99-44d6-8220-3e397fff8458"></a><span class="section-number-4">2.1.2</span> <code>tag</code>, <code>tag_to_ignore</code>, <code>identifier</code></h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 These options allow to select items to include:
@@ -949,7 +964,7 @@ This will generate:
 </p>
 
 <p>
-  <a id="org95f569a"></a>
+  <a id="org6888c62"></a>
 </p>
 <div class="org-src-container">
 <pre class="src src-julia">norm(p::<span style="color: #228b22;">Point</span>)::<span style="color: #228b22;">Float64</span>
@@ -978,16 +993,16 @@ See: <span class="underline">Point_struct</span>
 </p>
 </blockquote>
 <p>
-<a href="minimal_example/Foo.jl#org4c99d07">Foo.jl:31</a>
+<a href="minimal_example/Foo.jl#orgdc51c53">Foo.jl:31</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgb39892c" class="outline-4">
-<h4 id="orgb39892c"><span class="section-number-4">2.1.3</span> <code>complete_link</code></h4>
+<div id="outline-container-orgc0dac95" class="outline-4">
+<h4 id="orgc0dac95"><span class="section-number-4">2.1.3</span> <code>complete_link</code></h4>
 <div class="outline-text-4" id="text-2-1-3">
 <p>
-If you look back at <a href="#orgd3cca42"><code>tag</code>, <code>tag_to_ignore</code>, <code>identifier</code></a> you can see,
+If you look back at <a href="#org5572ba7"><code>tag</code>, <code>tag_to_ignore</code>, <code>identifier</code></a> you can see,
 at the end of the <code>norm</code> function documentation, that the
 <span class="underline">Point_struct</span> link is not active. The reason is that the <code>Point</code>
 structure is not present. The <code>complete_link</code> option, if set to <code>true</code>
@@ -1013,7 +1028,7 @@ This will generate:
 </p>
 
 <p>
-  <a id="orge626d2f"></a>
+  <a id="org9ef777b"></a>
 </p>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">struct</span> <span style="color: #228b22;">Point</span>
@@ -1039,12 +1054,12 @@ Creates a point \(p\) of coordinates \((x=1,y=2)\).
 
 <p>
 You can add any valid Org mode directive. If you want to use
-in-documentation link, use <a href="#org756bba2">norm(&#x2026;)</a>
+in-documentation link, use <a href="#org38a1f7c">norm(&#x2026;)</a>
 </p>
 </blockquote>
 <p>
-<a href="minimal_example/Foo.jl#org787fb50">Foo.jl:8</a>
-   <a id="org756bba2"></a>
+<a href="minimal_example/Foo.jl#org16b2265">Foo.jl:8</a>
+   <a id="org38a1f7c"></a>
 </p>
 <div class="org-src-container">
 <pre class="src src-julia">norm(p::<span style="color: #228b22;">Point</span>)::<span style="color: #228b22;">Float64</span>
@@ -1069,11 +1084,11 @@ norm(p)
 </div>
 
 <p>
-See: <a href="#orge626d2f">struct Point</a>
+See: <a href="#org9ef777b">struct Point</a>
 </p>
 </blockquote>
 <p>
-<a href="minimal_example/Foo.jl#org4c99d07">Foo.jl:31</a>
+<a href="minimal_example/Foo.jl#orgdc51c53">Foo.jl:31</a>
 </p>
 
 <p>
@@ -1083,8 +1098,8 @@ you see that the <code>Point</code> structure is included to make the
 </div>
 </div>
 
-<div id="outline-container-org3aad26d" class="outline-4">
-<h4 id="org3aad26d"><span class="section-number-4">2.1.4</span> <code>link_prefix</code></h4>
+<div id="outline-container-org5170100" class="outline-4">
+<h4 id="org5170100"><span class="section-number-4">2.1.4</span> <code>link_prefix</code></h4>
 <div class="outline-text-4" id="text-2-1-4">
 <p>
 You can create link from your OrgMode document to Julia documented
@@ -1108,8 +1123,8 @@ then you can create a regular OrgMode link to this item using
 </div>
 
 
-<div id="outline-container-orgd961e35" class="outline-4">
-<h4 id="orgd961e35"><span class="section-number-4">2.1.5</span> <code>case_sensitive</code></h4>
+<div id="outline-container-org39662f2" class="outline-4">
+<h4 id="org39662f2"><span class="section-number-4">2.1.5</span> <code>case_sensitive</code></h4>
 <div class="outline-text-4" id="text-2-1-5">
 <p>
 When set to true, generates an index as follows:
@@ -1127,8 +1142,8 @@ When set to false, do not split upper/lower cases and group all A,a;B,b together
 </div>
 </div>
 
-<div id="outline-container-orgf00017b" class="outline-4">
-<h4 id="orgf00017b"><span class="section-number-4">2.1.6</span> <code>boxingModule</code></h4>
+<div id="outline-container-orgfb7012f" class="outline-4">
+<h4 id="orgfb7012f"><span class="section-number-4">2.1.6</span> <code>boxingModule</code></h4>
 <div class="outline-text-4" id="text-2-1-6">
 <p>
 Comments starting with "#!" are executed in a boxed environment
@@ -1148,7 +1163,7 @@ Comments starting with "#!" are executed in a boxed environment
 </div>
 
 <p>
-This boxing is defined by the <a href="#orgf4ac8ec">initialize_boxing_module(&#x2026;)</a> function:
+This boxing is defined by the <a href="#org9ae6dc0">initialize_boxing_module(&#x2026;)</a> function:
 </p>
 
 <div class="org-src-container">
@@ -1168,8 +1183,8 @@ This <code>boxingModule</code> option allows you to chose your boxing environmen
 </div>
 </div>
 
-<div id="outline-container-org5f87d89" class="outline-3">
-<h3 id="org5f87d89"><span class="section-number-3">2.2</span> Error reporting</h3>
+<div id="outline-container-orgdd98cc8" class="outline-3">
+<h3 id="orgdd98cc8"><span class="section-number-3">2.2</span> Error reporting</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Error reporting is performed as OrgMode comment. For instance if you execute:
@@ -1196,8 +1211,8 @@ you will get:
 </div>
 </div>
 </div>
-<div id="outline-container-org233ca55" class="outline-3">
-<h3 id="org233ca55"><span class="section-number-3">2.3</span> Compatibility with docstring / documenter.jl</h3>
+<div id="outline-container-orge33065a" class="outline-3">
+<h3 id="orge33065a"><span class="section-number-3">2.3</span> Compatibility with docstring / documenter.jl</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 You can still use something like:
@@ -1217,22 +1232,18 @@ You can still use something like:
 </div>
 </div>
 
-<div id="outline-container-org70a58aa" class="outline-2">
-<h2 id="org70a58aa"><a id="ID-c9053a86-dea5-4bc2-a883-92a1bfde20ba"></a><span class="section-number-2">3</span> API</h2>
+<div id="outline-container-org2934804" class="outline-2">
+<h2 id="org2934804"><a id="ID-c9053a86-dea5-4bc2-a883-92a1bfde20ba"></a><span class="section-number-2">3</span> API</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 The API is simple, with very few functions:
 </p>
 
 <p>
-
-</p>
-
-<p>
-<a id="orgd3b1389"></a> <b>Index:</b> <b>[c]</b> <a href="#org7691ef4">create_documented_item_array</a>, <a href="#org5344032">create_documented_item_array_dir</a> <b>[i]</b> <a href="#org576269e">initialize_boxing_module</a> <b>[p]</b> <a href="#org180b775">print_org_doc</a> 
+<a id="org6971de7"></a> <b>Index:</b> <b>[c]</b> <a href="#org347e27e">create_documented_item_array</a>, <a href="#orgd9cc925">create_documented_item_array_dir</a> <b>[i]</b> <a href="#orgb3d9c32">initialize_boxing_module</a> <b>[p]</b> <a href="#org070f8f3">print_org_doc</a> 
 </p>
 <ul class="org-ul">
-<li><b><code>create_documented_item_array</code></b>  <a id="org7691ef4"></a> <a id="org93874d4"></a></li>
+<li><b><code>create_documented_item_array</code></b>  <a id="org347e27e"></a> <a id="org067741a"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">create_documented_item_array</span>(filename::<span style="color: #228b22;">String</span>)::<span style="color: #228b22;">Array</span>{Documented_Item,1}
@@ -1244,7 +1255,7 @@ Reads a Julia code file and returns an array of documented items.
 </p>
 </blockquote>
 <p>
-<a href="../src/documented_item.jl#orgb6d4fcb">documented_item.jl:89</a>, <a href="#orgd3b1389">back to index</a>
+<a href="../src/documented_item.jl#org08835d6">documented_item.jl:89</a>, <a href="#org6971de7">back to index</a>
 </p>
 
 <div class="org-src-container">
@@ -1267,14 +1278,14 @@ documented items.
 
 <p>
 <b>Note:</b> instead of a list of files you can also specify a directory,
-see <a href="#orgf5ec5a1">create_documented_item_array_dir(&#x2026;)</a>
+see <a href="#org63d6257">create_documented_item_array_dir(&#x2026;)</a>
 </p>
 </blockquote>
 <p>
-<a href="../src/documented_item.jl#orgdead8f4">documented_item.jl:128</a>, <a href="#orgd3b1389">back to index</a>
+<a href="../src/documented_item.jl#orgee961df">documented_item.jl:128</a>, <a href="#org6971de7">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>create_documented_item_array_dir</code></b>  <a id="org5344032"></a> <a id="orgf5ec5a1"></a></li>
+<li><b><code>create_documented_item_array_dir</code></b>  <a id="orgd9cc925"></a> <a id="org63d6257"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">create_documented_item_array_dir</span>(dirname::<span style="color: #228b22;">String</span>)
@@ -1287,10 +1298,10 @@ documented items.
 </p>
 </blockquote>
 <p>
-<a href="../src/documented_item.jl#org3992ce2">documented_item.jl:150</a>, <a href="#orgd3b1389">back to index</a>
+<a href="../src/documented_item.jl#org84d2e3f">documented_item.jl:150</a>, <a href="#org6971de7">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>initialize_boxing_module</code></b>  <a id="org576269e"></a> <a id="orgf4ac8ec"></a></li>
+<li><b><code>initialize_boxing_module</code></b>  <a id="orgb3d9c32"></a> <a id="org9ae6dc0"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">initialize_boxing_module</span>(;
@@ -1302,7 +1313,7 @@ documented items.
 <blockquote>
 <p>
 Initialize a boxing module. This module is used to run Julia comment
-code snippet (tagged by #!)
+code snippet (tagged by "#!" or by "# !")
 </p>
 
 <p>
@@ -1327,19 +1338,19 @@ creates
 </div>
 
 <p>
-and future "#!" statements are executed after using MyBoxing:
+and future "# !" statements are executed after using MyBoxing:
 </p>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">using</span> MyBoxing
-<span style="color: #b22222;">#</span><span style="color: #b22222;">! statements</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">!statements</span>
 </pre>
 </div>
 </blockquote>
 <p>
-<a href="../src/evaluate.jl#org29edfdd">evaluate.jl:18</a>, <a href="#orgd3b1389">back to index</a>
+<a href="../src/evaluate.jl#orgf56a49b">evaluate.jl:18</a>, <a href="#org6971de7">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>print_org_doc</code></b>  <a id="org180b775"></a> <a id="orgc7a8cf1"></a></li>
+<li><b><code>print_org_doc</code></b>  <a id="org070f8f3"></a> <a id="org3050b31"></a></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">print_org_doc</span>(di_array::<span style="color: #228b22;">Array</span>{Documented_Item,1};
@@ -1379,29 +1390,42 @@ print_org_doc(documented_items,tag=<span style="color: #8b2252;">"API"</span>,he
 <li><code>link_prefix</code>: allows to add a prefix to extra link (#+tag L=extra_link). this is can be useful to avoid link name conflict when performing local doc extraction.</li>
 <li><code>complete_link</code>: if true, try to fix link without target by adding extra items</li>
 <li><code>case_sensitive</code>: case sensitive index.</li>
-<li><code>boxingModule</code>: specifies the context in which "#!" code will be executed. See <a href="#orgf4ac8ec">initialize_boxing_module(&#x2026;)</a> for details.</li>
+<li><code>boxingModule</code>: specifies the context in which "#!" code will be executed. See <a href="#org9ae6dc0">initialize_boxing_module(&#x2026;)</a> for details.</li>
 </ul>
 </blockquote>
 <p>
-<a href="../src/main.jl#org1aa5ea8">main.jl:346</a>, <a href="#orgd3b1389">back to index</a>
+<a href="../src/main.jl#orgc89d375">main.jl:346</a>, <a href="#org6971de7">back to index</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-org7dfa80c" class="outline-2">
-<h2 id="org7dfa80c"><span class="section-number-2">4</span> Unit tests</h2>
+<div id="outline-container-org428f8e0" class="outline-2">
+<h2 id="org428f8e0"><span class="section-number-2">4</span> Unit tests</h2>
 <div class="outline-text-2" id="text-4">
 <pre class="example">
-Test Summary: | Pass  Total
-J4Org         |   96     96
 
+foo (generic function with 1 method)
+ERROR: MethodError: no method matching start(::#foo)
+Closest candidates are:
+  start(!Matched::SimpleVector) at essentials.jl:258
+  start(!Matched::Base.MethodList) at reflection.jl:560
+  start(!Matched::ExponentialBackOff) at error.jl:107
+  ...
+Stacktrace:
+ [1] #writedlm#18(::Array{Any,1}, ::Function, ::IOStream, ::Function, ::Char) at ./datafmt.jl:673
+ [2] #20 at ./datafmt.jl:683 [inlined]
+ [3] open(::Base.DataFmt.##20#21{Array{Any,1},#foo,Char}, ::String, ::String) at ./iostream.jl:152
+ [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Function) at ./datafmt.jl:705
+ [5] writecsv(::String, ::Function) at ./datafmt.jl:705
+Test Summary: | Pass  Total
+J4Org         |  103    103
 </pre>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Vincent Picaud</p>
-<p class="date">Created: 2018-04-30 Mon 11:59</p>
+<p class="date">Created: 2018-05-03 Thu 13:45</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

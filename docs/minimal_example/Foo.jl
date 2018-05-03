@@ -39,12 +39,12 @@ Point() = Point(0,0)
 #
 norm(p::Point)::Float64 = sqrt(p.x*p.x+p.y*p.y)
 
-#+Method,Internal
+# +Method,Internal
 # An internal function
 #
 # For symbol that are not exported, do not forget the "Foo." prefix:
-#!p=Point(1.0,2.0)
-#!Foo.foo(2.0,p)
+# !p=Point(1.0,2.0)
+# !Foo.foo(2.0,p)
 foo(r::Float64,p::Point) = Point(r*p.x,r*p.y)
 
 end
