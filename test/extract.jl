@@ -1,4 +1,5 @@
 import J4Org: tokenized, untokenize
+import J4Org: identifier
 import J4Org: skip
 import J4Org: raw_string
 import J4Org: extract_comment
@@ -6,6 +7,7 @@ import J4Org: extract_function
 import J4Org: extract_struct
 import J4Org: extract_export
 import J4Org: extract_abstract
+import J4Org: extract_enum
 
 @testset "extract_comment" begin
     filename="$(dirname(@__FILE__))/code_examples/basic.jl"
@@ -115,10 +117,24 @@ end;
     @test raw_string(r) == "export A,B,   C"
 end;
 
+
+
 @testset "abstract" begin
     filename="$(dirname(@__FILE__))/code_examples/abstract.jl"
     t=tokenized(readstring(filename))
     r = extract_abstract(t,1)
     @test r!=nothing
     @test raw_string(r) == "abstract type UDWT_Filter_Biorthogonal{T<:Number} "
-end; 
+end;
+
+
+
+@testset "enum" begin
+    filename="$(dirname(@__FILE__))/code_examples/enum.jl"
+    t=tokenized(readstring(filename))
+    r = extract_enum(t,1)
+    @test r!=nothing
+    @test raw_string(r) == "@enum Alpha A  B=1 C"
+    @test identifier(r) == "Alpha"
+end;
+

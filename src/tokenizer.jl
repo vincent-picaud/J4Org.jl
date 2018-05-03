@@ -8,11 +8,18 @@ const Tokenized = Array{Tokenize.Tokens.Token,1}
 # Defines a convenient method to tokenize a =String=
 tokenized(s::String) = collect(tokenize(s))
 
-#<Tokenizer,Internal
+
+# +Tokenizer,Internal
 is_structure(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.STRUCT)
 is_function(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.FUNCTION)
 is_comment(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (kind(tok[idx])==Tokenize.Tokens.COMMENT)
 is_whitespace(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (kind(tok[idx])==Tokenize.Tokens.WHITESPACE)
+# +Tokenizer,Internal
+# Checks for "\n"
+is_whitespace_n(tok::Tokenized,idx::Int)::Bool = is_whitespace(tok,idx) && (untokenize(tok[idx])=="\n")
+# +Tokenizer,Internal
+# Checks for ENDMARKER (end of code)
+is_endmarker(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.ENDMARKER)
 is_identifier(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.IDENTIFIER)
 is_declaration(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.DECLARATION)
 is_dot(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.DOT)
@@ -25,16 +32,34 @@ is_issubtype(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(t
 is_export(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.EXPORT)
 is_abstract(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.ABSTRACT)
 is_type(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.TYPE)
-#>
 
-#<Tokenizer,Internal
+# +Tokenizer,Internal
+#
+# Check if tok[i] points on
+#
+# #+BEGIN_SRC julia :eval never :exports code 
+# @enum ...
+# #+END_SRC
+#
+# *Example*:
+#
+# !tok = collect(Tokenize.tokenize("@enum Alpha A B"));
+# !is_enum(tok,1)
+# 
+is_enum(tok::Tokenized,idx::Int)::Bool = (idx+1<=length(tok)) &&
+    (exactkind(tok[idx])==Tokenize.Tokens.AT_SIGN) &&
+    (untokenize(tok[idx+1])=="enum")
+
+
+
+# +Tokenizer,Internal
 is_opening_parenthesis(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (kind(tok[idx])==Tokenize.Tokens.LPAREN)
 is_closing_parenthesis(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (kind(tok[idx])==Tokenize.Tokens.RPAREN)
 is_opening_brace(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (kind(tok[idx])==Tokenize.Tokens.LBRACE)
 is_closing_brace(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (kind(tok[idx])==Tokenize.Tokens.RBRACE)
 is_opening_square(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (kind(tok[idx])==Tokenize.Tokens.LSQUARE)
 is_closing_square(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (kind(tok[idx])==Tokenize.Tokens.RSQUARE)
-#>
+
 
 
 
@@ -65,41 +90,6 @@ function skip_whitespace(tok::Tokenized,idx::Int)
     end
     return idx
 end
-
-# #+Tokenizer,Internal,Obsolet
-# # Moves to the next position 
-# function next_idx(tok::Tokenized,idx::Int)::Int
-#     return idx+1
-# end
-
-# #+Tokenizer,Internal,Obsolet
-# # Moves to the next position (skipping comment)
-# function next_idx_skip_comment(tok::Tokenized,idx::Int)::Int
-#     idx=idx+1
-#     return skip_comment(tok,idx)
-# end
-# #>
-
-# #<Tokenizer,Internal
-# # Check "strict" newline: "\n    " (but not "\n\n" for instance)
-# #
-# function is_newline_strict(s::String)::Bool
-#     n=length(s)
-#     if (n==0)||(s[1]!='\n')
-#         return false
-#     end
-
-#     for i = 2:n
-#         if (s[i]!=' ')&&(s[i]!='\t')
-#             return false
-#         end
-#     end         
-#     return true
-# end
-# function is_newline_strict(tok::Tokenized,idx::Int)::Bool
-#     return is_whitespace(tok,idx)&&is_newline_strict(untokenize(tok[idx]))
-# end
-# #>
 
 #<Tokenizer,Internal
 # Check "strict" whitespace: "  \t    " 
@@ -410,6 +400,42 @@ function skip_abstract_block(tok::Tokenized,idx::Int;
                 # success
                 return idx
             end
+        end
+    end
+    
+    return idx_save
+end
+
+#+Tokenizer,Internal
+# Moves idx until it reaches a comment #, end of line \n or of file ENDMARKER
+# 
+function skip_line(tok::Tokenized,idx::Int)::Int
+    while !(is_comment(tok,idx)||is_endmarker(tok,idx)||is_whitespace_n(tok,idx))
+        idx=idx+1
+    end
+    return idx
+end 
+
+#+Tokenizer,Internal
+# Skips uniformative & @enum ... line
+# Does not move is identifier not found
+# 
+function skip_enum_block(tok::Tokenized,idx::Int;
+                         identifier::Ref{String}=Ref{String}(""))::Int
+    identifier[]=""
+    idx_save = idx
+    idx = skip_uninformative(tok,idx)
+
+    if is_enum(tok,idx)
+
+        idx = idx+2 # caveat skip @ AND enum 
+        idx_check_success = idx
+        idx = skip_identifier(tok,idx,identifier=identifier)
+
+        if idx_check_success != idx
+            # move until end of line (ignoring comment if any)
+            idx = skip_line(tok,idx)
+            return idx
         end
     end
     

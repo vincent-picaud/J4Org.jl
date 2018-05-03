@@ -3,6 +3,7 @@ import J4Org: is_opening_parenthesis, is_closing_parenthesis
 import J4Org: is_opening_brace, is_closing_brace
 import J4Org: is_opening_square, is_closing_square
 import J4Org: is_abstract
+import J4Org: is_enum
 import J4Org: is_type
 import J4Org: skip_identifier, skip_comma_separated_identifiers
 import J4Org: skip_where_block, skip_declaration_block
@@ -66,5 +67,10 @@ end;
     t=tokenized("abstract type something")
     @test is_abstract(t,1)
     @test is_type(t,3)
+end;
+
+@testset "is_enum" begin
+    t=tokenized("@enum Alpha A B")
+    @test is_enum(t,1)
 end;
 

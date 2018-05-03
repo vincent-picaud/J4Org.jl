@@ -200,6 +200,32 @@ end
 
 
 
+struct Extracted_Enum <: Extracted_Item_Base
+    _tok::Tokenized
+    _idx_array::Array{Int,1}
+    _skip_idx::Int
+    _identifier::String
+end
+
+# +Tokenizer
+#
+# Extract enum type
+#
+function extract_enum(tok::Tokenized,idx::Int)::Union{Void,Extracted_Enum}
+
+    idx_save = skip_uninformative(tok,idx)
+    identifier=Ref{String}("")
+    idx = skip_enum_block(tok,idx_save,identifier=identifier)
+
+    if idx != idx_save
+        return Extracted_Enum(tok,collect(idx_save:idx-1),idx,identifier[])
+    end
+    
+    return nothing
+end
+
+
+
 #+Extracted_Item_Base
 #
 # Extract the "code" part, sequentially trying
