@@ -16,5 +16,17 @@
 - [X] fix ugly PDF link 
 - [ ] detect constructor
 - [X] for the index, lexico sort: l = L (sort not sensitive to capital)
+* Change logs
+** v0.1.0 -> v0.2.0
+- to support [[https://github.com/QBobWatson/poporg/blob/master/poporg.el][poporg]] (also see [[https://github.com/QBobWatson/poporg][QBobWatson/poporg]]) for comment editing, comment syntax is extended: 
+  - "# \plus" is processed as "#\plus"
+  - "# !" is processed as "#!"
+  one possible risk is than you must avoid line starting with "!"
+
+  You can instal poporg from MELPA, configuration is:
+  #+BEGIN_EXAMPLE
+  (autoload 'poporg-dwim "poporg" nil t)
+  (global-set-key (kbd "C-c \"") 'poporg-dwim)
+  #+END_EXAMPLE
 * W3 Links
 
