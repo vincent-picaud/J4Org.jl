@@ -33,7 +33,7 @@ function extract_tag(tok::Tokenized,idx::Int)::Union{Void,Extract_Tag_Result}
 
     s = untokenize(tok[idx])
     
-    first_tag=match(r"^#\+(\w+)",s)
+    first_tag=match(r"^#[ ]?\+(\w+)",s)
 
     # Math tag?  
     if first_tag==nothing

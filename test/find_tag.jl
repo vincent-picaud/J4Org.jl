@@ -20,6 +20,16 @@ import J4Org: extract_tag, find_tag, tags, link, line, tokenized
     @test tags(r)[2] == "two_Words"
     @test link(r) == "my_link"
     @test line(r) == 1
+
+    # also support "# +"
+    r=extract_tag(tokenized("# +one_word, two_Words L:my_link   "),1)
+    @test r!=nothing
+    @test length(tags(r))==2
+    @test tags(r)[1] == "one_word"
+    @test tags(r)[2] == "two_Words"
+    @test link(r) == "my_link"
+    @test line(r) == 1
+
 end;
 
 @testset "extract_tag" begin
