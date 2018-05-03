@@ -270,5 +270,13 @@ function extract_code(tok::Tokenized,idx::Int)::Union{Void,Extracted_Item_Base}
         return toReturn
     end
 
+    # Try enum
+    #
+    toReturn = extract_enum(tok,idx)
+
+    if toReturn!=nothing
+        return toReturn
+    end
+
     return nothing
 end 

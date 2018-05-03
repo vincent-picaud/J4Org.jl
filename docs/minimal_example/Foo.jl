@@ -28,6 +28,10 @@ end
 # Creates Point at origin $(0,0)$ 
 Point() = Point(0,0)
 
+#+Enum
+# An enum
+@enum Alpha A=1 B C # just for example
+
 #+Point,Method L:norm_link_example
 # A simple function that computes $\sqrt{x^2+y^2}$
 #

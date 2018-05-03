@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-05-03 Thu 15:11 -->
+<!-- 2018-05-03 Thu 16:42 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Getting Started with a minimal example</title>
@@ -256,22 +256,37 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgabff11f">1. Example</a></li>
+<li><a href="#org21dbcef">1. Example</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgabff11f" class="outline-2">
-<h2 id="orgabff11f"><span class="section-number-2">1</span> Example</h2>
+<div id="outline-container-org21dbcef" class="outline-2">
+<h2 id="org21dbcef"><span class="section-number-2">1</span> Example</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Prints all documented items, except those tagged with "Internal" 
 </p>
 <p>
-<a id="org84e4ad6"></a> <b>Index:</b> <b>[P]</b> <a href="#orgcee219c">Point</a> <b>[n]</b> <a href="#org1800949">norm</a> 
+<a id="orgdb36828"></a> <b>Index:</b> <b>[A]</b> <a href="#org246aaf1">Alpha</a> <b>[P]</b> <a href="#org065ecc0">Point</a> <b>[n]</b> <a href="#org2b7dc0a">norm</a> 
 </p>
 <ul class="org-ul">
-<li><b><code>Point</code></b>  <a id="orgcee219c"></a> <a id="org03a0540"></a></li>
+<li><b><code>Alpha</code></b>  <a id="org246aaf1"></a></li>
+</ul>
+<div class="org-src-container">
+<pre><code class="src src-julia"><span style="color: #483d8b;">@enum</span> Alpha A=1 B C 
+</code></pre>
+</div>
+<blockquote>
+<p>
+An enum
+</p>
+</blockquote>
+<p>
+<a href="Foo.jl#MissingReference">Foo.jl:31</a>, <a href="#orgdb36828">back to index</a>
+</p>
+<ul class="org-ul">
+<li><b><code>Point</code></b>  <a id="org065ecc0"></a> <a id="orgbc191f8"></a></li>
 </ul>
 <div class="org-src-container">
 <pre><code class="src src-julia"><span style="color: #a020f0;">struct</span> <span style="color: #228b22;">Point</span>
@@ -297,11 +312,11 @@ Creates a point \(p\) of coordinates \((x=1,y=2)\).
 
 <p>
 You can add any valid Org mode directive. If you want to use
-in-documentation link, use <a href="#orgddf79ea">norm(&#x2026;)</a>
+in-documentation link, use <a href="#org6b153f5">norm(&#x2026;)</a>
 </p>
 </blockquote>
 <p>
-<a href="Foo.jl#MissingReference">Foo.jl:8</a>, <a href="#org84e4ad6">back to index</a>
+<a href="Foo.jl#MissingReference">Foo.jl:8</a>, <a href="#orgdb36828">back to index</a>
 </p>
 
 <div class="org-src-container">
@@ -314,10 +329,10 @@ Creates Point at origin \((0,0)\)
 </p>
 </blockquote>
 <p>
-<a href="Foo.jl#MissingReference">Foo.jl:27</a>, <a href="#org84e4ad6">back to index</a>
+<a href="Foo.jl#MissingReference">Foo.jl:27</a>, <a href="#orgdb36828">back to index</a>
 </p>
 <ul class="org-ul">
-<li><b><code>norm</code></b>  <a id="org1800949"></a> <a id="orgddf79ea"></a></li>
+<li><b><code>norm</code></b>  <a id="org2b7dc0a"></a> <a id="org6b153f5"></a></li>
 </ul>
 <div class="org-src-container">
 <pre><code class="src src-julia">norm(p<span style="color: #000000; background-color: #ffffff;">::</span><span style="color: #228b22;">Point</span>)<span style="color: #000000; background-color: #ffffff;">::</span><span style="color: #228b22;">Float64</span>
@@ -343,18 +358,18 @@ norm(p)
 </div>
 
 <p>
-See: <a href="#org03a0540">struct Point</a>
+See: <a href="#orgbc191f8">struct Point</a>
 </p>
 </blockquote>
 <p>
-<a href="Foo.jl#MissingReference">Foo.jl:31</a>, <a href="#org84e4ad6">back to index</a>
+<a href="Foo.jl#MissingReference">Foo.jl:35</a>, <a href="#orgdb36828">back to index</a>
 </p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: picaud</p>
-<p class="date">Created: 2018-05-03 Thu 15:11</p>
+<p class="date">Created: 2018-05-03 Thu 16:42</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
