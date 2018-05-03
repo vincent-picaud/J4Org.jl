@@ -19,4 +19,62 @@ Prints all documented items, except those tagged with "Internal"
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 print_org_doc(documented_items,tag_to_ignore=["Internal"],header_level=0)
 #+END_SRC
+
+#+RESULTS:
+:RESULTS:
+<<rgroq5hV>> *Index:* *[P]* [[qW1icIl2][Point]] *[n]* [[udTza5Ld][norm]] 
+- @@latex:\phantomsection@@ *=Point=*  <<qW1icIl2>> <<d25Kv3AYPoint_struct>>
+#+BEGIN_SRC julia :eval never :exports code
+struct Point
+#+END_SRC
+#+BEGIN_QUOTE
+This is my Point structure
+
+*Example:*
+
+Creates a point $p$ of coordinates $(x=1,y=2)$.
+
+#+BEGIN_SRC julia :eval never :exports code
+p=Point(1,2)
+#+END_SRC
+
+You can add any valid Org mode directive. If you want to use
+in-documentation link, use [[d25Kv3AYnorm_link_example][norm(...)]]
+#+END_QUOTE
+[[file:Foo.jl::8][Foo.jl:8]], [[rgroq5hV][back to index]]
+
+#+BEGIN_SRC julia :eval never :exports code
+Point()
+#+END_SRC
+#+BEGIN_QUOTE
+Creates Point at origin $(0,0)$ 
+#+END_QUOTE
+[[file:Foo.jl::27][Foo.jl:27]], [[rgroq5hV][back to index]]
+- @@latex:\phantomsection@@ *=norm=*  <<udTza5Ld>> <<d25Kv3AYnorm_link_example>>
+#+BEGIN_SRC julia :eval never :exports code
+norm(p::Point)::Float64
+#+END_SRC
+#+BEGIN_QUOTE
+A simple function that computes $\sqrt{x^2+y^2}$
+
+*Example:*
+#+BEGIN_SRC julia
+p=Point(1.0,2.0);
+norm(p) 
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC julia
+2.23606797749979
+#+END_SRC
+
+#+RESULTS:
+: 2.23606797749979
+
+See: [[d25Kv3AYPoint_struct][struct Point]]
+#+END_QUOTE
+[[file:Foo.jl::31][Foo.jl:31]], [[rgroq5hV][back to index]]
+:END:
+
 # Minimal OrgMode document:1 ends here
