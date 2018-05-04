@@ -1,10 +1,24 @@
+
+
+# Link array is a vector of Tuple{String,String}
+const Link_Collection_Type = Vector{Tuple{String,String}}
+
+# +Links
+#
+# This function cleans extracted links by removing duplicates
+#
+# See: [[extract_links_string][]]
+function remove_link_duplicate(toClean::Link_Collection_Type)::Link_Collection_Type
+    # a priori sort is not necessary
+    return unique(toClean)
+end
 
 # +Links L:extract_links_string
 #
 # This function returns the list of links found in the string. It
 # returns nothing if no link is found
 #
-# !s="# some text [[some_target][]] another one [[link_target][link_name]]\n and a last one [[a4][b1]]";
+# !s="# some text [[some_target][]], [[link_target][link_name]]";
 # !J4Org.extract_links(s)
 #
 # *Caveat:* only use links of the forme ​"[​[something][]]", which are not
@@ -12,10 +26,10 @@
 #
 # *Test link:* [[doc_link_substituion][]]
 #
-function extract_links(input::String)::Vector{Tuple{String,String}}
+function extract_links(input::String)::Link_Collection_Type
     # remove blalba "toremove" kmsdqkm (do not consider quoted links)
     input = replace(input,r"(\".*\")","")
-    v=Vector{Tuple{String,String}}(0)
+    v=Link_Collection_Type(0)
     
     match_link = r"\[\[(\w+)\]\[\]\]"
     m=match(match_link,input)
@@ -40,24 +54,14 @@ end
 # This function is like [[extract_links_string][]], except that is
 # process an array of [[Documented_Item][]]
 #
-function extract_links(di_array::Array{Documented_Item,1})::Vector{Tuple{String,String}}
-    v=Vector{Tuple{String,String}}(0)
+function extract_links(di_array::Array{Documented_Item,1})::Link_Collection_Type
+    v=Link_Collection_Type(0)
 
     for di in di_array
         v=vcat(v,extract_links(raw_string_doc(di)))
     end 
 
     v
-end
-
-#+Links
-#
-# This function clean extracted links by removing duplicates
-#
-# See: [[extract_links_string][]]
-function clean_extracted_links(toClean::Vector{Tuple{String,String}})::Vector{Tuple{String,String}}
-    # a priori sort is not necessary
-    return unique(toClean)
 end
 
 #+Links
@@ -121,13 +125,22 @@ function create_link_readable_part(di::Documented_Item)::String
     return readable_link
 end
 
-#+Links                                       L:doc_link_substituion
+# +Links                                       L:doc_link_substituion
 # From doc string performs links substitution
 #
-# - check if there are links in the doc, eventually return unmodified doc string 
+# - check if there are links in the doc:
+#   - no: return unmodified doc string, exit
+#   - yes: return a list of links 
 # - for each link check if it exists in di_array
-#   - yes, replace ​[​[link_target][]] by ​[​[link_prefix_link_target][identifier]] to create a valid OrgMode link.
-#   - no,  replace ​[​[link_target][]] by _link_target_ to create an inactive link 
+#   - yes:
+#       - creates a magnified readable_link 
+#       - replaces ​[​[link_target][]] by ​[​[link_prefix_link_target][readable_link]] to create a valid OrgMode link.
+#   - no: try to find in di_array_universe, found?
+#       - yes: 
+#            - creates a magnified readable_link 
+# 	   - replaces an inactive [readable_link] OrgMode link.
+#       - no: 
+#            - replaces ​[​[link_target][]] by _link_target_ to create an inactive link 
 #
 # *Note:* in order to do not interfere with org mode link we only process "links" of the form "[[something][]]"
 #         see https://orgmode.org/manual/Link-format.html
@@ -135,17 +148,20 @@ end
 # *Note:* to be able to write a "unactive" link, use C-x 8 RET 200b
 #         (see: https://emacs.stackexchange.com/a/16702)
 #
-function doc_link_substituion(doc::String,di_array::Array{Documented_Item,1},link_prefix::String)::String
-    # extract links 
+function doc_link_substituion(doc::String,
+                              di_array::Array{Documented_Item,1},
+#                              di_array_universe::Array{Documented_Item,1},
+                              link_prefix::String)::String
+    # Extract links 
     links = extract_links(doc)
-    links = clean_extracted_links(links)
-    
+    links = remove_link_duplicate(links)
+
     if isempty(links)
         return doc
     end
 
 
-    # for each links search its identifier
+    # Process each link
     const not_found = Int(-1)
     n_links = length(links)
     n_di_array = length(di_array)
