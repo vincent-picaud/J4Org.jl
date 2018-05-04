@@ -35,15 +35,12 @@ function extract_links(input::String)::Link_Collection_Type
     v=Link_Collection_Type(0)
     
     match_link = r"\[\[(\w+)\]\[\]\]"
-    m=match(match_link,input)
 
-    if m==nothing
+    if !ismatch(match_link,input)
         return v
     end
 
-    push!(v,m[1])
-    offset=m.offsets[end]+length(m[1])
-    
+    offset=1
     while (m=match(match_link,input,offset))!=nothing
         push!(v,m[1])
         offset=m.offsets[end]+length(m[1])      
