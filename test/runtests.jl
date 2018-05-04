@@ -47,10 +47,10 @@ using J4Org
         t=tokenized(code_1)
         r=find_tag(t,1,"MyTag")
         di=create_documented_item(t,tag_idx(r))
-        @test org_string_comment(di,[di],"","BoxingModule") == "#+BEGIN_QUOTE\nMy documentedItem\n\nline 2\n#+END_QUOTE\n"
+        @test org_string_comment(di,[di],[di],"","BoxingModule") == "#+BEGIN_QUOTE\nMy documentedItem\n\nline 2\n#+END_QUOTE\n"
         @test org_string_code(di) == "#+BEGIN_SRC julia :eval never :exports code\nfunction myFunction (;x::Float64=sin(1))\n#+END_SRC\n"
         @test identifier(di) == "myFunction"
-        @test org_string_documented_item(di,[di]) ==  "- @@latex:\\phantomsection@@ *=myFunction=* \n#+BEGIN_SRC julia :eval never :exports code\nfunction myFunction (;x::Float64=sin(1))\n#+END_SRC\n#+BEGIN_QUOTE\nMy documentedItem\n\nline 2\n#+END_QUOTE\n\n"
+        @test org_string_documented_item(di,[di],[di]) ==  "- @@latex:\\phantomsection@@ *=myFunction=* \n#+BEGIN_SRC julia :eval never :exports code\nfunction myFunction (;x::Float64=sin(1))\n#+END_SRC\n#+BEGIN_QUOTE\nMy documentedItem\n\nline 2\n#+END_QUOTE\n\n"
     end
     
 end;

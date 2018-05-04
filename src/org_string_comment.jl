@@ -15,19 +15,21 @@ function remove_hashtag(s::String)::String
     return reduce(*,"",output)
 end 
 
-#+Extracted_Item_Base,OrgString  L:org_string_comment
+# +Extracted_Item_Base,OrgString  L:org_string_comment
 #
 # *Note:* this function does a lot, it uses links.jl and
 # *evaluate.jl. That is the reason why it is defined in its own file
+#
 function org_string_comment(di::Documented_Item,
                             di_array::Array{Documented_Item,1},
+                            di_array_universe::Array{Documented_Item,1},
                             link_prefix::String,
                             boxingModule::String)::String
 
     s=raw_string_doc(di)
     
     # Process links 
-    s=doc_link_substituion(s,di_array, link_prefix)
+    s=doc_link_substitution(s,di_array,di_array_universe, link_prefix)
     # Execute code snippet
     s=with_hash_evaluate(s,boxingModule)
     # remove #

@@ -69,7 +69,7 @@ function initialize_boxing_module(;
 end 
 
 
-# +Evaluate, TODO
+# +Evaluate
 #
 # Parse and execute a Julia code snippet
 #
@@ -85,7 +85,6 @@ end
 # !5+6
 # !rand(5)
 #
-# - [ ] TODO skip output for code ending with ";"
 function with_hash_evaluate(comment::String,
                             boxingModule::String)::String
     # Common error

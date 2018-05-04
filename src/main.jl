@@ -73,7 +73,8 @@ end
 # - souce_link: uses item filename to create a link to source
 # - uuid_link: if != "" add a link target <uuid_link> (for used to create index for instance)
 function org_string_documented_item(di::Documented_Item,
-                                    di_array::Array{Documented_Item,1};
+                                    di_array::Array{Documented_Item,1},
+                                    di_array_universe::Array{Documented_Item,1};
                                     link_prefix::String=randstring(),
                                     source_link::Bool=true,
                                     uuid_link::String="",
@@ -102,6 +103,7 @@ function org_string_documented_item(di::Documented_Item,
     # Doc
     s=s*org_string_comment(di,
                            di_array,
+                           di_array_universe,
                            link_prefix,
                            boxingModule)
     
@@ -197,17 +199,16 @@ function org_string_documented_item_array(di_array::Array{Documented_Item,1},
     # try to complete links
     if complete_link
         links = extract_links(di_array_copy)
-        links = clean_extracted_links(links)
         di_array_copy_complement=filter(x->!predicate(x),di_array)
         @assert length(di_array_copy_complement) + length(di_array_copy) == length(di_array)
         while length(links)>0
             link_i=pop!(links)
-            idx=get_items_with_link_target(first(link_i),di_array_copy)
+            idx=get_item_idx_from_link_target(first(link_i),di_array_copy)
             if isempty(idx)
                 # We have not found the link target,
                 # try with complementary
                 #
-                idx=get_items_with_link_target(first(link_i),di_array_copy_complement)
+                idx=get_item_idx_from_link_target(first(link_i),di_array_copy_complement)
 
                 if !isempty(idx)
                     # The target exists in complementary, we must:
@@ -217,7 +218,7 @@ function org_string_documented_item_array(di_array::Array{Documented_Item,1},
 
                     # 1/
                     links=vcat(links,extract_links(di_array_copy_complement[idx]))
-                    links=clean_extracted_links(links)
+                    links=remove_link_duplicate(links)
                     # 2/
                     di_array_copy=vcat(di_array_copy,di_array_copy_complement[idx])
                     di_array_copy_complement=deleteat!(di_array_copy_complement,idx)
@@ -295,6 +296,7 @@ function org_string_documented_item_array(di_array::Array{Documented_Item,1},
             const is_first = j==first(group_j)
             s=s*org_string_documented_item(di_array_copy[j],
                                            di_array_copy,
+                                           di_array, # universe (mainly use to find external links)
                                            header_level = (is_first ? header_level : -1),
                                            index_link   = index_label,
                                            uuid_link    = uuid[j],

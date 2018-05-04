@@ -18,12 +18,12 @@ end;
     t=tokenized(readstring(filename))
     r=find_tag(t,1)
     di=create_documented_item(t,tag_idx(r),filename=filename)
-    @test org_string_comment(di,[di],"","BoxingModule") == "#+BEGIN_QUOTE\nA *central* structure containing documented item\n#+END_QUOTE\n"
+    @test org_string_comment(di,[di],[di],"","BoxingModule") == "#+BEGIN_QUOTE\nA *central* structure containing documented item\n#+END_QUOTE\n"
     @test org_string_code(di) == "#+BEGIN_SRC julia :eval never :exports code\nstruct Documented_Item\n#+END_SRC\n"
 
     r=find_tag(t,8)
     di=create_documented_item(t,tag_idx(r),filename=filename)
-    @test org_string_comment(di,[di],"","BoxingModule") == ""
+    @test org_string_comment(di,[di],[di],"","BoxingModule") == ""
     @test org_string_code(di) == "#+BEGIN_SRC julia :eval never :exports code\nfilename(di::Documented_Item)::String\n#+END_SRC\n"
 end; 
 

@@ -22,9 +22,9 @@ end
 # !J4Org.extract_links(s)
 #
 # *Caveat:* only use links of the forme ​"[​[something][]]", which are not
-#           valid Org mode links, see [[doc_link_substituion][]]
+#           valid Org mode links, see [[doc_link_substitution][]]
 #
-# *Test link:* [[doc_link_substituion][]]
+# *Test link:* [[doc_link_substitution][]]
 #
 # *Note*: duplicates are removed
 #
@@ -53,8 +53,8 @@ end
 
 # +Links
 #
-# This function is like [[extract_links_string][]], except that is
-# process an array of [[Documented_Item][]]
+# This function is like [[extract_links_string][]], except that it
+# processes an array of [[Documented_Item][]]
 #
 # *Note*: duplicates are removed
 #
@@ -68,7 +68,9 @@ function extract_links(di_array::Array{Documented_Item,1})::Link_Collection_Type
     return remove_link_duplicate(v)
 end
 
-#+Links
+
+
+# +Links
 #
 # Returns the indices of [[Documented_Item][]] containing the
 # link_target (have a tag line with L:link_target)
@@ -76,7 +78,7 @@ end
 # *Note:* a normal situation is to have zero or one indices. Several
 # indices means that we do not have a unique target.
 #
-function get_items_with_link_target(link_target::String,di_array::Array{Documented_Item,1})::Vector{Int}
+function get_item_idx_from_link_target(link_target::String,di_array::Array{Documented_Item,1})::Vector{Int}
     v=Vector{Int}(0)
     const n = length(di_array)
     for i in 1:n
@@ -86,6 +88,26 @@ function get_items_with_link_target(link_target::String,di_array::Array{Document
     end 
     return v
 end 
+
+# +Links
+# Check for duplicated links, print an error message if any
+#
+# *Returns*:
+# - true: duplicates detected
+# - false: ok
+#
+function has_duplicate_with_error_message(link_target_idx,di_array)::Bool
+    if length(link_target_idx)>=2
+        duplicated_link = link(di_array[link_target_idx[1]])
+        for idx in link_target_idx
+            warning_message("duplicate link target $(duplicated_link) presents in $(create_file_org_link(di_array[idx]))")
+        end
+        return true
+    end
+    return false
+end
+
+
 
 # +Links
 #
@@ -129,22 +151,27 @@ function create_link_readable_part(di::Documented_Item)::String
     return readable_link
 end
 
-# +Links                                       L:doc_link_substituion
-# From doc string performs links substitution
+
+# +Links
 #
-# - check if there are links in the doc:
-#   - no: return unmodified doc string, exit
-#   - yes: return a list of links 
-# - for each link check if it exists in di_array
-#   - yes:
-#       - creates a magnified readable_link 
-#       - replaces ​[​[link_target][]] by ​[​[link_prefix_link_target][readable_link]] to create a valid OrgMode link.
-#   - no: try to find in di_array_universe, found?
-#       - yes: 
-#            - creates a magnified readable_link 
-# 	   - replaces an inactive [readable_link] OrgMode link.
-#       - no: 
-#            - replaces ​[​[link_target][]] by _link_target_ to create an inactive link 
+# - new_target=="": transforms [​[link_target][]] -> _link_magnified_
+# - otherwise: transforms [​[link_target][]] -> [​[link_new_target][link_magnified]] 
+#
+function doc_link_substitution_helper(doc::String,
+                                     link_target,
+                                     link_new_target,
+                                     link_magnified)::String 
+    src="[[$(link_target)][]]"
+    if isempty(link_new_target)
+        dest="_$(link_magnified)_"
+    else
+        dest="[[$(link_new_target)][$(link_magnified)]]"
+    end
+    return replace(doc,src,dest)
+end
+
+# +Links, TODO                                       L:doc_link_substitution
+# From doc string performs links substitution
 #
 # *Note:* in order to do not interfere with org mode link we only process "links" of the form "[[something][]]"
 #         see https://orgmode.org/manual/Link-format.html
@@ -152,52 +179,61 @@ end
 # *Note:* to be able to write a "unactive" link, use C-x 8 RET 200b
 #         (see: https://emacs.stackexchange.com/a/16702)
 #
-function doc_link_substituion(doc::String,
-                              di_array::Array{Documented_Item,1},
-#                              di_array_universe::Array{Documented_Item,1},
-                              link_prefix::String)::String
+# - [ ] TODO Finally duplicate links are not checked... do it before
+#
+function doc_link_substitution(doc::String,
+                               di_array::Array{Documented_Item,1},
+                               di_array_universe::Array{Documented_Item,1},
+                               link_prefix::String)::String
     # Extract links 
     links = extract_links(doc)
-#    links = remove_link_duplicate(links)
 
+    # Something to?
     if isempty(links)
         return doc
     end
 
+    # Process each link (=Tuple{String,String}), sequentially modify doc 
+    for current_link in links
+        # check that we are processing links of the form [[target][]]
+        @assert first(current_link) != ""
+        @assert last(current_link) == ""
+   
+        const link_target = first(current_link)
+        # default values (to be modified)
+        # link_new_target = "" if target not found 
+        link_new_target = link_prefix*link_target
+        # use create_link_readable_part()
+        link_magnified = link_target
+        
+        # Find item indices having current_link as target (L:current_link)
+        link_target_idx = get_item_idx_from_link_target(link_target,di_array)
 
-    # Process each link
-    const not_found = Int(-1)
-    n_links = length(links)
-    n_di_array = length(di_array)
-    for k in 1:n_links
-        first_occurence = not_found
-        link_in_doc="[[$(first(links[k]))][]]"
-        for i in 1:n_di_array
-            if first(links[k])==link(di_array[i])
-                first_occurence = i
-                break;
+        # No target found 
+        if isempty(link_target_idx)
+            link_new_target = "" # inactive link
+            
+            # Try to magnify name from di_array_universe
+            if !(di_array===di_array_universe)
+                # Try to find one in di_array_universe
+                link_target_idx = get_item_idx_from_link_target(link_target,di_array_universe)
+
+                if isempty(link_target_idx)
+                    warning_message("Link target $(current_link) not found")
+                else
+                    link_magnified = create_link_readable_part(di_array_universe[link_target_idx[1]])
+                end
             end
+        else 
+            link_magnified= create_link_readable_part(di_array[link_target_idx[1]])
         end
 
-        if first_occurence==not_found
-            warning_message("Link target $(links[k]) not found")
-            doc = replace(doc,link_in_doc,"_$(first(links[k]))_") # inactive link 
-        else
-            readable_link = create_link_readable_part(di_array[first_occurence])
-            links[k]=(links[k][1],readable_link)
-            
-            # check for multi-occurrence
-            for i in first_occurence+1:n_di_array
-                if first(links[k])==link(di_array[i])
-                    warning_message("multi-occurrences of target $(links[k]), $(create_file_org_link(di_array[first_occurence])) <-> $(create_file_org_link(di_array[i]))")
-                end
-            end  
-
-            # perform substitution
-            doc = replace(doc,link_in_doc,"[[$(link_prefix*first(links[k]))][$(last(links[k]))]]")
-        end 
+        doc = doc_link_substitution_helper(doc,
+                                           link_target,
+                                           link_new_target,
+                                           link_magnified)
     end
-
+    
     return doc
 end 
 
