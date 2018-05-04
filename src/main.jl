@@ -81,9 +81,11 @@ function org_string_documented_item(di::Documented_Item,
                                     index_link::String="",
                                     header_level::Int=0,
                                     boxingModule::String="BoxingModule")::String
-    s=""
+    # check links for error
+    check_for_link_error(di_array,di_array_universe)
     
     # Header
+    s=""
     s=s*org_string_documented_item_header(di,
                                           uuid_link=uuid_link,
                                           header_level=header_level)

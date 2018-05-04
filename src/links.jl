@@ -1,7 +1,5 @@
 
 
-# Link array is a vector of Tuple{String,String}
-# TODO: this would need refactoring to also store item 
 const Link_Collection_Type = Vector{String}
 
 # +Links
@@ -52,6 +50,18 @@ end
 # +Links
 #
 # This function is like [[extract_links_string][]], except that it
+# processes a [[Documented_Item][]]
+#
+# *Note*: duplicates are removed
+#
+function extract_links(di::Documented_Item)::Link_Collection_Type
+    v=extract_links(raw_string_doc(di))
+    return remove_link_duplicate(v)
+end
+
+# +Links
+#
+# This function is like [[extract_links_string][]], except that it
 # processes an array of [[Documented_Item][]]
 #
 # *Note*: duplicates are removed
@@ -60,9 +70,9 @@ function extract_links(di_array::Array{Documented_Item,1})::Link_Collection_Type
     v=Link_Collection_Type(0)
 
     for di in di_array
-        v=vcat(v,extract_links(raw_string_doc(di)))
+        v=vcat(v,extract_links(di))
     end 
-
+    
     return remove_link_duplicate(v)
 end
 
@@ -89,35 +99,48 @@ end
 
 
 
-# # +Links
-# # Check for if links are well formed
-# #
-# # Two kinds of errors:
-# # - links without target
-# # - duplicate link targets
-# #
-# # *Returns*: true if ok, false if some errors are detected
-# # 
-# function check_for_link_error(di_array::Array{Documented_Item,1},
-#                               di_array_universe::Array{Documented_Item,1})::Bool 
-#     links_to_check = extract_links(di_array)
-#     ok=true
-#     for link in links_to_check
-#         link_target=first(link)
-#         item_idx = get_item_idx_from_link_target(link_target,di_array_universe)
+# +Links
+# Check for if links are well formed
+#
+# Two kinds of errors:
+# - links without target
+# - duplicate link targets
+#
+# *Returns*: true if ok, false if some errors are detected
+# 
+function check_for_link_error(di_array::Array{Documented_Item,1},
+                              di_array_universe::Array{Documented_Item,1})::Bool
 
-#         if isempty(item_idx)
-#             ok=false
-#             warning_message("link target $(link_target) not found")
-#         elseif length(item_idx)>1
-#             ok=false
-#             for idx in item_idx
-#                 warning_message("duplicate link target $(duplicated_link) presents in $(create_file_org_link(di_array[idx]))")
-#             end
-#         end 
-#     end 
+    visited_links = Link_Collection_Type(0) # store visited links -> do not print error several times
 
-# end 
+    ok=true
+    
+    for di in di_array
+        links_to_check = extract_links(di)
+        
+        for link_target in links_to_check
+
+            if !contains(==,visited_links,link_target)
+
+                push!(visited_links,link_target)
+
+                item_idx = get_item_idx_from_link_target(link_target,di_array_universe)
+                
+                if isempty(item_idx)
+                    ok=false
+                    warning_message("link target $(link_target) in $(create_file_org_link(di)) not found")
+                elseif length(item_idx)>1
+                    ok=false
+                    for idx in item_idx
+                        warning_message("duplicate link target $(duplicated_link) presents in $(create_file_org_link(di_array_universe[idx]))")
+                    end
+                end
+            end 
+        end
+    end
+
+    return ok
+end
 
 #
 # *Returns*:
@@ -221,7 +244,7 @@ function doc_link_substitution(doc::String,
         return doc
     end
 
-    # Process each link (=Tuple{String,String}), sequentially modify doc 
+    # Process each link, sequentially modify doc 
     for link_target in links
         # default values (to be modified)
         # link_new_target = "" if target not found 
@@ -241,9 +264,9 @@ function doc_link_substitution(doc::String,
                 # Try to find one in di_array_universe
                 link_target_idx = get_item_idx_from_link_target(link_target,di_array_universe)
 
-                if isempty(link_target_idx)
-                    warning_message("Link target $(link_target) not found")
-                else
+                if !isempty(link_target_idx)
+#                    warning_message("Link target $(link_target) not found")
+#                else
                     link_magnified = create_link_readable_part(di_array_universe[link_target_idx[1]])
                 end
             end
