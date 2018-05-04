@@ -34,5 +34,6 @@
   #+END_EXAMPLE
 - add support for =@enum=
 - magnified link name if link target is present
+- complete refactoring of link engine
 * W3 Links
 
