@@ -1,7 +1,6 @@
 using Tokenize
 import Tokenize.Tokens: kind, exactkind, startpos
 
-# +Tokenizer,Internal
 # Defines a convenient type alias 
 const Tokenized = Array{Tokenize.Tokens.Token,1}
 #+Tokenizer,Internal

@@ -310,8 +310,8 @@ Foo.Point(2.0, 4.0)
 #+RESULTS:
 
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::42][Foo.jl:42]]
- @@latex:\phantomsection@@  <<26Mfjhypnorm_link_example>>
+[[file:minimal_example/Foo.jl::46][Foo.jl:46]]
+ @@latex:\phantomsection@@  <<AA92hulPnorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -331,11 +331,10 @@ norm(p)
 #+END_SRC
 
 #+RESULTS:
-: 2.23606797749979
 
 See: _Point_struct_
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::31][Foo.jl:31]]
+[[file:minimal_example/Foo.jl::35][Foo.jl:35]]
 :END:
 
 **** header_level=0
@@ -359,10 +358,54 @@ print_org_doc(documented_items,tag="Method",header_level=0)
 
 #+RESULTS:
 :RESULTS:
+ERROR: UndefVarError: Point not defined
+ERROR: UndefVarError: p not defined
+ERROR: MethodError: no method matching start(::Void)
+Closest candidates are:
+  start(!Matched::SimpleVector) at essentials.jl:258
+  start(!Matched::Base.MethodList) at reflection.jl:560
+  start(!Matched::ExponentialBackOff) at error.jl:107
+  ...
+Stacktrace:
+ [1] #writedlm#18(::Array{Any,1}, ::Function, ::IOStream, ::Void, ::Char) at ./datafmt.jl:673
+ [2] #20 at ./datafmt.jl:683 [inlined]
+ [3] open(::Base.DataFmt.##20#21{Array{Any,1},Void,Char}, ::String, ::String) at ./iostream.jl:152
+ [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Void) at ./datafmt.jl:705
+ [5] writecsv(::String, ::Void) at ./datafmt.jl:705
+Foo.Point(1.0, 2.0)
+Foo.Point(2.0, 4.0)
+ERROR: MethodError: no method matching start(::Foo.Point)
+Closest candidates are:
+  start(!Matched::SimpleVector) at essentials.jl:258
+  start(!Matched::Base.MethodList) at reflection.jl:560
+  start(!Matched::ExponentialBackOff) at error.jl:107
+  ...
+Stacktrace:
+ [1] #writedlm#18(::Array{Any,1}, ::Function, ::IOStream, ::Foo.Point, ::Char) at ./datafmt.jl:673
+ [2] #20 at ./datafmt.jl:683 [inlined]
+ [3] open(::Base.DataFmt.##20#21{Array{Any,1},Foo.Point,Char}, ::String, ::String) at ./iostream.jl:152
+ [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Foo.Point) at ./datafmt.jl:705
+ [5] writecsv(::String, ::Foo.Point) at ./datafmt.jl:705
+
+ERROR: UndefVarError: p not defined
+ERROR: MethodError: no method matching start(::Foo.Point)
+Closest candidates are:
+  start(!Matched::SimpleVector) at essentials.jl:258
+  start(!Matched::Base.MethodList) at reflection.jl:560
+  start(!Matched::ExponentialBackOff) at error.jl:107
+  ...
+Stacktrace:
+ [1] #writedlm#18(::Array{Any,1}, ::Function, ::IOStream, ::Foo.Point, ::Char) at ./datafmt.jl:673
+ [2] #20 at ./datafmt.jl:683 [inlined]
+ [3] open(::Base.DataFmt.##20#21{Array{Any,1},Foo.Point,Char}, ::String, ::String) at ./iostream.jl:152
+ [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Foo.Point) at ./datafmt.jl:705
+ [5] writecsv(::String, ::Foo.Point) at ./datafmt.jl:705
+2.23606797749979
+
 
 # =WARNING:= Link target ("Point_struct", "") not found
-<<ok4uNaGU>> *Index:* *[f]* [[p2PfqavC][foo]] *[n]* [[0V8lc07d][norm]] 
-- @@latex:\phantomsection@@ *=foo=*  <<p2PfqavC>>
+<<zUy73F4s>> *Index:* *[f]* [[Jz0S06pw][foo]] *[n]* [[NVi3CW2B][norm]] 
+- @@latex:\phantomsection@@ *=foo=*  <<Jz0S06pw>>
 #+BEGIN_SRC julia :eval never :exports code
 foo(r::Float64,p::Point)
 #+END_SRC
@@ -385,8 +428,8 @@ Foo.Point(2.0, 4.0)
 #+RESULTS:
 
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::42][Foo.jl:42]], [[ok4uNaGU][back to index]]
-- @@latex:\phantomsection@@ *=norm=*  <<0V8lc07d>> <<BeNbhtpmnorm_link_example>>
+[[file:minimal_example/Foo.jl::46][Foo.jl:46]], [[zUy73F4s][back to index]]
+- @@latex:\phantomsection@@ *=norm=*  <<NVi3CW2B>> <<dKFdSpMAnorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -410,7 +453,7 @@ norm(p)
 
 See: _Point_struct_
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::31][Foo.jl:31]], [[ok4uNaGU][back to index]]
+[[file:minimal_example/Foo.jl::35][Foo.jl:35]], [[zUy73F4s][back to index]]
 :END:
 
 
@@ -436,10 +479,54 @@ print_org_doc(documented_items,tag="Method",header_level=5)
 
 #+RESULTS:
 :RESULTS:
+ERROR: UndefVarError: Point not defined
+ERROR: UndefVarError: p not defined
+ERROR: MethodError: no method matching start(::Void)
+Closest candidates are:
+  start(!Matched::SimpleVector) at essentials.jl:258
+  start(!Matched::Base.MethodList) at reflection.jl:560
+  start(!Matched::ExponentialBackOff) at error.jl:107
+  ...
+Stacktrace:
+ [1] #writedlm#18(::Array{Any,1}, ::Function, ::IOStream, ::Void, ::Char) at ./datafmt.jl:673
+ [2] #20 at ./datafmt.jl:683 [inlined]
+ [3] open(::Base.DataFmt.##20#21{Array{Any,1},Void,Char}, ::String, ::String) at ./iostream.jl:152
+ [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Void) at ./datafmt.jl:705
+ [5] writecsv(::String, ::Void) at ./datafmt.jl:705
+Foo.Point(1.0, 2.0)
+Foo.Point(2.0, 4.0)
+ERROR: MethodError: no method matching start(::Foo.Point)
+Closest candidates are:
+  start(!Matched::SimpleVector) at essentials.jl:258
+  start(!Matched::Base.MethodList) at reflection.jl:560
+  start(!Matched::ExponentialBackOff) at error.jl:107
+  ...
+Stacktrace:
+ [1] #writedlm#18(::Array{Any,1}, ::Function, ::IOStream, ::Foo.Point, ::Char) at ./datafmt.jl:673
+ [2] #20 at ./datafmt.jl:683 [inlined]
+ [3] open(::Base.DataFmt.##20#21{Array{Any,1},Foo.Point,Char}, ::String, ::String) at ./iostream.jl:152
+ [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Foo.Point) at ./datafmt.jl:705
+ [5] writecsv(::String, ::Foo.Point) at ./datafmt.jl:705
+
+ERROR: UndefVarError: p not defined
+ERROR: MethodError: no method matching start(::Foo.Point)
+Closest candidates are:
+  start(!Matched::SimpleVector) at essentials.jl:258
+  start(!Matched::Base.MethodList) at reflection.jl:560
+  start(!Matched::ExponentialBackOff) at error.jl:107
+  ...
+Stacktrace:
+ [1] #writedlm#18(::Array{Any,1}, ::Function, ::IOStream, ::Foo.Point, ::Char) at ./datafmt.jl:673
+ [2] #20 at ./datafmt.jl:683 [inlined]
+ [3] open(::Base.DataFmt.##20#21{Array{Any,1},Foo.Point,Char}, ::String, ::String) at ./iostream.jl:152
+ [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Foo.Point) at ./datafmt.jl:705
+ [5] writecsv(::String, ::Foo.Point) at ./datafmt.jl:705
+2.23606797749979
+
 
 # =WARNING:= Link target ("Point_struct", "") not found
-<<CuKw0SiQ>> *Index:* *[f]* [[m4rpqNb1][foo]] *[n]* [[dHm3GaGJ][norm]] 
-***** *=foo=*  <<m4rpqNb1>>
+<<J2SFQ4TY>> *Index:* *[f]* [[XpMIuHRz][foo]] *[n]* [[T6Z1pyra][norm]] 
+***** *=foo=*  <<XpMIuHRz>>
 #+BEGIN_SRC julia :eval never :exports code
 foo(r::Float64,p::Point)
 #+END_SRC
@@ -451,13 +538,19 @@ For symbol that are not exported, do not forget the "Foo." prefix:
 p=Point(1.0,2.0)
 Foo.foo(2.0,p)
 #+END_SRC
+
+#+RESULTS:
+
 #+BEGIN_SRC julia
 Foo.Point(1.0, 2.0)
 Foo.Point(2.0, 4.0)
 #+END_SRC
+
+#+RESULTS:
+
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::42][Foo.jl:42]], [[CuKw0SiQ][back to index]]
-***** *=norm=*  <<dHm3GaGJ>> <<r3HYS2p9norm_link_example>>
+[[file:minimal_example/Foo.jl::46][Foo.jl:46]], [[J2SFQ4TY][back to index]]
+***** *=norm=*  <<T6Z1pyra>> <<AQYBWXbEnorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -469,13 +562,19 @@ A simple function that computes $\sqrt{x^2+y^2}$
 p=Point(1.0,2.0);
 norm(p) 
 #+END_SRC
+
+#+RESULTS:
+
 #+BEGIN_SRC julia
 2.23606797749979
 #+END_SRC
 
+#+RESULTS:
+: 2.23606797749979
+
 See: _Point_struct_
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::31][Foo.jl:31]], [[CuKw0SiQ][back to index]]
+[[file:minimal_example/Foo.jl::35][Foo.jl:35]], [[J2SFQ4TY][back to index]]
 :END:
 
 *** =tag=, =tag_to_ignore=, =identifier=
@@ -507,9 +606,53 @@ print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1)
 
 #+RESULTS:
 :RESULTS:
+ERROR: UndefVarError: Point not defined
+ERROR: UndefVarError: p not defined
+ERROR: MethodError: no method matching start(::Void)
+Closest candidates are:
+  start(!Matched::SimpleVector) at essentials.jl:258
+  start(!Matched::Base.MethodList) at reflection.jl:560
+  start(!Matched::ExponentialBackOff) at error.jl:107
+  ...
+Stacktrace:
+ [1] #writedlm#18(::Array{Any,1}, ::Function, ::IOStream, ::Void, ::Char) at ./datafmt.jl:673
+ [2] #20 at ./datafmt.jl:683 [inlined]
+ [3] open(::Base.DataFmt.##20#21{Array{Any,1},Void,Char}, ::String, ::String) at ./iostream.jl:152
+ [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Void) at ./datafmt.jl:705
+ [5] writecsv(::String, ::Void) at ./datafmt.jl:705
+Foo.Point(1.0, 2.0)
+Foo.Point(2.0, 4.0)
+ERROR: MethodError: no method matching start(::Foo.Point)
+Closest candidates are:
+  start(!Matched::SimpleVector) at essentials.jl:258
+  start(!Matched::Base.MethodList) at reflection.jl:560
+  start(!Matched::ExponentialBackOff) at error.jl:107
+  ...
+Stacktrace:
+ [1] #writedlm#18(::Array{Any,1}, ::Function, ::IOStream, ::Foo.Point, ::Char) at ./datafmt.jl:673
+ [2] #20 at ./datafmt.jl:683 [inlined]
+ [3] open(::Base.DataFmt.##20#21{Array{Any,1},Foo.Point,Char}, ::String, ::String) at ./iostream.jl:152
+ [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Foo.Point) at ./datafmt.jl:705
+ [5] writecsv(::String, ::Foo.Point) at ./datafmt.jl:705
+
+ERROR: UndefVarError: p not defined
+ERROR: MethodError: no method matching start(::Foo.Point)
+Closest candidates are:
+  start(!Matched::SimpleVector) at essentials.jl:258
+  start(!Matched::Base.MethodList) at reflection.jl:560
+  start(!Matched::ExponentialBackOff) at error.jl:107
+  ...
+Stacktrace:
+ [1] #writedlm#18(::Array{Any,1}, ::Function, ::IOStream, ::Foo.Point, ::Char) at ./datafmt.jl:673
+ [2] #20 at ./datafmt.jl:683 [inlined]
+ [3] open(::Base.DataFmt.##20#21{Array{Any,1},Foo.Point,Char}, ::String, ::String) at ./iostream.jl:152
+ [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Foo.Point) at ./datafmt.jl:705
+ [5] writecsv(::String, ::Foo.Point) at ./datafmt.jl:705
+2.23606797749979
+
 
 # =WARNING:= Link target ("Point_struct", "") not found
- @@latex:\phantomsection@@  <<5X8gK1jVnorm_link_example>>
+ @@latex:\phantomsection@@  <<mohjDaXSnorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -521,13 +664,19 @@ A simple function that computes $\sqrt{x^2+y^2}$
 p=Point(1.0,2.0);
 norm(p) 
 #+END_SRC
+
+#+RESULTS:
+
 #+BEGIN_SRC julia
 2.23606797749979
 #+END_SRC
 
+#+RESULTS:
+: 2.23606797749979
+
 See: _Point_struct_
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::31][Foo.jl:31]]
+[[file:minimal_example/Foo.jl::35][Foo.jl:35]]
 :END:
 
 *** =complete_link=
@@ -558,7 +707,23 @@ print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1,
 #+RESULTS:
 :RESULTS:
 
- @@latex:\phantomsection@@  <<xuLjGuEDPoint_struct>>
+ERROR: UndefVarError: p not defined
+ERROR: MethodError: no method matching start(::Void)
+Closest candidates are:
+  start(!Matched::SimpleVector) at essentials.jl:258
+  start(!Matched::Base.MethodList) at reflection.jl:560
+  start(!Matched::ExponentialBackOff) at error.jl:107
+  ...
+Stacktrace:
+ [1] #writedlm#18(::Array{Any,1}, ::Function, ::IOStream, ::Void, ::Char) at ./datafmt.jl:673
+ [2] #20 at ./datafmt.jl:683 [inlined]
+ [3] open(::Base.DataFmt.##20#21{Array{Any,1},Void,Char}, ::String, ::String) at ./iostream.jl:152
+ [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Void) at ./datafmt.jl:705
+ [5] writecsv(::String, ::Void) at ./datafmt.jl:705
+2.23606797749979
+
+
+ @@latex:\phantomsection@@  <<muX5n8b2Point_struct>>
 #+BEGIN_SRC julia :eval never :exports code
 struct Point
 #+END_SRC
@@ -574,10 +739,10 @@ p=Point(1,2)
 #+END_SRC
 
 You can add any valid Org mode directive. If you want to use
-in-documentation link, use [[xuLjGuEDnorm_link_example][norm(...)]]
+in-documentation link, use [[muX5n8b2norm_link_example][norm(...)]]
 #+END_QUOTE
 [[file:minimal_example/Foo.jl::8][Foo.jl:8]]
- @@latex:\phantomsection@@  <<xuLjGuEDnorm_link_example>>
+ @@latex:\phantomsection@@  <<muX5n8b2norm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -589,13 +754,19 @@ A simple function that computes $\sqrt{x^2+y^2}$
 p=Point(1.0,2.0);
 norm(p) 
 #+END_SRC
+
+#+RESULTS:
+
 #+BEGIN_SRC julia
 2.23606797749979
 #+END_SRC
 
-See: [[xuLjGuEDPoint_struct][struct Point]]
+#+RESULTS:
+: 2.23606797749979
+
+See: [[muX5n8b2Point_struct][struct Point]]
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::31][Foo.jl:31]]
+[[file:minimal_example/Foo.jl::35][Foo.jl:35]]
 :END:
 
 you see that the =Point= structure is included to make the
@@ -700,16 +871,32 @@ print_org_doc(documented_items,boxingModule="J4OrgBoxing",tag="API",header_level
 
 #+RESULTS:
 :RESULTS:
-# =WARNING:= cannot interpret ../src/tokenizer.jl:4 AssertionError("code != nothing")
-<<bFba3880>> *Index:* *[c]* [[QiLJq0aU][create_documented_item_array]], [[tk8k71zs][create_documented_item_array_dir]] *[i]* [[xXqy4y5W][initialize_boxing_module]] *[p]* [[gMZok08b][print_org_doc]] 
-- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<QiLJq0aU>> <<API_create_documented_item_array_filename>>
+
+ERROR: UndefVarError: p not defined
+ERROR: MethodError: no method matching start(::Void)
+Closest candidates are:
+  start(!Matched::SimpleVector) at essentials.jl:258
+  start(!Matched::Base.MethodList) at reflection.jl:560
+  start(!Matched::ExponentialBackOff) at error.jl:107
+  ...
+Stacktrace:
+ [1] #writedlm#18(::Array{Any,1}, ::Function, ::IOStream, ::Void, ::Char) at ./datafmt.jl:673
+ [2] #20 at ./datafmt.jl:683 [inlined]
+ [3] open(::Base.DataFmt.##20#21{Array{Any,1},Void,Char}, ::String, ::String) at ./iostream.jl:152
+ [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Void) at ./datafmt.jl:705
+ [5] writecsv(::String, ::Void) at ./datafmt.jl:705
+2.23606797749979
+
+
+<<ZhNQjTtI>> *Index:* *[c]* [[pKgqfE8k][create_documented_item_array]], [[0ye9zUqo][create_documented_item_array_dir]] *[i]* [[YjPYM9uI][initialize_boxing_module]] *[p]* [[2qXRWMY3][print_org_doc]] 
+- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<pKgqfE8k>> <<API_create_documented_item_array_filename>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename::String)::Array{Documented_Item,1}
 #+END_SRC
 #+BEGIN_QUOTE
 Reads a Julia code file and returns an array of documented items.
 #+END_QUOTE
-[[file:../src/documented_item.jl::89][documented_item.jl:89]], [[bFba3880][back to index]]
+[[file:../src/documented_item.jl::91][documented_item.jl:91]], [[ZhNQjTtI][back to index]]
 
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename_list::Array{String,1})::Array{Documented_Item,1}
@@ -723,11 +910,13 @@ documented items.
 create_documented_item_array(["file1","file2",...])
 #+END_SRC
 
+#+RESULTS:
+
 *Note:* instead of a list of files you can also specify a directory,
 see [[API_create_documented_item_array_dir][create_documented_item_array_dir(...)]]
 #+END_QUOTE
-[[file:../src/documented_item.jl::128][documented_item.jl:128]], [[bFba3880][back to index]]
-- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<tk8k71zs>> <<API_create_documented_item_array_dir>>
+[[file:../src/documented_item.jl::130][documented_item.jl:130]], [[ZhNQjTtI][back to index]]
+- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<0ye9zUqo>> <<API_create_documented_item_array_dir>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array_dir(dirname::String)
 #+END_SRC
@@ -735,8 +924,8 @@ function create_documented_item_array_dir(dirname::String)
 Reads all *.jl files in a directory and returns an array of
 documented items.
 #+END_QUOTE
-[[file:../src/documented_item.jl::150][documented_item.jl:150]], [[bFba3880][back to index]]
-- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<xXqy4y5W>> <<API_initialize_boxing_module>>
+[[file:../src/documented_item.jl::152][documented_item.jl:152]], [[ZhNQjTtI][back to index]]
+- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<YjPYM9uI>> <<API_initialize_boxing_module>>
 #+BEGIN_SRC julia :eval never :exports code
 function initialize_boxing_module(;
                                   boxingModule::String="BoxingModule",
@@ -768,8 +957,8 @@ using MyBoxing
 # !statements
 #+END_SRC
 #+END_QUOTE
-[[file:../src/evaluate.jl::18][evaluate.jl:18]], [[bFba3880][back to index]]
-- @@latex:\phantomsection@@ *=print_org_doc=*  <<gMZok08b>> <<API_print_org_doc_API>>
+[[file:../src/evaluate.jl::18][evaluate.jl:18]], [[ZhNQjTtI][back to index]]
+- @@latex:\phantomsection@@ *=print_org_doc=*  <<2qXRWMY3>> <<API_print_org_doc_API>>
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -801,7 +990,7 @@ print_org_doc(documented_items,tag="API",header_level=0)
 - =case_sensitive=: case sensitive index.
 - =boxingModule=: specifies the context in which "#!" code will be executed. See [[API_initialize_boxing_module][initialize_boxing_module(...)]] for details.
 #+END_QUOTE
-[[file:../src/main.jl::346][main.jl:346]], [[bFba3880][back to index]]
+[[file:../src/main.jl::346][main.jl:346]], [[ZhNQjTtI][back to index]]
 :END:
 
 * More examples and Tips                                           :noexport:
@@ -838,9 +1027,22 @@ print_org_doc(documented_items,identifier="print_org_doc",header_level=-1)
 
 #+RESULTS:
 :RESULTS:
-# =WARNING:= cannot interpret ../src/tokenizer.jl:4 AssertionError("code != nothing")
+ERROR: syntax: invalid identifier name "..."
+ERROR: MethodError: no method matching start(::Void)
+Closest candidates are:
+  start(!Matched::SimpleVector) at essentials.jl:258
+  start(!Matched::Base.MethodList) at reflection.jl:560
+  start(!Matched::ExponentialBackOff) at error.jl:107
+  ...
+Stacktrace:
+ [1] #writedlm#18(::Array{Any,1}, ::Function, ::IOStream, ::Void, ::Char) at ./datafmt.jl:673
+ [2] #20 at ./datafmt.jl:683 [inlined]
+ [3] open(::Base.DataFmt.##20#21{Array{Any,1},Void,Char}, ::String, ::String) at ./iostream.jl:152
+ [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Void) at ./datafmt.jl:705
+ [5] writecsv(::String, ::Void) at ./datafmt.jl:705
+
 # =WARNING:= Link target ("initialize_boxing_module", "") not found
- @@latex:\phantomsection@@  <<iehpijlBprint_org_doc_API>>
+ @@latex:\phantomsection@@  <<GQntAMCoprint_org_doc_API>>
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -958,7 +1160,7 @@ Stacktrace:
  [4] #writecsv#23(::Array{Any,1}, ::Function, ::String, ::Function) at ./datafmt.jl:705
  [5] writecsv(::String, ::Function) at ./datafmt.jl:705
 Test Summary: | Pass  Total
-J4Org         |  103    103
+J4Org         |  107    107
 #+end_example
 
 * Design tips                                                      :noexport:
@@ -971,6 +1173,4 @@ To be able to use links everywhere we use the
 ** HTML export with background
 
 See https://github.com/JuliaEditorSupport/julia-emacs/issues/53
-
-
 

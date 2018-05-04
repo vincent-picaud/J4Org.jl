@@ -1,18 +1,11 @@
 
-#+Links L:extract_links_string
+# +Links L:extract_links_string
 #
 # This function returns the list of links found in the string. It
 # returns nothing if no link is found
 #
-# #+BEGIN_SRC julia
-# s="# some text [[some_target][]] another one [[link_target][link_name]]\n and a last one [[a4][b1]]"
-# J4Org.extract_links(s)
-# #+END_SRC
-#
-# #+BEGIN_EXAMPLE
-# 1-element Array{Tuple{String,String},1}:
-#  ("some_target", "")         
-# #+END_EXAMPLE
+# !s="# some text [[some_target][]] another one [[link_target][link_name]]\n and a last one [[a4][b1]]";
+# !J4Org.extract_links(s)
 #
 # *Caveat:* only use links of the forme ​"[​[something][]]", which are not
 #           valid Org mode links, see [[doc_link_substituion][]]
