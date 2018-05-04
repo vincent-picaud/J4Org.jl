@@ -3,10 +3,10 @@
 
 * Project Journal
 * Project TODO
-** TODO [7/15]
+** TODO [8/15]
 - [ ] add a function to show link and targets & detect useless link_target
 - [ ] search for "export" keyword to annotate documented item 
-- [ ] even if complete_link = false, search for target in order to do pretty print (information like struct etc...)
+- [X] even if complete_link = false, search for target in order to do pretty print (information like struct etc...)
 - [X] use extracted tag in DocumentedItem
 - [X] allows tag list "#+tag1, tag2"
 - [X] add prefix to extra link: <<link>> -> <<prefix_link>>
@@ -33,5 +33,6 @@
   (global-set-key (kbd "C-c \"") 'poporg-dwim)
   #+END_EXAMPLE
 - add support for =@enum=
+- magnified link name if link target is present
 * W3 Links
 

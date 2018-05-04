@@ -1,7 +1,8 @@
 
 
 # Link array is a vector of Tuple{String,String}
-const Link_Collection_Type = Vector{Tuple{String,String}}
+# TODO: this would need refactoring to also store item 
+const Link_Collection_Type = Vector{String}
 
 # +Links
 #
@@ -40,11 +41,11 @@ function extract_links(input::String)::Link_Collection_Type
         return v
     end
 
-    push!(v,(m[1],""))
+    push!(v,m[1])
     offset=m.offsets[end]+length(m[1])
     
     while (m=match(match_link,input,offset))!=nothing
-        push!(v,(m[1],""))
+        push!(v,m[1])
         offset=m.offsets[end]+length(m[1])      
     end 
     
@@ -89,8 +90,38 @@ function get_item_idx_from_link_target(link_target::String,di_array::Array{Docum
     return v
 end 
 
-# +Links
-# Check for duplicated links, print an error message if any
+
+
+# # +Links
+# # Check for if links are well formed
+# #
+# # Two kinds of errors:
+# # - links without target
+# # - duplicate link targets
+# #
+# # *Returns*: true if ok, false if some errors are detected
+# # 
+# function check_for_link_error(di_array::Array{Documented_Item,1},
+#                               di_array_universe::Array{Documented_Item,1})::Bool 
+#     links_to_check = extract_links(di_array)
+#     ok=true
+#     for link in links_to_check
+#         link_target=first(link)
+#         item_idx = get_item_idx_from_link_target(link_target,di_array_universe)
+
+#         if isempty(item_idx)
+#             ok=false
+#             warning_message("link target $(link_target) not found")
+#         elseif length(item_idx)>1
+#             ok=false
+#             for idx in item_idx
+#                 warning_message("duplicate link target $(duplicated_link) presents in $(create_file_org_link(di_array[idx]))")
+#             end
+#         end 
+#     end 
+
+# end 
+
 #
 # *Returns*:
 # - true: duplicates detected
@@ -194,19 +225,14 @@ function doc_link_substitution(doc::String,
     end
 
     # Process each link (=Tuple{String,String}), sequentially modify doc 
-    for current_link in links
-        # check that we are processing links of the form [[target][]]
-        @assert first(current_link) != ""
-        @assert last(current_link) == ""
-   
-        const link_target = first(current_link)
+    for link_target in links
         # default values (to be modified)
         # link_new_target = "" if target not found 
         link_new_target = link_prefix*link_target
         # use create_link_readable_part()
         link_magnified = link_target
         
-        # Find item indices having current_link as target (L:current_link)
+        # Find item indices having link_target as target (L:link_target)
         link_target_idx = get_item_idx_from_link_target(link_target,di_array)
 
         # No target found 
@@ -219,7 +245,7 @@ function doc_link_substitution(doc::String,
                 link_target_idx = get_item_idx_from_link_target(link_target,di_array_universe)
 
                 if isempty(link_target_idx)
-                    warning_message("Link target $(current_link) not found")
+                    warning_message("Link target $(link_target) not found")
                 else
                     link_magnified = create_link_readable_part(di_array_universe[link_target_idx[1]])
                 end

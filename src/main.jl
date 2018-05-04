@@ -203,12 +203,12 @@ function org_string_documented_item_array(di_array::Array{Documented_Item,1},
         @assert length(di_array_copy_complement) + length(di_array_copy) == length(di_array)
         while length(links)>0
             link_i=pop!(links)
-            idx=get_item_idx_from_link_target(first(link_i),di_array_copy)
+            idx=get_item_idx_from_link_target(link_i,di_array_copy)
             if isempty(idx)
                 # We have not found the link target,
                 # try with complementary
                 #
-                idx=get_item_idx_from_link_target(first(link_i),di_array_copy_complement)
+                idx=get_item_idx_from_link_target(link_i,di_array_copy_complement)
 
                 if !isempty(idx)
                     # The target exists in complementary, we must:
