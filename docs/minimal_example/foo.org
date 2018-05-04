@@ -22,16 +22,16 @@ print_org_doc(documented_items,tag_to_ignore=["Internal"],header_level=0)
 
 #+RESULTS:
 :RESULTS:
-<<NNaztqpj>> *Index:* *[A]* [[bpMnhATf][Alpha]] *[P]* [[kqlO0Ngf][Point]] *[n]* [[hNdd2XVt][norm]] 
-- @@latex:\phantomsection@@ *=Alpha=*  <<bpMnhATf>>
+<<KI1L4RUf>> *Index:* *[A]* [[UHWJli9e][Alpha]] *[P]* [[BZjrMtx0][Point]] *[n]* [[bpiXEe84][norm]] 
+- @@latex:\phantomsection@@ *=Alpha=*  <<UHWJli9e>>
 #+BEGIN_SRC julia :eval never :exports code
 @enum Alpha A=1 B C 
 #+END_SRC
 #+BEGIN_QUOTE
 An enum
 #+END_QUOTE
-[[file:Foo.jl::31][Foo.jl:31]], [[NNaztqpj][back to index]]
-- @@latex:\phantomsection@@ *=Point=*  <<kqlO0Ngf>> <<YwxyyrxcPoint_struct>>
+[[file:Foo.jl::31][Foo.jl:31]], [[KI1L4RUf][back to index]]
+- @@latex:\phantomsection@@ *=Point=*  <<BZjrMtx0>> <<MCB54GqiPoint_struct>>
 #+BEGIN_SRC julia :eval never :exports code
 struct Point
 #+END_SRC
@@ -47,9 +47,9 @@ p=Point(1,2)
 #+END_SRC
 
 You can add any valid Org mode directive. If you want to use
-in-documentation link, use [[Ywxyyrxcnorm_link_example][norm(...)]]
+in-documentation link, use [[MCB54Gqinorm_link_example][norm(...)]]
 #+END_QUOTE
-[[file:Foo.jl::8][Foo.jl:8]], [[NNaztqpj][back to index]]
+[[file:Foo.jl::8][Foo.jl:8]], [[KI1L4RUf][back to index]]
 
 #+BEGIN_SRC julia :eval never :exports code
 Point()
@@ -57,8 +57,8 @@ Point()
 #+BEGIN_QUOTE
 Creates Point at origin $(0,0)$ 
 #+END_QUOTE
-[[file:Foo.jl::27][Foo.jl:27]], [[NNaztqpj][back to index]]
-- @@latex:\phantomsection@@ *=norm=*  <<hNdd2XVt>> <<Ywxyyrxcnorm_link_example>>
+[[file:Foo.jl::27][Foo.jl:27]], [[KI1L4RUf][back to index]]
+- @@latex:\phantomsection@@ *=norm=*  <<bpiXEe84>> <<MCB54Gqinorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -78,10 +78,11 @@ norm(p)
 #+END_SRC
 
 #+RESULTS:
+: 2.23606797749979
 
-See: [[YwxyyrxcPoint_struct][struct Point]]
+See: [[MCB54GqiPoint_struct][struct Point]]
 #+END_QUOTE
-[[file:Foo.jl::35][Foo.jl:35]], [[NNaztqpj][back to index]]
+[[file:Foo.jl::35][Foo.jl:35]], [[KI1L4RUf][back to index]]
 :END:
 
 # Minimal OrgMode document:1 ends here

@@ -142,22 +142,6 @@ function check_for_link_error(di_array::Array{Documented_Item,1},
     return ok
 end
 
-#
-# *Returns*:
-# - true: duplicates detected
-# - false: ok
-#
-function has_duplicate_with_error_message(link_target_idx,di_array)::Bool
-    if length(link_target_idx)>=2
-        duplicated_link = link(di_array[link_target_idx[1]])
-        for idx in link_target_idx
-            warning_message("duplicate link target $(duplicated_link) presents in $(create_file_org_link(di_array[idx]))")
-        end
-        return true
-    end
-    return false
-end
-
 
 
 # +Links
@@ -265,8 +249,6 @@ function doc_link_substitution(doc::String,
                 link_target_idx = get_item_idx_from_link_target(link_target,di_array_universe)
 
                 if !isempty(link_target_idx)
-#                    warning_message("Link target $(link_target) not found")
-#                else
                     link_magnified = create_link_readable_part(di_array_universe[link_target_idx[1]])
                 end
             end

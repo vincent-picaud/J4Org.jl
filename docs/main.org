@@ -492,7 +492,7 @@ print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1)
 #+RESULTS:
 :RESULTS:
 
- @@latex:\phantomsection@@  <<xtQNAsSBnorm_link_example>>
+ @@latex:\phantomsection@@  <<uWldRFMSnorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -684,15 +684,15 @@ print_org_doc(documented_items,boxingModule="J4OrgBoxing",tag="API",header_level
 #+RESULTS:
 :RESULTS:
 
-<<ERirR9ro>> *Index:* *[c]* [[vgnLV5Rd][create_documented_item_array]], [[ENlO21eb][create_documented_item_array_dir]] *[i]* [[ItsdGG8b][initialize_boxing_module]] *[p]* [[KTgNkTo8][print_org_doc]] 
-- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<vgnLV5Rd>> <<API_create_documented_item_array_filename>>
+<<GpZYwPIs>> *Index:* *[c]* [[MF2y7jVW][create_documented_item_array]], [[bLwjt13w][create_documented_item_array_dir]] *[i]* [[tj9urqLx][initialize_boxing_module]] *[p]* [[nMrzFb5y][print_org_doc]] 
+- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<MF2y7jVW>> <<API_create_documented_item_array_filename>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename::String)::Array{Documented_Item,1}
 #+END_SRC
 #+BEGIN_QUOTE
 Reads a Julia code file and returns an array of documented items.
 #+END_QUOTE
-[[file:../src/documented_item.jl::91][documented_item.jl:91]], [[ERirR9ro][back to index]]
+[[file:../src/documented_item.jl::91][documented_item.jl:91]], [[GpZYwPIs][back to index]]
 
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename_list::Array{String,1})::Array{Documented_Item,1}
@@ -709,8 +709,8 @@ create_documented_item_array(["file1","file2",...])
 *Note:* instead of a list of files you can also specify a directory,
 see [[API_create_documented_item_array_dir][create_documented_item_array_dir(...)]]
 #+END_QUOTE
-[[file:../src/documented_item.jl::130][documented_item.jl:130]], [[ERirR9ro][back to index]]
-- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<ENlO21eb>> <<API_create_documented_item_array_dir>>
+[[file:../src/documented_item.jl::130][documented_item.jl:130]], [[GpZYwPIs][back to index]]
+- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<bLwjt13w>> <<API_create_documented_item_array_dir>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array_dir(dirname::String)
 #+END_SRC
@@ -718,8 +718,8 @@ function create_documented_item_array_dir(dirname::String)
 Reads all *.jl files in a directory and returns an array of
 documented items.
 #+END_QUOTE
-[[file:../src/documented_item.jl::152][documented_item.jl:152]], [[ERirR9ro][back to index]]
-- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<ItsdGG8b>> <<API_initialize_boxing_module>>
+[[file:../src/documented_item.jl::152][documented_item.jl:152]], [[GpZYwPIs][back to index]]
+- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<tj9urqLx>> <<API_initialize_boxing_module>>
 #+BEGIN_SRC julia :eval never :exports code
 function initialize_boxing_module(;
                                   boxingModule::String="BoxingModule",
@@ -751,8 +751,8 @@ using MyBoxing
 # !statements
 #+END_SRC
 #+END_QUOTE
-[[file:../src/evaluate.jl::18][evaluate.jl:18]], [[ERirR9ro][back to index]]
-- @@latex:\phantomsection@@ *=print_org_doc=*  <<KTgNkTo8>> <<API_print_org_doc_API>>
+[[file:../src/evaluate.jl::18][evaluate.jl:18]], [[GpZYwPIs][back to index]]
+- @@latex:\phantomsection@@ *=print_org_doc=*  <<nMrzFb5y>> <<API_print_org_doc_API>>
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -784,7 +784,7 @@ print_org_doc(documented_items,tag="API",header_level=0)
 - =case_sensitive=: case sensitive index.
 - =boxingModule=: specifies the context in which "#!" code will be executed. See [[API_initialize_boxing_module][initialize_boxing_module(...)]] for details.
 #+END_QUOTE
-[[file:../src/main.jl::348][main.jl:348]], [[ERirR9ro][back to index]]
+[[file:../src/main.jl::350][main.jl:350]], [[GpZYwPIs][back to index]]
 :END:
 
 * More examples and Tips                                           :noexport:
@@ -924,111 +924,8 @@ include("../test/runtests.jl")
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
-extract_links: Error During Test
-  Got an exception of type MethodError outside of a @test
-  MethodError: Cannot `convert` an object of type SubString{String} to an object of type Tuple{String,String}
-  This may have arisen from a call to the constructor Tuple{String,String}(...),
-  since type constructors fall back to convert methods.
-  Stacktrace:
-   [1] push!(::Array{Tuple{String,String},1}, ::SubString{String}) at ./array.jl:651
-   [2] extract_links(::String) at /home/picaud/GitHub/J4Org.jl/src/links.jl:45
-   [3] macro expansion at /home/picaud/GitHub/J4Org.jl/test/links.jl:9 [inlined]
-   [4] macro expansion at ./test.jl:860 [inlined]
-   [5] anonymous at ./<missing>:?
-   [6] include_from_node1(::String) at ./loading.jl:576
-   [7] include(::String) at ./sysimg.jl:14
-   [8] macro expansion at /home/picaud/GitHub/J4Org.jl/test/runtests.jl:16 [inlined]
-   [9] macro expansion at ./test.jl:860 [inlined]
-   [10] anonymous at ./<missing>:?
-   [11] include_from_node1(::String) at ./loading.jl:576
-   [12] include(::String) at ./sysimg.jl:14
-   [13] eval(::Module, ::Any) at ./boot.jl:235
-   [14] eval_user_input(::Any, ::Base.REPL.REPLBackend) at ./REPL.jl:66
-   [15] macro expansion at /home/picaud/.julia/v0.6/Revise/src/Revise.jl:775 [inlined]
-   [16] (::Revise.##17#18{Base.REPL.REPLBackend})() at ./event.jl:73
-real_code_with_link: Error During Test
-  Got an exception of type MethodError outside of a @test
-  MethodError: Cannot `convert` an object of type SubString{String} to an object of type Tuple{String,String}
-  This may have arisen from a call to the constructor Tuple{String,String}(...),
-  since type constructors fall back to convert methods.
-  Stacktrace:
-   [1] push!(::Array{Tuple{String,String},1}, ::SubString{String}) at ./array.jl:651
-   [2] extract_links(::String) at /home/picaud/GitHub/J4Org.jl/src/links.jl:45
-   [3] extract_links at /home/picaud/GitHub/J4Org.jl/src/links.jl:60 [inlined]
-   [4] check_for_link_error(::Array{J4Org.Documented_Item,1}, ::Array{J4Org.Documented_Item,1}) at /home/picaud/GitHub/J4Org.jl/src/links.jl:119
-   [5] #org_string_documented_item#56(::String, ::Bool, ::String, ::String, ::Int64, ::String, ::Function, ::J4Org.Documented_Item, ::Array{J4Org.Documented_Item,1}, ::Array{J4Org.Documented_Item,1}) at /home/picaud/GitHub/J4Org.jl/src/main.jl:85
-   [6] (::J4Org.#kw##org_string_documented_item)(::Array{Any,1}, ::J4Org.#org_string_documented_item, ::J4Org.Documented_Item, ::Array{J4Org.Documented_Item,1}, ::Array{J4Org.Documented_Item,1}) at ./<missing>:0
-   [7] #org_string_documented_item_array#50(::Int64, ::String, ::Bool, ::Bool, ::String, ::Function, ::Array{J4Org.Documented_Item,1}, ::J4Org.#predicate#48{String,String,String}) at /home/picaud/GitHub/J4Org.jl/src/main.jl:297
-   [8] (::J4Org.#kw##org_string_documented_item_array)(::Array{Any,1}, ::J4Org.#org_string_documented_item_array, ::Array{J4Org.Documented_Item,1}, ::Function) at ./<missing>:0
-   [9] #org_string_documented_item_array#47(::String, ::String, ::String, ::Int64, ::String, ::Bool, ::Bool, ::String, ::J4Org.#org_string_documented_item_array, ::Array{J4Org.Documented_Item,1}) at /home/picaud/GitHub/J4Org.jl/src/main.jl:339
-   [10] (::J4Org.#kw##org_string_documented_item_array)(::Array{Any,1}, ::J4Org.#org_string_documented_item_array, ::Array{J4Org.Documented_Item,1}) at ./<missing>:0
-   [11] macro expansion at /home/picaud/GitHub/J4Org.jl/test/real_code.jl:6 [inlined]
-   [12] macro expansion at ./test.jl:860 [inlined]
-   [13] anonymous at ./<missing>:?
-   [14] include_from_node1(::String) at ./loading.jl:576
-   [15] include(::String) at ./sysimg.jl:14
-   [16] macro expansion at /home/picaud/GitHub/J4Org.jl/test/runtests.jl:19 [inlined]
-   [17] macro expansion at ./test.jl:860 [inlined]
-   [18] anonymous at ./<missing>:?
-   [19] include_from_node1(::String) at ./loading.jl:576
-   [20] include(::String) at ./sysimg.jl:14
-   [21] eval(::Module, ::Any) at ./boot.jl:235
-   [22] eval_user_input(::Any, ::Base.REPL.REPLBackend) at ./REPL.jl:66
-   [23] macro expansion at /home/picaud/.julia/v0.6/Revise/src/Revise.jl:775 [inlined]
-   [24] (::Revise.##17#18{Base.REPL.REPLBackend})() at ./event.jl:73
-code_1: Error During Test
-  Test threw an exception of type MethodError
-  Expression: org_string_documented_item(di, [di], [di]) == "- @@latex:\\phantomsection@@ *=myFunction=* \n#+BEGIN_SRC julia :eval never :exports code\nfunction myFunction (;x::Float64=sin(1))\n#+END_SRC\n#+BEGIN_QUOTE\nMy documentedItem\n\nline 2\n#+END_QUOTE\n\n"
-  MethodError: Cannot `convert` an object of type Void to an object of type Bool
-  This may have arisen from a call to the constructor Bool(...),
-  since type constructors fall back to convert methods.
-  Stacktrace:
-   [1] check_for_link_error(::Array{J4Org.Documented_Item,1}, ::Array{J4Org.Documented_Item,1}) at /home/picaud/GitHub/J4Org.jl/src/links.jl:136
-   [2] #org_string_documented_item#56(::String, ::Bool, ::String, ::String, ::Int64, ::String, ::Function, ::J4Org.Documented_Item, ::Array{J4Org.Documented_Item,1}, ::Array{J4Org.Documented_Item,1}) at /home/picaud/GitHub/J4Org.jl/src/main.jl:85
-   [3] macro expansion at /home/picaud/GitHub/J4Org.jl/test/runtests.jl:53 [inlined]
-   [4] macro expansion at ./test.jl:860 [inlined]
-   [5] macro expansion at /home/picaud/GitHub/J4Org.jl/test/runtests.jl:45 [inlined]
-   [6] macro expansion at ./test.jl:860 [inlined]
-   [7] anonymous at ./<missing>:?
-Test Summary:                      | Pass  Error  Total
-J4Org                              |   92      3     95
-  openclose                        |    6             6
-  skip_identifier                  |    6             6
-  skip_comma_separated_identifiers |    5             5
-  skip_where_block                 |    2             2
-  skip_declaration_block           |    3             3
-  is_abstract_and_is_type          |    2             2
-  is_enum                          |    1             1
-  extract_comment                  |    4             4
-  extract_comment_tab              |    4             4
-  function_1                       |    2             2
-  function_2                       |    2             2
-  function_3                       |    2             2
-  function_1_short                 |    2             2
-  function_2_short                 |    2             2
-  function_3_short                 |    2             2
-  struct_1                         |    2             2
-  struct_2                         |    2             2
-  struct_3                         |    2             2
-  export                           |    2             2
-  abstract                         |    2             2
-  enum                             |    3             3
-  extract_tag                      |   17            17
-  extract_tag                      |    3             3
-  find_tag                         |    3             3
-  extract_links                    |    1      1      2
-  extract_links                    |              No tests
-  extract_links_full               |    1             1
-  extract_links_full               |    1             1
-  documented_item                  |              No tests
-  di_real_code_1                   |    4             4
-  di_real_code_problematic_1       |              No tests
-  real_code_with_link              |           1      1
-  code_1                           |    4      1      5
-ERROR: LoadError: Some tests did not pass: 92 passed, 0 failed, 3 errored, 0 broken.
-while loading /home/picaud/GitHub/J4Org.jl/test/runtests.jl, in expression starting on line 5
-#+end_example
+: Test Summary: | Pass  Total
+: J4Org         |  102    102
 
 * Design tips                                                      :noexport:
 ** PDF export & phantomsection 
