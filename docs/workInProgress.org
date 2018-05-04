@@ -3,7 +3,7 @@
 
 * Project Journal
 * Project TODO
-** TODO [6/12]
+** TODO [7/15]
 - [ ] add a function to show link and targets & detect useless link_target
 - [ ] search for "export" keyword to annotate documented item 
 - [ ] even if complete_link = false, search for target in order to do pretty print (information like struct etc...)
@@ -14,8 +14,12 @@
 - [ ] add an option to extract code body
 - [ ] :RESULT: bug
 - [X] fix ugly PDF link 
-- [ ] detect constructor
+- [X] detect constructor
 - [X] for the index, lexico sort: l = L (sort not sensitive to capital)
+- [ ] support for "@macro function() ... end"
+- [ ] support for "macro a_macro"
+- [ ] support for alias/variable "const alias = something"
+
 * Change logs
 ** v0.1.0 -> v0.2.0
 - to support [[https://github.com/QBobWatson/poporg/blob/master/poporg.el][poporg]] (also see [[https://github.com/QBobWatson/poporg][QBobWatson/poporg]]) for comment editing, comment syntax is extended: 
