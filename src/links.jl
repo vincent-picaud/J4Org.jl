@@ -26,6 +26,8 @@ end
 #
 # *Test link:* [[doc_link_substituion][]]
 #
+# *Note*: duplicates are removed
+#
 function extract_links(input::String)::Link_Collection_Type
     # remove blalba "toremove" kmsdqkm (do not consider quoted links)
     input = replace(input,r"(\".*\")","")
@@ -46,13 +48,15 @@ function extract_links(input::String)::Link_Collection_Type
         offset=m.offsets[end]+length(m[1])      
     end 
     
-    v
+    return remove_link_duplicate(v)
 end
 
-#+Links
+# +Links
 #
 # This function is like [[extract_links_string][]], except that is
 # process an array of [[Documented_Item][]]
+#
+# *Note*: duplicates are removed
 #
 function extract_links(di_array::Array{Documented_Item,1})::Link_Collection_Type
     v=Link_Collection_Type(0)
@@ -61,7 +65,7 @@ function extract_links(di_array::Array{Documented_Item,1})::Link_Collection_Type
         v=vcat(v,extract_links(raw_string_doc(di)))
     end 
 
-    v
+    return remove_link_duplicate(v)
 end
 
 #+Links
@@ -154,7 +158,7 @@ function doc_link_substituion(doc::String,
                               link_prefix::String)::String
     # Extract links 
     links = extract_links(doc)
-    links = remove_link_duplicate(links)
+#    links = remove_link_duplicate(links)
 
     if isempty(links)
         return doc
