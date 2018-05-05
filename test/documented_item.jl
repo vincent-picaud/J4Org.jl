@@ -52,3 +52,14 @@ end;
     @test org_string_comment(di,[di],[di],"","BoxingModule") == "#+BEGIN_QUOTE\nThis is an enum example [[target][@enum Alpha]]\n#+END_QUOTE\n"
     @test org_string_code(di) == "#+BEGIN_SRC julia :eval never :exports code\n@enum Alpha A  B=1 C\n#+END_SRC\n"
  end;
+
+
+
+@testset "variable" begin
+    filename="$(dirname(@__FILE__))/code_examples/variable.jl"
+    t=tokenized(readstring(filename))
+    r=find_tag(t,1)
+    di=create_documented_item(t,tag_idx(r),filename=filename)
+    @test org_string_comment(di,[di],[di],"","BoxingModule") == "#+BEGIN_QUOTE\nThis is an variable example [[target][variable A]]\n#+END_QUOTE\n"
+    @test org_string_code(di) == "#+BEGIN_SRC julia :eval never :exports code\nA\n#+END_SRC\n"
+ end;
