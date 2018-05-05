@@ -162,7 +162,7 @@ end
 # *Post-condition*:
 # - returns a non-empty string
 # 
-function create_link_readable_part(di::Documented_Item)::String
+function create_magnified_link_name(di::Documented_Item)::String
 
     # start with the identifier
     identifier_as_string = identifier(di)
@@ -237,7 +237,7 @@ function doc_link_substitution(doc::String,
         # default values (to be modified)
         # link_new_target = "" if target not found 
         link_new_target = link_prefix*link_target
-        # use create_link_readable_part()
+        # use create_magnified_link_name()
         link_magnified = link_target
         
         # Find item indices having link_target as target (L:link_target)
@@ -253,11 +253,11 @@ function doc_link_substitution(doc::String,
                 link_target_idx = get_item_idx_from_link_target(link_target,di_array_universe)
 
                 if !isempty(link_target_idx)
-                    link_magnified = create_link_readable_part(di_array_universe[link_target_idx[1]])
+                    link_magnified = create_magnified_link_name(di_array_universe[link_target_idx[1]])
                 end
             end
         else 
-            link_magnified= create_link_readable_part(di_array[link_target_idx[1]])
+            link_magnified= create_magnified_link_name(di_array[link_target_idx[1]])
         end
 
         doc = doc_link_substitution_helper(doc,
