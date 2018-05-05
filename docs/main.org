@@ -239,6 +239,8 @@ then type:
 - =C-c C-e h o= to html-export the file 
 - =C-c C-e l o= to pdf-export the file 
 
+You should get this [[file:minimal_example/foo.html][minimal_example/foo.html]] file.
+
 *** Improving exported document style
 
 This was a minimal example, you can have a better look for the
