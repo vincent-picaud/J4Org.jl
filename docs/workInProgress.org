@@ -3,7 +3,7 @@
 
 * Project Journal
 * Project TODO
-** TODO [9/16]
+** TODO [10/16]
 - [ ] add a function to show link and targets & detect useless link_target
 - [ ] search for "export" keyword to annotate documented item 
 - [X] even if complete_link = false, search for target in order to do pretty print (information like struct etc...)
@@ -17,7 +17,7 @@
 - [X] detect constructor
 - [X] for the index, lexico sort: l = L (sort not sensitive to capital)
 - [ ] support for "@macro function() ... end"
-- [ ] support for "macro a_macro"
+- [X] support for "macro a_macro"
 - [X] support for alias/variable "const alias = something"
 - [ ] add procedure to generate doc without =ob-julia.el=  installed
 * Change logs
@@ -36,5 +36,6 @@
 - magnified link name if link target is present
 - complete refactoring of link engine
 - add support for variables
+- add support for macros
 * W3 Links
 

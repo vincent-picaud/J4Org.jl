@@ -70,6 +70,9 @@ You first need a minimal =init.el= file to configure Emacs.
 #+RESULTS:
 
 *** A documented Julia =Foo= module
+    :PROPERTIES:
+    :ID:       2ae4bb8f-17f2-4cb7-9fba-eff22bea6a92
+    :END:
 
 Then you need a documented module:
 
@@ -177,6 +180,7 @@ under OrgMode mode without being bothered by the "#" characters.
 
 This is the =foo.org= file.
 
+# I use bash instead of org, othewise PDF export is not working properly.
 #+BEGIN_SRC org :eval never :tangle yes :tangle minimal_example/foo.org 
 ,#+PROPERTY: header-args:julia :session *my_session* :exports code :eval no-export
 ,#+OPTIONS: ^:{}
@@ -250,7 +254,7 @@ Another example is [[https://vincent-picaud.github.io/DirectConvolution.jl/docs.
 
 * More examples 
 
-We still use our =Foo= module to provide more examples. The complete [[id:c9053a86-dea5-4bc2-a883-92a1bfde20ba][API]] is detailed after.
+We still use our [[id:2ae4bb8f-17f2-4cb7-9fba-eff22bea6a92][=Foo=]] module to provide more examples. The complete [[id:c9053a86-dea5-4bc2-a883-92a1bfde20ba][API]] is detailed after.
 
 ** =print_org_doc= options
 
@@ -300,19 +304,13 @@ For symbol that are not exported, do not forget the "Foo." prefix:
 p=Point(1.0,2.0)
 Foo.foo(2.0,p)
 #+END_SRC
-
-#+RESULTS:
-
 #+BEGIN_SRC julia
 Foo.Point(1.0, 2.0)
 Foo.Point(2.0, 4.0)
 #+END_SRC
-
-#+RESULTS:
-
 #+END_QUOTE
 [[file:minimal_example/Foo.jl::46][Foo.jl:46]]
- @@latex:\phantomsection@@  <<yhPEdQtTnorm_link_example>>
+ @@latex:\phantomsection@@  <<LFTcP2fFnorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -324,14 +322,9 @@ A simple function that computes $\sqrt{x^2+y^2}$
 p=Point(1.0,2.0);
 norm(p) 
 #+END_SRC
-
-#+RESULTS:
-
 #+BEGIN_SRC julia
 2.23606797749979
 #+END_SRC
-
-#+RESULTS:
 
 See: _struct Point_
 #+END_QUOTE
@@ -994,8 +987,10 @@ Add
     t=tokenized(readstring(filename))
     r=find_tag(t,1)
     di=create_documented_item(t,tag_idx(r),filename=filename)
-    @test org_string_comment(di,[di],[di],"","BoxingModule") == "#+BEGIN_QUOTE\nThis is an enum example [[target][@enum Alpha]]\n#+END_QUOTE\n"
-    @test org_string_code(di) == "#+BEGIN_SRC julia :eval never :exports code\n@enum Alpha A  B=1 C\n#+END_SRC\n"
+    @test org_string_comment(di,[di],[di],"","BoxingModule") == 
+      "#+BEGIN_QUOTE\nThis is an enum example [[target][@enum Alpha]]\n#+END_QUOTE\n"
+    @test org_string_code(di) == 
+     "#+BEGIN_SRC julia :eval never :exports code\n@enum Alpha A  B=1 C\n#+END_SRC\n"
  end;
 #+END_SRC
 
