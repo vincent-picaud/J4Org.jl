@@ -179,6 +179,8 @@ function create_link_readable_part(di::Documented_Item)::String
         readable_link="abstract "*readable_link
     elseif is_documented_enum_type(di)
         readable_link="@enum "*readable_link
+     elseif is_documented_variable_type(di)
+        readable_link="variable "*readable_link
     end 
 
     @assert !isempty(readable_link)

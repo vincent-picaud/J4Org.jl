@@ -927,7 +927,7 @@ include("../test/runtests.jl")
 : Test Summary: | Pass  Total
 : J4Org         |  102    102
 
-* Design tips                                                      :noexport:
+* Code/Design tips                                                
 ** PDF export & phantomsection 
 
 To be able to use links everywhere we use the
@@ -937,4 +937,63 @@ To be able to use links everywhere we use the
 ** HTML export with background
 
 See https://github.com/JuliaEditorSupport/julia-emacs/issues/53
+
+** Steps to add a new item 
+We use =enum= as example
+*** =tokenizer.jl= file
+Add: =is_enum()= and =skip_enum_block()= functions
+**** tests 
+Add 
+#+BEGIN_SRC julia :eval never :exports code 
+import J4Org: is_enum
+
+@testset "is_enum" begin
+    t=tokenized("@enum Alpha A B")
+    @test is_enum(t,1)
+end;
+
+#+END_SRC
+*** =extract.jl= file
+Add: =struct Extracted_Enum= and =extract_enum()= function.
+
+Then complete =extract_code()= to take into account the extracted =Documented_Item=.
+**** tests 
+Create a basic file like: =test/code_example/enum.jl=
+#+INCLUDE: "../test/code_examples/enum.jl" src julia :eval never :exports code 
+Add 
+#+BEGIN_SRC julia :eval never :exports code 
+import J4Org: extract_enum
+
+@testset "enum" begin
+    filename="$(dirname(@__FILE__))/code_examples/enum.jl"
+    t=tokenized(readstring(filename))
+    r = extract_enum(t,1)
+    @test r!=nothing
+    @test raw_string(r) == "@enum Alpha A  B=1 C"
+    @test identifier(r) == "Alpha"
+end;
+#+END_SRC
+*** =link.jl= file 
+
+This is not mandatory, however if you want to magnify link to enum,
+you can update the =create_link_readable_part()= function.
+**** tests 
+Link magnification is checked in [[id:b84e7269-ae02-4c64-b180-6b50d6f8aa89][=documented_item.jl=]]
+*** =documented_item.jl=
+    :PROPERTIES:
+    :ID:       b84e7269-ae02-4c64-b180-6b50d6f8aa89
+    :END:
+Add the =is_documented_enum_type()= function.
+**** tests 
+Add 
+#+BEGIN_SRC julia :eval never :exports code 
+@testset "enum" begin
+    filename="$(dirname(@__FILE__))/code_examples/enum.jl"
+    t=tokenized(readstring(filename))
+    r=find_tag(t,1)
+    di=create_documented_item(t,tag_idx(r),filename=filename)
+    @test org_string_comment(di,[di],[di],"","BoxingModule") == "#+BEGIN_QUOTE\nThis is an enum example [[target][@enum Alpha]]\n#+END_QUOTE\n"
+    @test org_string_code(di) == "#+BEGIN_SRC julia :eval never :exports code\n@enum Alpha A  B=1 C\n#+END_SRC\n"
+ end;
+#+END_SRC
 

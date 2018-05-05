@@ -45,6 +45,8 @@ is_documented_structure(di::Documented_Item)::Bool = typeof(di._code) == Extract
 is_documented_abstract_type(di::Documented_Item)::Bool = typeof(di._code) == Extracted_Abstract
 #+Documented_Item
 is_documented_enum_type(di::Documented_Item)::Bool = typeof(di._code) == Extracted_Enum
+#+Documented_Item
+is_documented_variable_type(di::Documented_Item)::Bool = typeof(di._code) == Extracted_Variable
 
 
 
