@@ -165,27 +165,29 @@ end
 function create_link_readable_part(di::Documented_Item)::String
 
     # start with the identifier
-    readable_link = identifier(di)
+    identifier_as_string = identifier(di)
 
     # try to magnify 
     # - function add identifier()
     # - strucure add struct identifier
     # - ...
     if is_documented_function(di)
-        readable_link=readable_link*"(...)"
+        magnified_link_name=identifier_as_string*"(...)"
     elseif is_documented_structure(di)
-        readable_link="struct "*readable_link
+        magnified_link_name="struct "*identifier_as_string
     elseif is_documented_abstract_type(di)
-        readable_link="abstract "*readable_link
+        magnified_link_name="abstract "*identifier_as_string
     elseif is_documented_enum_type(di)
-        readable_link="@enum "*readable_link
-     elseif is_documented_variable_type(di)
-        readable_link="variable "*readable_link
+        magnified_link_name="@enum "*identifier_as_string
+    elseif is_documented_macro_type(di)
+        magnified_link_name="@"*identifier_as_string
+    elseif is_documented_variable_type(di)
+        magnified_link_name="variable "*identifier_as_string
     end 
 
-    @assert !isempty(readable_link)
+    @assert !isempty(magnified_link_name)
 
-    return readable_link
+    return magnified_link_name
 end
 
 

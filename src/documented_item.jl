@@ -47,6 +47,8 @@ is_documented_abstract_type(di::Documented_Item)::Bool = typeof(di._code) == Ext
 is_documented_enum_type(di::Documented_Item)::Bool = typeof(di._code) == Extracted_Enum
 #+Documented_Item
 is_documented_variable_type(di::Documented_Item)::Bool = typeof(di._code) == Extracted_Variable
+#+Documented_Item
+is_documented_macro_type(di::Documented_Item)::Bool = typeof(di._code) == Extracted_Macro
 
 
 

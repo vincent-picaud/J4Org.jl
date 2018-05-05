@@ -9,6 +9,7 @@ import J4Org: extract_struct
 import J4Org: extract_export
 import J4Org: extract_abstract
 import J4Org: extract_enum
+import J4Org: extract_macro
 
 @testset "extract_comment" begin
     filename="$(dirname(@__FILE__))/code_examples/basic.jl"
@@ -173,4 +174,15 @@ end;
     t=tokenized(readstring(filename))
     r = extract_variable(t,1)
     @test r===nothing
+end;
+
+
+
+@testset "macro" begin
+    filename="$(dirname(@__FILE__))/code_examples/macro.jl"
+    t=tokenized(readstring(filename))
+    r = extract_macro(t,1)
+    @test r!=nothing
+    @test raw_string(r) == "macro swap(x,y)"
+    @test identifier(r) == "swap"
 end;

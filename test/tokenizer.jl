@@ -78,6 +78,8 @@ end;
     @test is_enum(t,1)
 end;
 
+
+
 @testset "is_const_global_local" begin
     t=tokenized("const global A=0")
     @test is_const(t,1)
@@ -86,6 +88,8 @@ end;
     @test is_const(t,1)
     @test is_local(t,3)
 end;
+
+
 
 @testset "is_macro" begin
     t=tokenized("macro Alpha(A, B)")

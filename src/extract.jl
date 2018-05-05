@@ -226,6 +226,32 @@ end
 
 
 
+struct Extracted_Macro <: Extracted_Item_Base
+    _tok::Tokenized
+    _idx_array::Array{Int,1}
+    _skip_idx::Int
+    _identifier::String
+end
+
+# +Tokenizer
+#
+# Extract macro type
+#
+function extract_macro(tok::Tokenized,idx::Int)::Union{Void,Extracted_Macro}
+
+    idx_save = skip_uninformative(tok,idx)
+    identifier=Ref{String}("")
+    idx = skip_macro_block(tok,idx_save,identifier=identifier)
+
+    if idx != idx_save
+        return Extracted_Macro(tok,collect(idx_save:idx-1),idx,identifier[])
+    end
+    
+    return nothing
+end
+
+
+
 struct Extracted_Variable <: Extracted_Item_Base
     _tok::Tokenized
     _idx_array::Array{Int,1}
@@ -299,6 +325,14 @@ function extract_code(tok::Tokenized,idx::Int)::Union{Void,Extracted_Item_Base}
     # Try enum
     #
     toReturn = extract_enum(tok,idx)
+
+    if toReturn!=nothing
+        return toReturn
+    end
+
+    # Try macro
+    #
+    toReturn = extract_macro(tok,idx)
 
     if toReturn!=nothing
         return toReturn

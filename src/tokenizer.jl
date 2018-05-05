@@ -446,7 +446,7 @@ function skip_enum_block(tok::Tokenized,idx::Int;
 end
 
 #+Tokenizer,Internal
-# Skips uniformative & @enum ... line
+# Skips uniformative & const A
 # Does not move is identifier not found
 # 
 function skip_variable_block(tok::Tokenized,idx::Int;
@@ -471,5 +471,34 @@ function skip_variable_block(tok::Tokenized,idx::Int;
         return idx
     end
     
+    return idx_save
+end
+
+#+Tokenizer,Internal
+# Skips uniformative & @enum ... line
+# Does not move is identifier not found
+# 
+function skip_macro_block(tok::Tokenized,idx::Int;
+                         identifier::Ref{String}=Ref{String}(""))::Int
+    identifier[]=""
+    idx_save = idx
+    idx = skip_uninformative(tok,idx)
+
+    
+    if is_macro(tok,idx)
+        idx=idx+1    
+        idx_check_success = idx
+        idx = skip_identifier(tok,idx,identifier=identifier)
+
+        if idx_check_success != idx
+            idx=skip_uninformative(tok,idx)
+
+            if is_opening_parenthesis(tok,idx)
+                idx=find_closing_parenthesis(tok,idx)
+                idx=idx+1
+                return idx
+            end
+        end
+    end 
     return idx_save
 end
