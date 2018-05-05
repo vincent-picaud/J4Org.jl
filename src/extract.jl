@@ -226,6 +226,32 @@ end
 
 
 
+struct Extracted_Variable <: Extracted_Item_Base
+    _tok::Tokenized
+    _idx_array::Array{Int,1}
+    _skip_idx::Int
+    _identifier::String
+end
+
+# +Tokenizer
+#
+# Extract variable type
+#
+function extract_variable(tok::Tokenized,idx::Int)::Union{Void,Extracted_Variable}
+
+    idx_save = skip_uninformative(tok,idx)
+    identifier=Ref{String}("")
+    idx = skip_variable_block(tok,idx_save,identifier=identifier)
+
+    if idx != idx_save
+        return Extracted_Variable(tok,collect(idx_save:idx-1),idx,identifier[])
+    end
+    
+    return nothing
+end
+
+
+
 #+Extracted_Item_Base
 #
 # Extract the "code" part, sequentially trying
@@ -273,6 +299,14 @@ function extract_code(tok::Tokenized,idx::Int)::Union{Void,Extracted_Item_Base}
     # Try enum
     #
     toReturn = extract_enum(tok,idx)
+
+    if toReturn!=nothing
+        return toReturn
+    end
+
+    # Try variable
+    #
+    toReturn = extract_variable(tok,idx)
 
     if toReturn!=nothing
         return toReturn

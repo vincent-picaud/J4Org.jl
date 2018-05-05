@@ -444,3 +444,32 @@ function skip_enum_block(tok::Tokenized,idx::Int;
     
     return idx_save
 end
+
+#+Tokenizer,Internal
+# Skips uniformative & @enum ... line
+# Does not move is identifier not found
+# 
+function skip_variable_block(tok::Tokenized,idx::Int;
+                         identifier::Ref{String}=Ref{String}(""))::Int
+    identifier[]=""
+    idx_save = idx
+    idx = skip_uninformative(tok,idx)
+
+    
+    if is_const(tok,idx)
+        idx =  skip_uninformative(tok,idx+1)
+    end
+
+    if is_global(tok,idx)||is_local(tok,idx)
+        idx =  skip_uninformative(tok,idx+1)
+    end
+    
+    idx_check_success = idx
+    idx = skip_identifier(tok,idx,identifier=identifier)
+
+    if idx_check_success != idx
+        return idx
+    end
+    
+    return idx_save
+end

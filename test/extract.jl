@@ -3,6 +3,7 @@ import J4Org: identifier
 import J4Org: skip
 import J4Org: raw_string
 import J4Org: extract_comment
+import J4Org: extract_variable
 import J4Org: extract_function
 import J4Org: extract_struct
 import J4Org: extract_export
@@ -138,3 +139,38 @@ end;
     @test identifier(r) == "Alpha"
 end;
 
+
+
+@testset "variable" begin
+    filename="$(dirname(@__FILE__))/code_examples/variable.jl"
+    t=tokenized(readstring(filename))
+    r = extract_variable(t,1)
+    @test r!=nothing
+    @test raw_string(r) == "A"
+    @test identifier(r) == "A"
+end;
+
+@testset "variable_const" begin
+    filename="$(dirname(@__FILE__))/code_examples/variable_const.jl"
+    t=tokenized(readstring(filename))
+    r = extract_variable(t,1)
+    @test r!=nothing
+    @test raw_string(r) == "const A"
+    @test identifier(r) == "A"
+end;
+
+@testset "variable_const_global" begin
+    filename="$(dirname(@__FILE__))/code_examples/variable_const_global.jl"
+    t=tokenized(readstring(filename))
+    r = extract_variable(t,1)
+    @test r!=nothing
+    @test raw_string(r) == "const global A"
+    @test identifier(r) == "A"
+end;
+
+@testset "variable_global_const" begin
+    filename="$(dirname(@__FILE__))/code_examples/variable_global_const.jl"
+    t=tokenized(readstring(filename))
+    r = extract_variable(t,1)
+    @test r===nothing
+end;
