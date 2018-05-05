@@ -4,6 +4,10 @@ import J4Org: is_opening_brace, is_closing_brace
 import J4Org: is_opening_square, is_closing_square
 import J4Org: is_abstract
 import J4Org: is_enum
+import J4Org: is_const
+import J4Org: is_macro
+import J4Org: is_global
+import J4Org: is_local
 import J4Org: is_type
 import J4Org: skip_identifier, skip_comma_separated_identifiers
 import J4Org: skip_where_block, skip_declaration_block
@@ -74,3 +78,16 @@ end;
     @test is_enum(t,1)
 end;
 
+@testset "is_const_global_local" begin
+    t=tokenized("const global A=0")
+    @test is_const(t,1)
+    @test is_global(t,3)
+    t=tokenized("const local A=0")
+    @test is_const(t,1)
+    @test is_local(t,3)
+end;
+
+@testset "is_macro" begin
+    t=tokenized("macro Alpha(A, B)")
+    @test is_macro(t,1)
+end;
