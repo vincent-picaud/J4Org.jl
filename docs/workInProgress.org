@@ -2,6 +2,7 @@
 #+TITLE: Work in Progress
 
 * Project Journal
+** [2018-05-05 Sat] v0.2.0 is ready
 * Project TODO
 ** TODO [10/16]
 - [ ] add a function to show link and targets & detect useless link_target
