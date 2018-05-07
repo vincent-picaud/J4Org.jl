@@ -21,6 +21,7 @@
 - [X] support for "macro a_macro"
 - [X] support for alias/variable "const alias = something"
 - [ ] add procedure to generate doc without =ob-julia.el=  installed
+- [ ] make create_doc_items_dir *recursive*
 * Change logs
 ** v0.1.0 -> v0.2.0
 - to support [[https://github.com/QBobWatson/poporg/blob/master/poporg.el][poporg]] (also see [[https://github.com/QBobWatson/poporg][QBobWatson/poporg]]) for comment editing, comment syntax is extended: 
