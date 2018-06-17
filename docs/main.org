@@ -304,13 +304,19 @@ For symbol that are not exported, do not forget the "Foo." prefix:
 p=Point(1.0,2.0)
 Foo.foo(2.0,p)
 #+END_SRC
+
+#+RESULTS:
+
 #+BEGIN_SRC julia
 Foo.Point(1.0, 2.0)
 Foo.Point(2.0, 4.0)
 #+END_SRC
+
+#+RESULTS:
+
 #+END_QUOTE
 [[file:minimal_example/Foo.jl::46][Foo.jl:46]]
- @@latex:\phantomsection@@  <<LFTcP2fFnorm_link_example>>
+ @@latex:\phantomsection@@  <<RUbly9zKnorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -322,9 +328,14 @@ A simple function that computes $\sqrt{x^2+y^2}$
 p=Point(1.0,2.0);
 norm(p) 
 #+END_SRC
+
+#+RESULTS:
+
 #+BEGIN_SRC julia
 2.23606797749979
 #+END_SRC
+
+#+RESULTS:
 
 See: _struct Point_
 #+END_QUOTE
@@ -352,9 +363,11 @@ print_org_doc(documented_items,tag="Method",header_level=0)
 
 #+RESULTS:
 :RESULTS:
+2.23606797749979
 
-<<jyjOXGEO>> *Index:* *[f]* [[JgRUGz0s][foo]] *[n]* [[KyAt2C8w][norm]] 
-- @@latex:\phantomsection@@ *=foo=*  <<JgRUGz0s>>
+
+<<dBCvfWoi>> *Index:* *[f]* [[5c0v1kbs][foo]] *[n]* [[WebpFDJ0][norm]] 
+- @@latex:\phantomsection@@ *=foo=*  <<5c0v1kbs>>
 #+BEGIN_SRC julia :eval never :exports code
 foo(r::Float64,p::Point)
 #+END_SRC
@@ -366,13 +379,19 @@ For symbol that are not exported, do not forget the "Foo." prefix:
 p=Point(1.0,2.0)
 Foo.foo(2.0,p)
 #+END_SRC
+
+#+RESULTS:
+
 #+BEGIN_SRC julia
 Foo.Point(1.0, 2.0)
 Foo.Point(2.0, 4.0)
 #+END_SRC
+
+#+RESULTS:
+
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::46][Foo.jl:46]], [[jyjOXGEO][back to index]]
-- @@latex:\phantomsection@@ *=norm=*  <<KyAt2C8w>> <<FNCqEBEwnorm_link_example>>
+[[file:minimal_example/Foo.jl::46][Foo.jl:46]], [[dBCvfWoi][back to index]]
+- @@latex:\phantomsection@@ *=norm=*  <<WebpFDJ0>> <<UFoNykVZnorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -384,13 +403,19 @@ A simple function that computes $\sqrt{x^2+y^2}$
 p=Point(1.0,2.0);
 norm(p) 
 #+END_SRC
+
+#+RESULTS:
+
 #+BEGIN_SRC julia
 2.23606797749979
 #+END_SRC
 
+#+RESULTS:
+: 2.23606797749979
+
 See: _struct Point_
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::35][Foo.jl:35]], [[jyjOXGEO][back to index]]
+[[file:minimal_example/Foo.jl::35][Foo.jl:35]], [[dBCvfWoi][back to index]]
 :END:
 
 
@@ -417,8 +442,8 @@ print_org_doc(documented_items,tag="Method",header_level=5)
 #+RESULTS:
 :RESULTS:
 
-<<I2o1QN1K>> *Index:* *[f]* [[wrfzf1LI][foo]] *[n]* [[RpQo2xJK][norm]] 
-***** *=foo=*  <<wrfzf1LI>>
+<<ixVQVKHc>> *Index:* *[f]* [[wGdX72MB][foo]] *[n]* [[okPNhSsO][norm]] 
+***** *=foo=*  <<wGdX72MB>>
 #+BEGIN_SRC julia :eval never :exports code
 foo(r::Float64,p::Point)
 #+END_SRC
@@ -435,8 +460,8 @@ Foo.Point(1.0, 2.0)
 Foo.Point(2.0, 4.0)
 #+END_SRC
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::46][Foo.jl:46]], [[I2o1QN1K][back to index]]
-***** *=norm=*  <<RpQo2xJK>> <<xvGW5wHynorm_link_example>>
+[[file:minimal_example/Foo.jl::46][Foo.jl:46]], [[ixVQVKHc][back to index]]
+***** *=norm=*  <<okPNhSsO>> <<LO8vGNMEnorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -454,7 +479,7 @@ norm(p)
 
 See: _struct Point_
 #+END_QUOTE
-[[file:minimal_example/Foo.jl::35][Foo.jl:35]], [[I2o1QN1K][back to index]]
+[[file:minimal_example/Foo.jl::35][Foo.jl:35]], [[ixVQVKHc][back to index]]
 :END:
 
 *** =tag=, =tag_to_ignore=, =identifier=
@@ -487,7 +512,7 @@ print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1)
 #+RESULTS:
 :RESULTS:
 
- @@latex:\phantomsection@@  <<uWldRFMSnorm_link_example>>
+ @@latex:\phantomsection@@  <<e6h2ajhanorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -536,7 +561,7 @@ print_org_doc(documented_items,identifier="norm", tag="Point",header_level=-1,
 #+RESULTS:
 :RESULTS:
 
- @@latex:\phantomsection@@  <<kiZRi0AqPoint_struct>>
+ @@latex:\phantomsection@@  <<MVpMsBmwPoint_struct>>
 #+BEGIN_SRC julia :eval never :exports code
 struct Point
 #+END_SRC
@@ -552,10 +577,10 @@ p=Point(1,2)
 #+END_SRC
 
 You can add any valid Org mode directive. If you want to use
-in-documentation link, use [[kiZRi0Aqnorm_link_example][norm(...)]]
+in-documentation link, use [[MVpMsBmwnorm_link_example][norm(...)]]
 #+END_QUOTE
 [[file:minimal_example/Foo.jl::8][Foo.jl:8]]
- @@latex:\phantomsection@@  <<kiZRi0Aqnorm_link_example>>
+ @@latex:\phantomsection@@  <<MVpMsBmwnorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -571,7 +596,7 @@ norm(p)
 2.23606797749979
 #+END_SRC
 
-See: [[kiZRi0AqPoint_struct][struct Point]]
+See: [[MVpMsBmwPoint_struct][struct Point]]
 #+END_QUOTE
 [[file:minimal_example/Foo.jl::35][Foo.jl:35]]
 :END:
@@ -679,15 +704,15 @@ print_org_doc(documented_items,boxingModule="J4OrgBoxing",tag="API",header_level
 #+RESULTS:
 :RESULTS:
 
-<<GpZYwPIs>> *Index:* *[c]* [[MF2y7jVW][create_documented_item_array]], [[bLwjt13w][create_documented_item_array_dir]] *[i]* [[tj9urqLx][initialize_boxing_module]] *[p]* [[nMrzFb5y][print_org_doc]] 
-- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<MF2y7jVW>> <<API_create_documented_item_array_filename>>
+<<aP7ivMRF>> *Index:* *[c]* [[SzN9ZFTx][create_documented_item_array]], [[SNlxPbcS][create_documented_item_array_dir]] *[i]* [[dwazP2ur][initialize_boxing_module]] *[p]* [[bVXaJ4ND][print_org_doc]] 
+- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<SzN9ZFTx>> <<API_create_documented_item_array_filename>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename::String)::Array{Documented_Item,1}
 #+END_SRC
 #+BEGIN_QUOTE
 Reads a Julia code file and returns an array of documented items.
 #+END_QUOTE
-[[file:../src/documented_item.jl::91][documented_item.jl:91]], [[GpZYwPIs][back to index]]
+[[file:../src/documented_item.jl::95][documented_item.jl:95]], [[aP7ivMRF][back to index]]
 
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename_list::Array{String,1})::Array{Documented_Item,1}
@@ -704,8 +729,8 @@ create_documented_item_array(["file1","file2",...])
 *Note:* instead of a list of files you can also specify a directory,
 see [[API_create_documented_item_array_dir][create_documented_item_array_dir(...)]]
 #+END_QUOTE
-[[file:../src/documented_item.jl::130][documented_item.jl:130]], [[GpZYwPIs][back to index]]
-- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<bLwjt13w>> <<API_create_documented_item_array_dir>>
+[[file:../src/documented_item.jl::134][documented_item.jl:134]], [[aP7ivMRF][back to index]]
+- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<SNlxPbcS>> <<API_create_documented_item_array_dir>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array_dir(dirname::String)
 #+END_SRC
@@ -713,8 +738,8 @@ function create_documented_item_array_dir(dirname::String)
 Reads all *.jl files in a directory and returns an array of
 documented items.
 #+END_QUOTE
-[[file:../src/documented_item.jl::152][documented_item.jl:152]], [[GpZYwPIs][back to index]]
-- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<tj9urqLx>> <<API_initialize_boxing_module>>
+[[file:../src/documented_item.jl::156][documented_item.jl:156]], [[aP7ivMRF][back to index]]
+- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<dwazP2ur>> <<API_initialize_boxing_module>>
 #+BEGIN_SRC julia :eval never :exports code
 function initialize_boxing_module(;
                                   boxingModule::String="BoxingModule",
@@ -746,8 +771,8 @@ using MyBoxing
 # !statements
 #+END_SRC
 #+END_QUOTE
-[[file:../src/evaluate.jl::18][evaluate.jl:18]], [[GpZYwPIs][back to index]]
-- @@latex:\phantomsection@@ *=print_org_doc=*  <<nMrzFb5y>> <<API_print_org_doc_API>>
+[[file:../src/evaluate.jl::18][evaluate.jl:18]], [[aP7ivMRF][back to index]]
+- @@latex:\phantomsection@@ *=print_org_doc=*  <<bVXaJ4ND>> <<API_print_org_doc_API>>
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -779,7 +804,7 @@ print_org_doc(documented_items,tag="API",header_level=0)
 - =case_sensitive=: case sensitive index.
 - =boxingModule=: specifies the context in which "#!" code will be executed. See [[API_initialize_boxing_module][initialize_boxing_module(...)]] for details.
 #+END_QUOTE
-[[file:../src/main.jl::350][main.jl:350]], [[GpZYwPIs][back to index]]
+[[file:../src/main.jl::350][main.jl:350]], [[aP7ivMRF][back to index]]
 :END:
 
 * More examples and Tips                                           :noexport:
@@ -817,7 +842,7 @@ print_org_doc(documented_items,identifier="print_org_doc",header_level=-1)
 #+RESULTS:
 :RESULTS:
 
- @@latex:\phantomsection@@  <<YdODhLT2print_org_doc_API>>
+ @@latex:\phantomsection@@  <<symMTtnLprint_org_doc_API>>
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -849,7 +874,7 @@ print_org_doc(documented_items,tag="API",header_level=0)
 - =case_sensitive=: case sensitive index.
 - =boxingModule=: specifies the context in which "#!" code will be executed. See _initialize_boxing_module(...)_ for details.
 #+END_QUOTE
-[[file:../src/main.jl::348][main.jl:348]]
+[[file:../src/main.jl::350][main.jl:350]]
 :END:
 
 *** Julia code block in comment 
@@ -872,6 +897,8 @@ You can define Julia code in comment:
 foo(x::Int) = 2*x
 #+END_SRC
 
+#+RESULTS:
+
 The generated code is:
 
 #+RESULTS:
@@ -881,6 +908,9 @@ The generated code is:
 #+BEGIN_SRC julia
 foo(x::Int)
 #+END_SRC
+
+#+RESULTS:
+
 #+BEGIN_QUOTE
 You can redefine the foo function:
 
@@ -926,7 +956,7 @@ include("../test/runtests.jl")
 
 #+RESULTS:
 : Test Summary: | Pass  Total
-: J4Org         |  102    102
+: J4Org         |  126    126
 
 * Code/Design tips                                                
 ** PDF export & phantomsection 
