@@ -86,7 +86,7 @@ end
 # - =(length(tok)+1,nothing)=: if no tag found
 #
 function find_tag(tok::Tokenized,idx::Int,predicate::Function)::Union{Void,Extract_Tag_Result}
-    const n = length(tok)
+    n = length(tok)
 
     for k in idx:n
 

@@ -88,7 +88,7 @@ end
 #
 function get_item_idx_from_link_target(link_target::String,di_array::Array{Documented_Item,1})::Vector{Int}
     v=Vector{Int}(0)
-    const n = length(di_array)
+    n = length(di_array)
     for i in 1:n
         if link_target==link(di_array[i])
             push!(v,i)

@@ -49,7 +49,7 @@ function initialize_boxing_module(;
     @assert usedModules!=String[""]
     
     # initialize a module (for boxing)
-    const module_exists = isdefined(J4Org,Symbol(boxingModule))
+    module_exists = isdefined(J4Org,Symbol(boxingModule))
 
     if force||(!module_exists)
         if length(usedModules)>0
@@ -96,8 +96,8 @@ function with_hash_evaluate(comment::String,
     # process comment, line by line 
     output=Array{String,1}(0)
     comment_line_by_line=split(comment,"\n")
-    const n_comment_line_by_line=length(comment_line_by_line)
-    const code_to_execute=r"^#[ ]?!(.*)$"
+    n_comment_line_by_line=length(comment_line_by_line)
+    code_to_execute=r"^#[ ]?!(.*)$"
     i=1
     while i<=n_comment_line_by_line
         
@@ -119,7 +119,7 @@ function with_hash_evaluate(comment::String,
         push!(output_result,"# #+BEGIN_SRC julia")
 
         while ismatch(code_to_execute,comment_line_by_line[i])
-            const code_local = match(code_to_execute,comment_line_by_line[i])[1]
+            code_local = match(code_to_execute,comment_line_by_line[i])[1]
             push!(output_code,"# "*code_local)
             show_code_local_result = !ismatch(r";\s*$",code_local) # Caveat: do not take into account final comment
             

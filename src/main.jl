@@ -124,7 +124,7 @@ end
 # *Caveat:* to make sense, the input array must be sorted.
 function create_group(array::Array{T,1},t::Function)::Array{UnitRange{Int},1} where {T}
     groups=Array{UnitRange{Int},1}(0)
-    const n = length(array)
+    n = length(array)
     if length(array)==0
         return groups
     end 
@@ -230,22 +230,22 @@ function org_string_documented_item_array(di_array::Array{Documented_Item,1},
     end
     
     # lexical grouping
-    const n_di = length(di_array_copy)
+    n_di = length(di_array_copy)
     s=""
     if n_di==0
         return s
     end
-    #    const groups = group_by_identifier_case_nonsensitive(di_array_copy)
+    #    groups = group_by_identifier_case_nonsensitive(di_array_copy)
     # sort!(di_array_copy,by=x->identifier(x))
-    # const groups = create_group(di_array_copy,x->identifier(x))
+    # groups = create_group(di_array_copy,x->identifier(x))
 
     if case_sensitive 
-        const groups = group_by_identifier_case_sensitive(di_array_copy)
+        groups = group_by_identifier_case_sensitive(di_array_copy)
     else
-        const groups = group_by_identifier_case_nonsensitive(di_array_copy)
+        groups = group_by_identifier_case_nonsensitive(di_array_copy)
     end
     
-    const n_groups = length(groups)
+    n_groups = length(groups)
 
     # generates (hidden) uuid
     uuid = Array{String,1}(0)
@@ -295,7 +295,7 @@ function org_string_documented_item_array(di_array::Array{Documented_Item,1},
     # Generate documented items
     for group_j in groups
         for j in group_j
-            const is_first = j==first(group_j)
+            is_first = j==first(group_j)
             s=s*org_string_documented_item(di_array_copy[j],
                                            di_array_copy,
                                            di_array, # universe (mainly use to find external links)

@@ -100,7 +100,7 @@ function create_documented_item_array(filename::String)::Array{Documented_Item,1
 
     tok=tokenized(readstring(filename))
 
-    const n=length(tok)
+    n=length(tok)
     idx=1
     toReturn=Array{Documented_Item,1}(0)
     

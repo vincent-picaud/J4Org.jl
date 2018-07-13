@@ -56,7 +56,7 @@ function extract_comment(tok::Tokenized,idx::Int)::Union{Void,Extracted_Item_Bas
     
     # fill idx array with contiguous comment
     idx_array=Array{Int,1}(0)
-    const n = length(tok)
+    n = length(tok)
     while (idx<=n)&&(is_comment(tok,idx))
         push!(idx_array,idx)
         idx=idx+1
