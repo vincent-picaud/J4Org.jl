@@ -57,7 +57,7 @@ function initialize_boxing_module(;
         else
             usedModules_asString = ""
         end
-        if VERSION < v"0.7"
+        if VERSION < v"0.7.0-alpha"
             eval(parse("module $(boxingModule) $(usedModules_asString) end"))
         else
             Meta.eval(parse("module $(boxingModule) $(usedModules_asString) end"))
