@@ -189,14 +189,14 @@ end
 # Reads all *.jl files in a directory and returns an array of
 # documented items.
 #
-function create_documented_item_array_dir(dirname::String)
+function create_documented_item_array_dir(dirname::AbstractString)
     # expanded_dirname=expanduser(dirname)
     # @assert isdir(expanded_dirname)
     # # tips from https://stackoverflow.com/questions/20484581/search-for-files-in-a-folder
     # files=filter(x->contains(x,r".jl$"), readdir(expanded_dirname))
     # map!(x->expanded_dirname*x,files,files)
 
-    file_names=scan_directory_return_file_names()
+    file_names=scan_directory_return_file_names(dirname)
     files=filter_julia_source_code_file_names(file_names)
     return create_documented_item_array(files)
 end 

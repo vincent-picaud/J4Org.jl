@@ -9,10 +9,10 @@ export initialize_boxing_module
 #
 function evaluate(code::Union{SubString{String},String},
                   m::Module)::String
-        result=eval(m,parse(code,raise=true))
-        io=IOBuffer()
-        show(io,"text/plain",result)
-        return String(take!(io))
+    result=eval(m,parse(code,raise=true))
+    io=IOBuffer()
+    show(io,"text/plain",result)
+    return String(take!(io))
 end
 
 # +Evaluate, API   L:initialize_boxing_module
