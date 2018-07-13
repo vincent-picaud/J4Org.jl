@@ -43,7 +43,7 @@ end
 function initialize_boxing_module(;
                                   boxingModule::String="BoxingModule",
                                   usedModules::Vector{String}=String[],
-                                  force::Bool=false)::Void
+                                  force::Bool=false)::Nothing
     # Common errors
     @assert boxingModule!=""
     @assert usedModules!=String[""]

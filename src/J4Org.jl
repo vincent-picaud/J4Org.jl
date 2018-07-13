@@ -2,6 +2,14 @@ module J4Org
 
 export create_documented_item_array_dir, print_org_doc
 
+
+
+if VERSION < v"0.7"
+    const Nothing = Void
+end
+
+
+
 #+Error 
 # You must use this function to print error message,
 # It generates a message of the form
@@ -10,7 +18,7 @@ export create_documented_item_array_dir, print_org_doc
 # #+END_EXAMPLE
 # which is an Org mode *comment*, hence it does not affect function output.
 #
-function warning_message(message::String)::Void
+function warning_message(message::String)::Nothing
     println(STDERR,"# =WARNING:= $(message)")
 end 
 

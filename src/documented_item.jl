@@ -4,7 +4,7 @@
 struct Documented_Item
     _filename::String
     _extracted_tag::Extract_Tag_Result
-    _doc::Union{Void,
+    _doc::Union{Nothing,
                 Extracted_Comment}
     _code::Extracted_Item_Base
 end 
@@ -59,7 +59,7 @@ end
 
 #+Error,Documented_Item
 # Use data from [[Documented_Item][]] to add a link after the message 
-function warning_message(di::Documented_Item,message::String)::Void
+function warning_message(di::Documented_Item,message::String)::Nothing
     warning_message("$(message) $(create_file_org_link(di))")
 end
 

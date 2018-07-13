@@ -37,7 +37,7 @@ end
     create_documented_item,
     org_string_documented_item
     
-    const code_1 = String("
+    code_1 = String("
     # This is a test file
 
     #+MyTag

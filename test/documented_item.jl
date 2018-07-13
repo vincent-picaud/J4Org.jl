@@ -10,11 +10,7 @@ import J4Org:
 @testset "documented_item" begin
     filename="$(dirname(@__FILE__))/code_examples/basic.jl"
 
-    if VERSION < v"0.7"
-        code = readstring(filename)
-    else
-        code = read(filename,String)
-    end
+    code=readcode(filename)
     t=tokenized(code)
 
     r = find_tag(t,1)
@@ -22,11 +18,7 @@ end;
 
 @testset "di_real_code_1" begin
     filename="$(dirname(@__FILE__))/code_examples/real_code_1.jl"
-    if VERSION < v"0.7"
-        code = readstring(filename)
-    else
-        code = read(filename,String)
-    end
+    code=readcode(filename)
     t=tokenized(code)
 
     r=find_tag(t,1)
@@ -59,48 +51,36 @@ end;
 
 @testset "enum" begin
     filename="$(dirname(@__FILE__))/code_examples/enum.jl"
-    if VERSION < v"0.7"
-        code = readstring(filename)
-    else
-        code = read(filename,String)
-    end
+    code=readcode(filename)
     t=tokenized(code)
 
     r=find_tag(t,1)
     di=create_documented_item(t,tag_idx(r),filename=filename)
     @test org_string_comment(di,[di],[di],"","BoxingModule") == "#+BEGIN_QUOTE\nThis is an enum example [[target][@enum Alpha]]\n#+END_QUOTE\n"
     @test org_string_code(di) == "#+BEGIN_SRC julia :eval never :exports code\n@enum Alpha A  B=1 C\n#+END_SRC\n"
- end;
+end;
 
 
 
 @testset "variable" begin
     filename="$(dirname(@__FILE__))/code_examples/variable.jl"
-    if VERSION < v"0.7"
-        code = readstring(filename)
-    else
-        code = read(filename,String)
-    end
+    code=readcode(filename)
     t=tokenized(code)
 
     r=find_tag(t,1)
     di=create_documented_item(t,tag_idx(r),filename=filename)
     @test org_string_comment(di,[di],[di],"","BoxingModule") == "#+BEGIN_QUOTE\nThis is an variable example [[target][variable A]]\n#+END_QUOTE\n"
     @test org_string_code(di) == "#+BEGIN_SRC julia :eval never :exports code\nA\n#+END_SRC\n"
- end;
+end;
 
 
 @testset "macro" begin
     filename="$(dirname(@__FILE__))/code_examples/macro.jl"
-    if VERSION < v"0.7"
-        code = readstring(filename)
-    else
-        code = read(filename,String)
-    end
+    code=readcode(filename)
     t=tokenized(code)
 
     r=find_tag(t,1)
     di=create_documented_item(t,tag_idx(r),filename=filename)
     @test org_string_comment(di,[di],[di],"","BoxingModule") == "#+BEGIN_QUOTE\nThis is an macro example [[target][@swap]]\n#+END_QUOTE\n"
     @test org_string_code(di) == "#+BEGIN_SRC julia :eval never :exports code\nmacro swap(x,y)\n#+END_SRC\n"
- end;
+end;

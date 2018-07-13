@@ -25,7 +25,7 @@ line(o::Extract_Tag_Result)::Int = first(startpos(o._tokenized[o._idx]))
 
 
 #+FindTag L:extract_tag_link
-function extract_tag(tok::Tokenized,idx::Int)::Union{Void,Extract_Tag_Result}
+function extract_tag(tok::Tokenized,idx::Int)::Union{Nothing,Extract_Tag_Result}
 
     if !is_comment(tok,idx)
         return nothing
@@ -85,7 +85,7 @@ end
 # - =(idx,Extract_Tag_Result)=: where =idx= is the position of the discovered tag
 # - =(length(tok)+1,nothing)=: if no tag found
 #
-function find_tag(tok::Tokenized,idx::Int,predicate::Function)::Union{Void,Extract_Tag_Result}
+function find_tag(tok::Tokenized,idx::Int,predicate::Function)::Union{Nothing,Extract_Tag_Result}
     n = length(tok)
 
     for k in idx:n
@@ -105,7 +105,7 @@ end
 #
 # Convenience function that uses [[find_tag_master][]] with =x->true=
 # predicate. It accepts all tags
-function find_tag(tok::Tokenized,idx::Int)::Union{Void,Extract_Tag_Result}
+function find_tag(tok::Tokenized,idx::Int)::Union{Nothing,Extract_Tag_Result}
     return find_tag(tok,idx,x->true)
 end
 
@@ -114,6 +114,6 @@ end
 # Convenience function that uses  find_tag_master find_tag  with a
 # predicate that checks for *Tag* existence.
 #
-function find_tag(tok::Tokenized,idx::Int,tag::String)::Union{Void,Extract_Tag_Result}
+function find_tag(tok::Tokenized,idx::Int,tag::String)::Union{Nothing,Extract_Tag_Result}
     return find_tag(tok,idx,x->contains(==,tags(x),tag))
 end 

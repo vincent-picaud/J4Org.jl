@@ -50,7 +50,7 @@ end
 # Extracts *contiguous* comments
 #
 # Returns nothing if no comment found
-function extract_comment(tok::Tokenized,idx::Int)::Union{Void,Extracted_Item_Base}
+function extract_comment(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Item_Base}
 
     idx=skip_whitespace(tok,idx)
     
@@ -86,7 +86,7 @@ end
 
 #+Tokenizer L:extract_function
 # Extract function
-function extract_function(tok::Tokenized,idx::Int)::Union{Void,Extracted_Function}
+function extract_function(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Function}
 
     idx=skip_uninformative(tok,idx)
 
@@ -131,7 +131,7 @@ end
 #+Tokenizer
 # Extract struct
 #
-function extract_struct(tok::Tokenized,idx::Int)::Union{Void,Extracted_Struct}
+function extract_struct(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Struct}
 
     idx_save = skip_uninformative(tok,idx)
     identifier=Ref{String}("")
@@ -157,7 +157,7 @@ end
 #+Tokenizer
 # Extract export
 #
-function extract_export(tok::Tokenized,idx::Int)::Union{Void,Extracted_Export}
+function extract_export(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Export}
 
     idx_save = skip_uninformative(tok,idx)
 
@@ -185,7 +185,7 @@ end
 #+Tokenizer
 # Extract abstract type
 #
-function extract_abstract(tok::Tokenized,idx::Int)::Union{Void,Extracted_Abstract}
+function extract_abstract(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Abstract}
 
     idx_save = skip_uninformative(tok,idx)
     identifier=Ref{String}("")
@@ -211,7 +211,7 @@ end
 #
 # Extract enum type
 #
-function extract_enum(tok::Tokenized,idx::Int)::Union{Void,Extracted_Enum}
+function extract_enum(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Enum}
 
     idx_save = skip_uninformative(tok,idx)
     identifier=Ref{String}("")
@@ -237,7 +237,7 @@ end
 #
 # Extract macro type
 #
-function extract_macro(tok::Tokenized,idx::Int)::Union{Void,Extracted_Macro}
+function extract_macro(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Macro}
 
     idx_save = skip_uninformative(tok,idx)
     identifier=Ref{String}("")
@@ -263,7 +263,7 @@ end
 #
 # Extract variable type
 #
-function extract_variable(tok::Tokenized,idx::Int)::Union{Void,Extracted_Variable}
+function extract_variable(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Variable}
 
     idx_save = skip_uninformative(tok,idx)
     identifier=Ref{String}("")
@@ -288,7 +288,7 @@ end
 #
 # *Return:* nothing if we do not understandable the code 
 #
-function extract_code(tok::Tokenized,idx::Int)::Union{Void,Extracted_Item_Base}
+function extract_code(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Item_Base}
 
     # Try function
     #
