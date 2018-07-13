@@ -159,16 +159,44 @@ function create_documented_item_array(filename_list::Array{String,1})::Array{Doc
     return docItem_array
 end 
 
+
+
+function scan_directory_return_file_names(directory_name::AbstractString)
+    expanded_dirname=expanduser(directory_name)
+    @assert isdir(expanded_dirname)
+ 
+    file_names = Vector{String}()
+
+    for (root, dirs, files) in walkdir(expanded_dirname)
+
+        for file in files
+            push!(file_names,joinpath(root, file))
+        end
+        
+    end
+
+    return file_names
+end 
+
+function filter_julia_source_code_file_names(file_names::Array{<:AbstractString,1})
+    file_name_pattern = r".jl$"
+    return filter(x->ismatch(file_name_pattern,x),file_names)
+end 
+
+    
 #+API L:create_documented_item_array_dir
 #
 # Reads all *.jl files in a directory and returns an array of
 # documented items.
 #
 function create_documented_item_array_dir(dirname::String)
-    expanded_dirname=expanduser(dirname)
-    @assert isdir(expanded_dirname)
-    # tips from https://stackoverflow.com/questions/20484581/search-for-files-in-a-folder
-    files=filter(x->contains(x,r".jl$"), readdir(expanded_dirname))
-    map!(x->expanded_dirname*x,files,files)
+    # expanded_dirname=expanduser(dirname)
+    # @assert isdir(expanded_dirname)
+    # # tips from https://stackoverflow.com/questions/20484581/search-for-files-in-a-folder
+    # files=filter(x->contains(x,r".jl$"), readdir(expanded_dirname))
+    # map!(x->expanded_dirname*x,files,files)
+
+    file_names=scan_directory_return_file_names()
+    files=filter_julia_source_code_file_names(file_names)
     return create_documented_item_array(files)
 end 
