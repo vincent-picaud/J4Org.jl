@@ -1,7 +1,6 @@
 # J4Org
 
-[![Build Status](https://travis-ci.org/vincent-picaud/J4Org.jl.svg_0.6.svg)](https://travis-ci.org/vincent-picaud/J4Org.jl) 
-[![Build Status](https://travis-ci.org/vincent-picaud/J4Org.jl.svg_0.7.svg)](https://travis-ci.org/vincent-picaud/J4Org.jl) 
+[![Build Status](https://travis-ci.org/vincent-picaud/J4Org.jl.svg?branch=master)](https://travis-ci.org/vincent-picaud/J4Org.jl) 
 [![codecov.io](http://codecov.io/github/vincent-picaud/J4Org.jl/coverage.svg?branch=master)](http://codecov.io/github/vincent-picaud/J4Org.jl?branch=master)
 
 A package to generate Julia code documentation in Emacs OrgMode documents.
