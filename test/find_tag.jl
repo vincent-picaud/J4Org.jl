@@ -34,8 +34,10 @@ end;
 
 @testset "extract_tag" begin
 
-    t=tokenized(readstring("$(dirname(@__FILE__))/code_examples/basic.jl"))
-  
+    filename = "$(dirname(@__FILE__))/code_examples/basic.jl"
+    code=readcode(filename)
+    t=tokenized(code)
+    
     @test extract_tag(t,1)==nothing
     @test extract_tag(t,2)==nothing
     @test extract_tag(t,3)!=nothing
@@ -43,7 +45,10 @@ end;
 
 @testset "find_tag" begin
 
-    t=tokenized(readstring("$(dirname(@__FILE__))/code_examples/basic.jl"))
+    filename = "$(dirname(@__FILE__))/code_examples/basic.jl"
+
+    code=readcode(filename)
+    t=tokenized(code)
 
     r = find_tag(t,1)
     @test line(r) == 3

@@ -13,7 +13,9 @@ import J4Org: extract_macro
 
 @testset "extract_comment" begin
     filename="$(dirname(@__FILE__))/code_examples/basic.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_comment(t,1)
     @test r!=nothing
     @test raw_string(r) == "# This is a test file\n"
@@ -24,7 +26,9 @@ end;
 
 @testset "extract_comment_tab" begin
     filename="$(dirname(@__FILE__))/code_examples/basic_tab.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_comment(t,1)
     @test r!=nothing
     @test raw_string(r)  == "# This is a test file\n"
@@ -36,7 +40,9 @@ end;
 
 @testset "function_1" begin
     filename="$(dirname(@__FILE__))/code_examples/function_1.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_function(t,1)
     @test r!=nothing
     @test raw_string(r) == "   function    myFunction (a;\n                           x::Float64=sin(1))"
@@ -45,7 +51,9 @@ end;
 
 @testset "function_2" begin
     filename="$(dirname(@__FILE__))/code_examples/function_2.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_function(t,1)
     @test r!=nothing
     @test raw_string(r) == "function myFunction (a{T};\n                     x::Float64=sin(1))::Bool"
@@ -53,7 +61,9 @@ end;
 
 @testset "function_3" begin
     filename="$(dirname(@__FILE__))/code_examples/function_3.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_function(t,1)
     @test r!=nothing
     @test raw_string(r) == "function myFunction (a{T};\n                     x::Float64=sin(1))::Bool where {T}"
@@ -62,7 +72,9 @@ end;
 
 @testset "function_1_short" begin
     filename="$(dirname(@__FILE__))/code_examples/function_1_short.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_function(t,1)
     @test r!=nothing
     @test raw_string(r) == "       myFunction (a;\n                   x::Float64=sin(1))"
@@ -71,7 +83,9 @@ end;
 
 @testset "function_2_short" begin
     filename="$(dirname(@__FILE__))/code_examples/function_2_short.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_function(t,1)
     @test r!=nothing
     @test raw_string(r) == "myFunction (a{T};\n            x::Float64=sin(1))::Bool"
@@ -79,7 +93,9 @@ end;
 
 @testset "function_3_short" begin
     filename="$(dirname(@__FILE__))/code_examples/function_3_short.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_function(t,1)
     @test r!=nothing
     @test raw_string(r) == "myFunction (a{T};\n            x::Float64=sin(1))::Bool where {T}"
@@ -89,7 +105,9 @@ end;
 
 @testset "struct_1" begin
     filename="$(dirname(@__FILE__))/code_examples/struct_1.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_struct(t,1)
     @test r!=nothing
     @test raw_string(r) == "mutable struct Bar"
@@ -97,7 +115,9 @@ end;
 
 @testset "struct_2" begin
     filename="$(dirname(@__FILE__))/code_examples/struct_2.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_struct(t,1)
     @test r!=nothing
     @test raw_string(r) == "struct Bar" 
@@ -105,7 +125,9 @@ end;
 
 @testset "struct_3" begin
     filename="$(dirname(@__FILE__))/code_examples/struct_3.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_struct(t,1)
     @test r!=nothing
     @test raw_string(r) == "struct Point{T<:Real} <: Pointy{T}" 
@@ -113,7 +135,9 @@ end;
 
 @testset "export" begin
     filename="$(dirname(@__FILE__))/code_examples/export.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_export(t,1)
     @test r!=nothing
     @test raw_string(r) == "export A,B,   C"
@@ -123,7 +147,9 @@ end;
 
 @testset "abstract" begin
     filename="$(dirname(@__FILE__))/code_examples/abstract.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_abstract(t,1)
     @test r!=nothing
     @test raw_string(r) == "abstract type UDWT_Filter_Biorthogonal{T<:Number} "
@@ -133,7 +159,9 @@ end;
 
 @testset "enum" begin
     filename="$(dirname(@__FILE__))/code_examples/enum.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_enum(t,1)
     @test r!=nothing
     @test raw_string(r) == "@enum Alpha A  B=1 C"
@@ -144,7 +172,9 @@ end;
 
 @testset "variable" begin
     filename="$(dirname(@__FILE__))/code_examples/variable.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_variable(t,1)
     @test r!=nothing
     @test raw_string(r) == "A"
@@ -153,7 +183,9 @@ end;
 
 @testset "variable_const" begin
     filename="$(dirname(@__FILE__))/code_examples/variable_const.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_variable(t,1)
     @test r!=nothing
     @test raw_string(r) == "const A"
@@ -162,7 +194,9 @@ end;
 
 @testset "variable_const_global" begin
     filename="$(dirname(@__FILE__))/code_examples/variable_const_global.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_variable(t,1)
     @test r!=nothing
     @test raw_string(r) == "const global A"
@@ -171,7 +205,9 @@ end;
 
 @testset "variable_global_const" begin
     filename="$(dirname(@__FILE__))/code_examples/variable_global_const.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_variable(t,1)
     @test r===nothing
 end;
@@ -180,7 +216,9 @@ end;
 
 @testset "macro" begin
     filename="$(dirname(@__FILE__))/code_examples/macro.jl"
-    t=tokenized(readstring(filename))
+    code=readcode(filename)
+    t=tokenized(code)
+
     r = extract_macro(t,1)
     @test r!=nothing
     @test raw_string(r) == "macro swap(x,y)"

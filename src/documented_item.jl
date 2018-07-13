@@ -98,7 +98,13 @@ end
 #
 function create_documented_item_array(filename::String)::Array{Documented_Item,1}
 
-    tok=tokenized(readstring(filename))
+    if VERSION < v"0.7"
+        code = readstring(filename)
+    else
+        code = read(filename,String)
+    end
+    
+    tok=tokenized(code)
 
     n=length(tok)
     idx=1

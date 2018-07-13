@@ -1,6 +1,15 @@
 using Base.Test
 using J4Org
 
+function readcode(filename::AbstractString)
+    if VERSION < v"0.7"
+        code = readstring(filename)
+    else
+        code = read(filename,String)
+    end
+    code
+end 
+ 
 # write your own tests here
 @testset "J4Org" begin
 
