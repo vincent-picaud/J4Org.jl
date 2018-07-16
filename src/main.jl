@@ -101,19 +101,19 @@ function org_string_documented_item(di::Documented_Item,
     end
     
     # Code
-    if with_body
-        s=s*org_string_code_with_body(di)
-    else 
-        s=s*org_string_code(di)
-    end
-    
+    s=s*org_string_code(di)
+        
     # Doc
     s=s*org_string_comment(di,
                            di_array,
                            di_array_universe,
                            link_prefix,
                            boxingModule)
-    
+
+     if with_body
+        s=s*org_string_code_with_body(di)
+     end
+         
     # Footer
     s=s*org_string_documented_item_footer(di,
                                           index_link=index_link)

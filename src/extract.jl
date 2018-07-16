@@ -91,7 +91,6 @@ end
 #+Tokenizer L:extract_function
 # Extract function
 function extract_function(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Function}
-    #@enum Function_Type_Eum Function_Type_Long=0 Function_Type_Short=1
     
     idx=skip_uninformative(tok,idx)
 
@@ -102,8 +101,6 @@ function extract_function(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Func
         const Function_Type_Long  = Val{:Long}
         const Function_Type_Short = Val{:Short}
         function_type =  is_function(tok,idx) ? Function_Type_Long : Function_Type_Short
-        
-     #   function_type =  Function_Type_Eum(is_function(tok,idx) ? Function_Type_Long : Function_Type_Short)
         
         # retrieve an eventual whitespace without \n <-> important: coherent preserve tabulation
         if (idx>1)&&(is_whitespace(tok,idx-1))&&(count(x->(x=='\n'),untokenize(tok[idx-1]))==0)
@@ -126,15 +123,15 @@ function extract_function(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Func
             idx=skip_where_block(tok,idx)
 
             if function_type==Function_Type_Short
-                idx_body_end = skip_line(tok,idx)-2
+                idx_body_end = skip_line(tok,idx_save )-1
             else
                 idx_body_end = find_closing_block(tok,idx,1)
-                if is_end(tok,idx_body_end)
-                    idx_body_end += 1
-                end 
+                # if is_end(tok,idx_body_end)
+                #     idx_body_end += 1
+                # end 
             end 
                 
-            return Extracted_Function(tok,collect(idx_save:idx-1),collect(idx_save:idx_body_end-1),idx,identifier[])
+            return Extracted_Function(tok,collect(idx_save:idx-1),collect(idx_save:idx_body_end),idx,identifier[])
         end 
     end
 
