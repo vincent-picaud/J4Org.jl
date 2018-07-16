@@ -83,6 +83,7 @@ end
 struct Extracted_Function <: Extracted_Item_Base
     _tok::Tokenized
     _idx_array::Array{Int,1}
+    _idx_array_with_body::Array{Int,1}
     _skip_idx::Int
     _identifier::String
 end
@@ -90,10 +91,20 @@ end
 #+Tokenizer L:extract_function
 # Extract function
 function extract_function(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Function}
-
+    #@enum Function_Type_Eum Function_Type_Long=0 Function_Type_Short=1
+    
     idx=skip_uninformative(tok,idx)
 
     if is_function(tok,idx)||is_identifier(tok,idx)
+        # long  function: function foo() .... end <-> is_function(tok,idx)   = TRUE
+        # short function: foo() = something       <-> is_identifier(tok,idx) = TRUE
+        #
+        const Function_Type_Long  = Val{:Long}
+        const Function_Type_Short = Val{:Short}
+        function_type =  is_function(tok,idx) ? Function_Type_Long : Function_Type_Short
+        
+     #   function_type =  Function_Type_Eum(is_function(tok,idx) ? Function_Type_Long : Function_Type_Short)
+        
         # retrieve an eventual whitespace without \n <-> important: coherent preserve tabulation
         if (idx>1)&&(is_whitespace(tok,idx-1))&&(count(x->(x=='\n'),untokenize(tok[idx-1]))==0)
             idx_save = idx-1
@@ -114,7 +125,15 @@ function extract_function(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Func
             idx=skip_declaration_block(tok,idx)
             idx=skip_where_block(tok,idx)
 
-            return Extracted_Function(tok,collect(idx_save:idx-1),idx,identifier[])
+            idx_body_end = idx
+            if function_type==Function_Type_Short
+                idx_body_end = skip_line(tok,idx)
+            else
+                @assert function_type==Function_Type_Long "Internal error"
+                idx_body_end = idx
+            end 
+                
+            return Extracted_Function(tok,collect(idx_save:idx-1),collect(idx_save:idx_body_end-1),idx,identifier[])
         end 
     end
 

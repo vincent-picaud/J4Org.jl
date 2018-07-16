@@ -27,8 +27,7 @@ end
 # #+END_SRC
 #
 function org_string_code_with_body(di::Documented_Item)::String
-    s=raw_string_code(di)
-    s=s*" TO COMPLETE"
+    s=raw_string_code_with_body(di)
     if !isempty(s)
         s="#+BEGIN_SRC julia :eval never :exports code\n$(s)\n#+END_SRC\n"
     end
