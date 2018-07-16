@@ -35,6 +35,12 @@ is_issubtype(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(t
 is_export(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.EXPORT)
 is_abstract(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.ABSTRACT)
 is_type(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.TYPE)
+is_end(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.END)
+is_if(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.IF)
+is_for(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.FOR)
+is_while(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.WHILE)
+is_begin(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.BEGIN)
+is_try(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.TRY)
 
 # +Tokenizer,Internal
 #
@@ -64,7 +70,14 @@ is_opening_square(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (kind(t
 is_closing_square(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (kind(tok[idx])==Tokenize.Tokens.RSQUARE)
 
 
-
+is_opening_block(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok))&&(is_structure(tok,idx)||
+                                                                       is_function(tok,idx)||
+                                                                       is_if(tok,idx)||
+                                                                       is_for(tok,idx)||
+                                                                       is_begin(tok,idx)||
+                                                                       is_try(tok,idx))
+is_closing_block(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok))&&(is_end(tok,idx))
+    
 
 #+Tokenizer,Internal,Obsolete
 # Skip comment
@@ -125,11 +138,12 @@ end
 #
 function find_closing_X_helper(tok::Tokenized,idx::Int,
                                is_opening_X::Function,
-                               is_closing_X::Function)::Int
+                               is_closing_X::Function,
+                               count_opening::Int = 0)::Int
 
-    @assert is_opening_X(tok,idx)
+    # @assert is_opening_X(tok,idx)
     
-    count_opening = 0
+    # count_opening = 0
     while idx<=length(tok)
         if is_opening_X(tok,idx)
             count_opening =  count_opening+1
@@ -169,6 +183,13 @@ function find_closing_square(tok::Tokenized,idx::Int)::Int
     return find_closing_X_helper(tok,idx,
                                  is_opening_square,
                                  is_closing_square)
+end
+
+#+
+function find_closing_block(tok::Tokenized,idx::Int)::Int
+    return find_closing_X_helper(tok,idx,
+                                 is_opening_block,
+                                 is_closing_block)
 end
 
 
