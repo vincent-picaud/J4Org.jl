@@ -11,6 +11,8 @@ identifier(ex::Extracted_Item_Base)::String = ex._identifier
 
 #+Extracted_Item_Base
 raw_string(ex::Extracted_Item_Base)::String = untokenize(ex._tok[ex._idx_array])
+#+Extracted_Item_Base
+raw_string_with_body(ex::Extracted_Item_Base)::String = untokenize(ex._tok[ex._idx_array_with_body])
 
 
 #+Extracted_Item_Base 
@@ -45,6 +47,7 @@ function raw_string(ex::Extracted_Comment)::String
     return reduce(*,"",a)
 end 
     
+raw_string_with_body(ex::Extracted_Comment) = throw("Does not make sense")
 
 #+Extracted_Item_Base L:extract_comment
 # Extracts *contiguous* comments
