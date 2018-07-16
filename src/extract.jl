@@ -125,12 +125,13 @@ function extract_function(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Func
             idx=skip_declaration_block(tok,idx)
             idx=skip_where_block(tok,idx)
 
-            idx_body_end = idx
             if function_type==Function_Type_Short
-                idx_body_end = skip_line(tok,idx)
+                idx_body_end = skip_line(tok,idx)-2
             else
-                @assert function_type==Function_Type_Long "Internal error"
-                idx_body_end = idx
+                idx_body_end = find_closing_block(tok,idx,1)
+                # if is_end(tok,idx_body_end)
+                #     idx_body_end += 1
+                # end 
             end 
                 
             return Extracted_Function(tok,collect(idx_save:idx-1),collect(idx_save:idx_body_end-1),idx,identifier[])

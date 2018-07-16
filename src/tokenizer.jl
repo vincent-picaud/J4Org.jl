@@ -166,6 +166,7 @@ end
 #+
 # assume an open parenthesis, find the closed one
 function find_closing_parenthesis(tok::Tokenized,idx::Int)::Int
+    @assert is_opening_parenthesis(tok,idx)
     return find_closing_X_helper(tok,idx,
                                  is_opening_parenthesis,
                                  is_closing_parenthesis)
@@ -173,6 +174,7 @@ end
 
 #+
 function find_closing_brace(tok::Tokenized,idx::Int)::Int
+    @assert is_opening_brace(tok,idx)
     return find_closing_X_helper(tok,idx,
                                  is_opening_brace,
                                  is_closing_brace)
@@ -180,16 +182,30 @@ end
 
 #+
 function find_closing_square(tok::Tokenized,idx::Int)::Int
+    @assert is_opening_square(tok,idx)
     return find_closing_X_helper(tok,idx,
                                  is_opening_square,
                                  is_closing_square)
 end
 
-#+
-function find_closing_block(tok::Tokenized,idx::Int)::Int
+#+Internal
+#
+# Find closing block (-> END)
+#
+# This function does not impose that the idx position is an opening
+# block. If this is the case use the count_opening::Int = 0 default
+# value.
+#
+# If you want to reach end of block starting from an already opened
+# one (for instance from the middle of a function body, use the
+# count_opening::Int = 1 value.
+#
+function find_closing_block(tok::Tokenized,idx::Int,
+                            count_opening::Int = 0)::Int
     return find_closing_X_helper(tok,idx,
                                  is_opening_block,
-                                 is_closing_block)
+                                 is_closing_block,
+                                 count_opening)
 end
 
 
