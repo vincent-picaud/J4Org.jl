@@ -695,19 +695,64 @@ print_org_doc(documented_items,boxingModule="J4OrgBoxing",tag="API",header_level
 
 #+RESULTS:
 :RESULTS:
-
-<<aP7ivMRF>> *Index:* *[c]* [[SzN9ZFTx][create_documented_item_array]], [[SNlxPbcS][create_documented_item_array_dir]] *[i]* [[dwazP2ur][initialize_boxing_module]] *[p]* [[bVXaJ4ND][print_org_doc]] 
-- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<SzN9ZFTx>> <<API_create_documented_item_array_filename>>
+WARNING: Method definition extract_function(Array{Tokenize.Tokens.Token, 1}, Int64) in module J4Org at /home/picaud/GitHub/J4Org.jl/src/extract.jl:96 overwritten at /home/picaud/GitHub/J4Org.jl/src/extract.jl:96.
+<<dPpe6bcP>> *Index:* *[c]* [[BvuZRjhj][create_documented_item_array]], [[fB9GJRnY][create_documented_item_array_dir]] *[i]* [[PuyNqvGv][initialize_boxing_module]] *[p]* [[nw3ZyjtW][print_org_doc]] 
+- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<BvuZRjhj>> <<API_create_documented_item_array_filename>>
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename::String)::Array{Documented_Item,1}
+
+    if VERSION < v"0.7"
+        code = readstring(filename)
+    else
+        code = read(filename,String)
+    end
+    
+    tok=tokenized(code)
+
+    n=length(tok)
+    idx=1
+    toReturn=Array{Documented_Item,1}(0)
+    
+    while idx<=n
+        extracted_tag = find_tag(tok,idx)
+
+        # no more tag?
+        # 
+        if extracted_tag==nothing
+            break
+        end 
+
+        try
+            di=create_documented_item(extracted_tag,filename=filename)
+            push!(toReturn,di)
+        catch msg
+            warning_message("cannot interpret $(filename):$(line(extracted_tag)) $(msg)")
+        end
+
+        # important to rescan after tag (and not after code):
+        # tag1
+        # struct foo
+        #   tag2 <- catch me!
+        #   constructor
+        # end 
+        idx=skip(extracted_tag)
+    end
 #+END_SRC
 #+BEGIN_QUOTE
 Reads a Julia code file and returns an array of documented items.
 #+END_QUOTE
-[[file:../src/documented_item.jl::95][documented_item.jl:95]], [[aP7ivMRF][back to index]]
+[[file:../src/documented_item.jl::97][documented_item.jl:97]], [[dPpe6bcP][back to index]]
 
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename_list::Array{String,1})::Array{Documented_Item,1}
+    docItem_array = Array{Documented_Item,1}()
+    
+    for file in filename_list
+        docItem_array = vcat(docItem_array,create_documented_item_array(file))
+    end 
+
+    return docItem_array
+end
 #+END_SRC
 #+BEGIN_QUOTE
 Reads an array of Julia code files and returns an array of
@@ -721,22 +766,59 @@ create_documented_item_array(["file1","file2",...])
 *Note:* instead of a list of files you can also specify a directory,
 see [[API_create_documented_item_array_dir][create_documented_item_array_dir(...)]]
 #+END_QUOTE
-[[file:../src/documented_item.jl::134][documented_item.jl:134]], [[aP7ivMRF][back to index]]
-- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<SNlxPbcS>> <<API_create_documented_item_array_dir>>
+[[file:../src/documented_item.jl::142][documented_item.jl:142]], [[dPpe6bcP][back to index]]
+- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<fB9GJRnY>> <<API_create_documented_item_array_dir>>
 #+BEGIN_SRC julia :eval never :exports code
-function create_documented_item_array_dir(dirname::String)
+function create_documented_item_array_dir(dirname::AbstractString)
+    # expanded_dirname=expanduser(dirname)
+    # @assert isdir(expanded_dirname)
+    # # tips from https://stackoverflow.com/questions/20484581/search-for-files-in-a-folder
+    # files=filter(x->contains(x,r".jl$"), readdir(expanded_dirname))
+    # map!(x->expanded_dirname*x,files,files)
+
+    file_names=scan_directory_return_file_names(dirname)
+    files=filter_julia_source_code_file_names(file_names)
+    return create_documented_item_array(files)
+end
 #+END_SRC
 #+BEGIN_QUOTE
 Reads all *.jl files in a directory and returns an array of
 documented items.
 #+END_QUOTE
-[[file:../src/documented_item.jl::156][documented_item.jl:156]], [[aP7ivMRF][back to index]]
-- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<dwazP2ur>> <<API_initialize_boxing_module>>
+[[file:../src/documented_item.jl::189][documented_item.jl:189]], [[dPpe6bcP][back to index]]
+- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<PuyNqvGv>> <<API_initialize_boxing_module>>
 #+BEGIN_SRC julia :eval never :exports code
 function initialize_boxing_module(;
                                   boxingModule::String="BoxingModule",
                                   usedModules::Vector{String}=String[],
-                                  force::Bool=false)::Void
+                                  force::Bool=false)::Nothing
+    # Common errors
+    @assert boxingModule!=""
+    @assert usedModules!=String[""]
+    
+    # initialize a module (for boxing)
+    module_exists = isdefined(J4Org,Symbol(boxingModule))
+
+    if force||(!module_exists)
+        if length(usedModules)>0
+            usedModules_asString = "using $(foldr((x,y)->x*", "*y,"",usedModules)[1:end-2]) "
+        else
+            usedModules_asString = ""
+        end
+        if VERSION < v"0.7.0-alpha"
+            eval(parse("module $(boxingModule) $(usedModules_asString) end"))
+        else
+            Meta.eval(parse("module $(boxingModule) $(usedModules_asString) end"))
+        end
+    else
+        # force=false && module_exists = true
+        # -> nothing is done... interpreted as an error if usedModules if different
+        # --> however for the moment we do not know how to get module "used" module_name
+        #     thus we trigger an error if usedModules is not empty 
+        @assert isempty(usedModules) "Tried to define an already existing module, maybe use the force=true kwarg"
+    end
+    nothing
+end
 #+END_SRC
 #+BEGIN_QUOTE
 Initialize a boxing module. This module is used to run Julia comment
@@ -763,8 +845,8 @@ using MyBoxing
 # !statements
 #+END_SRC
 #+END_QUOTE
-[[file:../src/evaluate.jl::18][evaluate.jl:18]], [[aP7ivMRF][back to index]]
-- @@latex:\phantomsection@@ *=print_org_doc=*  <<bVXaJ4ND>> <<API_print_org_doc_API>>
+[[file:../src/evaluate.jl::18][evaluate.jl:18]], [[dPpe6bcP][back to index]]
+- @@latex:\phantomsection@@ *=print_org_doc=*  <<nw3ZyjtW>> <<API_print_org_doc_API>>
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -774,7 +856,19 @@ function print_org_doc(di_array::Array{Documented_Item,1};
                        link_prefix::String=randstring(),
                        complete_link::Bool=false,
                        case_sensitive::Bool=true,
-                       boxingModule::String="BoxingModule")
+                       boxingModule::String="BoxingModule",
+                       with_body::Bool=false)
+    print(org_string_documented_item_array(di_array,
+                                           tag=tag,
+                                           tag_to_ignore=tag_to_ignore,
+                                           identifier=identifier,
+                                           header_level=header_level,
+                                           link_prefix=link_prefix,
+                                           complete_link=complete_link,
+                                           case_sensitive=case_sensitive,
+                                           boxingModule=boxingModule,
+                                           with_body=with_body))
+end
 #+END_SRC
 #+BEGIN_QUOTE
 Prints generated documentation to be exported by OrgMode, this is the main function of the =J4Org= package.
@@ -795,9 +889,11 @@ print_org_doc(documented_items,tag="API",header_level=0)
 - =complete_link=: if true, try to fix link without target by adding extra items
 - =case_sensitive=: case sensitive index.
 - =boxingModule=: specifies the context in which "#!" code will be executed. See [[API_initialize_boxing_module][initialize_boxing_module(...)]] for details.
+- =with_body::Bool=: if true include code body
 #+END_QUOTE
-[[file:../src/main.jl::350][main.jl:350]], [[aP7ivMRF][back to index]]
+[[file:../src/main.jl::359][main.jl:359]], [[dPpe6bcP][back to index]]
 :END:
+
 
 * More examples and Tips                                           :noexport:
 

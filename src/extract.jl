@@ -129,9 +129,9 @@ function extract_function(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Func
                 idx_body_end = skip_line(tok,idx)-2
             else
                 idx_body_end = find_closing_block(tok,idx,1)
-                # if is_end(tok,idx_body_end)
-                #     idx_body_end += 1
-                # end 
+                if is_end(tok,idx_body_end)
+                    idx_body_end += 1
+                end 
             end 
                 
             return Extracted_Function(tok,collect(idx_save:idx-1),collect(idx_save:idx_body_end-1),idx,identifier[])
