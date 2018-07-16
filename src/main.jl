@@ -101,10 +101,10 @@ function org_string_documented_item(di::Documented_Item,
     end
     
     # Code
-    if with_body::Bool==false
-        s=s*org_string_code(di)
+    if with_body
+        s=s*org_string_code_with_body(di)
     else 
-        s=s*org_string_code_body(di)
+        s=s*org_string_code(di)
     end
     
     # Doc
