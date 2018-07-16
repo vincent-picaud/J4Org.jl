@@ -80,7 +80,8 @@ function org_string_documented_item(di::Documented_Item,
                                     uuid_link::String="",
                                     index_link::String="",
                                     header_level::Int=0,
-                                    boxingModule::String="BoxingModule")::String
+                                    boxingModule::String="BoxingModule",
+                                    with_body::Bool=false)::String
     # check links for error
     check_for_link_error(di_array,di_array_universe)
     
@@ -99,9 +100,13 @@ function org_string_documented_item(di::Documented_Item,
         s=s*"\n"
     end
     
-    # Code 
-    s=s*org_string_code(di)
-
+    # Code
+    if with_body::Bool==false
+        s=s*org_string_code(di)
+    else 
+        s=s*org_string_code_body(di)
+    end
+    
     # Doc
     s=s*org_string_comment(di,
                            di_array,
@@ -193,7 +198,8 @@ function org_string_documented_item_array(di_array::Array{Documented_Item,1},
                                           link_prefix::String=randstring(),
                                           complete_link::Bool=false,
                                           case_sensitive::Bool=true,
-                                          boxingModule::String="BoxingModule")::String
+                                          boxingModule::String="BoxingModule",
+                       with_body::Bool=false)::String
 
     # extract what we need 
     di_array_copy=filter(predicate,di_array)
@@ -303,7 +309,8 @@ function org_string_documented_item_array(di_array::Array{Documented_Item,1},
                                            index_link   = index_label,
                                            uuid_link    = uuid[j],
                                            link_prefix  = link_prefix,
-                                           boxingModule=boxingModule)
+                                           boxingModule=boxingModule,
+                                           with_body=with_body)
         end
     end
     
@@ -327,7 +334,8 @@ function org_string_documented_item_array(di_array::Array{Documented_Item,1};
                                           link_prefix::String=randstring(),
                                           complete_link::Bool=false,
                                           case_sensitive::Bool=true,
-                                          boxingModule::String="BoxingModule")::String
+                                          boxingModule::String="BoxingModule",
+                                          with_body::Bool=false)::String
 
     function predicate(di::Documented_Item)
         ok = true
@@ -344,7 +352,8 @@ function org_string_documented_item_array(di_array::Array{Documented_Item,1};
                                             link_prefix=link_prefix,
                                             complete_link=complete_link,
                                             case_sensitive=case_sensitive,
-                                            boxingModule=boxingModule)
+                                            boxingModule=boxingModule,
+                                           with_body=with_body)
 end
 
 #+API                                                                L:print_org_doc_API
@@ -367,6 +376,7 @@ end
 # - =complete_link=: if true, try to fix link without target by adding extra items
 # - =case_sensitive=: case sensitive index.
 # - =boxingModule=: specifies the context in which "#!" code will be executed. See [[initialize_boxing_module][]] for details.
+# - =with_body::Bool=: if true include code body
 #
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -376,7 +386,8 @@ function print_org_doc(di_array::Array{Documented_Item,1};
                        link_prefix::String=randstring(),
                        complete_link::Bool=false,
                        case_sensitive::Bool=true,
-                       boxingModule::String="BoxingModule")
+                       boxingModule::String="BoxingModule",
+                       with_body::Bool=false)
     print(org_string_documented_item_array(di_array,
                                            tag=tag,
                                            tag_to_ignore=tag_to_ignore,
@@ -385,6 +396,7 @@ function print_org_doc(di_array::Array{Documented_Item,1};
                                            link_prefix=link_prefix,
                                            complete_link=complete_link,
                                            case_sensitive=case_sensitive,
-                                           boxingModule=boxingModule))
+                                           boxingModule=boxingModule,
+                                           with_body=with_body))
 end 
 
