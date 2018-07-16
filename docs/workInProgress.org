@@ -6,6 +6,22 @@
 ** [2018-07-16 Mon] working on v.0.2.1
 *** Recursive search for *.jl files
 *** with_body option 
+For the moment
+- comment 
+- function
+- struct 
+considered
+*CAVEAT*: certainly buged for 
+#+BEGIN_SRC julia :eval never
+foo() = ...several lines...
+#+END_SRC
+as we only go to end of line (tokenier and not parsing).
+Fix: turns these long function into true function
+#+BEGIN_SRC julia :eval never
+function foo()
+  # long body
+end 
+#+END_SRC
 ** [2018-05-05 Sat] v0.2.0 is ready
 * Project TODO
 ** TODO [10/16]
