@@ -49,15 +49,12 @@ is_try(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx
 # #+BEGIN_SRC julia :eval never :exports code 
 # @enum ...
 # #+END_SRC
-#
-# *Example*:
-#
-# !tok = collect(Tokenize.tokenize("@enum Alpha A B"));
-# !is_enum(tok,1)
 # 
-is_enum(tok::Tokenized,idx::Int)::Bool = (idx+1<=length(tok)) &&
-    (exactkind(tok[idx])==Tokenize.Tokens.AT_SIGN) &&
-    (untokenize(tok[idx+1])=="enum")
+function is_enum(tok::Tokenized,idx::Int)::Bool
+    return (idx+1<=length(tok)) &&
+        (exactkind(tok[idx])==Tokenize.Tokens.AT_SIGN) &&
+        (untokenize(tok[idx+1])=="enum")
+end
 
 
 
@@ -70,12 +67,15 @@ is_opening_square(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (kind(t
 is_closing_square(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (kind(tok[idx])==Tokenize.Tokens.RSQUARE)
 
 
-is_opening_block(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok))&&(is_structure(tok,idx)||
-                                                                       is_function(tok,idx)||
-                                                                       is_if(tok,idx)||
-                                                                       is_for(tok,idx)||
-                                                                       is_begin(tok,idx)||
-                                                                       is_try(tok,idx))
+function is_opening_block(tok::Tokenized,idx::Int)::Bool
+    return (idx<=length(tok))&&(is_structure(tok,idx)||
+                                is_function(tok,idx)||
+                                is_if(tok,idx)||
+                                is_for(tok,idx)||
+                                is_begin(tok,idx)||
+                                is_try(tok,idx))
+end
+
 is_closing_block(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok))&&(is_end(tok,idx))
     
 

@@ -2,6 +2,10 @@
 #+TITLE: Work in Progress
 
 * Project Journal
+  
+** [2018-07-16 Mon] working on v.0.2.1
+*** Recursive search for *.jl files
+*** with_body option 
 ** [2018-05-05 Sat] v0.2.0 is ready
 * Project TODO
 ** TODO [10/16]

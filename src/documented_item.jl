@@ -1,4 +1,4 @@
-#+Documented_Item L:Documented_Item
+#+Documented_Item,Internal L:Documented_Item
 # A *central* structure containing documented item
 #
 struct Documented_Item

@@ -690,14 +690,37 @@ The API is simple, with very few functions:
 
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array_dir("../src/");
-print_org_doc(documented_items,boxingModule="J4OrgBoxing",tag="API",header_level=0,link_prefix="API_",with_body=true)
+print_org_doc(documented_items,boxingModule="J4OrgBoxing",tag=["API","Internal"],header_level=0,link_prefix="API_",with_body=true)
 #+END_SRC
 
 #+RESULTS:
 :RESULTS:
-WARNING: Method definition extract_function(Array{Tokenize.Tokens.Token, 1}, Int64) in module J4Org at /home/picaud/GitHub/J4Org.jl/src/extract.jl:96 overwritten at /home/picaud/GitHub/J4Org.jl/src/extract.jl:96.
-<<dPpe6bcP>> *Index:* *[c]* [[BvuZRjhj][create_documented_item_array]], [[fB9GJRnY][create_documented_item_array_dir]] *[i]* [[PuyNqvGv][initialize_boxing_module]] *[p]* [[nw3ZyjtW][print_org_doc]] 
-- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<BvuZRjhj>> <<API_create_documented_item_array_filename>>
+
+<<kgn9knpD>> *Index:* *[D]* [[qm975XlT][Documented_Item]] *[c]* [[ZizOkgIU][create_documented_item_array]], [[b5m6Kbh3][create_documented_item_array_dir]], [[MA6vbIHd][create_group]] *[f]* [[1YuNv0Hp][find_closing_X_helper]], [[h8VHlw3U][find_closing_block]] *[g]* [[iK4GjSxa][group_by_identifier_case_nonsensitive]], [[T9plU2ml][group_by_identifier_case_sensitive]] *[i]* [[lyFPWy8S][initialize_boxing_module]], [[Igmna4FW][is_endmarker]], [[cnlfU4gA][is_enum]], [[B3AHGHUx][is_opening_parenthesis]], [[ovJKVcOA][is_structure]], [[MrpF1KWz][is_whitespace_n]] *[o]* [[LtzKMe0E][org_string_code]], [[UCIW5kc5][org_string_code_with_body]] *[p]* [[6NnAKWM4][print_org_doc]] *[r]* [[HsvMoBaE][raw_string_with_body]] *[s]* [[tCR0D5WJ][skip_abstract_block]], [[PX7r6tvj][skip_comma_separated_identifiers]], [[YI07DWf2][skip_comment]], [[tOSOPVhb][skip_declaration_block]], [[20w33ocb][skip_enum_block]], [[mSsOaF7i][skip_function_call_block]], [[SaViG9fx][skip_identifier]], [[Fgozo6uY][skip_issubtype_block]], [[QpWx2mHu][skip_line]], [[yuPCfAhE][skip_macro_block]], [[37LOskpd][skip_struct_block]], [[bSaTXGqn][skip_uninformative]], [[FTJIISZE][skip_variable_block]], [[vQ8mjYCX][skip_where_block]], [[AGMSIZGx][skip_whitespace]], [[7P1f9wMv][skip_whitespace_strict]] *[t]* [[tmrp9U7X][tokenized]] 
+- @@latex:\phantomsection@@ *=Documented_Item=*  <<qm975XlT>> <<API_Documented_Item>>
+#+BEGIN_SRC julia :eval never :exports code
+struct Documented_Item
+#+END_SRC
+#+BEGIN_QUOTE
+A *central* structure containing documented item
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+struct Documented_Item
+    _filename::String
+    _extracted_tag::Extract_Tag_Result
+    _doc::Union{Nothing,
+                Extracted_Comment}
+    _code::Extracted_Item_Base
+end
+#+END_SRC
+[[file:../src/documented_item.jl::1][documented_item.jl:1]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=create_documented_item_array=*  <<ZizOkgIU>> <<API_create_documented_item_array_filename>>
+#+BEGIN_SRC julia :eval never :exports code
+function create_documented_item_array(filename::String)::Array{Documented_Item,1}
+#+END_SRC
+#+BEGIN_QUOTE
+Reads a Julia code file and returns an array of documented items.
+#+END_QUOTE
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename::String)::Array{Documented_Item,1}
 
@@ -738,21 +761,10 @@ function create_documented_item_array(filename::String)::Array{Documented_Item,1
         idx=skip(extracted_tag)
     end
 #+END_SRC
-#+BEGIN_QUOTE
-Reads a Julia code file and returns an array of documented items.
-#+END_QUOTE
-[[file:../src/documented_item.jl::97][documented_item.jl:97]], [[dPpe6bcP][back to index]]
+[[file:../src/documented_item.jl::97][documented_item.jl:97]], [[kgn9knpD][back to index]]
 
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array(filename_list::Array{String,1})::Array{Documented_Item,1}
-    docItem_array = Array{Documented_Item,1}()
-    
-    for file in filename_list
-        docItem_array = vcat(docItem_array,create_documented_item_array(file))
-    end 
-
-    return docItem_array
-end
 #+END_SRC
 #+BEGIN_QUOTE
 Reads an array of Julia code files and returns an array of
@@ -766,8 +778,26 @@ create_documented_item_array(["file1","file2",...])
 *Note:* instead of a list of files you can also specify a directory,
 see [[API_create_documented_item_array_dir][create_documented_item_array_dir(...)]]
 #+END_QUOTE
-[[file:../src/documented_item.jl::142][documented_item.jl:142]], [[dPpe6bcP][back to index]]
-- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<fB9GJRnY>> <<API_create_documented_item_array_dir>>
+#+BEGIN_SRC julia :eval never :exports code
+function create_documented_item_array(filename_list::Array{String,1})::Array{Documented_Item,1}
+    docItem_array = Array{Documented_Item,1}()
+    
+    for file in filename_list
+        docItem_array = vcat(docItem_array,create_documented_item_array(file))
+    end 
+
+    return docItem_array
+end
+#+END_SRC
+[[file:../src/documented_item.jl::142][documented_item.jl:142]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=create_documented_item_array_dir=*  <<b5m6Kbh3>> <<API_create_documented_item_array_dir>>
+#+BEGIN_SRC julia :eval never :exports code
+function create_documented_item_array_dir(dirname::AbstractString)
+#+END_SRC
+#+BEGIN_QUOTE
+Reads all *.jl files in a directory and returns an array of
+documented items.
+#+END_QUOTE
 #+BEGIN_SRC julia :eval never :exports code
 function create_documented_item_array_dir(dirname::AbstractString)
     # expanded_dirname=expanduser(dirname)
@@ -781,12 +811,180 @@ function create_documented_item_array_dir(dirname::AbstractString)
     return create_documented_item_array(files)
 end
 #+END_SRC
+[[file:../src/documented_item.jl::189][documented_item.jl:189]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=create_group=*  <<MA6vbIHd>>
+#+BEGIN_SRC julia :eval never :exports code
+function create_group(array::Array{T,1},t::Function)::Array{UnitRange{Int},1} where {T}
+#+END_SRC
 #+BEGIN_QUOTE
-Reads all *.jl files in a directory and returns an array of
-documented items.
+Given a transformation t(x) creates groups (a vector of UnitRange) where
+t(x_i), i in group_k is constant
+
+*Caveat:* to make sense, the input array must be sorted.
 #+END_QUOTE
-[[file:../src/documented_item.jl::189][documented_item.jl:189]], [[dPpe6bcP][back to index]]
-- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<PuyNqvGv>> <<API_initialize_boxing_module>>
+#+BEGIN_SRC julia :eval never :exports code
+function create_group(array::Array{T,1},t::Function)::Array{UnitRange{Int},1} where {T}
+    groups=Array{UnitRange{Int},1}(0)
+    n = length(array)
+    if length(array)==0
+        return groups
+    end 
+    i,j=1,2
+    current_identifier = t(array[1])
+    while(j<=n)
+        if current_identifier!=t(array[j])
+            push!(groups,i:j-1)
+            i=j
+            current_identifier=t(array[j])
+        end
+        j=j+1
+    end
+#+END_SRC
+[[file:../src/main.jl::124][main.jl:124]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=find_closing_X_helper=*  <<1YuNv0Hp>>
+#+BEGIN_SRC julia :eval never :exports code
+function find_closing_X_helper(tok::Tokenized,idx::Int,
+                               is_opening_X::Function,
+                               is_closing_X::Function,
+                               count_opening::Int = 0)::Int
+#+END_SRC
+#+BEGIN_SRC julia :eval never :exports code
+function find_closing_X_helper(tok::Tokenized,idx::Int,
+                               is_opening_X::Function,
+                               is_closing_X::Function,
+                               count_opening::Int = 0)::Int
+
+    # @assert is_opening_X(tok,idx)
+    
+    # count_opening = 0
+    while idx<=length(tok)
+        if is_opening_X(tok,idx)
+            count_opening =  count_opening+1
+	    idx=idx+1
+            continue
+        end
+
+        if is_closing_X(tok,idx)
+            count_opening = count_opening-1
+            if count_opening == 0
+                return idx
+            end
+        end
+        idx=idx+1
+    end
+#+END_SRC
+[[file:../src/tokenizer.jl::137][tokenizer.jl:137]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=find_closing_block=*  <<h8VHlw3U>>
+#+BEGIN_SRC julia :eval never :exports code
+function find_closing_block(tok::Tokenized,idx::Int,
+                            count_opening::Int = 0)::Int
+#+END_SRC
+#+BEGIN_QUOTE
+Find closing block (-> END)
+
+This function does not impose that the idx position is an opening
+block. If this is the case use the count_opening::Int = 0 default
+value.
+
+If you want to reach end of block starting from an already opened
+one (for instance from the middle of a function body, use the
+count_opening::Int = 1 value.
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function find_closing_block(tok::Tokenized,idx::Int,
+                            count_opening::Int = 0)::Int
+    return find_closing_X_helper(tok,idx,
+                                 is_opening_block,
+                                 is_closing_block,
+                                 count_opening)
+end
+#+END_SRC
+[[file:../src/tokenizer.jl::191][tokenizer.jl:191]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=group_by_identifier_case_nonsensitive=*  <<iK4GjSxa>>
+#+BEGIN_SRC julia :eval never :exports code
+function group_by_identifier_case_nonsensitive(di_array::Array{Documented_Item,1})::Array{UnitRange{Int},1}
+#+END_SRC
+#+BEGIN_QUOTE
+Creates groups sharing the same identifier with correct lexical order 
+
+This version is *case nonsensitive*
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function group_by_identifier_case_nonsensitive(di_array::Array{Documented_Item,1})::Array{UnitRange{Int},1}
+
+    # Group without taking into account uppercase/lowercase
+    #
+    t(x)=uppercase(identifier(x))
+    sort!(di_array, by = t)
+    groups = create_group(di_array,t)
+    
+    # Sort taking account uppercase/lowercase for each group
+    #
+    for group_i in groups
+        sort!(view(di_array,group_i), by = x -> identifier(x))
+    end
+    # Rebuild group taking account uppercase/lowercase
+    #
+    groups = create_group(di_array,x->identifier(x))
+    
+    return groups
+end
+#+END_SRC
+[[file:../src/main.jl::150][main.jl:150]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=group_by_identifier_case_sensitive=*  <<T9plU2ml>>
+#+BEGIN_SRC julia :eval never :exports code
+function group_by_identifier_case_sensitive(di_array::Array{Documented_Item,1})::Array{UnitRange{Int},1}
+#+END_SRC
+#+BEGIN_QUOTE
+Creates groups sharing the same identifier with correct lexical order 
+
+This version is *case sensitive* (capitals are in front)
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function group_by_identifier_case_sensitive(di_array::Array{Documented_Item,1})::Array{UnitRange{Int},1}
+
+    # Group without taking into account uppercase/lowercase
+    #
+    t(x)=identifier(x)
+    sort!(di_array, by = t)
+    groups = create_group(di_array,t)
+    
+    return groups
+end
+#+END_SRC
+[[file:../src/main.jl::175][main.jl:175]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=initialize_boxing_module=*  <<lyFPWy8S>> <<API_initialize_boxing_module>>
+#+BEGIN_SRC julia :eval never :exports code
+function initialize_boxing_module(;
+                                  boxingModule::String="BoxingModule",
+                                  usedModules::Vector{String}=String[],
+                                  force::Bool=false)::Nothing
+#+END_SRC
+#+BEGIN_QUOTE
+Initialize a boxing module. This module is used to run Julia comment
+code snippet (tagged by "#!" or by "# !")
+
+*Example:*
+#+BEGIN_SRC julia :eval never :exports code
+initialize_boxing_module(boxingModule="MyBoxing",
+                         usedModules=["RequiredPackage_1",
+                                      "RequiredPackage_2",...])
+#+END_SRC
+
+creates
+
+#+BEGIN_SRC julia :eval never :exports code
+module MyBoxing
+using RequiredPackage_1,RequiredPackage_2,...
+end 
+#+END_SRC
+
+and future "# !" statements are executed after using MyBoxing:
+#+BEGIN_SRC julia :eval never :exports code
+using MyBoxing
+# !statements
+#+END_SRC
+#+END_QUOTE
 #+BEGIN_SRC julia :eval never :exports code
 function initialize_boxing_module(;
                                   boxingModule::String="BoxingModule",
@@ -820,33 +1018,145 @@ function initialize_boxing_module(;
     nothing
 end
 #+END_SRC
+[[file:../src/evaluate.jl::18][evaluate.jl:18]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=is_endmarker=*  <<Igmna4FW>>
+#+BEGIN_SRC julia :eval never :exports code
+is_endmarker(tok::Tokenized,idx::Int)::Bool
+#+END_SRC
 #+BEGIN_QUOTE
-Initialize a boxing module. This module is used to run Julia comment
-code snippet (tagged by "#!" or by "# !")
-
-*Example:*
+Checks for ENDMARKER (end of code)
+#+END_QUOTE
 #+BEGIN_SRC julia :eval never :exports code
-initialize_boxing_module(boxingModule="MyBoxing",
-                         usedModules=["RequiredPackage_1",
-                                      "RequiredPackage_2",...])
+is_endmarker(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.ENDMARKER)
+#+END_SRC
+[[file:../src/tokenizer.jl::19][tokenizer.jl:19]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=is_enum=*  <<cnlfU4gA>>
+#+BEGIN_SRC julia :eval never :exports code
+function is_enum(tok::Tokenized,idx::Int)::Bool
+#+END_SRC
+#+BEGIN_QUOTE
+Check if tok[i] points on
+
+#+BEGIN_SRC julia :eval never :exports code 
+@enum ...
 #+END_SRC
 
-creates
-
+#+END_QUOTE
 #+BEGIN_SRC julia :eval never :exports code
-module MyBoxing
-using RequiredPackage_1,RequiredPackage_2,...
-end 
+function is_enum(tok::Tokenized,idx::Int)::Bool
+    return (idx+1<=length(tok)) &&
+        (exactkind(tok[idx])==Tokenize.Tokens.AT_SIGN) &&
+        (untokenize(tok[idx+1])=="enum")
+end
 #+END_SRC
-
-and future "# !" statements are executed after using MyBoxing:
+[[file:../src/tokenizer.jl::45][tokenizer.jl:45]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=is_opening_parenthesis=*  <<B3AHGHUx>>
 #+BEGIN_SRC julia :eval never :exports code
-using MyBoxing
-# !statements
+is_opening_parenthesis(tok::Tokenized,idx::Int)::Bool
+#+END_SRC
+#+BEGIN_SRC julia :eval never :exports code
+is_opening_parenthesis(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (kind(tok[idx])==Tokenize.Tokens.LPAREN)
+#+END_SRC
+[[file:../src/tokenizer.jl::61][tokenizer.jl:61]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=is_structure=*  <<ovJKVcOA>>
+#+BEGIN_SRC julia :eval never :exports code
+is_structure(tok::Tokenized,idx::Int)::Bool
+#+END_SRC
+#+BEGIN_SRC julia :eval never :exports code
+is_structure(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.STRUCT)
+#+END_SRC
+[[file:../src/tokenizer.jl::11][tokenizer.jl:11]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=is_whitespace_n=*  <<MrpF1KWz>>
+#+BEGIN_SRC julia :eval never :exports code
+is_whitespace_n(tok::Tokenized,idx::Int)::Bool
+#+END_SRC
+#+BEGIN_QUOTE
+Checks for "\n"
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+is_whitespace_n(tok::Tokenized,idx::Int)::Bool = is_whitespace(tok,idx) && (untokenize(tok[idx])=="\n")
+#+END_SRC
+[[file:../src/tokenizer.jl::16][tokenizer.jl:16]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=org_string_code=*  <<LtzKMe0E>>
+#+BEGIN_SRC julia :eval never :exports code
+function org_string_code(di::Documented_Item)::String
+#+END_SRC
+#+BEGIN_QUOTE
+Print first line of code
+
+For instance:
+#+BEGIN_SRC julia :eval never
+function foo()
 #+END_SRC
 #+END_QUOTE
-[[file:../src/evaluate.jl::18][evaluate.jl:18]], [[dPpe6bcP][back to index]]
-- @@latex:\phantomsection@@ *=print_org_doc=*  <<nw3ZyjtW>> <<API_print_org_doc_API>>
+#+BEGIN_SRC julia :eval never :exports code
+function org_string_code(di::Documented_Item)::String
+    s=raw_string_code(di)
+    if !isempty(s)
+        s="#+BEGIN_SRC julia :eval never :exports code\n$(s)\n#+END_SRC\n"
+    end
+    return s
+end
+#+END_SRC
+[[file:../src/org_string_code.jl::1][org_string_code.jl:1]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=org_string_code_with_body=*  <<UCIW5kc5>>
+#+BEGIN_SRC julia :eval never :exports code
+function org_string_code_with_body(di::Documented_Item)::String
+#+END_SRC
+#+BEGIN_QUOTE
+Print first line of code AND body
+
+For instance:
+#+BEGIN_SRC julia :eval never
+function foo()
+  # foo body
+end
+#+END_SRC
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function org_string_code_with_body(di::Documented_Item)::String
+    s=raw_string_code_with_body(di)
+    if !isempty(s)
+        s="#+BEGIN_SRC julia :eval never :exports code\n$(s)\n#+END_SRC\n"
+    end
+    return s
+end
+#+END_SRC
+[[file:../src/org_string_code.jl::18][org_string_code.jl:18]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=print_org_doc=*  <<6NnAKWM4>> <<API_print_org_doc_API>>
+#+BEGIN_SRC julia :eval never :exports code
+function print_org_doc(di_array::Array{Documented_Item,1};
+                       tag::Union{String,Array{String,1}}="",
+                       tag_to_ignore::Union{String,Array{String,1}}="",
+                       identifier::String="",
+                       header_level::Int=0,
+                       link_prefix::String=randstring(),
+                       complete_link::Bool=false,
+                       case_sensitive::Bool=true,
+                       boxingModule::String="BoxingModule",
+                       with_body::Bool=false)
+#+END_SRC
+#+BEGIN_QUOTE
+Prints generated documentation to be exported by OrgMode, this is the main function of the =J4Org= package.
+
+*Org-Mode Usage example:*
+#+BEGIN_SRC julia :eval never :exports code
+,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
+documented_items = create_documented_item_array_dir("~/GitLab/MyPackage.jl/src/");
+print_org_doc(documented_items,tag="API",header_level=0)
+,#+END_SRC
+#+END_SRC
+
+*Arguments:*
+- =tag=: tags to collect when generating the documentation
+- =tag_to_ignore=: tags to ignore when generating the documentation
+- =identifier=: generates documentation for this "identifier". Can be a function name, a structure name, etc…
+- =link_prefix=: allows to add a prefix to extra link (#+tag L=extra_link). this is can be useful to avoid link name conflict when performing local doc extraction.
+- =complete_link=: if true, try to fix link without target by adding extra items
+- =case_sensitive=: case sensitive index.
+- =boxingModule=: specifies the context in which "#!" code will be executed. See [[API_initialize_boxing_module][initialize_boxing_module(...)]] for details.
+- =with_body::Bool=: if true include code body
+#+END_QUOTE
 #+BEGIN_SRC julia :eval never :exports code
 function print_org_doc(di_array::Array{Documented_Item,1};
                        tag::Union{String,Array{String,1}}="",
@@ -870,28 +1180,506 @@ function print_org_doc(di_array::Array{Documented_Item,1};
                                            with_body=with_body))
 end
 #+END_SRC
-#+BEGIN_QUOTE
-Prints generated documentation to be exported by OrgMode, this is the main function of the =J4Org= package.
-
-*Org-Mode Usage example:*
+[[file:../src/main.jl::359][main.jl:359]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=raw_string_with_body=*  <<HsvMoBaE>>
 #+BEGIN_SRC julia :eval never :exports code
-,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
-documented_items = create_documented_item_array_dir("~/GitLab/MyPackage.jl/src/");
-print_org_doc(documented_items,tag="API",header_level=0)
-,#+END_SRC
+raw_string_with_body(ex::Extracted_Function)::String
 #+END_SRC
+#+BEGIN_SRC julia :eval never :exports code
+raw_string_with_body(ex::Extracted_Function)::String = untokenize(ex._tok[ex._idx_array_with_body])
 
-*Arguments:*
-- =tag=: tags to collect when generating the documentation
-- =tag_to_ignore=: tags to ignore when generating the documentation
-- =identifier=: generates documentation for this "identifier". Can be a function name, a structure name, etc…
-- =link_prefix=: allows to add a prefix to extra link (#+tag L=extra_link). this is can be useful to avoid link name conflict when performing local doc extraction.
-- =complete_link=: if true, try to fix link without target by adding extra items
-- =case_sensitive=: case sensitive index.
-- =boxingModule=: specifies the context in which "#!" code will be executed. See [[API_initialize_boxing_module][initialize_boxing_module(...)]] for details.
-- =with_body::Bool=: if true include code body
+
+#+END_SRC
+[[file:../src/extract.jl::92][extract.jl:92]], [[kgn9knpD][back to index]]
+
+#+BEGIN_SRC julia :eval never :exports code
+raw_string_with_body(ex::Extracted_Struct)::String
+#+END_SRC
+#+BEGIN_SRC julia :eval never :exports code
+raw_string_with_body(ex::Extracted_Struct)::String = untokenize(ex._tok[ex._idx_array_with_body])
+
+
+#+END_SRC
+[[file:../src/extract.jl::155][extract.jl:155]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_abstract_block=*  <<tCR0D5WJ>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_abstract_block(tok::Tokenized,idx::Int;
+                             identifier::Ref{String}=Ref{String}(""))::Int
+#+END_SRC
+#+BEGIN_QUOTE
+Skips uniformative & abstract type block
+Does not move is identifier not found
+
 #+END_QUOTE
-[[file:../src/main.jl::359][main.jl:359]], [[dPpe6bcP][back to index]]
+#+BEGIN_SRC julia :eval never :exports code
+function skip_abstract_block(tok::Tokenized,idx::Int;
+                             identifier::Ref{String}=Ref{String}(""))::Int
+    identifier[]=""
+    idx_save = idx
+    idx = skip_uninformative(tok,idx)
+
+    if is_abstract(tok,idx)
+
+        idx = idx+1
+        idx = skip_uninformative(tok,idx)
+
+        if is_type(tok,idx)
+            idx = idx + 1
+            idx_check_success = idx
+            idx = skip_identifier(tok,idx,identifier=identifier)
+
+            if idx_check_success != idx
+                # no need to check success as subtype is not mandatory
+                idx = idx + 1
+                idx = skip_issubtype_block(tok,idx)
+
+                # success
+                return idx
+            end
+        end
+    end
+    
+    return idx_save
+end
+#+END_SRC
+[[file:../src/tokenizer.jl::415][tokenizer.jl:415]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_comma_separated_identifiers=*  <<PX7r6tvj>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_comma_separated_identifiers(tok::Tokenized,idx::Int)::Int
+#+END_SRC
+#+BEGIN_QUOTE
+Skips uninformative & a comma separated sequence of identifiers A,A.B.C,A.B{...}
+Does not move is comma separeted identifier not found
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_comma_separated_identifiers(tok::Tokenized,idx::Int)::Int
+    idx_save = idx
+    idx = skip_uninformative(tok,idx)
+    if !is_identifier(tok,idx)
+        return idx_save
+    end
+
+    n=length(tok)
+    while idx<=n
+        idx=skip_identifier(tok,idx)
+        idx_save=idx
+        idx=skip_uninformative(tok,idx)
+        if !is_comma(tok,idx)
+            return idx_save
+        end
+        idx=idx+1
+        idx=skip_uninformative(tok,idx)
+        if !is_identifier(tok,idx)
+            return idx_save
+        end
+    end
+#+END_SRC
+[[file:../src/tokenizer.jl::261][tokenizer.jl:261]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_comment=*  <<YI07DWf2>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_comment(tok::Tokenized,idx::Int)
+#+END_SRC
+#+BEGIN_QUOTE
+Skip comment
+-> replaced by skip uninformative
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_comment(tok::Tokenized,idx::Int)
+    while (idx<=length(tok))&&(is_comment(tok,idx)||is_whitespace(tok,idx))
+        idx=idx+1
+    end
+#+END_SRC
+[[file:../src/tokenizer.jl::82][tokenizer.jl:82]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_declaration_block=*  <<tOSOPVhb>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_declaration_block(tok::Tokenized,idx::Int)::Int
+#+END_SRC
+#+BEGIN_QUOTE
+Skips uninformative & a declaration block ::identifier{...}
+Does not move in case of identification failure
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_declaration_block(tok::Tokenized,idx::Int)::Int
+    idx_save = idx
+    idx = skip_uninformative(tok,idx)
+    if !is_declaration(tok,idx)
+        return idx_save
+    end
+
+    idx=idx+1
+    idx=skip_uninformative(tok,idx)
+
+    if is_identifier(tok,idx)
+        return skip_identifier(tok,idx)
+    end
+
+    return idx_save
+end
+#+END_SRC
+[[file:../src/tokenizer.jl::312][tokenizer.jl:312]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_enum_block=*  <<20w33ocb>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_enum_block(tok::Tokenized,idx::Int;
+                         identifier::Ref{String}=Ref{String}(""))::Int
+#+END_SRC
+#+BEGIN_QUOTE
+Skips uniformative & @enum ... line
+Does not move is identifier not found
+
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_enum_block(tok::Tokenized,idx::Int;
+                         identifier::Ref{String}=Ref{String}(""))::Int
+    identifier[]=""
+    idx_save = idx
+    idx = skip_uninformative(tok,idx)
+
+    if is_enum(tok,idx)
+
+        idx = idx+2 # caveat skip @ AND enum 
+        idx_check_success = idx
+        idx = skip_identifier(tok,idx,identifier=identifier)
+
+        if idx_check_success != idx
+            # move until end of line (ignoring comment if any)
+            idx = skip_line(tok,idx)
+            return idx
+        end
+    end
+    
+    return idx_save
+end
+#+END_SRC
+[[file:../src/tokenizer.jl::459][tokenizer.jl:459]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_function_call_block=*  <<mSsOaF7i>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_function_call_block(tok::Tokenized,idx::Int;
+                         identifier::Ref{String}=Ref{String}(""))::Int
+#+END_SRC
+#+BEGIN_QUOTE
+Skips uninformative & a function call block identifier{...}(....)
+Does not move in case of identification failure
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_function_call_block(tok::Tokenized,idx::Int;
+                         identifier::Ref{String}=Ref{String}(""))::Int
+    identifier[]=""
+    idx_save = idx
+    idx = skip_uninformative(tok,idx)
+    if !is_identifier(tok,idx)
+        return idx_save
+    end
+
+    idx=skip_identifier(tok,idx,identifier=identifier)
+    idx=skip_uninformative(tok,idx)
+
+    if is_opening_parenthesis(tok,idx)
+        idx=find_closing_parenthesis(tok,idx)
+        idx=idx+1
+        return idx
+    end
+
+    return idx_save
+end
+#+END_SRC
+[[file:../src/tokenizer.jl::331][tokenizer.jl:331]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_identifier=*  <<SaViG9fx>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_identifier(tok::Tokenized,idx::Int;
+                         identifier::Ref{String}=Ref{String}(""))::Int
+#+END_SRC
+#+BEGIN_QUOTE
+Skips uniformative & identifier A or A.B.C or A.B{...}
+Returns (name,idx) if prod
+Does not move is identifier not found
+
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_identifier(tok::Tokenized,idx::Int;
+                         identifier::Ref{String}=Ref{String}(""))::Int
+    identifier[]=""
+    idx_save = idx
+    idx = skip_uninformative(tok,idx)
+    if !is_identifier(tok,idx)
+        return idx_save
+    end
+
+    n=length(tok)
+    identifier[] = untokenize(tok[idx])
+    while idx<=n
+        idx=idx+1
+        idx_save = idx
+        idx=skip_whitespace_strict(tok,idx)
+        if is_dot(tok,idx)
+            idx=idx+1
+            idx=skip_whitespace_strict(tok,idx)
+            if is_identifier(tok,idx)
+                identifier[]=identifier[]*"."*untokenize(tok[idx])
+                continue
+            else
+                identifier[]=""
+                return idx_save # failure
+            end
+        end 
+        
+        if is_opening_brace(tok,idx)
+            idx=find_closing_brace(tok,idx)
+            return idx+1
+        end
+
+        return idx_save
+    end
+#+END_SRC
+[[file:../src/tokenizer.jl::213][tokenizer.jl:213]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_issubtype_block=*  <<Fgozo6uY>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_issubtype_block(tok::Tokenized,idx::Int)::Int
+#+END_SRC
+#+BEGIN_QUOTE
+Skips uniformative & issubtype indentifier
+Does not move is identifier not found
+
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_issubtype_block(tok::Tokenized,idx::Int)::Int
+    idx_save = idx
+    idx = skip_uninformative(tok,idx)
+
+    if !is_issubtype(tok,idx)
+        return idx_save
+    end
+    idx=idx+1
+    idx_check_success = idx
+    idx = skip_identifier(tok,idx)
+
+    if idx != idx_check_success
+        return idx
+    end
+
+    return idx_save
+end
+#+END_SRC
+[[file:../src/tokenizer.jl::357][tokenizer.jl:357]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_line=*  <<QpWx2mHu>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_line(tok::Tokenized,idx::Int)::Int
+#+END_SRC
+#+BEGIN_QUOTE
+Moves idx until it reaches a comment #, end of line \n or of file ENDMARKER
+
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_line(tok::Tokenized,idx::Int)::Int
+    while !(is_comment(tok,idx)||is_endmarker(tok,idx)||is_whitespace_n(tok,idx))
+        idx=idx+1
+    end
+#+END_SRC
+[[file:../src/tokenizer.jl::449][tokenizer.jl:449]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_macro_block=*  <<yuPCfAhE>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_macro_block(tok::Tokenized,idx::Int;
+                         identifier::Ref{String}=Ref{String}(""))::Int
+#+END_SRC
+#+BEGIN_QUOTE
+Skips uniformative & @enum ... line
+Does not move is identifier not found
+
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_macro_block(tok::Tokenized,idx::Int;
+                         identifier::Ref{String}=Ref{String}(""))::Int
+    identifier[]=""
+    idx_save = idx
+    idx = skip_uninformative(tok,idx)
+
+    
+    if is_macro(tok,idx)
+        idx=idx+1    
+        idx_check_success = idx
+        idx = skip_identifier(tok,idx,identifier=identifier)
+
+        if idx_check_success != idx
+            idx=skip_uninformative(tok,idx)
+
+            if is_opening_parenthesis(tok,idx)
+                idx=find_closing_parenthesis(tok,idx)
+                idx=idx+1
+                return idx
+            end
+        end
+    end 
+    return idx_save
+end
+#+END_SRC
+[[file:../src/tokenizer.jl::514][tokenizer.jl:514]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_struct_block=*  <<37LOskpd>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_struct_block(tok::Tokenized,idx::Int;
+                          identifier::Ref{String}=Ref{String}(""))::Int
+#+END_SRC
+#+BEGIN_QUOTE
+Skips uniformative & structure block
+Does not move is identifier not found
+
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_struct_block(tok::Tokenized,idx::Int;
+                          identifier::Ref{String}=Ref{String}(""))::Int
+    identifier[]=""
+    idx_save = idx
+    idx = skip_uninformative(tok,idx)
+
+    check_is_structure = is_structure(tok,idx)
+    check_is_mutable = is_mutable(tok,idx)
+    check_is_immutable = is_immutable(tok,idx)
+    
+    if !(check_is_structure||check_is_mutable||check_is_immutable)
+        return idx_save
+    end
+
+    if check_is_mutable||check_is_immutable
+        idx=idx+1
+        idx = skip_uninformative(tok,idx)
+
+        if !is_structure(tok,idx)
+            return idx_save
+        end
+    end
+
+    @assert is_structure(tok,idx)
+    
+    idx=idx+1
+    idx = skip_identifier(tok,idx,identifier=identifier)
+    idx = skip_issubtype_block(tok,idx)
+    
+    return idx
+end
+#+END_SRC
+[[file:../src/tokenizer.jl::379][tokenizer.jl:379]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_uninformative=*  <<bSaTXGqn>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_uninformative(tok::Tokenized,idx::Int)
+#+END_SRC
+#+BEGIN_QUOTE
+Skip whitespace 
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_uninformative(tok::Tokenized,idx::Int)
+    while (idx<=length(tok))&&(is_comment(tok,idx)||is_whitespace(tok,idx))
+        idx=idx+1
+    end
+#+END_SRC
+[[file:../src/tokenizer.jl::92][tokenizer.jl:92]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_variable_block=*  <<FTJIISZE>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_variable_block(tok::Tokenized,idx::Int;
+                         identifier::Ref{String}=Ref{String}(""))::Int
+#+END_SRC
+#+BEGIN_QUOTE
+Skips uniformative & const A
+Does not move is identifier not found
+
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_variable_block(tok::Tokenized,idx::Int;
+                         identifier::Ref{String}=Ref{String}(""))::Int
+    identifier[]=""
+    idx_save = idx
+    idx = skip_uninformative(tok,idx)
+
+    
+    if is_const(tok,idx)
+        idx =  skip_uninformative(tok,idx+1)
+    end
+
+    if is_global(tok,idx)||is_local(tok,idx)
+        idx =  skip_uninformative(tok,idx+1)
+    end
+    
+    idx_check_success = idx
+    idx = skip_identifier(tok,idx,identifier=identifier)
+
+    if idx_check_success != idx
+        return idx
+    end
+    
+    return idx_save
+end
+#+END_SRC
+[[file:../src/tokenizer.jl::485][tokenizer.jl:485]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_where_block=*  <<vQ8mjYCX>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_where_block(tok::Tokenized,idx::Int)::Int
+#+END_SRC
+#+BEGIN_QUOTE
+Skips uninformative & a where block (where {...} or where A,B
+Does not move is comma separeted identifier not found
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_where_block(tok::Tokenized,idx::Int)::Int
+    idx_save = idx
+    idx = skip_uninformative(tok,idx)
+    if !is_where(tok,idx)
+        return idx_save
+    end
+
+    idx=idx+1
+    idx = skip_uninformative(tok,idx)
+
+    if is_opening_brace(tok,idx)
+        return find_closing_brace(tok,idx)+1
+    end
+
+    if is_identifier(tok,idx)
+        return skip_comma_separated_identifiers(tok,idx)
+    end
+
+    return idx_save
+end
+#+END_SRC
+[[file:../src/tokenizer.jl::288][tokenizer.jl:288]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_whitespace=*  <<AGMSIZGx>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_whitespace(tok::Tokenized,idx::Int)
+#+END_SRC
+#+BEGIN_QUOTE
+Skip comment + whitespace 
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_whitespace(tok::Tokenized,idx::Int)
+    while (idx<=length(tok))&&is_whitespace(tok,idx)
+        idx=idx+1
+    end
+#+END_SRC
+[[file:../src/tokenizer.jl::101][tokenizer.jl:101]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=skip_whitespace_strict=*  <<7P1f9wMv>>
+#+BEGIN_SRC julia :eval never :exports code
+function skip_whitespace_strict(tok::Tokenized,idx::Int)
+#+END_SRC
+#+BEGIN_QUOTE
+Skip whitespace
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+function skip_whitespace_strict(tok::Tokenized,idx::Int)
+    while (idx<=length(tok))&&(is_whitespace_strict(tok,idx))
+        idx=idx+1
+    end
+#+END_SRC
+[[file:../src/tokenizer.jl::127][tokenizer.jl:127]], [[kgn9knpD][back to index]]
+- @@latex:\phantomsection@@ *=tokenized=*  <<tmrp9U7X>>
+#+BEGIN_SRC julia :eval never :exports code
+tokenized(s::String)
+#+END_SRC
+#+BEGIN_QUOTE
+Defines a convenient method to tokenize a =String=
+#+END_QUOTE
+#+BEGIN_SRC julia :eval never :exports code
+tokenized(s::String) = collect(tokenize(s))
+
+
+
+#+END_SRC
+[[file:../src/tokenizer.jl::6][tokenizer.jl:6]], [[kgn9knpD][back to index]]
 :END:
 
 

@@ -12,7 +12,9 @@ identifier(ex::Extracted_Item_Base)::String = ex._identifier
 #+Extracted_Item_Base
 raw_string(ex::Extracted_Item_Base)::String = untokenize(ex._tok[ex._idx_array])
 #+Extracted_Item_Base
-raw_string_with_body(ex::Extracted_Item_Base)::String = untokenize(ex._tok[ex._idx_array_with_body])
+# By default do nothing (returns an empty string)
+raw_string_with_body(ex::Extracted_Item_Base)::String = ""
+#untokenize(ex._tok[ex._idx_array_with_body])
 
 
 #+Extracted_Item_Base 
@@ -29,7 +31,7 @@ identifier(ex::Extracted_Comment)::String = ""
 #+Extracted_Item_Base
 # For comment we remove empty # at begin&end
 function raw_string(ex::Extracted_Comment)::String
-   a=Array{String,1}(0)
+    a=Array{String,1}(0)
     # remove first and trailing empty "#"
     not_empty_comment_p(idx) = untokenize(ex._tok[idx])!="#"
     idx_first = findfirst(not_empty_comment_p,ex._idx_array)
@@ -46,7 +48,7 @@ function raw_string(ex::Extracted_Comment)::String
     
     return reduce(*,"",a)
 end 
-    
+
 raw_string_with_body(ex::Extracted_Comment) = throw("Does not make sense")
 
 #+Extracted_Item_Base L:extract_comment
@@ -87,6 +89,8 @@ struct Extracted_Function <: Extracted_Item_Base
     _skip_idx::Int
     _identifier::String
 end
+#+Internal 
+raw_string_with_body(ex::Extracted_Function)::String = untokenize(ex._tok[ex._idx_array_with_body])
 
 #+Tokenizer L:extract_function
 # Extract function
@@ -130,7 +134,7 @@ function extract_function(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Func
                 #     idx_body_end += 1
                 # end 
             end 
-                
+            
             return Extracted_Function(tok,collect(idx_save:idx-1),collect(idx_save:idx_body_end),idx,identifier[])
         end 
     end
@@ -144,9 +148,12 @@ end
 struct Extracted_Struct <: Extracted_Item_Base
     _tok::Tokenized
     _idx_array::Array{Int,1}
+    _idx_array_with_body::Array{Int,1}
     _skip_idx::Int
     _identifier::String
 end
+#+Internal 
+raw_string_with_body(ex::Extracted_Struct)::String = untokenize(ex._tok[ex._idx_array_with_body])
 
 #+Tokenizer
 # Extract struct
@@ -158,7 +165,8 @@ function extract_struct(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Struct
     idx = skip_struct_block(tok,idx_save,identifier=identifier)
 
     if idx != idx_save
-        return Extracted_Struct(tok,collect(idx_save:idx-1),idx,identifier[])
+        idx_with_body = find_closing_block(tok,idx_save)
+        return Extracted_Struct(tok,collect(idx_save:idx-1),collect(idx_save:idx_with_body),idx,identifier[])
     end
     
     return nothing
