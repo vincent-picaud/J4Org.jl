@@ -278,15 +278,16 @@ This integer can have these values:
 #+BEGIN_src julia :eval never :exports code
 ,#+BEGIN_SRC julia :results output drawer :eval no-export :exports results 
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
-print_org_doc(documented_items,tag="Method",header_level=-1)
+print_org_doc(documented_items,tag="Method",header_level=-1,with_body=true)
 ,#+END_SRC
 #+END_SRC
 
-This will generate:
+This will generate (here =with_body=true= this mean that we also
+extract code body).
 
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports results 
 documented_items=create_documented_item_array("minimal_example/Foo.jl");
-print_org_doc(documented_items,tag="Method",header_level=-1)
+print_org_doc(documented_items,tag="Method",header_level=-1,with_body=true)
 #+END_SRC
 
 #+RESULTS:
@@ -294,7 +295,7 @@ print_org_doc(documented_items,tag="Method",header_level=-1)
 
 
 #+BEGIN_SRC julia :eval never :exports code
-foo(r::Float64,p::Point)
+foo(r::Float64,p::Point) = Point(r*p.x,r*p.y)
 #+END_SRC
 #+BEGIN_QUOTE
 An internal function
@@ -304,21 +305,15 @@ For symbol that are not exported, do not forget the "Foo." prefix:
 p=Point(1.0,2.0)
 Foo.foo(2.0,p)
 #+END_SRC
-
-#+RESULTS:
-
 #+BEGIN_SRC julia
 Foo.Point(1.0, 2.0)
 Foo.Point(2.0, 4.0)
 #+END_SRC
-
-#+RESULTS:
-
 #+END_QUOTE
 [[file:minimal_example/Foo.jl::46][Foo.jl:46]]
- @@latex:\phantomsection@@  <<RUbly9zKnorm_link_example>>
+ @@latex:\phantomsection@@  <<8wSajN26norm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
-norm(p::Point)::Float64
+norm(p::Point)::Float64 = sqrt(p.x*p.x+p.y*p.y
 #+END_SRC
 #+BEGIN_QUOTE
 A simple function that computes $\sqrt{x^2+y^2}$
@@ -328,19 +323,16 @@ A simple function that computes $\sqrt{x^2+y^2}$
 p=Point(1.0,2.0);
 norm(p) 
 #+END_SRC
-
-#+RESULTS:
-
 #+BEGIN_SRC julia
 2.23606797749979
 #+END_SRC
-
-#+RESULTS:
 
 See: _struct Point_
 #+END_QUOTE
 [[file:minimal_example/Foo.jl::35][Foo.jl:35]]
 :END:
+
+
 
 **** header_level=0
      :PROPERTIES:
@@ -698,7 +690,7 @@ The API is simple, with very few functions:
 
 #+BEGIN_SRC julia :results output drawer :eval no-export :exports results
 documented_items=create_documented_item_array_dir("../src/");
-print_org_doc(documented_items,boxingModule="J4OrgBoxing",tag="API",header_level=0,link_prefix="API_")
+print_org_doc(documented_items,boxingModule="J4OrgBoxing",tag="API",header_level=0,link_prefix="API_",with_body=true)
 #+END_SRC
 
 #+RESULTS:
