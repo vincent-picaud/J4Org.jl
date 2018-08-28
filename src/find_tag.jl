@@ -115,5 +115,5 @@ end
 # predicate that checks for *Tag* existence.
 #
 function find_tag(tok::Tokenized,idx::Int,tag::String)::Union{Nothing,Extract_Tag_Result}
-    return find_tag(tok,idx,x->(tags(x) ∈ tag))
+    return find_tag(tok,idx,x->(tag ∈ tags(x)))
 end 

@@ -120,7 +120,7 @@ function check_for_link_error(di_array::Array{Documented_Item,1},
         
         for link_target in links_to_check
 
-            if visited_links ∉ link_target
+            if link_target ∉ visited_links
 
                 push!(visited_links,link_target)
 

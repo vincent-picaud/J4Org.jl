@@ -24,7 +24,7 @@ raw_string_code(di::Documented_Item)::String = (di._code==nothing) ? "" : raw_st
 #+Documented_Item
 raw_string_code_with_body(di::Documented_Item)::String = (di._code==nothing) ? "" : raw_string_with_body(di._code)
 #+Documented_Item
-contains_tag(di::Documented_Item,tag::String)::Bool = tags(di) ∈ tag
+contains_tag(di::Documented_Item,tag::String)::Bool = tag ∈ tags(di)
 #contains_tag(di::Documented_Item,tag::String)::Bool = contains(==,tags(di),tag)
 #+Documented_Item
 # Checks if at least one tag of =tag_list= is contained in =di=
