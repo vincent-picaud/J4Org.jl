@@ -1,4 +1,4 @@
-using Base.Test
+using Test
 using J4Org
 
 function readcode(filename::AbstractString)

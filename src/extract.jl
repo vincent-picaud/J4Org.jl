@@ -31,7 +31,7 @@ identifier(ex::Extracted_Comment)::String = ""
 #+Extracted_Item_Base
 # For comment we remove empty # at begin&end
 function raw_string(ex::Extracted_Comment)::String
-    a=Array{String,1}(0)
+    a=Array{String,1}()
     # remove first and trailing empty "#"
     not_empty_comment_p(idx) = untokenize(ex._tok[idx])!="#"
     idx_first = findfirst(not_empty_comment_p,ex._idx_array)
@@ -46,7 +46,7 @@ function raw_string(ex::Extracted_Comment)::String
         push!(a,untokenize(ex._tok[ex._idx_array[k]])*"\n")
     end
     
-    return reduce(*,"",a)
+    return join(a)
 end 
 
 raw_string_with_body(ex::Extracted_Comment) = throw("Does not make sense")
@@ -60,7 +60,7 @@ function extract_comment(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Item_
     idx=skip_whitespace(tok,idx)
     
     # fill idx array with contiguous comment
-    idx_array=Array{Int,1}(0)
+    idx_array=Array{Int,1}()
     n = length(tok)
     while (idx<=n)&&(is_comment(tok,idx))
         push!(idx_array,idx)
@@ -102,8 +102,8 @@ function extract_function(tok::Tokenized,idx::Int)::Union{Nothing,Extracted_Func
         # long  function: function foo() .... end <-> is_function(tok,idx)   = TRUE
         # short function: foo() = something       <-> is_identifier(tok,idx) = TRUE
         #
-        const Function_Type_Long  = Val{:Long}
-        const Function_Type_Short = Val{:Short}
+        Function_Type_Long  = Val{:Long}
+        Function_Type_Short = Val{:Short}
         function_type =  is_function(tok,idx) ? Function_Type_Long : Function_Type_Short
         
         # retrieve an eventual whitespace without \n <-> important: coherent preserve tabulation

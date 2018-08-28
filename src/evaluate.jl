@@ -57,11 +57,7 @@ function initialize_boxing_module(;
         else
             usedModules_asString = ""
         end
-        if VERSION < v"0.7.0-alpha"
-            eval(parse("module $(boxingModule) $(usedModules_asString) end"))
-        else
-            Meta.eval(parse("module $(boxingModule) $(usedModules_asString) end"))
-        end
+        Meta.eval(Meta.parse("module $(boxingModule) $(usedModules_asString) end"))
     else
         # force=false && module_exists = true
         # -> nothing is done... interpreted as an error if usedModules if different
