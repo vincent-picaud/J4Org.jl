@@ -293,45 +293,20 @@ print_org_doc(documented_items,tag="Method",header_level=-1,with_body=true)
 #+RESULTS:
 :RESULTS:
 
-
-#+BEGIN_SRC julia :eval never :exports code
-foo(r::Float64,p::Point) = Point(r*p.x,r*p.y)
-#+END_SRC
-#+BEGIN_QUOTE
-An internal function
-
-For symbol that are not exported, do not forget the "Foo." prefix:
-#+BEGIN_SRC julia
-p=Point(1.0,2.0)
-Foo.foo(2.0,p)
-#+END_SRC
-#+BEGIN_SRC julia
-Foo.Point(1.0, 2.0)
-Foo.Point(2.0, 4.0)
-#+END_SRC
-#+END_QUOTE
-[[file:minimal_example/Foo.jl::46][Foo.jl:46]]
- @@latex:\phantomsection@@  <<8wSajN26norm_link_example>>
-#+BEGIN_SRC julia :eval never :exports code
-norm(p::Point)::Float64 = sqrt(p.x*p.x+p.y*p.y
-#+END_SRC
-#+BEGIN_QUOTE
-A simple function that computes $\sqrt{x^2+y^2}$
-
-*Example:*
-#+BEGIN_SRC julia
-p=Point(1.0,2.0);
-norm(p) 
-#+END_SRC
-#+BEGIN_SRC julia
-2.23606797749979
-#+END_SRC
-
-See: _struct Point_
-#+END_QUOTE
-[[file:minimal_example/Foo.jl::35][Foo.jl:35]]
+ERROR: AssertionError: Module BoxingModule does not exist, create a new one with initialize_boxing_module()
+Stacktrace:
+ [1] with_hash_evaluate(::String, ::String) at /home/picaud/GitHub/J4Org.jl/src/evaluate.jl:92
+ [2] org_string_comment(::J4Org.Documented_Item, ::Array{J4Org.Documented_Item,1}, ::Array{J4Org.Documented_Item,1}, ::String, ::String) at /home/picaud/GitHub/J4Org.jl/src/org_string_comment.jl:34
+ [3] #org_string_documented_item#32(::String, ::Bool, ::String, ::String, ::Int64, ::String, ::Bool, ::Function, ::J4Org.Documented_Item, ::Array{J4Org.Documented_Item,1}, ::Array{J4Org.Documented_Item,1}) at /home/picaud/GitHub/J4Org.jl/src/main.jl:107
+ [4] #org_string_documented_item at ./none:0 [inlined]
+ [5] #org_string_documented_item_array#39(::Int64, ::String, ::Bool, ::Bool, ::String, ::Bool, ::Function, ::Array{J4Org.Documented_Item,1}, ::getfield(J4Org, Symbol("#predicate#46")){String,String,String}) at /home/picaud/GitHub/J4Org.jl/src/main.jl:305
+ [6] #org_string_documented_item_array at ./none:0 [inlined]
+ [7] #org_string_documented_item_array#45 at /home/picaud/GitHub/J4Org.jl/src/main.jl:349 [inlined]
+ [8] #org_string_documented_item_array at ./none:0 [inlined]
+ [9] #print_org_doc#47 at /home/picaud/GitHub/J4Org.jl/src/main.jl:391 [inlined]
+ [10] (::getfield(J4Org, Symbol("#kw##print_org_doc")))(::NamedTuple{(:tag, :header_level, :with_body),Tuple{String,Int64,Bool}}, ::typeof(print_org_doc), ::Array{J4Org.Documented_Item,1}) at ./none:0
+ [11] top-level scope at none:0
 :END:
-
 
 
 **** header_level=0

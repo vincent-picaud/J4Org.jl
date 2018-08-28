@@ -21,7 +21,7 @@ end
 # which is an Org mode *comment*, hence it does not affect function output.
 #
 function warning_message(message::String)::Nothing
-    println(STDERR,"# =WARNING:= $(message)")
+    println(stderr,"# =WARNING:= $(message)")
 end 
 
 #+Error,Links

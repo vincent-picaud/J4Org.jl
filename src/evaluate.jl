@@ -53,7 +53,7 @@ function initialize_boxing_module(;
 
     if force||(!module_exists)
         if length(usedModules)>0
-            usedModules_asString = "using $(foldr((x,y)->x*", "*y,"",usedModules)[1:end-2]) "
+            usedModules_asString = "using $(join(usedModules,", ")) "
         else
             usedModules_asString = ""
         end
