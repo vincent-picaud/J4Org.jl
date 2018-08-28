@@ -128,7 +128,7 @@ end
 #
 # *Caveat:* to make sense, the input array must be sorted.
 function create_group(array::Array{T,1},t::Function)::Array{UnitRange{Int},1} where {T}
-    groups=Array{UnitRange{Int},1}(0)
+    groups=Array{UnitRange{Int},1}()
     n = length(array)
     if length(array)==0
         return groups
@@ -254,7 +254,7 @@ function org_string_documented_item_array(di_array::Array{Documented_Item,1},
     n_groups = length(groups)
 
     # generates (hidden) uuid
-    uuid = Array{String,1}(0)
+    uuid = Array{String,1}()
     for i in 1:n_di 
         push!(uuid,randstring())
     end

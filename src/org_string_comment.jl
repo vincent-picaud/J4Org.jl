@@ -1,8 +1,8 @@
 #+Extracted_Item_Base
 # Removes hash
 function remove_hashtag(s::String)::String
-    input=split(s,"\n",keep=false)
-    output=Vector{String}(0)
+    input=split(s,"\n",keepempty=false)
+    output=Vector{String}()
 
     for s in input
         if s=="#"
@@ -12,7 +12,7 @@ function remove_hashtag(s::String)::String
             push!(output,s[3:end]*"\n")
         end
     end
-    return reduce(*,"",output)
+    return join(output)
 end 
 
 # +Extracted_Item_Base,OrgString  L:org_string_comment

@@ -39,7 +39,7 @@ end
 @testset "di_real_code_problematic_1" begin
     filename="$(dirname(@__FILE__))/code_examples/real_code_problematic_1.jl"
 
-    tok=tokenized(readstring(filename))
+    tok=tokenized(String(read(filename)))
 
     idx=1
     extracted_tag = extract_tag(tok,idx)

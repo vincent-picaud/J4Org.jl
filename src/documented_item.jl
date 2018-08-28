@@ -24,7 +24,8 @@ raw_string_code(di::Documented_Item)::String = (di._code==nothing) ? "" : raw_st
 #+Documented_Item
 raw_string_code_with_body(di::Documented_Item)::String = (di._code==nothing) ? "" : raw_string_with_body(di._code)
 #+Documented_Item
-contains_tag(di::Documented_Item,tag::String)::Bool = contains(==,tags(di),tag)
+contains_tag(di::Documented_Item,tag::String)::Bool = tags(di) ∈ tag
+#contains_tag(di::Documented_Item,tag::String)::Bool = contains(==,tags(di),tag)
 #+Documented_Item
 # Checks if at least one tag of =tag_list= is contained in =di=
 contains_tag(di::Documented_Item,tag_list::Array{String,1})::Bool = mapreduce(x->contains_tag(di,x),(x,y)->x||y,tag_list)
@@ -110,7 +111,7 @@ function create_documented_item_array(filename::String)::Array{Documented_Item,1
 
     n=length(tok)
     idx=1
-    toReturn=Array{Documented_Item,1}(0)
+    toReturn=Array{Documented_Item,1}()
     
     while idx<=n
         extracted_tag = find_tag(tok,idx)
@@ -182,7 +183,7 @@ end
 
 function filter_julia_source_code_file_names(file_names::Array{<:AbstractString,1})
     file_name_pattern = r".jl$"
-    return filter(x->ismatch(file_name_pattern,x),file_names)
+    return filter(x->occursin(file_name_pattern,x),file_names)
 end 
 
     

@@ -9,7 +9,7 @@ export initialize_boxing_module
 #
 function evaluate(code::Union{SubString{String},String},
                   m::Module)::String
-    result=eval(m,parse(code,raise=true))
+    result=m.eval(Meta.parse(code,raise=true))
     io=IOBuffer()
     show(io,"text/plain",result)
     return String(take!(io))
@@ -57,7 +57,7 @@ function initialize_boxing_module(;
         else
             usedModules_asString = ""
         end
-        Meta.eval(Meta.parse("module $(boxingModule) $(usedModules_asString) end"))
+        eval(Meta.parse("module $(boxingModule) $(usedModules_asString) end"))
     else
         # force=false && module_exists = true
         # -> nothing is done... interpreted as an error if usedModules if different
@@ -91,10 +91,10 @@ function with_hash_evaluate(comment::String,
     @assert boxingModule!=""
     @assert isdefined(J4Org,Symbol(boxingModule)) "Module $(boxingModule) does not exist, create a new one with initialize_boxing_module()"
     
-    boxingModule_asType=eval(parse("J4Org.$(boxingModule)"))
+    boxingModule_asType=eval(Meta.parse("J4Org.$(boxingModule)"))
     
     # process comment, line by line 
-    output=Array{String,1}(0)
+    output=Array{String,1}()
     comment_line_by_line=split(comment,"\n")
     n_comment_line_by_line=length(comment_line_by_line)
     code_to_execute=r"^#[ ]?!(.*)$"
@@ -103,25 +103,25 @@ function with_hash_evaluate(comment::String,
         
         # only process line beginning with "#!" or by "# !"
         # (other lines are forwarded without modification)
-        if !ismatch(code_to_execute,comment_line_by_line[i])
+        if !occursin(code_to_execute,comment_line_by_line[i])
             push!(output,comment_line_by_line[i])
             i=i+1
             continue
         end 
 
         # Here process code
-        @assert ismatch(code_to_execute,comment_line_by_line[i])
+        @assert occursin(code_to_execute,comment_line_by_line[i])
 
-        output_code=Array{String,1}(0)
-        output_result=Array{String,1}(0)
+        output_code=Array{String,1}()
+        output_result=Array{String,1}()
 
         push!(output_code,"# #+BEGIN_SRC julia")
         push!(output_result,"# #+BEGIN_SRC julia")
 
-        while ismatch(code_to_execute,comment_line_by_line[i])
+        while occursin(code_to_execute,comment_line_by_line[i])
             code_local = match(code_to_execute,comment_line_by_line[i])[1]
             push!(output_code,"# "*code_local)
-            show_code_local_result = !ismatch(r";\s*$",code_local) # Caveat: do not take into account final comment
+            show_code_local_result = !occursin(r";\s*$",code_local) # Caveat: do not take into account final comment
             
             try 
                 result_line_by_line=evaluate(code_local,boxingModule_asType)
@@ -147,6 +147,7 @@ function with_hash_evaluate(comment::String,
         output=vcat(output,output_code,output_result)
     end
 
-    return foldr((x,y)->x*"\n"*y,"",output)
+#    return foldr((x,y)->x*"\n"*y,output,"")
+    return join(output,"\n")
 end 
 

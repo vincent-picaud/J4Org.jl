@@ -29,12 +29,12 @@ end
 #
 function extract_links(input::String)::Link_Collection_Type
     # remove blalba "toremove" kmsdqkm (do not consider quoted links)
-    input = replace(input,r"(\".*\")","")
-    v=Link_Collection_Type(0)
+    input = replace(input,r"(\".*\")" => "")
+    v=Link_Collection_Type()
     
     match_link = r"\[\[(\w+)\]\[\]\]"
 
-    if !ismatch(match_link,input)
+    if !occursin(match_link,input)
         return v
     end
 
@@ -67,7 +67,7 @@ end
 # *Note*: duplicates are removed
 #
 function extract_links(di_array::Array{Documented_Item,1})::Link_Collection_Type
-    v=Link_Collection_Type(0)
+    v=Link_Collection_Type()
 
     for di in di_array
         v=vcat(v,extract_links(di))
@@ -87,7 +87,7 @@ end
 # indices means that we do not have a unique target.
 #
 function get_item_idx_from_link_target(link_target::String,di_array::Array{Documented_Item,1})::Vector{Int}
-    v=Vector{Int}(0)
+    v=Vector{Int}()
     n = length(di_array)
     for i in 1:n
         if link_target==link(di_array[i])
@@ -111,7 +111,7 @@ end
 function check_for_link_error(di_array::Array{Documented_Item,1},
                               di_array_universe::Array{Documented_Item,1})::Bool
 
-    visited_links = Link_Collection_Type(0) # store visited links -> do not print error several times
+    visited_links = Link_Collection_Type() # store visited links -> do not print error several times
 
     ok=true
     
@@ -120,7 +120,7 @@ function check_for_link_error(di_array::Array{Documented_Item,1},
         
         for link_target in links_to_check
 
-            if !contains(==,visited_links,link_target)
+            if visited_links ∉ link_target
 
                 push!(visited_links,link_target)
 
@@ -206,7 +206,7 @@ function doc_link_substitution_helper(doc::String,
     else
         dest="[[$(link_new_target)][$(link_magnified)]]"
     end
-    return replace(doc,src,dest)
+    return replace(doc,src => dest)
 end
 
 # +Links, TODO                                       L:doc_link_substitution
