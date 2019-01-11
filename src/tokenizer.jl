@@ -30,7 +30,6 @@ is_const(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[i
 is_global(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.GLOBAL)
 is_local(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.LOCAL)
 is_macro(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.MACRO)
-# is_immutable(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.IMMUTABLE)
 is_issubtype(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.ISSUBTYPE)
 is_export(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.EXPORT)
 is_abstract(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.ABSTRACT)
@@ -388,13 +387,12 @@ function skip_struct_block(tok::Tokenized,idx::Int;
 
     check_is_structure = is_structure(tok,idx)
     check_is_mutable = is_mutable(tok,idx)
-    check_is_immutable = is_immutable(tok,idx)
     
-    if !(check_is_structure||check_is_mutable||check_is_immutable)
+    if !(check_is_structure||check_is_mutable)
         return idx_save
     end
 
-    if check_is_mutable||check_is_immutable
+    if check_is_mutable
         idx=idx+1
         idx = skip_uninformative(tok,idx)
 
