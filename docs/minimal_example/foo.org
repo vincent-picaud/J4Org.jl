@@ -1,5 +1,5 @@
 # [[file:~/GitHub/J4Org.jl/docs/main.org::*Minimal%20OrgMode%20document][Minimal OrgMode document:1]]
-#+PROPERTY: header-args:jupyter-julia :session *julia__session* :exports both :eval no-export :results output drawer
+#+PROPERTY: header-args:jupyter-julia :session *julia_session* :exports both :eval no-export :results output drawer
 #+OPTIONS: ^:{}
 #+TITLE: Getting Started with a minimal example
 
@@ -13,7 +13,7 @@ pwd()
 :END:
 
 #+BEGIN_SRC jupyter-julia :exports none
-push!(LOAD_PATH,pwd())
+pushfirst!(LOAD_PATH,pwd())
 #+END_SRC
 
 #+RESULTS:
@@ -40,16 +40,16 @@ print_org_doc(documented_items,tag_to_ignore=["Internal"],header_level=0)
 
 #+RESULTS:
 :RESULTS:
-<<iswrtjYL>> *Index:* *[A]* [[6vK0C255][Alpha]] *[P]* [[NGwPyLfF][Point]] *[n]* [[TH8j8Rwr][norm]] 
-- @@latex:\phantomsection@@ *=Alpha=*  <<6vK0C255>>
+<<hTsspxsk>> *Index:* *[A]* [[ybyl8eDu][Alpha]] *[P]* [[KStWMmA3][Point]] *[n]* [[DkcLbSl1][norm]] 
+- @@latex:\phantomsection@@ *=Alpha=*  <<ybyl8eDu>>
 #+BEGIN_SRC julia :eval never :exports code
 @enum Alpha A=1 B C 
 #+END_SRC
 #+BEGIN_QUOTE
 An enum
 #+END_QUOTE
-[[file:Foo.jl::31][Foo.jl:31]], [[iswrtjYL][back to index]]
-- @@latex:\phantomsection@@ *=Point=*  <<NGwPyLfF>> <<M1nU3BSxPoint_struct>>
+[[file:Foo.jl::31][Foo.jl:31]], [[hTsspxsk][back to index]]
+- @@latex:\phantomsection@@ *=Point=*  <<KStWMmA3>> <<chQXbvYhPoint_struct>>
 #+BEGIN_SRC julia :eval never :exports code
 struct Point
 #+END_SRC
@@ -65,9 +65,9 @@ p=Point(1,2)
 #+END_SRC
 
 You can add any valid Org mode directive. If you want to use
-in-documentation link, use [[M1nU3BSxnorm_link_example][norm(...)]]
+in-documentation link, use [[chQXbvYhnorm_link_example][norm(...)]]
 #+END_QUOTE
-[[file:Foo.jl::8][Foo.jl:8]], [[iswrtjYL][back to index]]
+[[file:Foo.jl::8][Foo.jl:8]], [[hTsspxsk][back to index]]
 
 #+BEGIN_SRC julia :eval never :exports code
 Point()
@@ -75,8 +75,8 @@ Point()
 #+BEGIN_QUOTE
 Creates Point at origin $(0,0)$ 
 #+END_QUOTE
-[[file:Foo.jl::27][Foo.jl:27]], [[iswrtjYL][back to index]]
-- @@latex:\phantomsection@@ *=norm=*  <<TH8j8Rwr>> <<M1nU3BSxnorm_link_example>>
+[[file:Foo.jl::27][Foo.jl:27]], [[hTsspxsk][back to index]]
+- @@latex:\phantomsection@@ *=norm=*  <<DkcLbSl1>> <<chQXbvYhnorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -92,9 +92,9 @@ norm(p)
 ***ERROR***  UndefVarError(:norm)
 #+END_SRC
 
-See: [[M1nU3BSxPoint_struct][struct Point]]
+See: [[chQXbvYhPoint_struct][struct Point]]
 #+END_QUOTE
-[[file:Foo.jl::35][Foo.jl:35]], [[iswrtjYL][back to index]]
+[[file:Foo.jl::35][Foo.jl:35]], [[hTsspxsk][back to index]]
 # =WARNING:= An error occurred evaluating norm(p) 
 :END:
 

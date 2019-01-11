@@ -1,7 +1,7 @@
 # [[file:~/GitHub/J4Org.jl/docs/main.org::*A%20documented%20Julia%20=Foo=%20module][A documented Julia =Foo= module:1]]
 module Foo
 
-export Point, foo
+export Point, norm, foo
     
 import Base: norm
 
