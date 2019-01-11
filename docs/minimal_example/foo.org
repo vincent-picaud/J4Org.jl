@@ -1,64 +1,60 @@
 # [[file:~/GitHub/J4Org.jl/docs/main.org::*Minimal%20OrgMode%20document][Minimal OrgMode document:1]]
-#+PROPERTY: header-args:julia :session *my_session* :exports code :eval no-export
+#+PROPERTY: header-args:jupyter-julia :session *julia3_session* :exports both :eval no-export :results output drawer
 #+OPTIONS: ^:{}
 #+TITLE: Getting Started with a minimal example
 
-#+BEGIN_SRC julia :results output none :eval no-export :exports none
+#+BEGIN_SRC jupyter-julia :exports none
+;cd("/home/picaud/GitHub/J4Org.jl/docs/minimal_example/")
+pwd()
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+:END:
+
+#+BEGIN_SRC jupyter-julia :exports none
 push!(LOAD_PATH,pwd())
 #+END_SRC
 
-#+BEGIN_SRC julia :results output none :eval no-export :exports none
+#+RESULTS:
+:RESULTS:
+:END:
+
+# +BEGIN_SRC julia :results output none :eval no-export :exports none
+#+BEGIN_SRC jupyter-julia :exports none
 using J4Org 
 initialize_boxing_module(usedModules=["Foo"]) 
 documented_items=create_documented_item_array("Foo.jl")
 #+END_SRC
 
+#+RESULTS:
+:RESULTS:
+┌ Info: Recompiling stale cache file /home/picaud/.julia/compiled/v1.0/J4Org.ji for J4Org [top-level]
+└ @ Base loading.jl:1184
+# =WARNING:= cannot interpret Foo.jl:8 UndefVarError(:is_immutable)
+# =WARNING:= cannot interpret Foo.jl:31 UndefVarError(:is_immutable)
+:END:
+
 * Example
 
 Prints all documented items, except those tagged with "Internal" 
-#+BEGIN_SRC julia :results output drawer :eval no-export :exports results
+# +BEGIN_SRC julia :results output drawer :eval no-export :exports results
+#+BEGIN_SRC jupyter-julia :exports results
 print_org_doc(documented_items,tag_to_ignore=["Internal"],header_level=0)
 #+END_SRC
 
 #+RESULTS:
 :RESULTS:
-<<fLiSFlTS>> *Index:* *[A]* [[aujIqHwV][Alpha]] *[P]* [[2o3fWj7f][Point]] *[n]* [[rZugUj3H][norm]] 
-- @@latex:\phantomsection@@ *=Alpha=*  <<aujIqHwV>>
-#+BEGIN_SRC julia :eval never :exports code
-@enum Alpha A=1 B C 
-#+END_SRC
-#+BEGIN_QUOTE
-An enum
-#+END_QUOTE
-[[file:Foo.jl::31][Foo.jl:31]], [[fLiSFlTS][back to index]]
-- @@latex:\phantomsection@@ *=Point=*  <<2o3fWj7f>> <<j9qQxEZ9Point_struct>>
-#+BEGIN_SRC julia :eval never :exports code
-struct Point
-#+END_SRC
-#+BEGIN_QUOTE
-This is my Point structure
-
-*Example:*
-
-Creates a point $p$ of coordinates $(x=1,y=2)$.
-
-#+BEGIN_SRC julia :eval never :exports code
-p=Point(1,2)
-#+END_SRC
-
-You can add any valid Org mode directive. If you want to use
-in-documentation link, use [[j9qQxEZ9norm_link_example][norm(...)]]
-#+END_QUOTE
-[[file:Foo.jl::8][Foo.jl:8]], [[fLiSFlTS][back to index]]
-
+<<gXWDiYD4>> *Index:* *[P]* [[srtm68fP][Point]] *[n]* [[hhJKAc8L][norm]] 
+- @@latex:\phantomsection@@ *=Point=*  <<srtm68fP>>
 #+BEGIN_SRC julia :eval never :exports code
 Point()
 #+END_SRC
 #+BEGIN_QUOTE
 Creates Point at origin $(0,0)$ 
 #+END_QUOTE
-[[file:Foo.jl::27][Foo.jl:27]], [[fLiSFlTS][back to index]]
-- @@latex:\phantomsection@@ *=norm=*  <<rZugUj3H>> <<j9qQxEZ9norm_link_example>>
+[[file:Foo.jl::27][Foo.jl:27]], [[gXWDiYD4][back to index]]
+- @@latex:\phantomsection@@ *=norm=*  <<hhJKAc8L>> <<uMsmZY0Onorm_link_example>>
 #+BEGIN_SRC julia :eval never :exports code
 norm(p::Point)::Float64
 #+END_SRC
@@ -70,19 +66,16 @@ A simple function that computes $\sqrt{x^2+y^2}$
 p=Point(1.0,2.0);
 norm(p) 
 #+END_SRC
-
-#+RESULTS:
-
 #+BEGIN_SRC julia
-2.23606797749979
+***ERROR***  UndefVarError(:norm)
 #+END_SRC
 
-#+RESULTS:
-: 2.23606797749979
-
-See: [[j9qQxEZ9Point_struct][struct Point]]
+See: _Point_struct_
 #+END_QUOTE
-[[file:Foo.jl::35][Foo.jl:35]], [[fLiSFlTS][back to index]]
+[[file:Foo.jl::35][Foo.jl:35]], [[gXWDiYD4][back to index]]
+# =WARNING:= link target Point_struct in [[file:Foo.jl::35][Foo.jl:35]] not found
+# =WARNING:= link target Point_struct in [[file:Foo.jl::35][Foo.jl:35]] not found
+# =WARNING:= An error occurred evaluating norm(p) 
 :END:
 
 # Minimal OrgMode document:1 ends here
