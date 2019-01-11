@@ -1506,13 +1506,12 @@ function skip_struct_block(tok::Tokenized,idx::Int;
 
     check_is_structure = is_structure(tok,idx)
     check_is_mutable = is_mutable(tok,idx)
-    check_is_immutable = is_immutable(tok,idx)
     
-    if !(check_is_structure||check_is_mutable||check_is_immutable)
+    if !(check_is_structure||check_is_mutable)
         return idx_save
     end
 
-    if check_is_mutable||check_is_immutable
+    if check_is_mutable
         idx=idx+1
         idx = skip_uninformative(tok,idx)
 

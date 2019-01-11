@@ -30,7 +30,7 @@ is_const(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[i
 is_global(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.GLOBAL)
 is_local(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.LOCAL)
 is_macro(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.MACRO)
-is_immutable(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.IMMUTABLE)
+# is_immutable(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.IMMUTABLE)
 is_issubtype(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.ISSUBTYPE)
 is_export(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.EXPORT)
 is_abstract(tok::Tokenized,idx::Int)::Bool = (idx<=length(tok)) && (exactkind(tok[idx])==Tokenize.Tokens.ABSTRACT)
